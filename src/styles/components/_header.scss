@@ -1,0 +1,97 @@
+@use "../variables";
+
+.header {
+  background-color: #fff;
+  padding: 15px 0;
+
+  &-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+
+      & > div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 762px;
+
+        .categories-btn {
+          background-color: variables.$yellow;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 20px 25px;
+          border-radius: 10px;
+          border: none;
+          font-size: 16px;
+          font-weight: 600;
+        }
+
+        .search-input {
+          padding: 15px;
+          width: 100%;
+          border: 2px solid variables.$border-color;
+          border-radius: 10px;
+        }
+
+        .search-btn {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 15px;
+          border-radius: 10px;
+          border: none;
+          background-color: #000;
+          color: #fff;
+          font-size: 16px;
+          font-family: "TT Travels";
+
+          span {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      a {
+        background-color: variables.$background-color;
+        border-radius: 10px;
+        width: 50px;
+        height: 50px;
+        display: grid;
+        place-items: center;
+
+        position: relative;
+
+        .count {
+          position: absolute;
+          top: -10px;
+          right: -5px;
+
+          background-color: variables.$green;
+          color: #fff;
+          font-size: 12px;
+          font-weight: 600;
+          border-radius: 100px;
+          width: 22px;
+          height: 22px;
+
+          display: grid;
+          place-items: center;
+        }
+      }
+    }
+  }
+}

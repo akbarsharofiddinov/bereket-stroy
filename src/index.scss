@@ -1,0 +1,45 @@
+@use "./styles/variables";
+@use "./styles/components/header-top";
+@use "./styles/components/header";
+@use "./styles/components/banner";
+
+@font-face {
+  font-family: "TT-Travels";
+  src: url("./fonts/TT-Travels-regular.otf");
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "TT-Travels" !important;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+html,
+body {
+  background-color: variables.$background-color;
+  font-family: "TT-Travels";
+}
+
+.container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
