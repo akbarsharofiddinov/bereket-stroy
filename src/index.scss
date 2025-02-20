@@ -2,6 +2,9 @@
 @use "./styles/components/header-top";
 @use "./styles/components/header";
 @use "./styles/components/banner";
+@use "./styles/components/categories";
+@use "./styles/components/suggestions";
+@use "./styles/components/products/productItem";
 
 @font-face {
   font-family: "TT-Travels";
@@ -42,4 +45,35 @@ body {
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
+}
+
+.section-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .title {
+    font-size: 30px;
+    font-weight: 700;
+  }
+
+  a {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 2px solid variables.$border-color;
+    border-radius: 10px;
+    color: variables.$text-200;
+
+    span {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.section {
+  margin: 40px 0;
 }

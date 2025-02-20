@@ -1,0 +1,91 @@
+@use "../../variables";
+
+@mixin flexStyle() {
+  display: flex;
+  align-items: center;
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@mixin fontStyle($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
+
+.product-item {
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #fff;
+
+  .img-box {
+    position: relative;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+
+    .extra-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      p {
+        @include flexStyle();
+        gap: 5px;
+
+        span {
+          @include flexStyle();
+        }
+      }
+    }
+
+    .product-name {
+      @include fontStyle(16px, 600);
+    }
+
+    .price {
+      @include fontStyle(18px, 600);
+    }
+
+    .count-box {
+      @include flexStyle();
+      gap: 10px;
+
+      .add-cart_btn {
+        @include flexStyle();
+
+        width: 100%;
+        justify-content: center;
+        gap: 20px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 10px;
+        background-color: variables.$yellow;
+        flex-direction: row;
+
+        @include fontStyle(16px, 600);
+
+        span {
+          position: relative;
+          &::after {
+            content: "";
+            position: absolute;
+            left: -10px;
+            top: 0;
+            bottom: 0;
+            border: 1px solid #c8bb00;
+          }
+        }
+      }
+    }
+  }
+
+  // ======
+  max-width: 315px;
+}
