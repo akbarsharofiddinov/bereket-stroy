@@ -1,10 +1,17 @@
 @use "./styles/variables";
 @use "./styles/components/header-top";
 @use "./styles/components/header";
-@use "./styles/components/banner";
+@use "./styles/components/footer";
+
+@use "./styles/components/banner/banner";
+@use "./styles/components/banner/miniBanner";
+@use "./styles/components/banner/banner3";
+
 @use "./styles/components/categories";
 @use "./styles/components/suggestions";
 @use "./styles/components/products/productItem";
+@use "./styles/components/partners";
+@use "./styles/components/services";
 
 @font-face {
   font-family: "TT-Travels";

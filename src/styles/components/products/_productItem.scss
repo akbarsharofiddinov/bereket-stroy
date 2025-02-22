@@ -68,6 +68,13 @@
         border-radius: 10px;
         background-color: variables.$yellow;
         flex-direction: row;
+        transition: background-color 0.3s;
+        cursor: pointer;
+        border: 2px solid variables.$yellow;
+
+        &:hover {
+          background-color: variables.$yellow-light;
+        }
 
         @include fontStyle(16px, 600);
 
@@ -79,13 +86,10 @@
             left: -10px;
             top: 0;
             bottom: 0;
-            border: 1px solid #c8bb00;
+            border: 1px solid variables.$yellow-dark;
           }
         }
       }
     }
   }
-
-  // ======
-  max-width: 315px;
 }

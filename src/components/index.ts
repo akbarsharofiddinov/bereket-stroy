@@ -3,3 +3,8 @@ export { default as Banner } from "./Banner/Banner";
 export { default as Categories } from "./Categories/Categories";
 export { default as Suggestion } from "./Suggestions";
 export { default as ProductItem } from "./Products/ProductItem";
+export { default as Banner2 } from "./Banner/Banner2";
+export { default as Banner3 } from "./Banner/Banner3";
+export { default as Partners } from "./partners";
+export { default as Services } from "./Services";
+export { default as Footer } from "./Footer";

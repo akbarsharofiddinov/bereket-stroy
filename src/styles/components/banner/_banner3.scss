@@ -1,0 +1,154 @@
+@mixin fontStyle($size, $weight) {
+  font-size: $size;
+  font-family: $weight;
+}
+
+.banner3 {
+  .banner-boxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    .banner-box {
+      width: 100%;
+      border-radius: 20px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      height: 220px;
+      overflow: hidden;
+
+      .context {
+        padding: 50px;
+        flex: 50%;
+        .title {
+          @include fontStyle(34px, 900);
+        }
+
+        .desc {
+          @include fontStyle(20px, 700);
+          opacity: 0.5;
+        }
+      }
+
+      .right {
+        flex: 50%;
+        text-align: end;
+        position: relative;
+        height: 100%;
+
+        .price {
+          position: absolute;
+          top: 50%;
+          right: 40%;
+          transform: translateY(0);
+
+          z-index: 99;
+          color: #000;
+          background-color: #fff;
+          padding: 8px 10px;
+          border-radius: 10px 2px 10px 10px;
+
+          @include fontStyle(20px, 600);
+
+          span {
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            bottom: 100%;
+            transform: translate(-2px, 5px);
+          }
+        }
+
+        img {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          z-index: 20;
+        }
+      }
+    }
+
+    .box-1 {
+      grid-column: 1 / 3;
+      background: #9ea4ac;
+      height: 320px;
+
+      .context {
+        .title {
+          @include fontStyle(48px, 900);
+        }
+
+        .desc {
+          @include fontStyle(34px, 700);
+        }
+      }
+
+      .right {
+        &::after {
+          content: "";
+          position: absolute;
+          background: #d5dbe2;
+          clip-path: polygon(50% 0%, 100% 0, 100% 98%, 0 100%, 0 50%);
+          width: 640px;
+          height: 640px;
+          top: -170px;
+          z-index: 5;
+          right: -165px;
+        }
+
+        .price {
+          @include fontStyle(30px, 900);
+          transform: translate(180px, 50px);
+          right: unset !important;
+          color: #3f464f;
+
+          span {
+            width: 20px !important;
+            height: 20px !important;
+            bottom: 100% !important;
+            right: -8px !important;
+            transform: translateY(5px) !important;
+          }
+        }
+      }
+    }
+
+    .box-2 {
+      background: #9c818f;
+
+      .price {
+        color: #563c4a;
+      }
+
+      img {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .box-3 {
+      background: #a0ad9c;
+
+      .price {
+        transform: translate(-150px, 50px) !important;
+        color: #374832;
+      }
+    }
+
+    .box-4 {
+      background: #9ebbbb;
+      .price {
+        color: #3e6969;
+      }
+    }
+
+    .box-5 {
+      background: #aea8ba;
+
+      .price {
+        color: #423b51;
+      }
+    }
+  }
+}

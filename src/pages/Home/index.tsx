@@ -1,12 +1,25 @@
 import React from "react";
-import { Banner, Categories, Suggestion } from "@/components";
+import {
+  Banner,
+  Banner2,
+  Banner3,
+  Categories,
+  Partners,
+  Services,
+  Suggestion,
+} from "@/components";
 
 const Home: React.FC = () => {
   return (
     <>
       <Banner />
       <Categories />
-      <Suggestion />
+      <Suggestion title="Eng yaxshi takliflar" link="" />
+      <Banner2 />
+      <Suggestion title="Har doim foydali bo'ladi" link="" />
+      <Banner3 />
+      <Partners />
+      <Services />
     </>
   );
 };
