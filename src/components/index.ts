@@ -8,3 +8,4 @@ export { default as Banner3 } from "./Banner/Banner3";
 export { default as Partners } from "./partners";
 export { default as Services } from "./Services";
 export { default as Footer } from "./Footer";
+export { default as SearchModal } from "./Header/search/SearchModal";

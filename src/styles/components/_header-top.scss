@@ -3,6 +3,13 @@
 .header-top {
   padding: 15px 0;
 
+  &.active {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    background-color: variables.$background-color;
+  }
+
   .inner {
     display: flex;
     align-items: center;
@@ -84,6 +91,12 @@
         &_item {
           &__link {
             color: variables.$text-200;
+
+            transition: color 0.3s;
+
+            &:hover {
+              color: #000;
+            }
           }
         }
       }

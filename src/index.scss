@@ -13,6 +13,8 @@
 @use "./styles/components/partners";
 @use "./styles/components/services";
 
+@use "./styles/components/search/search";
+
 @font-face {
   font-family: "TT-Travels";
   src: url("./fonts/TT-Travels-regular.otf");

@@ -4,10 +4,10 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { PiGlobe } from "react-icons/pi";
 import { Link } from "react-router-dom";
 
-const HeaderTop: React.FC = () => {
+const HeaderTop: React.FC<{ searchModal: boolean }> = ({ searchModal }) => {
   return (
     <>
-      <div className="header-top">
+      <div className={searchModal ? "header-top active" : "header-top"}>
         <div className="container">
           <div className="inner">
             {/* Select Element */}

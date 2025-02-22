@@ -3,13 +3,18 @@ import HeaderTop from "./HeaderTop";
 import { Link } from "react-router-dom";
 import logo from "@/assets/Vector.svg";
 
-const Header: React.FC = () => {
+interface IProps {
+  searchModal: boolean;
+  setSearchModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Header: React.FC<IProps> = ({ searchModal, setSearchModal }) => {
   const [searchInput, setSearchInput] = useState("");
 
   return (
     <>
-      <HeaderTop />
-      <header className="header">
+      <HeaderTop searchModal={searchModal} />
+      <header className={searchModal ? "header active" : "header"}>
         <div className="container">
           <div className="header-inner">
             <div className="left">
@@ -60,6 +65,7 @@ const Header: React.FC = () => {
                   className="search-input"
                   placeholder="Mahsulotni qidirish..."
                   value={searchInput}
+                  onFocus={() => setSearchModal(true)}
                   onChange={(e) => setSearchInput(e.target.value)}
                 />
                 <button className="search-btn">

@@ -20,16 +20,17 @@ footer {
       gap: 10px;
 
       .column-item {
+        a {
+          color: variables.$text-200;
+        }
+
         &:first-child {
+          margin-bottom: 5px;
           a {
             color: #fff !important;
             font-size: 20px;
             font-weight: 600;
           }
-        }
-
-        a {
-          color: variables.$text-200;
         }
       }
 

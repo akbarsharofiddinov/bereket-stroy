@@ -4,6 +4,12 @@
   background-color: #fff;
   padding: 15px 0;
 
+  &.active {
+    position: sticky;
+    top: 70px;
+    z-index: 99;
+  }
+
   &-inner {
     display: flex;
     justify-content: space-between;
@@ -37,6 +43,7 @@
           width: 100%;
           border: 2px solid variables.$border-color;
           border-radius: 10px;
+          caret-color: variables.$blue;
         }
 
         .search-btn {
@@ -50,6 +57,8 @@
           color: #fff;
           font-size: 16px;
           font-family: "TT Travels";
+
+          cursor: pointer;
 
           span {
             display: flex;
