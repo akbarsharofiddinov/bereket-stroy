@@ -4,6 +4,7 @@ import { Footer, Header, SearchModal } from "@/components";
 
 const Layout: React.FC = () => {
   const [searchModal, setSearchModal] = useState(false);
+
   return (
     <>
       <Header searchModal={searchModal} setSearchModal={setSearchModal} />

@@ -1,0 +1,43 @@
+@use "../variables";
+
+@mixin fontStyle($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
+
+.cart-page {
+  margin: 40px 0;
+
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+
+    .empty-cart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+
+      .title {
+        @include fontStyle(24px, 600);
+      }
+
+      .desc {
+        @include fontStyle(18px, 600);
+        text-align: center;
+      }
+
+      a {
+        @include fontStyle(18px, 600);
+        background-color: variables.$yellow;
+        padding: 15px 20px;
+        border-radius: 10px;
+        color: #000;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}

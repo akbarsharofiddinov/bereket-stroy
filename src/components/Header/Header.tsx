@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import HeaderTop from "./HeaderTop";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "@/assets/Vector.svg";
+import { LiaTimesSolid } from "react-icons/lia";
 
 interface IProps {
   searchModal: boolean;
@@ -60,14 +61,28 @@ const Header: React.FC<IProps> = ({ searchModal, setSearchModal }) => {
                   </svg>
                   Kategoriya
                 </button>
-                <input
-                  type="text"
-                  className="search-input"
-                  placeholder="Mahsulotni qidirish..."
-                  value={searchInput}
-                  onFocus={() => setSearchModal(true)}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                />
+                <div className="input-box">
+                  <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Mahsulotni qidirish..."
+                    value={searchInput}
+                    onFocus={() => setSearchModal(true)}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                  />
+                  {searchModal ? (
+                    <span
+                      onClick={() => {
+                        setSearchInput("");
+                        setSearchModal(false);
+                      }}
+                    >
+                      <LiaTimesSolid />
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </div>
                 <button className="search-btn">
                   <span>
                     <svg
@@ -104,7 +119,7 @@ const Header: React.FC<IProps> = ({ searchModal, setSearchModal }) => {
               </div>
             </div>
             <div className="right">
-              <Link to={"#"}>
+              <NavLink to={"favorites"}>
                 <span className="count">5</span>
                 <svg
                   width="22"
@@ -120,8 +135,9 @@ const Header: React.FC<IProps> = ({ searchModal, setSearchModal }) => {
                     stroke-linecap="round"
                   />
                 </svg>
-              </Link>
-              <Link to={"#"}>
+              </NavLink>
+              <NavLink to={"cart"}>
+                <span className="count">5</span>
                 <svg
                   width="24"
                   height="24"
@@ -164,8 +180,8 @@ const Header: React.FC<IProps> = ({ searchModal, setSearchModal }) => {
                     stroke-linecap="round"
                   />
                 </svg>
-              </Link>
-              <Link to={"#"}>
+              </NavLink>
+              <NavLink to={"orders"}>
                 <svg
                   width="24"
                   height="24"
@@ -202,8 +218,8 @@ const Header: React.FC<IProps> = ({ searchModal, setSearchModal }) => {
                     stroke-linejoin="round"
                   />
                 </svg>
-              </Link>
-              <Link to={"#"}>
+              </NavLink>
+              <NavLink to={"profile"}>
                 <svg
                   width="24"
                   height="24"
@@ -224,7 +240,7 @@ const Header: React.FC<IProps> = ({ searchModal, setSearchModal }) => {
                     stroke-width="2"
                   />
                 </svg>
-              </Link>
+              </NavLink>
             </div>
           </div>
         </div>

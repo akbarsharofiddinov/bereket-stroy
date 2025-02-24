@@ -15,6 +15,10 @@
 
 @use "./styles/components/search/search";
 
+// Pages
+@use "./styles/pages/favorites";
+@use "./styles/pages/cart";
+
 @font-face {
   font-family: "TT-Travels";
   src: url("./fonts/TT-Travels-regular.otf");
