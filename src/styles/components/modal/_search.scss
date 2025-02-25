@@ -1,6 +1,9 @@
 @use "../../variables";
 
 .search-modal {
+  height: 0;
+  overflow: hidden;
+
   position: fixed;
   top: 160px;
   left: 0;
@@ -8,6 +11,12 @@
   bottom: 0;
   z-index: 99;
   background-color: rgba(0, 0, 0, 0.3);
+
+  transition: height 0.4s ease-in-out;
+
+  &.active {
+    height: 100%;
+  }
 
   .inner {
     padding: 30px;

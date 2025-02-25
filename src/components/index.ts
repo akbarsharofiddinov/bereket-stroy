@@ -9,3 +9,5 @@ export { default as Partners } from "./partners";
 export { default as Services } from "./Services";
 export { default as Footer } from "./Footer";
 export { default as SearchModal } from "./Header/search/SearchModal";
+export { default as CatalogsModal } from "./Header/catalogs/CatalogsModal";
+export { default as Branches } from "./Branches";

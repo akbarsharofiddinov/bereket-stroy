@@ -10,7 +10,7 @@ const Favorites: React.FC = () => {
       <div className="favorites-page">
         <div className="container">
           <div className={hasFavs ? "top" : "top center"}>
-            <Link to={"-1"}>
+            <Link to={"/"}>
               <span>
                 <svg
                   width="24"
@@ -50,8 +50,8 @@ const Favorites: React.FC = () => {
                 Siz hali ham sevili mahsulot tanlamadingiz
               </h3>
               <p className="desc">
-                Sizga maʼqul kelgan mahsulotlarni <br /> sevimlilarga qo‘shing va
-                ularni buyurtma qiling
+                Sizga maʼqul kelgan mahsulotlarni <br /> sevimlilarga qo‘shing
+                va ularni buyurtma qiling
               </p>
               <Link to={"/"}>Bosh sahifaga o‘tish</Link>
             </div>

@@ -11,9 +11,11 @@
 @use "./styles/components/suggestions";
 @use "./styles/components/products/productItem";
 @use "./styles/components/partners";
+@use "./styles/components/branches";
 @use "./styles/components/services";
 
-@use "./styles/components/search/search";
+@use "./styles/components/modal/search";
+@use "./styles/components/modal/catalogs";
 
 // Pages
 @use "./styles/pages/favorites";

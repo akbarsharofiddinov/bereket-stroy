@@ -1,0 +1,49 @@
+@use "../../variables";
+
+.catalogs-modal {
+  height: 0px;
+  overflow: hidden;
+
+  position: fixed;
+  top: 159px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background-color: #fff;
+
+  transition: height 0.4s;
+
+  &.active {
+    height: 100%;
+  }
+
+  .inner {
+    display: flex;
+
+    .left {
+      flex: 40%;
+
+      display: flex;
+      flex-direction: column;
+
+      a {
+        padding: 20px 60px;
+        font-size: 18px;
+        font-weight: 600;
+        color: #000;
+
+        &.active {
+          background-color: variables.$yellow;
+        }
+      }
+    }
+
+    .right {
+      flex: 60%;
+      height: 100vh;
+      padding: 30px;
+      background-color: variables.$background-color;
+    }
+  }
+}

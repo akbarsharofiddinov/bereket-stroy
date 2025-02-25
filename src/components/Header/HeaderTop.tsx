@@ -1,13 +1,16 @@
+import { useAppSelector } from "@/store/hooks";
 import React from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { PiGlobe } from "react-icons/pi";
 import { Link } from "react-router-dom";
 
-const HeaderTop: React.FC<{ searchModal: boolean }> = ({ searchModal }) => {
+const HeaderTop: React.FC = () => {
+  const { searchModal, catalogModal } = useAppSelector((state) => state.projectSlice);
+
   return (
     <>
-      <div className={searchModal ? "header-top active" : "header-top"}>
+      <div className={searchModal || catalogModal ? "header-top active" : "header-top"}>
         <div className="container">
           <div className="inner">
             {/* Select Element */}

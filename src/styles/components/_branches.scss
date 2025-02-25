@@ -1,0 +1,63 @@
+@use "../variables";
+
+@mixin flexStyle($direction, $align, $justifyContent) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justifyContent;
+}
+
+.branches {
+  .container {
+    margin: 60px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+
+    .inner {
+      @include flexStyle(row, start, "");
+      gap: 20px;
+
+      .left {
+        flex: 30%;
+        @include flexStyle(column, "", "");
+        gap: 10px;
+
+        .select-item {
+          position: relative;
+
+          .selected {
+            @include flexStyle(row, center, space-between);
+            border-radius: 10px;
+            padding: 20px;
+            background-color: variables.$background-color;
+
+            span {
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+
+        .location-info {
+          @include flexStyle(column, start, "");
+          gap: 20px;
+          border: 2px solid variables.$border-color;
+          border-radius: 10px;
+          padding: 20px;
+
+          p {
+            @include flexStyle(row, center, "");
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 500;
+          }
+        }
+      }
+
+      .right {
+        flex: 70%;
+      }
+    }
+  }
+}

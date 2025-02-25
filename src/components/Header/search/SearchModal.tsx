@@ -1,12 +1,18 @@
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setSearchModal } from "@/store/projectSlice";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const SearchModal: React.FC<{
-  setSearchModal: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ setSearchModal }) => {
+const SearchModal: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const searchModal = useAppSelector((state) => state.projectSlice.searchModal);
+
   return (
     <>
-      <div className="search-modal" onClick={() => setSearchModal(false)}>
+      <div
+        className={searchModal ? "search-modal active" : "search-modal"}
+        onClick={() => dispatch(setSearchModal(false))}
+      >
         <div className="inner" onClick={(e) => e.stopPropagation()}>
           <div className="container">
             <div className="most-searched">

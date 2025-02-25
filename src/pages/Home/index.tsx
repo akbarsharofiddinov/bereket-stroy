@@ -3,6 +3,7 @@ import {
   Banner,
   Banner2,
   Banner3,
+  Branches,
   Categories,
   Partners,
   Services,
@@ -19,6 +20,7 @@ const Home: React.FC = () => {
       <Suggestion title="Har doim foydali bo'ladi" link="" />
       <Banner3 />
       <Partners />
+      <Branches />
       <Services />
     </>
   );
