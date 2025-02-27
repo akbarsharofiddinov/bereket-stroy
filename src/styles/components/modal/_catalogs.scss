@@ -44,6 +44,30 @@
       height: 100vh;
       padding: 30px;
       background-color: variables.$background-color;
+
+      .title {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .sub-categories {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex-wrap: wrap;
+        max-height: 530px;
+
+        a {
+          height: 44px;
+          color: variables.$text-200;
+          transition: color 0.3s;
+
+          &:hover {
+            color: variables.$text-300;
+          }
+        }
+      }
     }
   }
 }

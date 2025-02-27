@@ -2,6 +2,7 @@ import React from "react";
 import banner1 from "@/assets/banner-images/banner-1.png";
 import banner2 from "@/assets/banner-images/banner-2.png";
 import banner3 from "@/assets/banner-images/banner-3.png";
+import { Link } from "react-router-dom";
 
 const Banner: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const Banner: React.FC = () => {
               <div className="context">
                 <h1 className="title">Mukammal tamirlash</h1>
                 <p>Sifatli mebel bilan</p>
-                <button>Batafsil</button>
+                <Link to={"catalog-details"}>Batafsil</Link>
               </div>
             </div>
             <div className="box box-2">

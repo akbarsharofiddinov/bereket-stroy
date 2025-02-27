@@ -4,6 +4,7 @@ import Layout from "./Layout";
 import {
   Cart,
   Catalog,
+  CatalogDetails,
   Checkout,
   Favorites,
   Home,
@@ -11,19 +12,25 @@ import {
   ProductDetails,
   Profile,
 } from "@/pages";
+import { PageNotFound } from "@/components";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <PageNotFound />,
     children: [
       {
         path: "",
         element: <Home />,
       },
       {
-        path: "catalog",
+        path: "catalogs/:catalog_slug",
         element: <Catalog />,
+      },
+      {
+        path: "/catalog-details/:details_slug",
+        element: <CatalogDetails />,
       },
       {
         path: "checkout",

@@ -1,11 +1,26 @@
-import { useAppSelector } from "@/store/hooks";
-import React from "react";
+import { setSelectedCategory } from "@/store/categorySlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setCatalogModal } from "@/store/projectSlice";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const CatalogsModal: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const catalogModal = useAppSelector(
     (state) => state.projectSlice.catalogModal
   );
+
+  const { allCategories, selectedCategory } = useAppSelector(
+    (state) => state.categorySlice
+  );
+
+  useEffect(() => {
+    if (allCategories.length) {
+      dispatch(setSelectedCategory(allCategories[0]));
+    }
+  }, [allCategories.length]);
+
   return (
     <>
       <div
@@ -14,22 +29,44 @@ const CatalogsModal: React.FC = () => {
         <div className="container">
           <div className="inner">
             <div className="left">
-              <Link to={""} className="active">
-                Lorem ipsum dolor sit amet.
-              </Link>
-              <Link to={""}>Lorem ipsum dolor sit amet.</Link>
-              <Link to={""}>Lorem ipsum dolor sit amet.</Link>
-              <Link to={""}>Lorem ipsum dolor sit amet.</Link>
-              <Link to={""}>Lorem ipsum dolor sit amet.</Link>
-              <Link to={""}>Lorem ipsum dolor sit amet.</Link>
-              <Link to={""}>Lorem ipsum dolor sit amet.</Link>
-              <Link to={""}>Lorem ipsum dolor sit amet.</Link>
+              {allCategories.length
+                ? allCategories.map((category, index) => (
+                    <Link
+                      to={`catalogs/${category.slug}`}
+                      key={index}
+                      className={
+                        selectedCategory?.id === category.id ? "active" : ""
+                      }
+                      onMouseOver={() => {
+                        dispatch(setSelectedCategory(category));
+                      }}
+                      onClick={() => {
+                        dispatch(setCatalogModal(false));
+                        dispatch(setSelectedCategory(category));
+                      }}
+                    >
+                      {category.name.uz}
+                    </Link>
+                  ))
+                : ""}
             </div>
             <div className="right">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim,
-              magni. Reprehenderit modi libero error ea harum alias. At rerum
-              corporis possimus consequuntur deserunt molestiae debitis
-              incidunt, fugiat distinctio ad. Blanditiis?
+              {selectedCategory ? (
+                <>
+                  <h2 className="title">{selectedCategory.name.uz}</h2>
+                  <div className="sub-categories">
+                    {selectedCategory.sub_category.map(
+                      (sub_category, index) => (
+                        <Link to={""} key={index}>
+                          {sub_category.name.uz}
+                        </Link>
+                      )
+                    )}
+                  </div>
+                </>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>

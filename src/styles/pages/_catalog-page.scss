@@ -1,0 +1,33 @@
+@use "../variables";
+
+.catalog-page {
+  min-height: 45vh;
+  .sub-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 272px));
+    gap: 20px;
+
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 10px;
+
+      border-radius: 20px;
+      overflow: hidden;
+      padding: 10px;
+      background-color: #fff;
+
+      img {
+        margin-left: auto;
+        border-radius: 20px;
+      }
+
+      span {
+        color: variables.$text-300;
+      }
+    }
+  }
+
+  
+}

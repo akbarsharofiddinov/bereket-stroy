@@ -94,7 +94,7 @@
       align-items: center;
       gap: 10px;
 
-      a {
+      & > a {
         background-color: variables.$background-color;
         border-radius: 10px;
         width: 50px;
@@ -126,6 +126,80 @@
 
           display: grid;
           place-items: center;
+        }
+      }
+
+      button {
+        background-color: variables.$background-color;
+        border-radius: 10px;
+        width: 50px;
+        height: 50px;
+        display: grid;
+        place-items: center;
+        border: none;
+        cursor: pointer;
+
+        transition: background-color 0.3s;
+
+        &:hover,
+        &.active {
+          background-color: variables.$yellow;
+        }
+
+        position: relative;
+
+        &.active {
+          .menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+            transform: translateY(0);
+          }
+        }
+
+        .menu {
+          position: absolute;
+          top: 155%;
+          border-radius: 20px;
+          overflow: hidden;
+          z-index: 99;
+          width: 315px;
+          background-color: #fff;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0px 5px 15px 0px #20202426;
+
+          transform: translateY(-50%);
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+
+          transition: opacity 0.2s, visibility 0.2s, transform 0.2s ease-in-out;
+
+          a {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: variables.$text-200;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+
+            &:first-child {
+              padding: 20px;
+              border-bottom: 2px solid variables.$border-color;
+              background-color: variables.$background-color;
+            }
+
+            &:last-child {
+              border-top: 2px solid variables.$border-color;
+              padding: 20px;
+              width: 100%;
+              color: variables.$red;
+              cursor: pointer;
+            }
+          }
         }
       }
     }

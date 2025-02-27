@@ -1,0 +1,16 @@
+.catalog-details {
+  min-height: 45vh;
+
+  .inner {
+    .title-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title {
+        font-size: 30px;
+        font-weight: 700;
+      }
+    }
+  }
+}

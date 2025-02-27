@@ -11,3 +11,5 @@ export { default as Footer } from "./Footer";
 export { default as SearchModal } from "./Header/search/SearchModal";
 export { default as CatalogsModal } from "./Header/catalogs/CatalogsModal";
 export { default as Branches } from "./Branches";
+export { default as PageNotFound } from "./Error/PageNotFound";
+export { default as Products } from "./Products/Products";

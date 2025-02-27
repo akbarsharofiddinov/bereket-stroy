@@ -4,21 +4,23 @@ import {
   Banner2,
   Banner3,
   Branches,
-  Categories,
+  // Categories,
   Partners,
   Services,
   Suggestion,
 } from "@/components";
 
 const Home: React.FC = () => {
+  
+
   return (
     <>
       <Banner />
-      <Categories />
-      <Suggestion title="Eng yaxshi takliflar" link="" />
       <Banner2 />
-      <Suggestion title="Har doim foydali bo'ladi" link="" />
+      {/* <Categories /> */}
+      <Suggestion title="Eng yaxshi takliflar" link="" />
       <Banner3 />
+      <Suggestion title="Har doim foydali bo'ladi" link="" />
       <Partners />
       <Branches />
       <Services />

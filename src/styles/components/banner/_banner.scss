@@ -45,13 +45,13 @@
           letter-spacing: -1px;
         }
 
-        button {
+        a {
           padding: 10px 30px;
           background-color: variables.$yellow;
           border-radius: 10px;
-          border: none;
           font-size: 18px;
           font-weight: 600;
+          color: #000;
         }
       }
 
