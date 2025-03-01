@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Banner,
   Banner2,
@@ -9,9 +9,30 @@ import {
   Services,
   Suggestion,
 } from "@/components";
+import axios from "axios";
+import { useAppDispatch } from "@/store/hooks";
+import { setProducts } from "@/store/productSlice";
 
 const Home: React.FC = () => {
-  
+
+  const dispatch = useAppDispatch();
+
+  async function getAllProducts() {
+    try {
+      const response = await axios.get(
+        "https://bereket.webclub.uz/api/products"
+      );
+      if(response.status === 200) {
+        dispatch(setProducts(response.data.data))
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getAllProducts();
+  }, []);
 
   return (
     <>

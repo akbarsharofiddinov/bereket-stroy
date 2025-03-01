@@ -3,7 +3,8 @@ import { Outlet } from "react-router-dom";
 import { CatalogsModal, Footer, Header, SearchModal } from "@/components";
 import { useAppDispatch } from "./store/hooks";
 import axios from "axios";
-import { setAllCategories } from "./store/categorySlice";
+import { setAllCategories } from "@/store/categorySlice";
+import { setCartProducts } from "@/store/productSlice";
 
 const Layout: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,14 @@ const Layout: React.FC = () => {
   useEffect(() => {
     getAllCategories();
   }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("cart")) {
+      const cartProducts: { product: IProduct; quantity: number }[] = [];
+      cartProducts.push(...JSON.parse(localStorage.getItem("cart") + ""));
+      dispatch(setCartProducts(cartProducts));
+    }
+  }, [localStorage.getItem("cart")]);
 
   return (
     <>

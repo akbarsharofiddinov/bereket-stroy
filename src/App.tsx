@@ -4,7 +4,6 @@ import Layout from "./Layout";
 import {
   Cart,
   Catalog,
-  CatalogDetails,
   Checkout,
   Favorites,
   Home,
@@ -29,10 +28,6 @@ const router = createBrowserRouter([
         element: <Catalog />,
       },
       {
-        path: "/catalog-details/:details_slug",
-        element: <CatalogDetails />,
-      },
-      {
         path: "checkout",
         element: <Checkout />,
       },
@@ -41,7 +36,7 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: "details",
+        path: "details/:product_id",
         element: <ProductDetails />,
       },
       {

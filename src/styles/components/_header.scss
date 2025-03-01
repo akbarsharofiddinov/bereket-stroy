@@ -4,11 +4,9 @@
   background-color: #fff;
   padding: 15px 0;
 
-  &.active {
-    position: sticky;
-    top: 70px;
-    z-index: 99;
-  }
+  position: sticky;
+  top: 70px;
+  z-index: 99;
 
   &-inner {
     display: flex;

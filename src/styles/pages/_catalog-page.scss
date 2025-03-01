@@ -3,8 +3,8 @@
 .catalog-page {
   min-height: 45vh;
   .sub-categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 272px));
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
 
     a {
@@ -13,9 +13,9 @@
       align-items: start;
       gap: 10px;
 
-      border-radius: 20px;
+      border-radius: 10px;
       overflow: hidden;
-      padding: 10px;
+      padding: 10px 15px;
       background-color: #fff;
 
       img {
@@ -25,9 +25,9 @@
 
       span {
         color: variables.$text-300;
+        font-size: 16px;
+        font-weight: 600;
       }
     }
   }
-
-  
 }

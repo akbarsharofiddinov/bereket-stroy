@@ -6,7 +6,7 @@ export { default as SubCatalogDetails } from "./Catalog/Details/SubCatalogDetail
 export { default as SubSubCatalogDetails } from "./Catalog/Details/SubSubCatalogDetails";
 
 export { default as Checkout } from "./Checkout";
-export { default as ProductDetails } from "./Details";
+export { default as ProductDetails } from "./Details/ProductDetails";
 export { default as Cart } from "./Cart/Cart";
 export { default as Favorites } from "./Favorites";
 export { default as Orders } from "./Orders";

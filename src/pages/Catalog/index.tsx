@@ -2,7 +2,6 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import React, { useEffect } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { Link, useParams } from "react-router-dom";
-import noImage from "@/assets/no-image.webp";
 import {
   setSelectedCategory,
   setSelectedSubCategory,
@@ -59,56 +58,13 @@ const Catalog: React.FC = () => {
 
           <div className="sub-categories">
             {selectedCategory?.sub_category.map((sub_category, index) => (
-              <>
-                <Link
-                  to={`/catalog-details/${sub_category.slug}`}
-                  key={index}
-                  onClick={() => dispatch(setSelectedSubCategory(sub_category))}
-                >
-                  {sub_category.photo ? (
-                    <img src={sub_category.photo} alt="" />
-                  ) : (
-                    <img src={noImage} alt="" />
-                  )}
-                  <span>{sub_category.name.uz}</span>
-                </Link>
-                <Link
-                  to={`/catalog-details/${sub_category.slug}`}
-                  key={index}
-                  onClick={() => dispatch(setSelectedSubCategory(sub_category))}
-                >
-                  {sub_category.photo ? (
-                    <img src={sub_category.photo} alt="" />
-                  ) : (
-                    <img src={noImage} alt="" />
-                  )}
-                  <span>{sub_category.name.uz}</span>
-                </Link>
-                <Link
-                  to={`/catalog-details/${sub_category.slug}`}
-                  key={index}
-                  onClick={() => dispatch(setSelectedSubCategory(sub_category))}
-                >
-                  {sub_category.photo ? (
-                    <img src={sub_category.photo} alt="" />
-                  ) : (
-                    <img src={noImage} alt="" />
-                  )}
-                  <span>{sub_category.name.uz}</span>
-                </Link>
-                <Link
-                  to={`/catalog-details/${sub_category.slug}`}
-                  key={index}
-                  onClick={() => dispatch(setSelectedSubCategory(sub_category))}
-                >
-                  {sub_category.photo ? (
-                    <img src={sub_category.photo} alt="" />
-                  ) : (
-                    <img src={noImage} alt="" />
-                  )}
-                  <span>{sub_category.name.uz}</span>
-                </Link>
-              </>
+              <Link
+                to={`/catalog-details/${sub_category.slug}`}
+                key={index}
+                onClick={() => dispatch(setSelectedSubCategory(sub_category))}
+              >
+                <span>{sub_category.name.uz}</span>
+              </Link>
             ))}
           </div>
 

@@ -1,5 +1,7 @@
 .suggestions {
   .products {
+    margin: 0 !important;
+    height: 100%;
     .suggestions-swiper {
       &::after {
         content: "";
@@ -16,6 +18,7 @@
           rgba(255, 255, 255, 0)
         );
       }
+
       .swiper-slide {
         max-width: 315px;
       }

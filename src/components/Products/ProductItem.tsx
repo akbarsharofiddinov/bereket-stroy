@@ -1,13 +1,82 @@
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  addProductToCart,
+  removeProductFromCart,
+  setCartProducts,
+} from "@/store/productSlice";
 import React from "react";
 
 const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
+  const dispatch = useAppDispatch();
+  const { cart } = useAppSelector((state) => state.productSlice);
+
+  function handleAddProductToCart() {
+    if (!localStorage.getItem("cart")) {
+      const cartProducts = data;
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([{ product: cartProducts, quantity: 1 }])
+      );
+      dispatch(setCartProducts([{ product: cartProducts, quantity: 1 }]));
+    } else {
+      const cartProducts: { product: IProduct; quantity: number }[] =
+        JSON.parse(localStorage.getItem("cart") + "");
+      const findProduct = cartProducts.find(
+        (product) => product.product.id === data.id
+      );
+      if (!findProduct) {
+        cartProducts.push({ product: data, quantity: 1 });
+        localStorage.setItem("cart", JSON.stringify(cartProducts));
+        dispatch(addProductToCart(data));
+      } else {
+        findProduct.quantity += 1;
+        localStorage.setItem("cart", JSON.stringify(cartProducts));
+        dispatch(addProductToCart(data));
+      }
+    }
+  }
+
+  function handleRemoveProductFromCart() {
+    const cartProducts: { product: IProduct; quantity: number }[] = JSON.parse(
+      localStorage.getItem("cart") + ""
+    );
+    const findProduct = cartProducts.find(
+      (product) => product.product.id === data.id
+    );
+    if (findProduct) {
+      if (findProduct.quantity === 1) {
+        const newCartProducts = cartProducts.filter(
+          (product) => product.product.id !== data.id
+        );
+        localStorage.setItem("cart", JSON.stringify(newCartProducts));
+        dispatch(removeProductFromCart(data));
+      } else {
+        findProduct.quantity -= 1;
+        localStorage.setItem("cart", JSON.stringify(cartProducts));
+        dispatch(removeProductFromCart(data));
+      }
+    }
+  }
+
+  function checkProductInCart() {
+    if (cart) {
+      const findProduct = cart.find(
+        (product) => product.product.id === data.id
+      );
+      if (findProduct) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   return (
     <>
       {data ? (
         <div className="product-item">
           <div className="img-box">
             <img
-              src={`http://bereket.webclub.uz/storage/${data.photos[0]}`}
+              src={`https://bereket.webclub.uz/storage/${data.photos[0]}`}
               alt=""
             />
           </div>
@@ -48,56 +117,134 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                 sharhlar yo‘q
               </p>
             </div>
-            <p className="product-name">{data.name.uz}</p>
+            <p className="product-name">
+              {data.name.uz.slice(0, 68) +
+                (data.name.uz.length > 70 ? "..." : "")}
+            </p>
             <p className="price">{data.price} so‘m</p>
+            <p className="monthly-price">15,400 so‘m / 24 oyga</p>
             <div className="count-box">
-              <button className="add-cart_btn">
-                Savatga solish
-                <span>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8 16L16.7201 15.2733C19.4486 15.046 20.0611 14.45 20.3635 11.7289L21 6"
-                      stroke="black"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M6 6H22"
-                      stroke="black"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M6 22C7.10457 22 8 21.1046 8 20C8 18.8954 7.10457 18 6 18C4.89543 18 4 18.8954 4 20C4 21.1046 4.89543 22 6 22Z"
-                      stroke="black"
-                      strokeWidth="2"
-                    />
-                    <path
-                      d="M17 22C18.1046 22 19 21.1046 19 20C19 18.8954 18.1046 18 17 18C15.8954 18 15 18.8954 15 20C15 21.1046 15.8954 22 17 22Z"
-                      stroke="black"
-                      strokeWidth="2"
-                    />
-                    <path
-                      d="M8 20H15"
-                      stroke="black"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M2 2H2.966C3.91068 2 4.73414 2.62459 4.96326 3.51493L7.93852 15.0765C8.08887 15.6608 7.9602 16.2797 7.58824 16.7616L6.63213 18"
-                      stroke="black"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-              </button>
+              {checkProductInCart() ? (
+                <>
+                  <button>
+                    Savatda
+                    <span>
+                      <svg
+                        width="25"
+                        height="24"
+                        viewBox="0 0 25 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8.25 16L16.9701 15.2733C19.6986 15.046 20.3111 14.45 20.6135 11.7289L21.25 6"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M6.25 6H7.75M22.25 6H19.25"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M10.75 7C10.75 7 11.75 7 12.75 9C12.75 9 15.9265 4 18.75 3"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M6.25 22C7.35457 22 8.25 21.1046 8.25 20C8.25 18.8954 7.35457 18 6.25 18C5.14543 18 4.25 18.8954 4.25 20C4.25 21.1046 5.14543 22 6.25 22Z"
+                          stroke="white"
+                          strokeWidth="2"
+                        />
+                        <path
+                          d="M17.25 22C18.3546 22 19.25 21.1046 19.25 20C19.25 18.8954 18.3546 18 17.25 18C16.1454 18 15.25 18.8954 15.25 20C15.25 21.1046 16.1454 22 17.25 22Z"
+                          stroke="white"
+                          strokeWidth="2"
+                        />
+                        <path
+                          d="M8.25 20H15.25"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M2.25 2H3.216C4.16068 2 4.98414 2.62459 5.21326 3.51493L8.18852 15.0765C8.33887 15.6608 8.2102 16.2797 7.83824 16.7616L6.88213 18"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </span>
+                  </button>
+                  <div>
+                    <button onClick={() => handleRemoveProductFromCart()}>
+                      -
+                    </button>
+                    <span>
+                      {
+                        cart.find((product) => product.product.id === data.id)
+                          ?.quantity
+                      }
+                    </span>
+                    <button onClick={() => handleAddProductToCart()}>+</button>
+                  </div>
+                </>
+              ) : (
+                <button
+                  className="add-cart_btn"
+                  onClick={() => handleAddProductToCart()}
+                >
+                  Savatga solish
+                  <span>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8 16L16.7201 15.2733C19.4486 15.046 20.0611 14.45 20.3635 11.7289L21 6"
+                        stroke="black"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M6 6H22"
+                        stroke="black"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M6 22C7.10457 22 8 21.1046 8 20C8 18.8954 7.10457 18 6 18C4.89543 18 4 18.8954 4 20C4 21.1046 4.89543 22 6 22Z"
+                        stroke="black"
+                        strokeWidth="2"
+                      />
+                      <path
+                        d="M17 22C18.1046 22 19 21.1046 19 20C19 18.8954 18.1046 18 17 18C15.8954 18 15 18.8954 15 20C15 21.1046 15.8954 22 17 22Z"
+                        stroke="black"
+                        strokeWidth="2"
+                      />
+                      <path
+                        d="M8 20H15"
+                        stroke="black"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M2 2H2.966C3.91068 2 4.73414 2.62459 4.96326 3.51493L7.93852 15.0765C8.08887 15.6608 7.9602 16.2797 7.58824 16.7616L6.63213 18"
+                        stroke="black"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              )}
             </div>
           </div>
         </div>

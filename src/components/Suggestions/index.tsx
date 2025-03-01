@@ -3,6 +3,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { ProductItem } from "@/components";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useAppSelector } from "@/store/hooks";
 
 interface IProps {
   title: string;
@@ -11,6 +12,7 @@ interface IProps {
 }
 
 const Suggestions: React.FC<IProps> = ({ link, title }) => {
+  const { products } = useAppSelector((state) => state.productSlice);
   return (
     <>
       <div className="suggestions section">
@@ -30,26 +32,16 @@ const Suggestions: React.FC<IProps> = ({ link, title }) => {
               <Swiper
                 slidesPerView={"auto"}
                 spaceBetween={20}
+                
                 className="suggestions-swiper"
               >
-                <SwiperSlide>
-                  <ProductItem />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <ProductItem />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <ProductItem />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <ProductItem />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <ProductItem />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <ProductItem />
-                </SwiperSlide>
+                {products.length
+                  ? products.map((product, index) => (
+                      <SwiperSlide key={index}>
+                        <ProductItem data={product} />
+                      </SwiperSlide>
+                    ))
+                  : ""}
               </Swiper>
             </div>
           </div>

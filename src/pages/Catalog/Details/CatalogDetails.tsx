@@ -21,7 +21,7 @@ const CatalogDetails: React.FC = () => {
     try {
       const response = await axios.get(
         `https://bereket.webclub.uz/api/products?sub_category_slug=${sub_category}`
-      );k
+      );
       if (response.status === 200) {
         dispatch(setProducts(response.data.data));
       }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderTop from "./HeaderTop";
 import { Link, NavLink } from "react-router-dom";
 import logo from "@/assets/Vector.svg";
@@ -9,6 +9,7 @@ import { setCatalogModal, setSearchModal } from "@/store/projectSlice";
 const Header: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
   const [profileMenu, setProfileMenu] = useState(false);
+  const [quantityCartProducts, setQuantityCartProducts] = useState(0);
 
   const { searchModal, catalogModal } = useAppSelector(
     (state) => state.projectSlice
@@ -18,6 +19,12 @@ const Header: React.FC = () => {
   window.addEventListener("click", () => {
     if (profileMenu) setProfileMenu(false);
   });
+
+  const { cart } = useAppSelector((state) => state.productSlice);
+
+  useEffect(() => {
+    if (cart) setQuantityCartProducts(cart.length);
+  }, [cart.length]);
 
   return (
     <>
@@ -184,7 +191,7 @@ const Header: React.FC = () => {
                 </svg>
               </NavLink>
               <NavLink to={"cart"}>
-                <span className="count">5</span>
+                <span className="count">{quantityCartProducts}</span>
                 <svg
                   width="24"
                   height="24"
