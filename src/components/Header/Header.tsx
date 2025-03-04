@@ -4,12 +4,17 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "@/assets/Vector.svg";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setCatalogModal, setSearchModal } from "@/store/projectSlice";
+import {
+  setAuthModal,
+  setCatalogModal,
+  setSearchModal,
+} from "@/store/projectSlice";
 
 const Header: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
   const [profileMenu, setProfileMenu] = useState(false);
   const [quantityCartProducts, setQuantityCartProducts] = useState(0);
+  const [quantityFavoritesProducts, setQuantityFavoritesProducts] = useState(0);
 
   const { searchModal, catalogModal } = useAppSelector(
     (state) => state.projectSlice
@@ -20,11 +25,15 @@ const Header: React.FC = () => {
     if (profileMenu) setProfileMenu(false);
   });
 
-  const { cart } = useAppSelector((state) => state.productSlice);
+  const { cart, favorites } = useAppSelector((state) => state.productSlice);
 
   useEffect(() => {
     if (cart) setQuantityCartProducts(cart.length);
   }, [cart.length]);
+
+  useEffect(() => {
+    if (favorites) setQuantityFavoritesProducts(favorites.length);
+  }, [favorites.length]);
 
   return (
     <>
@@ -174,7 +183,11 @@ const Header: React.FC = () => {
             </div>
             <div className="right">
               <NavLink to={"favorites"}>
-                <span className="count">5</span>
+                {quantityFavoritesProducts ? (
+                  <span className="count">{quantityFavoritesProducts}</span>
+                ) : (
+                  ""
+                )}
                 <svg
                   width="22"
                   height="20"
@@ -191,7 +204,11 @@ const Header: React.FC = () => {
                 </svg>
               </NavLink>
               <NavLink to={"cart"}>
-                <span className="count">{quantityCartProducts}</span>
+                {quantityCartProducts ? (
+                  <span className="count">{quantityCartProducts}</span>
+                ) : (
+                  ""
+                )}
                 <svg
                   width="24"
                   height="24"
@@ -277,7 +294,11 @@ const Header: React.FC = () => {
                 className={profileMenu ? "active" : ""}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setProfileMenu((prev) => !prev);
+                  if (localStorage.getItem("token"))
+                    setProfileMenu(!profileMenu);
+                  else {
+                    dispatch(setAuthModal(true));
+                  }
                 }}
               >
                 <svg

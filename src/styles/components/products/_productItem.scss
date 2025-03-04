@@ -32,6 +32,25 @@
       height: 100%;
       object-fit: contain;
     }
+
+    span {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+
+      &.status_new {
+        left: 20px;
+        background-color: variables.$blue;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 5px 10px;
+        border-radius: 10px;
+        width: 64px;
+        text-transform: capitalize;
+      }
+    }
   }
 
   .body {
@@ -48,6 +67,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      width: 100%;
 
       p {
         @include flexStyle();
@@ -55,6 +75,8 @@
 
         span {
           @include flexStyle();
+          display: flex;
+          gap: 5px;
         }
       }
     }
@@ -101,6 +123,19 @@
 
         @include fontStyle(16px, 600);
 
+        &.in-cart {
+          background-color: variables.$green;
+          border-color: variables.$green;
+          color: #fff;
+          flex: 50%;
+
+          span {
+            &::after {
+              border-color: variables.$green-dark;
+            }
+          }
+        }
+
         span {
           position: relative;
           &::after {
@@ -111,6 +146,33 @@
             bottom: 0;
             border: 1px solid variables.$yellow-dark;
           }
+        }
+      }
+
+      & > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: variables.$background-color;
+        padding: 10px 15px;
+        height: 50px;
+        border-radius: 10px;
+        flex: 50% !important;
+
+        button {
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          font-size: 20px;
+          font-weight: 600;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          justify-content: center;
+          color: variables.$text-300;
+          font-family: sans-serif !important;
+
+          @include flexStyle();
         }
       }
     }

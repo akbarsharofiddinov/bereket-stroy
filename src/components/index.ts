@@ -19,3 +19,6 @@ export { default as Branches } from "./Branches";
 export { default as PageNotFound } from "./Error/PageNotFound";
 
 export { default as Checkbox } from "./UI/Checkbox";
+
+export { default as LoginModal } from "./Auth/Login";
+export { default as SignUpModal } from "./Auth/Signup";

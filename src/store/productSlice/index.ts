@@ -6,11 +6,13 @@ interface IState {
     product: IProduct;
     quantity: number;
   }[];
+  favorites: IProduct[];
 }
 
 const initialState: IState = {
   products: [],
   cart: [],
+  favorites: [],
 };
 
 export const productSlice = createSlice({
@@ -46,6 +48,20 @@ export const productSlice = createSlice({
         }
       }
     },
+
+    setFavourites: (state, { payload }) => {
+      state.favorites = payload;
+    },
+
+    addToFavourites: (state, { payload }) => {
+      state.favorites.push(payload);
+    },
+
+    removeFromFavourites: (state, { payload }) => {
+      state.favorites = state.favorites.filter(
+        (item) => item.id !== payload.id
+      );
+    },
   },
 });
 
@@ -54,5 +70,8 @@ export const {
   setCartProducts,
   addProductToCart,
   removeProductFromCart,
+  setFavourites,
+  addToFavourites,
+  removeFromFavourites,
 } = productSlice.actions;
 export default productSlice.reducer;

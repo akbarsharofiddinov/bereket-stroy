@@ -13,6 +13,7 @@ interface IProps {
 
 const Suggestions: React.FC<IProps> = ({ link, title }) => {
   const { products } = useAppSelector((state) => state.productSlice);
+  
   return (
     <>
       <div className="suggestions section">

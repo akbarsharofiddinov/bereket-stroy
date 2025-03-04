@@ -1,13 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { CatalogsModal, Footer, Header, SearchModal } from "@/components";
-import { useAppDispatch } from "./store/hooks";
+import {
+  CatalogsModal,
+  Footer,
+  Header,
+  LoginModal,
+  SearchModal,
+  SignUpModal,
+} from "@/components";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
 import axios from "axios";
 import { setAllCategories } from "@/store/categorySlice";
-import { setCartProducts } from "@/store/productSlice";
+import { setCartProducts, setFavourites } from "@/store/productSlice";
 
 const Layout: React.FC = () => {
+  const [loginType, setLoginType] = useState("login");
+
   const dispatch = useAppDispatch();
+  const { authModal } = useAppSelector((state) => state.projectSlice);
 
   async function getAllCategories() {
     try {
@@ -34,6 +44,14 @@ const Layout: React.FC = () => {
     }
   }, [localStorage.getItem("cart")]);
 
+  useEffect(() => {
+    if (localStorage.getItem("favorites")) {
+      const favorites: IProduct[] = [];
+      favorites.push(...JSON.parse(localStorage.getItem("favorites") + ""));
+      dispatch(setFavourites(favorites));
+    }
+  }, [localStorage.getItem("favorites")]);
+
   return (
     <>
       <Header />
@@ -43,6 +61,16 @@ const Layout: React.FC = () => {
         <Outlet />
       </div>
       <Footer />
+
+      {authModal ? (
+        loginType === "login" ? (
+          <LoginModal setLoginType={setLoginType} />
+        ) : (
+          <SignUpModal setLoginType={setLoginType} />
+        )
+      ) : (
+        ""
+      )}
     </>
   );
 };

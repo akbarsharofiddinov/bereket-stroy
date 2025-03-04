@@ -10,6 +10,8 @@ import { Banner, Partners, Products, Services } from "@/components";
 import axios from "axios";
 import { setProducts } from "@/store/productSlice";
 
+import noImage from "@/assets/no-image.webp";
+
 const Catalog: React.FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -63,6 +65,13 @@ const Catalog: React.FC = () => {
                 key={index}
                 onClick={() => dispatch(setSelectedSubCategory(sub_category))}
               >
+                {sub_category.photo ? (
+                  <img
+                    src={`http://bereket.webclub.uz/storage/${sub_category.photo}`}
+                  />
+                ) : (
+                  <img src={noImage} alt="" />
+                )}
                 <span>{sub_category.name.uz}</span>
               </Link>
             ))}

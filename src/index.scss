@@ -19,6 +19,8 @@
 // modals
 @use "./styles/components/modal/search";
 @use "./styles/components/modal/catalogs";
+// Auth-modal
+@use "./styles/components/Auth/login";
 
 // Pages
 @use "./styles/pages/favorites";
@@ -28,6 +30,8 @@
 
 // error
 @use "./styles/components/error";
+
+@use "./styles/components/UI/checkbox";
 
 @font-face {
   font-family: "TT-Travels";
@@ -124,4 +128,8 @@ body {
 
 .amo-button-holder {
   z-index: 999 !important;
+}
+
+.amo-button-holder {
+  z-index: 80 !important;
 }

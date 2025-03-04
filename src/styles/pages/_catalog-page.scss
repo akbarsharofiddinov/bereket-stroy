@@ -2,9 +2,11 @@
 
 .catalog-page {
   min-height: 45vh;
+
   .sub-categories {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, 248px);
+    margin-bottom: 40px;
     gap: 20px;
 
     a {
@@ -12,6 +14,8 @@
       flex-direction: column;
       align-items: start;
       gap: 10px;
+      height: 248px;
+      width: 100%;
 
       border-radius: 10px;
       overflow: hidden;
@@ -19,14 +23,17 @@
       background-color: #fff;
 
       img {
-        margin-left: auto;
         border-radius: 20px;
+        width: 180px;
+        height: 180px;
+        margin: 0 auto;
       }
 
       span {
         color: variables.$text-300;
         font-size: 16px;
         font-weight: 600;
+        margin-top: auto;
       }
     }
   }

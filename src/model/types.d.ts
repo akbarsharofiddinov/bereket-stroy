@@ -32,6 +32,11 @@ interface IProduct {
   brand: DataNames;
   status: string;
   discounted_price: string;
+  discount: number;
+  discount_type: null | string;
+  discounted_price: string;
+  is_sale: number;
+  rating: number;
 }
 
 interface IBrands {

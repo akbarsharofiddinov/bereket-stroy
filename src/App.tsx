@@ -12,6 +12,7 @@ import {
   Profile,
 } from "@/pages";
 import { PageNotFound } from "@/components";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,7 @@ const App: React.FC = () => {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer />  
     </>
   );
 };
