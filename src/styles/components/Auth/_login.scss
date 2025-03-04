@@ -1,4 +1,4 @@
-@use "../../variables";
+
 
 .login-modal {
   position: fixed;
@@ -48,7 +48,7 @@
         align-items: center;
         gap: 5px;
         padding: 5px;
-        border: 2px solid variables.$border-color;
+        border: 2px solid $border-color;
         border-radius: 20px;
         width: 100%;
 
@@ -61,7 +61,7 @@
           font-weight: 600;
           border-color: transparent;
           background-color: transparent;
-          color: variables.$text-200;
+          color: $text-200;
           cursor: pointer;
 
           &.active {
@@ -77,7 +77,7 @@
         gap: 20px;
 
         .phone-input {
-          background-color: variables.$background-color;
+          background-color: $background-color;
           display: flex;
           align-items: center;
           gap: 10px;
@@ -99,11 +99,11 @@
           border-radius: 10px;
           padding: 20px;
           border: none;
-          background-color: variables.$background-color;
-          color: variables.$text-300;
+          background-color: $background-color;
+          color: $text-300;
 
           &::placeholder {
-            color: variables.$text-200;
+            color: $text-200;
           }
         }
 
@@ -113,7 +113,7 @@
           gap: 5px;
 
           a {
-            color: variables.$blue;
+            color: $blue;
             font-size: 16px;
             font-weight: 500;
             margin-left: 5px;
@@ -124,7 +124,7 @@
           position: relative;
 
           span {
-            color: variables.$red;
+            color: $red;
             font-size: 16px;
             font-weight: 500;
             position: absolute;
@@ -144,17 +144,17 @@
           border-radius: 10px;
           font-size: 18px;
           font-weight: 600;
-          color: variables.$text-300;
+          color: $text-300;
           border: none;
           cursor: pointer;
 
           &:first-child {
-            background-color: variables.$yellow;
+            background-color: $yellow;
           }
 
           &:last-child {
             background-color: #fff;
-            border: 2px solid variables.$border-color;
+            border: 2px solid $border-color;
           }
         }
       }
@@ -172,7 +172,7 @@
               position: absolute;
               top: 20px;
               left: 130px;
-              color: variables.$red;
+              color: $red;
               font-size: 16px;
               font-weight: 500;
             }

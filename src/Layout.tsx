@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import {
   CatalogsModal,
   Footer,
@@ -15,6 +15,8 @@ import { setCartProducts, setFavourites } from "@/store/productSlice";
 
 const Layout: React.FC = () => {
   const [loginType, setLoginType] = useState("login");
+
+  const { pathname } = useLocation();
 
   const dispatch = useAppDispatch();
   const { authModal } = useAppSelector((state) => state.projectSlice);
@@ -51,6 +53,10 @@ const Layout: React.FC = () => {
       dispatch(setFavourites(favorites));
     }
   }, [localStorage.getItem("favorites")]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <>

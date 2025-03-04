@@ -1,11 +1,9 @@
-@use "../variables";
-
 .header-top {
   padding: 15px 0;
   position: sticky;
   top: 0;
   z-index: 99;
-  background-color: variables.$background-color;
+  background-color: $background-color;
 
   .inner {
     display: flex;
@@ -28,24 +26,24 @@
           font-size: 16px;
 
           &:first-child {
-            color: variables.$red;
+            color: $red;
             font-size: 20px;
           }
         }
       }
 
       &.language {
-        border: 2px solid variables.$border-color;
+        border: 2px solid $border-color;
         border-radius: 8px;
 
         .selected {
           padding: 5px 10px;
           gap: 5px;
-          color: variables.$text-200;
+          color: $text-200;
 
           span {
             &:first-child {
-              color: variables.$text-300;
+              color: $text-300;
             }
           }
         }
@@ -87,7 +85,7 @@
 
         &_item {
           &__link {
-            color: variables.$text-200;
+            color: $text-200;
 
             transition: color 0.3s;
 

@@ -1,4 +1,4 @@
-@use "../variables";
+
 
 .services {
   background-color: #fff;
@@ -15,8 +15,8 @@
       align-items: center;
 
       &:nth-child(2) {
-        border-left: 2px solid variables.$border-color;
-        border-right: 2px solid variables.$border-color;
+        border-left: 2px solid $border-color;
+        border-right: 2px solid $border-color;
       }
     }
   }

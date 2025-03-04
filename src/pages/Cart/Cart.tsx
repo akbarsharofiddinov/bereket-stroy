@@ -3,7 +3,11 @@ import emptyCart from "@/assets/empty-cart.png";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { Checkbox, Services } from "@/components";
-import { addProductToCart, removeProductFromCart } from "@/store/productSlice";
+import {
+  addProductToCart,
+  instantRemoveProductsFromCart,
+  removeProductFromCart,
+} from "@/store/productSlice";
 import { formatCurrency } from "@/utils/currencyFormat";
 
 const Cart: React.FC = () => {
@@ -13,11 +17,22 @@ const Cart: React.FC = () => {
   const { cart } = useAppSelector((state) => state.productSlice);
   const dispatch = useAppDispatch();
 
+  function handleRemoveAllProductFromCart(product: IProduct) {
+    dispatch(instantRemoveProductsFromCart(product));
+    const filteredCartProducts = cart.filter(
+      (cartProduct) => cartProduct.product.id !== product.id
+    );
+
+    localStorage.setItem("cart", JSON.stringify(filteredCartProducts));
+  }
+
   useEffect(() => {
     const sum = cart.reduce((acc, { product, quantity }) => {
       return acc + parseFloat(product.price) * quantity;
     }, 0);
     setTotalSum(sum);
+
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   return (
@@ -53,7 +68,7 @@ const Cart: React.FC = () => {
                                 {product.name.uz}
                               </h2>
                               <p>
-                                <span>{product.id}</span> |
+                                {/* <span>{product.id}</span> | */}
                                 <span>
                                   <svg
                                     width="20"
@@ -72,7 +87,12 @@ const Cart: React.FC = () => {
                                   {product.is_sale ? "Sotuvda" : "Sotuvda yo'q"}
                                 </span>
                               </p>
-                              <button className="delete-btn">
+                              <button
+                                className="delete-btn"
+                                onClick={() =>
+                                  handleRemoveAllProductFromCart(product)
+                                }
+                              >
                                 <svg
                                   width="24"
                                   height="24"
@@ -109,9 +129,31 @@ const Cart: React.FC = () => {
                               </button>
                             </div>
                             <div className="cols col-2">
-                              <p className="price">
-                                {formatCurrency(parseFloat(product.price))}
-                              </p>
+                              <div className="price-box">
+                                <p className="price">
+                                  {formatCurrency(
+                                    parseFloat(product.discounted_price)
+                                  )}
+                                  <span>{" " + quantity + "x"}</span>
+                                </p>
+                                {product.discount ? (
+                                  <>
+                                    <p className="original-price">
+                                      {formatCurrency(
+                                        parseFloat(product.price)
+                                      )}
+                                    </p>
+                                    <p className="discount">
+                                      {product.discount_type === "%"
+                                        ? parseFloat(product.discount + "") +
+                                          "%"
+                                        : product.discount}
+                                    </p>
+                                  </>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
                               <div className="count-box">
                                 <button
                                   onClick={() =>
@@ -205,22 +247,22 @@ const Cart: React.FC = () => {
                         <path
                           d="M3.08041 11.6797C2.76973 11.6797 2.48623 11.4279 2.50052 11.0987C2.58416 9.17109 2.81851 7.91622 3.47509 6.92355C3.85284 6.35245 4.32206 5.85574 4.86153 5.45585C6.31968 4.375 8.37673 4.375 12.4908 4.375H17.5092C21.6233 4.375 23.6803 4.375 25.1385 5.45585C25.6779 5.85574 26.1472 6.35245 26.5249 6.92355C27.1814 7.91611 27.4158 9.17081 27.4994 11.098C27.5138 11.4276 27.2299 11.6797 26.9189 11.6797C25.1867 11.6797 23.7824 13.1662 23.7824 15C23.7824 16.8338 25.1867 18.3203 26.9189 18.3203C27.2299 18.3203 27.5138 18.5724 27.4994 18.902C27.4158 20.8293 27.1814 22.0839 26.5249 23.0765C26.1472 23.6475 25.6779 24.1442 25.1385 24.5441C23.6803 25.625 21.6233 25.625 17.5092 25.625H12.4908C8.37673 25.625 6.31968 25.625 4.86153 24.5441C4.32206 24.1442 3.85284 23.6475 3.47509 23.0765C2.81851 22.0838 2.58416 20.8289 2.50052 18.9014C2.48623 18.5721 2.76973 18.3203 3.08041 18.3203C4.81264 18.3203 6.21689 16.8338 6.21689 15C6.21689 13.1662 4.81264 11.6797 3.08041 11.6797Z"
                           stroke="black"
-                          stroke-width="2"
-                          stroke-linejoin="round"
+                          strokeWidth="2"
+                          strokeLinejoin="round"
                         />
                         <path
                           d="M11.875 18.125L18.1251 11.875"
                           stroke="black"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                         <path
                           d="M11.875 11.875H11.889M18.1109 18.125H18.1251"
                           stroke="black"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </span>

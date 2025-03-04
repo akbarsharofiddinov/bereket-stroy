@@ -1,4 +1,4 @@
-@use "../../variables";
+
 
 .products {
   display: flex;
@@ -61,11 +61,11 @@
           display: flex;
           align-items: center;
           gap: 10px;
-          color: variables.$text-250;
+          color: $text-250;
 
           button {
             .ant-switch-inner {
-              background-color: variables.$background-color;
+              background-color: $background-color;
 
               transition: background-color 0.3s;
             }
@@ -81,7 +81,7 @@
           padding: 15px 20px;
           font-size: 16px;
           font-weight: 500;
-          background-color: variables.$background-color;
+          background-color: $background-color;
           border: none;
           border-radius: 10px;
         }
@@ -98,7 +98,7 @@
     gap: 40px;
 
     .top-filter_box {
-      border-bottom: 2px solid variables.$border-color;
+      border-bottom: 2px solid $border-color;
       padding: 20px;
 
       display: flex;
@@ -126,11 +126,11 @@
         }
 
         &:hover {
-          background-color: variables.$yellow;
+          background-color: $yellow;
         }
 
         &.active {
-          background-color: variables.$yellow;
+          background-color: $yellow;
         }
       }
     }

@@ -1,4 +1,4 @@
-@use "../variables";
+
 
 .categories {
   .inner {
@@ -31,7 +31,7 @@
         p {
           font-size: 20px;
           font-weight: 600;
-          color: variables.$text-300;
+          color: $text-300;
           z-index: 10;
         }
 

@@ -49,6 +49,10 @@ export const productSlice = createSlice({
       }
     },
 
+    instantRemoveProductsFromCart: (state, { payload }) => {
+      state.cart = state.cart.filter((item) => item.product.id !== payload.id);
+    },
+
     setFavourites: (state, { payload }) => {
       state.favorites = payload;
     },
@@ -73,5 +77,6 @@ export const {
   setFavourites,
   addToFavourites,
   removeFromFavourites,
+  instantRemoveProductsFromCart
 } = productSlice.actions;
 export default productSlice.reducer;

@@ -1,4 +1,4 @@
-@use "../variables";
+
 
 .header {
   background-color: #fff;
@@ -25,7 +25,7 @@
         width: 762px;
 
         .categories-btn {
-          background-color: variables.$yellow;
+          background-color: $yellow;
           display: flex;
           align-items: center;
           gap: 10px;
@@ -44,9 +44,9 @@
           .search-input {
             padding: 15px;
             width: 100%;
-            border: 2px solid variables.$border-color;
+            border: 2px solid $border-color;
             border-radius: 10px;
-            caret-color: variables.$blue;
+            caret-color: $blue;
           }
 
           span {
@@ -93,7 +93,7 @@
       gap: 10px;
 
       & > a {
-        background-color: variables.$background-color;
+        background-color: $background-color;
         border-radius: 10px;
         width: 50px;
         height: 50px;
@@ -104,7 +104,7 @@
 
         &:hover,
         &.active {
-          background-color: variables.$yellow;
+          background-color: $yellow;
         }
 
         position: relative;
@@ -114,7 +114,7 @@
           top: -10px;
           right: -5px;
 
-          background-color: variables.$green;
+          background-color: $green;
           color: #fff;
           font-size: 12px;
           font-weight: 600;
@@ -128,7 +128,7 @@
       }
 
       button {
-        background-color: variables.$background-color;
+        background-color: $background-color;
         border-radius: 10px;
         width: 50px;
         height: 50px;
@@ -141,7 +141,7 @@
 
         &:hover,
         &.active {
-          background-color: variables.$yellow;
+          background-color: $yellow;
         }
 
         position: relative;
@@ -179,22 +179,22 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            color: variables.$text-200;
+            color: $text-200;
             font-size: 16px;
             font-weight: 500;
             cursor: pointer;
 
             &:first-child {
               padding: 20px;
-              border-bottom: 2px solid variables.$border-color;
-              background-color: variables.$background-color;
+              border-bottom: 2px solid $border-color;
+              background-color: $background-color;
             }
 
             &:last-child {
-              border-top: 2px solid variables.$border-color;
+              border-top: 2px solid $border-color;
               padding: 20px;
               width: 100%;
-              color: variables.$red;
+              color: $red;
               cursor: pointer;
             }
           }
