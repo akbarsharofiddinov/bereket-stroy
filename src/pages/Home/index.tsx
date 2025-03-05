@@ -11,7 +11,7 @@ import {
 } from "@/components";
 import axios from "axios";
 import { useAppDispatch } from "@/store/hooks";
-import { setProducts } from "@/store/productSlice";
+import { setAllProducts } from "@/store/productSlice";
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
         "https://bereket.webclub.uz/api/products"
       );
       if (response.status === 200) {
-        dispatch(setProducts(response.data.data));
+        dispatch(setAllProducts(response.data.data));
       }
     } catch (error) {
       console.log(error);

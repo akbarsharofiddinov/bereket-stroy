@@ -8,7 +8,7 @@ import {
 } from "@/store/productSlice";
 import { formatCurrency } from "@/utils/currencyFormat";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
   const dispatch = useAppDispatch();
@@ -111,10 +111,15 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
     return false;
   }
 
+  const navigate = useNavigate();
+
   return (
     <>
       {data ? (
-        <div className="product-item">
+        <div
+          className="product-item"
+          onClick={() => navigate(`/details/${data.slug}`)}
+        >
           <div className="img-box">
             <span className="status_new">{data.status}</span>
             <span

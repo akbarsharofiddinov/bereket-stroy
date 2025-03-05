@@ -1,9 +1,92 @@
-import React from "react";
+import { Products } from "@/components";
+import {
+  setSelectedSubCategory,
+  setSelectedSubSubCategory,
+} from "@/store/categorySlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { FaAngleRight } from "react-icons/fa6";
+import { Link, useParams } from "react-router-dom";
 
 const SubSubCatalogDetails: React.FC = () => {
+  const [loading, setLoading] = useState(true);
+  const dispatch = useAppDispatch();
+
+  const [products, setProducts] = useState<IProduct[]>([]);
+
+  const { selectedCategory, selectedSubCategory, selectedSubSubCategory } =
+    useAppSelector((state) => state.categorySlice);
+
+  const params = useParams();
+
+  async function getProducts(category_slug: string) {
+    try {
+      const response = await axios.get(
+        `https://bereket.webclub.uz/api/products?sub_sub_category_slug=${category_slug}`
+      );
+
+      console.log(response);
+
+      if (response.status === 200) {
+        setProducts(response.data.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    if (params.sub_sub_catalog_slug) {
+      const findSubCategory = selectedCategory?.sub_category?.find(
+        (item) => item.slug === params.sub_catalog_slug
+      );
+
+      dispatch(setSelectedSubCategory(findSubCategory));
+      getProducts(params.sub_sub_catalog_slug);
+
+      const findSubSubCategory = selectedSubCategory?.sub_sub_category?.find(
+        (item) => item.slug === params.sub_sub_catalog_slug
+      );
+      dispatch(setSelectedSubSubCategory(findSubSubCategory));
+    }
+  }, [selectedSubCategory]);
+
   return (
     <>
-      <div>SubSubCatalogDetails</div>
+      <div className="catalog-page">
+        <div className="container">
+          <div className="navigations">
+            <Link to={"/"}>Bosh sahifa</Link>
+            <span>
+              <FaAngleRight />
+            </span>
+            <Link to={`/catalogs/${selectedCategory?.slug!}`}>
+              {selectedCategory && selectedCategory.name.uz}
+            </Link>
+            <span>
+              <FaAngleRight />
+            </span>
+            <Link
+              to={`/catalogs/${selectedCategory?.slug!}/${selectedSubCategory?.slug!}`}
+            >
+              {selectedSubCategory && selectedSubCategory.name.uz}
+            </Link>
+            <span>
+              <FaAngleRight />
+            </span>
+            <Link to={""}>{selectedSubSubCategory?.name.uz}</Link>
+          </div>
+
+          <div className="top">
+            <h2 className="title">{selectedSubSubCategory?.name.uz}</h2>
+            <p>{products.length} ta mahsulot topildi</p>
+          </div>
+
+          {loading ? <h1>Loading...</h1> : <Products data={products} />}
+        </div>
+      </div>
     </>
   );
 };

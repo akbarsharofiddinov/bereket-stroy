@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const Suggestions: React.FC<IProps> = ({ link, title }) => {
-  const { products } = useAppSelector((state) => state.productSlice);
+  const { allProducts: products } = useAppSelector((state) => state.productSlice);
   
   return (
     <>

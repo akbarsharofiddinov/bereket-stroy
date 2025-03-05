@@ -3,9 +3,7 @@ import React from "react";
 import ProductItem from "./ProductItem";
 import { FilterSidebar, TopFilterBox } from "@/components";
 
-const Products: React.FC = () => {
-  const { products } = useAppSelector((state) => state.productSlice);
-
+const Products: React.FC<{ data: IProduct[] }> = ({ data }) => {
   return (
     <>
       <div className="products">
@@ -13,8 +11,8 @@ const Products: React.FC = () => {
         <div className="right">
           <TopFilterBox />
           <div className="products-grid">
-            {products.length
-              ? products.map((product, index) => (
+            {data.length
+              ? data.map((product, index) => (
                   <ProductItem data={product} key={`${index}-${product.id}`} />
                 ))
               : ""}

@@ -4,12 +4,14 @@ interface IState {
   allCategories: ICategory[];
   selectedCategory: ICategory | undefined;
   selectedSubCategory: ICategory | undefined;
+  selectedSubSubCategory: ICategory | undefined;
 }
 
 const initialState: IState = {
   allCategories: [],
   selectedCategory: undefined,
   selectedSubCategory: undefined,
+  selectedSubSubCategory: undefined,
 };
 
 export const categorySlice = createSlice({
@@ -27,10 +29,18 @@ export const categorySlice = createSlice({
     setSelectedSubCategory: (state, { payload }) => {
       state.selectedSubCategory = payload;
     },
+
+    setSelectedSubSubCategory: (state, { payload }) => {
+      state.selectedSubSubCategory = payload;
+    },
   },
 });
 
-export const { setAllCategories, setSelectedCategory, setSelectedSubCategory } =
-  categorySlice.actions;
+export const {
+  setAllCategories,
+  setSelectedCategory,
+  setSelectedSubCategory,
+  setSelectedSubSubCategory,
+} = categorySlice.actions;
 
 export default categorySlice.reducer;

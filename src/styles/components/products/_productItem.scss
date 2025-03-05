@@ -20,6 +20,7 @@
   overflow: hidden;
   background-color: #fff;
   max-height: 560px;
+  cursor: pointer;
 
   .img-box {
     position: relative;
@@ -169,7 +170,7 @@
           height: 30px;
           display: flex;
           justify-content: center;
-          color: var(--text-)300;
+          color: var(--text-) 300;
           font-family: sans-serif !important;
 
           @include flexStyle();

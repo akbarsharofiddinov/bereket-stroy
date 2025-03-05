@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IState {
-  products: IProduct[];
+  allProducts: IProduct[];
   cart: {
     product: IProduct;
     quantity: number;
@@ -10,7 +10,7 @@ interface IState {
 }
 
 const initialState: IState = {
-  products: [],
+  allProducts: [],
   cart: [],
   favorites: [],
 };
@@ -19,8 +19,8 @@ export const productSlice = createSlice({
   name: "productSlice",
   initialState,
   reducers: {
-    setProducts: (state, { payload }) => {
-      state.products = payload;
+    setAllProducts: (state, { payload }) => {
+      state.allProducts = payload;
     },
 
     setCartProducts: (state, { payload }) => {
@@ -70,7 +70,7 @@ export const productSlice = createSlice({
 });
 
 export const {
-  setProducts,
+  setAllProducts,
   setCartProducts,
   addProductToCart,
   removeProductFromCart,

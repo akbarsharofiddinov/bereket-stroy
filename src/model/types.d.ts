@@ -21,6 +21,13 @@ interface ICategory {
       slug: string;
     };
   }[];
+
+  sub_sub_category?: {
+    id: number;
+    name: DataNames;
+    photo: string | null;
+    slug: string;
+  }[];
 }
 
 interface IProduct {

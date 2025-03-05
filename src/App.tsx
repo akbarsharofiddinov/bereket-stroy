@@ -10,6 +10,8 @@ import {
   Orders,
   ProductDetails,
   Profile,
+  SubCatalogDetails,
+  SubSubCatalogDetails,
 } from "@/pages";
 import { PageNotFound } from "@/components";
 import { ToastContainer } from "react-toastify";
@@ -27,6 +29,18 @@ const router = createBrowserRouter([
       {
         path: "catalogs/:catalog_slug",
         element: <Catalog />,
+        children: [
+          {
+            path: ":sub_catalog_slug",
+            element: <SubCatalogDetails />,
+            children: [
+              {
+                path: ":sub_sub_catalog_slug",
+                element: <SubSubCatalogDetails />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: "checkout",
@@ -60,7 +74,7 @@ const App: React.FC = () => {
   return (
     <>
       <RouterProvider router={router} />
-      <ToastContainer />  
+      <ToastContainer />
     </>
   );
 };
