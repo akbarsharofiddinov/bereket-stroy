@@ -1,4 +1,4 @@
-
+@use "../../variables";
 
 @mixin flexStyle() {
   display: flex;
@@ -41,7 +41,7 @@
 
       &.status_new {
         left: 20px;
-        background-color: $blue;
+        background-color: variables.$blue;
         color: #fff;
         font-size: 16px;
         font-weight: 600;
@@ -92,7 +92,7 @@
     .monthly-price {
       @include fontStyle(16px, 500);
       padding: 10px;
-      border: 2px solid $border-color;
+      border: 2px solid variables.$border-color;
       border-radius: 10px;
       color: #000;
     }
@@ -111,27 +111,27 @@
         padding: 10px 15px;
         border: none;
         border-radius: 10px;
-        background-color: $yellow;
+        background-color: variables.$yellow;
         flex-direction: row;
         transition: background-color 0.3s;
         cursor: pointer;
-        border: 2px solid $yellow;
+        border: 2px solid variables.$yellow;
 
         &:hover {
-          background-color: $yellow-light;
+          background-color: variables.$yellow-light;
         }
 
         @include fontStyle(16px, 600);
 
         &.in-cart {
-          background-color: $green;
-          border-color: $green;
+          background-color: variables.$green;
+          border-color: variables.$green;
           color: #fff;
           flex: 50%;
 
           span {
             &::after {
-              border-color: $green-dark;
+              border-color: variables.$green-dark;
             }
           }
         }
@@ -144,7 +144,7 @@
             left: -10px;
             top: 0;
             bottom: 0;
-            border: 1px solid $yellow-dark;
+            border: 1px solid variables.$yellow-dark;
           }
         }
       }
@@ -153,7 +153,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: $background-color;
+        background-color: variables.$background-color;
         padding: 10px 15px;
         height: 50px;
         border-radius: 10px;
@@ -169,7 +169,7 @@
           height: 30px;
           display: flex;
           justify-content: center;
-          color: $text-300;
+          color: variables.$text-300;
           font-family: sans-serif !important;
 
           @include flexStyle();

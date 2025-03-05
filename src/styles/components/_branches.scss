@@ -1,4 +1,4 @@
-
+@use "../variables";
 
 @mixin flexStyle($direction, $align, $justifyContent) {
   display: flex;
@@ -30,7 +30,7 @@
             @include flexStyle(row, center, space-between);
             border-radius: 10px;
             padding: 20px;
-            background-color: $background-color;
+            background-color: variables.$background-color;
 
             span {
               display: flex;
@@ -42,7 +42,7 @@
         .location-info {
           @include flexStyle(column, start, "");
           gap: 20px;
-          border: 2px solid $border-color;
+          border: 2px solid variables.$border-color;
           border-radius: 10px;
           padding: 20px;
 

@@ -1,37 +1,37 @@
-@import "./styles/variables";
-@import "./styles/components/header-top";
-@import "./styles/components/header";
-@import "./styles/components/footer";
+@use "./styles/variables";
+@use "./styles/components/header-top";
+@use "./styles/components/header";
+@use "./styles/components/footer";
 
-@import "./styles/components/banner/banner";
-@import "./styles/components/banner/miniBanner";
-@import "./styles/components/banner/banner3";
+@use "./styles/components/banner/banner";
+@use "./styles/components/banner/miniBanner";
+@use "./styles/components/banner/banner3";
 
-@import "./styles/components/categories";
-@import "./styles/components/suggestions";
-@import "./styles/components/partners";
-@import "./styles/components/branches";
-@import "./styles/components/services";
+@use "./styles/components/categories";
+@use "./styles/components/suggestions";
+@use "./styles/components/partners";
+@use "./styles/components/branches";
+@use "./styles/components/services";
 
-@import "./styles/components/products/products";
-@import "./styles/components/products/productItem";
+@use "./styles/components/products/products";
+@use "./styles/components/products/productItem";
 
 // modals
-@import "./styles/components/modal/search";
-@import "./styles/components/modal/catalogs";
+@use "./styles/components/modal/search";
+@use "./styles/components/modal/catalogs";
 // Auth-modal
-@import "./styles/components/Auth/login";
+@use "./styles/components/Auth/login";
 
 // Pages
-@import "./styles/pages/favorites";
-@import "./styles/pages/cart";
-@import "./styles/pages/catalog-details";
-@import "./styles/pages/catalog-page";
+@use "./styles/pages/favorites";
+@use "./styles/pages/cart";
+@use "./styles/pages/catalog-details";
+@use "./styles/pages/catalog-page";
 
 // error
-@import "./styles/components/error";
+@use "./styles/components/error";
 
-@import "./styles/components/UI/checkbox";
+@use "./styles/components/UI/checkbox";
 
 @font-face {
   font-family: "TT-Travels";
@@ -64,7 +64,7 @@ img {
 
 html,
 body {
-  background-color: $background-color;
+  background-color: variables.$background-color;
   font-family: "TT-Travels";
 }
 
@@ -90,9 +90,9 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
-    border: 2px solid $border-color;
+    border: 2px solid variables.$border-color;
     border-radius: 10px;
-    color: $text-200;
+    color: variables.$text-200;
 
     span {
       display: flex;
@@ -117,7 +117,7 @@ body {
   }
 
   a {
-    color: $text-200;
+    color: variables.$text-200;
 
     &.active,
     &:hover {

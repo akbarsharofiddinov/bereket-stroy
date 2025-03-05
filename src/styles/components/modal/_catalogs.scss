@@ -1,4 +1,4 @@
-
+@use "../../variables";
 
 .catalogs-modal {
   height: 0px;
@@ -34,7 +34,7 @@
         color: #000;
 
         &.active {
-          background-color: $yellow;
+          background-color: variables.$yellow;
         }
       }
     }
@@ -43,7 +43,7 @@
       flex: 60%;
       height: 100vh;
       padding: 30px;
-      background-color: $background-color;
+      background-color: variables.$background-color;
 
       .title {
         font-size: 30px;
@@ -60,11 +60,11 @@
 
         a {
           height: 44px;
-          color: $text-200;
+          color: variables.$text-200;
           transition: color 0.3s;
 
           &:hover {
-            color: $text-300;
+            color: variables.$text-300;
           }
         }
       }

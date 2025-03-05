@@ -1,4 +1,4 @@
-
+@use "../variables";
 
 footer {
   background-color: #000;
@@ -21,7 +21,7 @@ footer {
 
       .column-item {
         a {
-          color: $text-200;
+          color: variables.$text-200;
         }
 
         &:first-child {
@@ -62,7 +62,7 @@ footer {
       gap: 20px;
 
       li {
-        background-color: $yellow;
+        background-color: variables.$yellow;
         width: 44px;
         height: 44px;
         display: grid;
@@ -87,7 +87,7 @@ footer {
       justify-content: space-between;
 
       & > p {
-        color: $text-200;
+        color: variables.$text-200;
       }
 
       div {
@@ -96,7 +96,7 @@ footer {
         gap: 40px;
 
         p {
-          color: $text-150;
+          color: variables.$text-150;
         }
       }
     }

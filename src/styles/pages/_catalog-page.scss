@@ -1,4 +1,4 @@
-
+@use "../variables";
 
 .catalog-page {
   min-height: 45vh;
@@ -30,7 +30,7 @@
       }
 
       span {
-        color: $text-300;
+        color: variables.$text-300;
         font-size: 16px;
         font-weight: 600;
         margin-top: auto;
