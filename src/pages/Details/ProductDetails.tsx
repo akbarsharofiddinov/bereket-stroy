@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "@/store/hooks";
 
 const ProductDetails: React.FC = () => {
-  const { allCategories, selectedCategory, selectedSubCategory } =
-    useAppSelector((state) => state.categorySlice);
+  const { selectedCategory, selectedSubCategory } = useAppSelector(
+    (state) => state.categorySlice
+  );
 
   return (
     <>

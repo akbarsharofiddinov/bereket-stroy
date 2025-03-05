@@ -1,4 +1,3 @@
-import { useAppSelector } from "@/store/hooks";
 import React from "react";
 import ProductItem from "./ProductItem";
 import { FilterSidebar, TopFilterBox } from "@/components";
