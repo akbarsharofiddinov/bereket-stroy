@@ -1,4 +1,3 @@
-import Portal from "@/Portal";
 import { useAppDispatch } from "@/store/hooks";
 import { setAuthModal } from "@/store/projectSlice";
 import axios from "axios";
@@ -50,81 +49,76 @@ const Login: React.FC<{
   }
 
   return (
-    <Portal container={document.getElementById("body")!}>
-      <div
-        className="login-modal"
-        onClick={() => dispatch(setAuthModal(false))}
-      >
-        <div className="inner" onClick={(e) => e.stopPropagation()}>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <h2 className="title">Tizimga kirish</h2>
-            <div className="switch-user_type">
-              <button
-                className={isIllegal ? "physical" : "physical active"}
-                onClick={(e) => {
-                  setIsIllegal(false);
-                  e.preventDefault();
-                }}
-              >
-                Jismoniy shaxs
-              </button>
-              <button
-                className={isIllegal ? "legal active" : "legal"}
-                onClick={(e) => {
-                  setIsIllegal(true);
-                  e.preventDefault();
-                }}
-              >
-                Yuridik shaxs
-              </button>
-            </div>
+    <div className="login-modal" onClick={() => dispatch(setAuthModal(false))}>
+      <div className="inner" onClick={(e) => e.stopPropagation()}>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <h2 className="title">Tizimga kirish</h2>
+          <div className="switch-user_type">
+            <button
+              className={isIllegal ? "physical" : "physical active"}
+              onClick={(e) => {
+                setIsIllegal(false);
+                e.preventDefault();
+              }}
+            >
+              Jismoniy shaxs
+            </button>
+            <button
+              className={isIllegal ? "legal active" : "legal"}
+              onClick={(e) => {
+                setIsIllegal(true);
+                e.preventDefault();
+              }}
+            >
+              Yuridik shaxs
+            </button>
+          </div>
 
-            <div className="inner-form">
-              {isIllegal ? (
-                <div className="inn-input">
-                  <span>*</span>
-                  <input type="text" name="inn" id="inn" placeholder="INN" />
-                </div>
-              ) : (
-                ""
-              )}
-              <div className="phone-input">
-                <span>+998</span>
-                <input
-                  type="text"
-                  name="phone"
-                  id="phone"
-                  placeholder="00 000 00 00"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
+          <div className="inner-form">
+            {isIllegal ? (
+              <div className="inn-input">
+                <span>*</span>
+                <input type="text" name="inn" id="inn" placeholder="INN" />
               </div>
-
-              <div className="sms-input">
-                <input
-                  type="text"
-                  name="sms"
-                  id="sms"
-                  placeholder="SMS kod"
-                  value={sms}
-                  onChange={(e) => setSms(e.target.value)}
-                />
-                <Link to={""} onClick={getVerificationCode}>
-                  Tasdiqlash kodni olish
-                </Link>
-              </div>
+            ) : (
+              ""
+            )}
+            <div className="phone-input">
+              <span>+998</span>
+              <input
+                type="text"
+                name="phone"
+                id="phone"
+                placeholder="00 000 00 00"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
             </div>
 
-            <div className="actions">
-              <button onClick={handleLogin}>Tizimga kirish</button>
-              <button onClick={() => setLoginType("signup")}>
-                Ro‘yhatdan o‘tish
-              </button>
+            <div className="sms-input">
+              <input
+                type="text"
+                name="sms"
+                id="sms"
+                placeholder="SMS kod"
+                value={sms}
+                onChange={(e) => setSms(e.target.value)}
+              />
+              <Link to={""} onClick={getVerificationCode}>
+                Tasdiqlash kodni olish
+              </Link>
             </div>
-          </form>
-        </div>
+          </div>
+
+          <div className="actions">
+            <button onClick={handleLogin}>Tizimga kirish</button>
+            <button onClick={() => setLoginType("signup")}>
+              Ro‘yhatdan o‘tish
+            </button>
+          </div>
+        </form>
       </div>
-    </Portal>
+    </div>
   );
 };
 

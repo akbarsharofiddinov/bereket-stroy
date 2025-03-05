@@ -33,7 +33,6 @@ const Suggestions: React.FC<IProps> = ({ link, title }) => {
               <Swiper
                 slidesPerView={"auto"}
                 spaceBetween={20}
-                
                 className="suggestions-swiper"
               >
                 {products.length

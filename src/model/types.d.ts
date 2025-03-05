@@ -2,6 +2,7 @@ type DataNames = {
   en: string;
   ru: string;
   uz: string;
+  qr: string;
 };
 
 interface ICategory {
@@ -19,7 +20,7 @@ interface ICategory {
       name: DataNames;
       photo: string | null;
       slug: string;
-    };
+    }[];
   }[];
 
   sub_sub_category?: {
@@ -44,6 +45,12 @@ interface IProduct {
   discounted_price: string;
   is_sale: number;
   rating: number;
+  category_id: number;
+  sub_category_id: number;
+  sub_sub_category_id: number;
+  description: DataNames;
+  avg_rating: number;
+  count_rating: number;
 }
 
 interface IBrands {
