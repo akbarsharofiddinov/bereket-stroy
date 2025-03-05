@@ -15,8 +15,8 @@
       align-items: center;
 
       &:nth-child(2) {
-        border-left: 2px solid variables.$border-color;
-        border-right: 2px solid variables.$border-color;
+        border-left: 2px solid var(--border-color);
+        border-right: 2px solid var(--border-color);
       }
     }
   }

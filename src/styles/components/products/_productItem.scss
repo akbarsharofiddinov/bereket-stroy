@@ -41,7 +41,7 @@
 
       &.status_new {
         left: 20px;
-        background-color: variables.$blue;
+        background-color: var(--blue);
         color: #fff;
         font-size: 16px;
         font-weight: 600;
@@ -92,7 +92,7 @@
     .monthly-price {
       @include fontStyle(16px, 500);
       padding: 10px;
-      border: 2px solid variables.$border-color;
+      border: 2px solid var(--border-color);
       border-radius: 10px;
       color: #000;
     }
@@ -111,27 +111,27 @@
         padding: 10px 15px;
         border: none;
         border-radius: 10px;
-        background-color: variables.$yellow;
+        background-color: var(--yellow);
         flex-direction: row;
         transition: background-color 0.3s;
         cursor: pointer;
-        border: 2px solid variables.$yellow;
+        border: 2px solid var(--yellow);
 
         &:hover {
-          background-color: variables.$yellow-light;
+          background-color: var(--yellow)-light;
         }
 
         @include fontStyle(16px, 600);
 
         &.in-cart {
-          background-color: variables.$green;
-          border-color: variables.$green;
+          background-color: var(--green);
+          border-color: var(--green);
           color: #fff;
           flex: 50%;
 
           span {
             &::after {
-              border-color: variables.$green-dark;
+              border-color: var(--green)-dark;
             }
           }
         }
@@ -144,7 +144,7 @@
             left: -10px;
             top: 0;
             bottom: 0;
-            border: 1px solid variables.$yellow-dark;
+            border: 1px solid var(--yellow)-dark;
           }
         }
       }
@@ -153,7 +153,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: variables.$background-color;
+        background-color: var(--background-color);
         padding: 10px 15px;
         height: 50px;
         border-radius: 10px;
@@ -169,7 +169,7 @@
           height: 30px;
           display: flex;
           justify-content: center;
-          color: variables.$text-300;
+          color: var(--text-)300;
           font-family: sans-serif !important;
 
           @include flexStyle();

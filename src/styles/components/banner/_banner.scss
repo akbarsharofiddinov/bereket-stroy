@@ -47,7 +47,7 @@
 
         a {
           padding: 10px 30px;
-          background-color: variables.$yellow;
+          background-color: var(--yellow);
           border-radius: 10px;
           font-size: 18px;
           font-weight: 600;

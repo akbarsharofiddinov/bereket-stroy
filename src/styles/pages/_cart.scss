@@ -39,7 +39,7 @@
 
         a {
           @include fontStyle(18px, 600);
-          background-color: variables.$yellow;
+          background-color: var(--yellow);
           padding: 15px 20px;
           border-radius: 10px;
           color: #000;
@@ -64,9 +64,9 @@
         display: flex;
         align-items: center;
         gap: 5px;
-        border: 2px solid variables.$border-color;
+        border: 2px solid var(--border-color);
         border-radius: 10px;
-        color: variables.$text-200;
+        color: var(--text-)200;
 
         span {
           display: flex;
@@ -100,14 +100,14 @@
             left: 10px;
             width: 24px;
             height: 24px;
-            background-color: variables.$border-color;
+            background-color: var(--border-color);
             border-radius: 6px;
             display: grid;
             place-items: center;
             box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 
             &.active {
-              background-color: variables.$yellow;
+              background-color: var(--yellow);
             }
           }
 
@@ -151,7 +151,7 @@
 
                   span {
                     &:last-child {
-                      color: variables.$green;
+                      color: var(--green);
                     }
                   }
                 }
@@ -166,7 +166,7 @@
                   font-size: 16px;
                   font-weight: 600;
                   background-color: transparent;
-                  border: 2px solid variables.$border-color;
+                  border: 2px solid var(--border-color);
                   cursor: pointer;
                 }
               }
@@ -193,17 +193,17 @@
                     span {
                       font-size: 14px;
                       font-weight: 600;
-                      color: variables.$text-200;
+                      color: var(--text-)200;
                     }
                   }
 
                   .original-price {
                     text-decoration: line-through;
-                    color: variables.$text-200;
+                    color: var(--text-)200;
                   }
 
                   .discount {
-                    color: variables.$red;
+                    color: var(--red);
                     font-weight: 500;
                   }
                 }
@@ -211,7 +211,7 @@
                 .count-box {
                   display: flex;
                   align-items: center;
-                  background-color: variables.$background-color;
+                  background-color: var(--background-color);
                   justify-content: space-between;
                   padding: 10px 20px;
                   max-width: 150px;
@@ -248,7 +248,7 @@
           align-items: center;
           gap: 5px;
           padding: 5px;
-          border: 2px solid variables.$border-color;
+          border: 2px solid var(--border-color);
           border-radius: 20px;
           width: 100%;
 
@@ -261,7 +261,7 @@
             font-weight: 600;
             border-color: transparent;
             background-color: transparent;
-            color: variables.$text-200;
+            color: var(--text-)200;
             cursor: pointer;
 
             &.active {
@@ -276,19 +276,19 @@
           align-items: center;
           justify-content: space-between;
           gap: 10px;
-          background-color: variables.$background-color;
+          background-color: var(--background-color);
           padding: 15px;
 
           input {
             width: 100%;
             background-color: transparent;
             border: none;
-            color: variables.$text-300;
+            color: var(--text-)300;
             font-size: 16px;
             font-weight: 500;
 
             &::placeholder {
-              color: variables.$text-200;
+              color: var(--text-)200;
             }
           }
 
@@ -317,7 +317,7 @@
               right: 0;
               top: 50%;
               height: 2px;
-              background-color: variables.$border-color;
+              background-color: var(--border-color);
               z-index: 1;
             }
 
@@ -329,7 +329,7 @@
 
               &:first-child {
                 font-weight: 600;
-                color: variables.$text-300;
+                color: var(--text-)300;
                 font-size: 16px !important;
                 text-align: start !important;
                 padding-right: 5px;
@@ -337,7 +337,7 @@
 
               &:last-child {
                 font-weight: 500;
-                color: variables.$text-200;
+                color: var(--text-)200;
                 padding-left: 5px;
               }
             }
@@ -345,7 +345,7 @@
             &:nth-child(2) {
               span {
                 &:last-child {
-                  color: variables.$green;
+                  color: var(--green);
                 }
               }
             }
@@ -353,7 +353,7 @@
             &:last-child {
               span {
                 &:last-child {
-                  color: variables.$text-300;
+                  color: var(--text-)300;
                   font-size: 18px;
                   font-weight: 600;
                 }
@@ -363,8 +363,8 @@
         }
 
         .order-btn {
-          background-color: variables.$yellow;
-          color: variables.$text-300;
+          background-color: var(--yellow);
+          color: var(--text-)300;
           font-size: 18px;
           font-weight: 600;
           padding: 15px 20px;

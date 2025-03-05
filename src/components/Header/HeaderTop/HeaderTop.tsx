@@ -1,27 +1,19 @@
-import { useAppSelector } from "@/store/hooks";
 import React from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { PiGlobe } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import styles from "./HeaderTop.module.scss";
 
 const HeaderTop: React.FC = () => {
-  const { searchModal, catalogModal } = useAppSelector(
-    (state) => state.projectSlice
-  );
-
   return (
     <>
-      <div
-        className={
-          searchModal || catalogModal ? "header-top active" : "header-top"
-        }
-      >
+      <div className={styles.headerTop}>
         <div className="container">
-          <div className="inner">
+          <div className={styles.inner}>
             {/* Select Element */}
-            <div className="select-item">
-              <div className="selected">
+            <div className={styles.selectItem}>
+              <div className={styles.selected}>
                 <span>
                   <HiOutlineLocationMarker />
                 </span>
@@ -32,15 +24,14 @@ const HeaderTop: React.FC = () => {
               </div>
             </div>
 
-            <div className="right">
+            <div className={styles.right}>
               {/* Discount button */}
-              <button className="discount-btn">
+              <button className={styles["discount-btn"]}>
                 <svg
                   width="20"
                   height="20"
                   viewBox="0 0 20 20"
                   fill="none"
-                  
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
@@ -51,8 +42,6 @@ const HeaderTop: React.FC = () => {
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"
-                    
-                    
                     d="M12.6728 7.32741C12.9982 7.65285 12.9982 8.18048 12.6728 8.50592L8.50611 12.6726C8.18065 12.998 7.65301 12.998 7.32757 12.6726C7.00214 12.3472 7.00214 11.8195 7.32757 11.4941L11.4943 7.32741C11.8197 7.00198 12.3473 7.00198 12.6728 7.32741Z"
                     fill="white"
                   />
@@ -67,32 +56,32 @@ const HeaderTop: React.FC = () => {
               </button>
 
               {/* Header menu */}
-              <ul className="header-menu">
-                <li className="header-menu_item">
-                  <Link to="#" className="header-menu_item__link">
+              <ul className={styles["header-menu"]}>
+                <li className={styles["header-menu_item"]}>
+                  <Link to="#" className={styles["header-menu_item__link"]}>
                     Do‘kon manzillari
                   </Link>
                 </li>
-                <li className="header-menu_item">
-                  <Link to="#" className="header-menu_item__link">
+                <li className={styles["header-menu_item"]}>
+                  <Link to="#" className={styles["header-menu_item__link"]}>
                     Sotuvchilar uchun
                   </Link>
                 </li>
-                <li className="header-menu_item">
-                  <Link to="#" className="header-menu_item__link">
+                <li className={styles["header-menu_item"]}>
+                  <Link to="#" className={styles["header-menu_item__link"]}>
                     Biz bilan bog’lanish
                   </Link>
                 </li>
-                <li className="header-menu_item">
-                  <Link to="#" className="header-menu_item__link">
+                <li className={styles["header-menu_item"]}>
+                  <Link to="#" className={styles["header-menu_item__link"]}>
                     Yordam
                   </Link>
                 </li>
               </ul>
 
               {/* Select element - language */}
-              <div className="select-item language">
-                <div className="selected">
+              <div className={`${styles.selectItem} ${styles.language}`}>
+                <div className={styles.selected}>
                   <span>
                     <PiGlobe />
                   </span>

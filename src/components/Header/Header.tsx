@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HeaderTop from "./HeaderTop";
+import HeaderTop from "./HeaderTop/HeaderTop";
 import { Link, NavLink } from "react-router-dom";
 import logo from "@/assets/Vector.svg";
 import { LiaTimesSolid } from "react-icons/lia";
@@ -9,6 +9,7 @@ import {
   setCatalogModal,
   setSearchModal,
 } from "@/store/projectSlice";
+import styles from "./Header.module.scss";
 
 const Header: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -38,9 +39,7 @@ const Header: React.FC = () => {
   return (
     <>
       <HeaderTop />
-      <header
-        className={searchModal || catalogModal ? "header active" : "header"}
-      >
+      <header className={styles.header}>
         <div className="container">
           <div className="header-inner">
             <div className="left">
