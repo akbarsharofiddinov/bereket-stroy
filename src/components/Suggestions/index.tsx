@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { ProductItem } from "@/components";
@@ -8,12 +8,21 @@ import { useAppSelector } from "@/store/hooks";
 interface IProps {
   title: string;
   link: string;
-  data?: [];
+  data?: IProduct[];
 }
 
-const Suggestions: React.FC<IProps> = ({ link, title }) => {
-  const { allProducts: products } = useAppSelector((state) => state.productSlice);
-  
+const Suggestions: React.FC<IProps> = ({ link, title, data }) => {
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const { allProducts } = useAppSelector((state) => state.productSlice);
+
+  useEffect(() => {
+    if (allProducts) setProducts(allProducts);
+  }, [allProducts]);
+
+  useEffect(() => {
+    if (data) setProducts(data);
+  }, [data]);
+
   return (
     <>
       <div className="suggestions section">

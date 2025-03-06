@@ -8,6 +8,7 @@ import {
 } from "@/store/productSlice";
 import { formatCurrency } from "@/utils/currencyFormat";
 import React from "react";
+import { FaMinus, FaPlus, FaStar } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 
 const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
@@ -121,10 +122,13 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
           onClick={() => navigate(`/details/${data.slug}`)}
         >
           <div className="img-box">
+            {!data.is_sale ? <div className="not-sale">Tugagan</div> : ""}
             <span className="status_new">{data.status}</span>
             <span
               className="add-fav"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 if (checkProductInFavourites()) handleRemoveFromFavorites();
                 else handleAddToFavorites();
               }}
@@ -198,8 +202,8 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M9.00008 17.9583C4.05253 17.9583 0.041748 13.9475 0.041748 8.99996C0.041748 4.05241 4.05253 0.041626 9.00008 0.041626C13.9477 0.041626 17.9584 4.05241 17.9584 8.99996C17.9584 13.9475 13.9477 17.9583 9.00008 17.9583ZM12.0893 7.08923C12.4147 6.76381 12.4147 6.23617 12.0893 5.91073C11.7639 5.58528 11.2363 5.58526 10.9108 5.91068L8.99991 7.82146L7.08931 5.91101C6.76387 5.58558 6.23623 5.5856 5.91081 5.91105C5.58538 6.2365 5.5854 6.76413 5.91085 7.08956L7.82133 8.99996L5.91085 10.9104C5.5854 11.2358 5.58538 11.7635 5.91081 12.0889C6.23623 12.4143 6.76387 12.4143 7.08931 12.0889L8.99991 10.1785L10.9108 12.0892C11.2363 12.4146 11.7639 12.4146 12.0893 12.0892C12.4147 11.7637 12.4147 11.2361 12.0893 10.9107L10.1785 8.99996L12.0893 7.08923Z"
                         fill="#E31E24"
                       />
@@ -210,18 +214,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
               </p>
               <p>
                 <span>
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11.906 4.82736L10.4395 1.87011C9.64792 0.265465 8.34809 0.265465 7.54817 1.87011L6.08168 4.82736C5.8817 5.23902 5.34843 5.63387 4.90681 5.70948L2.24877 6.15475C0.548962 6.4404 0.157337 7.68379 1.37387 8.91037L3.4403 10.9939C3.79027 11.3467 3.98191 12.0272 3.87359 12.5145L3.28199 15.0937C2.81538 17.1268 3.89859 17.925 5.68173 16.858L8.17309 15.371C8.63142 15.1021 9.373 15.1021 9.82292 15.371L12.3143 16.858C14.1058 17.925 15.1807 17.1352 14.7141 15.0937L14.1224 12.5145C14.0142 12.0272 14.2058 11.3467 14.5558 10.9939L16.6222 8.91037C17.8471 7.68379 17.4471 6.4404 15.7473 6.15475L13.0893 5.70948C12.6393 5.63387 12.106 5.23902 11.906 4.82736Z"
-                      fill="black"
-                    />
-                  </svg>
+                  <FaStar />
                 </span>
                 sharhlar yo‘q
               </p>
@@ -232,81 +225,100 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
             </p>
             <p className="price">{formatCurrency(parseInt(data.price))}</p>
             <p className="monthly-price">15,400 so‘m / 24 oyga</p>
-            <div className="count-box">
+            <div className="count-box" onClick={(e) => e.stopPropagation()}>
               {checkProductInCart() ? (
                 <>
-                  <Link to={"/cart"} className="add-cart_btn in-cart">
+                  <Link
+                    to={"/cart"}
+                    className={
+                      data.is_sale
+                        ? "add-cart_btn in-cart"
+                        : "add-cart_btn in-cart disable"
+                    }
+                  >
                     Savatda
                     <span>
-                      <svg
-                        width="25"
-                        height="24"
-                        viewBox="0 0 25 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M8.25 16L16.9701 15.2733C19.6986 15.046 20.3111 14.45 20.6135 11.7289L21.25 6"
-                          stroke="white"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                        <path
-                          d="M6.25 6H7.75M22.25 6H19.25"
-                          stroke="white"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                        <path
-                          d="M10.75 7C10.75 7 11.75 7 12.75 9C12.75 9 15.9265 4 18.75 3"
-                          stroke="white"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M6.25 22C7.35457 22 8.25 21.1046 8.25 20C8.25 18.8954 7.35457 18 6.25 18C5.14543 18 4.25 18.8954 4.25 20C4.25 21.1046 5.14543 22 6.25 22Z"
-                          stroke="white"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M17.25 22C18.3546 22 19.25 21.1046 19.25 20C19.25 18.8954 18.3546 18 17.25 18C16.1454 18 15.25 18.8954 15.25 20C15.25 21.1046 16.1454 22 17.25 22Z"
-                          stroke="white"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M8.25 20H15.25"
-                          stroke="white"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                        <path
-                          d="M2.25 2H3.216C4.16068 2 4.98414 2.62459 5.21326 3.51493L8.18852 15.0765C8.33887 15.6608 8.2102 16.2797 7.83824 16.7616L6.88213 18"
-                          stroke="white"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
+                      {data.is_sale ? (
+                        <svg
+                          width="25"
+                          height="24"
+                          viewBox="0 0 25 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M8.25 16L16.9701 15.2733C19.6986 15.046 20.3111 14.45 20.6135 11.7289L21.25 6"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M6.25 6H7.75M22.25 6H19.25"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M10.75 7C10.75 7 11.75 7 12.75 9C12.75 9 15.9265 4 18.75 3"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M6.25 22C7.35457 22 8.25 21.1046 8.25 20C8.25 18.8954 7.35457 18 6.25 18C5.14543 18 4.25 18.8954 4.25 20C4.25 21.1046 5.14543 22 6.25 22Z"
+                            stroke="white"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M17.25 22C18.3546 22 19.25 21.1046 19.25 20C19.25 18.8954 18.3546 18 17.25 18C16.1454 18 15.25 18.8954 15.25 20C15.25 21.1046 16.1454 22 17.25 22Z"
+                            stroke="white"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M8.25 20H15.25"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M2.25 2H3.216C4.16068 2 4.98414 2.62459 5.21326 3.51493L8.18852 15.0765C8.33887 15.6608 8.2102 16.2797 7.83824 16.7616L6.88213 18"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          width="22"
+                          height="22"
+                          viewBox="0 0 22 22"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M7 15L15.7201 14.2733C18.4486 14.046 19.0611 13.45 19.3635 10.7289L20 5M5 5H7M21 5H17.5M9.5 2L12.5 5M12.5 5L15.5 8M12.5 5L9.5 8M12.5 5L15.5 2M7 19C7 20.1046 6.10457 21 5 21C3.89543 21 3 20.1046 3 19C3 17.8954 3.89543 17 5 17C6.10457 17 7 17.8954 7 19ZM7 19H14M14 19C14 20.1046 14.8954 21 16 21C17.1046 21 18 20.1046 18 19C18 17.8954 17.1046 17 16 17C14.8954 17 14 17.8954 14 19ZM1 1H1.966C2.91068 1 3.73414 1.62459 3.96326 2.51493L6.93852 14.0765C7.08887 14.6608 6.9602 15.2797 6.58824 15.7616L5.63213 17"
+                            stroke="black"
+                            strokeOpacity="0.5"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      )}
                     </span>
                   </Link>
-                  <div>
-                    <button onClick={() => handleRemoveProductFromCart()}>
-                      <svg
-                        width="17"
-                        height="2"
-                        viewBox="0 0 17 2"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M15.1663 1H1.83301"
-                          stroke="black"
-                          strokeOpacity="0.5"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                  <div className={data.is_sale ? "" : "disable"}>
+                    <button
+                      onClick={(e) =>
+                        data.is_sale
+                          ? handleRemoveProductFromCart()
+                          : () => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                            }
+                      }
+                    >
+                      <FaMinus />
                     </button>
                     <span>
                       {
@@ -314,74 +326,95 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                           ?.quantity
                       }
                     </span>
-                    <button onClick={() => handleAddProductToCart()}>
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M7.99967 1.33337V14.6667M14.6663 8.00004H1.33301"
-                          stroke="black"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                    <button
+                      onClick={(e) =>
+                        data.is_sale
+                          ? handleAddProductToCart()
+                          : () => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                            }
+                      }
+                    >
+                      <FaPlus />
                     </button>
                   </div>
                 </>
               ) : (
                 <button
-                  className="add-cart_btn"
-                  onClick={() => handleAddProductToCart()}
+                  className={
+                    data.is_sale ? "add-cart_btn" : "add-cart_btn disable"
+                  }
+                  onClick={(e) => {
+                    if (data.is_sale) handleAddProductToCart();
+                    else {
+                      e.stopPropagation();
+                      e.preventDefault();
+                    }
+                  }}
                 >
                   Savatga solish
                   <span>
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M8 16L16.7201 15.2733C19.4486 15.046 20.0611 14.45 20.3635 11.7289L21 6"
-                        stroke="black"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M6 6H22"
-                        stroke="black"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M6 22C7.10457 22 8 21.1046 8 20C8 18.8954 7.10457 18 6 18C4.89543 18 4 18.8954 4 20C4 21.1046 4.89543 22 6 22Z"
-                        stroke="black"
-                        strokeWidth="2"
-                      />
-                      <path
-                        d="M17 22C18.1046 22 19 21.1046 19 20C19 18.8954 18.1046 18 17 18C15.8954 18 15 18.8954 15 20C15 21.1046 15.8954 22 17 22Z"
-                        stroke="black"
-                        strokeWidth="2"
-                      />
-                      <path
-                        d="M8 20H15"
-                        stroke="black"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M2 2H2.966C3.91068 2 4.73414 2.62459 4.96326 3.51493L7.93852 15.0765C8.08887 15.6608 7.9602 16.2797 7.58824 16.7616L6.63213 18"
-                        stroke="black"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                    </svg>
+                    {data.is_sale ? (
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8 16L16.7201 15.2733C19.4486 15.046 20.0611 14.45 20.3635 11.7289L21 6"
+                          stroke="black"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M6 6H22"
+                          stroke="black"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M6 22C7.10457 22 8 21.1046 8 20C8 18.8954 7.10457 18 6 18C4.89543 18 4 18.8954 4 20C4 21.1046 4.89543 22 6 22Z"
+                          stroke="black"
+                          strokeWidth="2"
+                        />
+                        <path
+                          d="M17 22C18.1046 22 19 21.1046 19 20C19 18.8954 18.1046 18 17 18C15.8954 18 15 18.8954 15 20C15 21.1046 15.8954 22 17 22Z"
+                          stroke="black"
+                          strokeWidth="2"
+                        />
+                        <path
+                          d="M8 20H15"
+                          stroke="black"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M2 2H2.966C3.91068 2 4.73414 2.62459 4.96326 3.51493L7.93852 15.0765C8.08887 15.6608 7.9602 16.2797 7.58824 16.7616L6.63213 18"
+                          stroke="black"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        width="22"
+                        height="22"
+                        viewBox="0 0 22 22"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7 15L15.7201 14.2733C18.4486 14.046 19.0611 13.45 19.3635 10.7289L20 5M5 5H7M21 5H17.5M9.5 2L12.5 5M12.5 5L15.5 8M12.5 5L9.5 8M12.5 5L15.5 2M7 19C7 20.1046 6.10457 21 5 21C3.89543 21 3 20.1046 3 19C3 17.8954 3.89543 17 5 17C6.10457 17 7 17.8954 7 19ZM7 19H14M14 19C14 20.1046 14.8954 21 16 21C17.1046 21 18 20.1046 18 19C18 17.8954 17.1046 17 16 17C14.8954 17 14 17.8954 14 19ZM1 1H1.966C2.91068 1 3.73414 1.62459 3.96326 2.51493L6.93852 14.0765C7.08887 14.6608 6.9602 15.2797 6.58824 15.7616L5.63213 17"
+                          stroke="black"
+                          strokeOpacity="0.5"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    )}
                   </span>
                 </button>
               )}

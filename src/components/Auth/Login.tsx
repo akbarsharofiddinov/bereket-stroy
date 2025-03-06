@@ -9,23 +9,54 @@ const Login: React.FC<{
   setLoginType: React.Dispatch<React.SetStateAction<string>>;
 }> = ({ setLoginType }) => {
   const [isIllegal, setIsIllegal] = React.useState(false);
+
   const [phone, setPhone] = React.useState("");
+  const [phoneValidation, setPhoneValidation] = React.useState(false);
+
   const [sms, setSms] = React.useState("");
 
+  const [timerStart, setTimerStart] = React.useState(false);
+  const [timeLeft, setTimeLeft] = React.useState(120);
+
   const dispatch = useAppDispatch();
+
+  function startTimer() {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+
+    if (timeLeft <= 1) clearInterval(timer);
+  }
 
   async function getVerificationCode() {
     const formData = new FormData();
     formData.append("is_legal", isIllegal ? "1" : "0");
     formData.append("phone", phone);
-    try {
-      const response = await axios.post(
-        "https://bereket.webclub.uz/api/login",
-        formData
-      );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+    if (phone) {
+      try {
+        const response = await axios.post(
+          "https://bereket.webclub.uz/api/login",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log(response);
+        if (response.status === 200) {
+          toast(`Tasdiqlash kodi ${phone} raqamiga yuborildi`, {
+            type: "success",
+          });
+          setTimerStart(true);
+          startTimer();
+        }
+      } catch (error: any) {
+        toast(error.response.data.message, { type: "error" });
+      }
+    } else {
+      toast("Iltimos telefon raqamingizni kiriting", { type: "error" });
+      setPhoneValidation(true);
     }
   }
 
@@ -38,13 +69,14 @@ const Login: React.FC<{
         "https://bereket.webclub.uz/api/login-verify",
         formData
       );
-
+      console.log(response);
       if (response.status === 200) {
         toast("Tizimga muvaffaqiyatli kirdingiz", { type: "success" });
         dispatch(setAuthModal(false));
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toast(error.response.data.message, { type: "error" });
     }
   }
 
@@ -83,7 +115,9 @@ const Login: React.FC<{
             ) : (
               ""
             )}
-            <div className="phone-input">
+            <div
+              className={phoneValidation ? "phone-input error" : "phone-input"}
+            >
               <span>+998</span>
               <input
                 type="text"
@@ -104,9 +138,16 @@ const Login: React.FC<{
                 value={sms}
                 onChange={(e) => setSms(e.target.value)}
               />
-              <Link to={""} onClick={getVerificationCode}>
-                Tasdiqlash kodni olish
-              </Link>
+              {timerStart ? (
+                <p className="desc">
+                  Agar kod kelmasa, siz {timeLeft} soniyadan so'ng yangi kod
+                  olishingiz mumkin
+                </p>
+              ) : (
+                <Link to={""} onClick={getVerificationCode}>
+                  Tasdiqlash kodni olish
+                </Link>
+              )}
             </div>
           </div>
 

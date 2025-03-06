@@ -8,8 +8,13 @@ const Signup: React.FC<{
   setLoginType: React.Dispatch<React.SetStateAction<string>>;
 }> = ({ setLoginType }) => {
   const [isIllegal, setIsIllegal] = React.useState(false);
+
   const [phone, setPhone] = React.useState("");
+  // const [phoneValidation, setPhoneValidation] = React.useState(false);
+
   const [userName, setUsername] = React.useState("");
+  // const [userNameValidation, setUserNameValidation] = React.useState(false);
+
   const [company, setCompany] = React.useState("");
   const [inn, setInn] = React.useState("");
   const [getSms, setGetSms] = React.useState(false);
@@ -33,6 +38,7 @@ const Signup: React.FC<{
       );
       if (response.status === 200) {
         setGetSms(true);
+        toast(`SMS kod +998${phone} raqamiga yuborildi`, { type: "success" });
       }
     } catch (error: any) {
       toast("Telefon raqam tizimdan ro'yxatdan o'tgan", { type: "error" });
@@ -50,9 +56,15 @@ const Signup: React.FC<{
         `https://bereket.webclub.uz/api/register-verify`,
         formData
       );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+      if (response.status === 200) {
+        toast("Muvafaqqiyatli ro'yxatdan o'tdingiz", { type: "success" });
+        setPhone("");
+        setUsername("");
+        setSmsCode("");
+        dispatch(setAuthModal(false));
+      }
+    } catch (error: any) {
+      toast(error.response.data.message, { type: "error" });
     }
   }
 
@@ -66,7 +78,12 @@ const Signup: React.FC<{
           <form onSubmit={(e) => e.preventDefault()}>
             <h2 className="title">
               {getSms ? (
-                <span onClick={() => setGetSms(false)}>
+                <span
+                  onClick={() => {
+                    setSmsCode("");
+                    setGetSms(false);
+                  }}
+                >
                   <svg
                     width="24"
                     height="24"
@@ -190,14 +207,11 @@ const Signup: React.FC<{
             <div className="actions">
               <button
                 onClick={() => {
-                  if (phone && userName) {
-                    getSMSCode();
-                  } else {
-                    handleRegister();
-                  }
+                  if (getSms) handleRegister();
+                  else getSMSCode();
                 }}
               >
-                Ro‘yhatdan o‘tish
+                {getSms ? "Ro‘yhatdan o‘tish" : "SMS kodni olish"}
               </button>
               <button onClick={() => setLoginType("login")}>
                 Tizimga kirish

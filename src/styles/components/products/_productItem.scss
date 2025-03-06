@@ -29,6 +29,18 @@
     height: 315px;
     width: 100%;
 
+    .not-sale {
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(5px);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #00000080;
+      background-color: #ffffff80;
+    }
+
     img {
       width: 100%;
       height: 100%;
@@ -119,8 +131,25 @@
         cursor: pointer;
         border: 2px solid var(--yellow);
 
+        &.disable {
+          background-color: var(--background-color);
+          border-color: var(--background-color);
+          color: var(--text-150);
+          cursor: not-allowed;
+
+          &:hover {
+            background-color: var(--background-color) !important;
+          }
+
+          span {
+            &::after {
+              border-color: var(--text-100);
+            }
+          }
+        }
+
         &:hover {
-          background-color: var(--yellow)-light;
+          background-color: var(--yellow-light);
         }
 
         @include fontStyle(16px, 600);
@@ -131,9 +160,21 @@
           color: #fff;
           flex: 50%;
 
+          &.disable {
+            background-color: var(--background-color) !important;
+            border-color: var(--background-color) !important;
+            color: var(--text-150) !important;
+
+            span {
+              &::after {
+                border-color: var(--text-100);
+              }
+            }
+          }
+
           span {
             &::after {
-              border-color: var(--green)-dark;
+              border-color: var(--green-dark);
             }
           }
         }
@@ -146,7 +187,7 @@
             left: -10px;
             top: 0;
             bottom: 0;
-            border: 1px solid var(--yellow)-dark;
+            border: 1px solid var(--yellow-dark);
           }
         }
       }
@@ -160,6 +201,17 @@
         height: 50px;
         border-radius: 10px;
         flex: 50% !important;
+        cursor: not-allowed;
+
+        &.disable {
+          button {
+            color: var(--text-150) !important;
+          }
+
+          span {
+            color: var(--text-150) !important;
+          }
+        }
 
         button {
           background-color: transparent;

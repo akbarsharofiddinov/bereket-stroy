@@ -61,7 +61,7 @@
           font-weight: 600;
           border-color: transparent;
           background-color: transparent;
-          color: var(--text-)200;
+          color: var(--text-) 200;
           cursor: pointer;
 
           &.active {
@@ -84,6 +84,16 @@
           padding: 20px;
           border-radius: 10px;
 
+          &.error {
+            border: 2px solid var(--red);
+            color: var(--red);
+
+            input::placeholder {
+              color: var(--red);
+              opacity: 0.5;
+            }
+          }
+
           input {
             padding: 0 !important;
           }
@@ -100,10 +110,10 @@
           padding: 20px;
           border: none;
           background-color: var(--background-color);
-          color: var(--text-)300;
+          color: var(--text-) 300;
 
           &::placeholder {
-            color: var(--text-)200;
+            color: var(--text-) 200;
           }
         }
 
@@ -118,10 +128,20 @@
             font-weight: 500;
             margin-left: 5px;
           }
+
+          .desc {
+            color: var(--text-250);
+            margin-top: 20px;
+            font-size: 16px;
+          }
         }
 
         .inn-input {
           position: relative;
+
+          input {
+            width: 100%;
+          }
 
           span {
             color: var(--red);
@@ -144,7 +164,7 @@
           border-radius: 10px;
           font-size: 18px;
           font-weight: 600;
-          color: var(--text-)300;
+          color: var(--text-) 300;
           border: none;
           cursor: pointer;
 
