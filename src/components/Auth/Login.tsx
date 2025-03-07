@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@/store/hooks";
-import { setAuthModal } from "@/store/projectSlice";
+import { setAuthModal, setToken } from "@/store/projectSlice";
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -69,10 +69,12 @@ const Login: React.FC<{
         "https://bereket.webclub.uz/api/login-verify",
         formData
       );
-      console.log(response);
+
       if (response.status === 200) {
         toast("Tizimga muvaffaqiyatli kirdingiz", { type: "success" });
         dispatch(setAuthModal(false));
+        localStorage.setItem("token", response.data.token);
+        dispatch(setToken(response.data.token));
       }
     } catch (error: any) {
       console.log(error);

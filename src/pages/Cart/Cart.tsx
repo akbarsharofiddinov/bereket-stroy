@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import emptyCart from "@/assets/empty-cart.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { Checkbox, Services } from "@/components";
+import { Checkbox, Services, Suggestion } from "@/components";
 import {
   addProductToCart,
   instantRemoveProductsFromCart,
@@ -13,8 +13,11 @@ import { formatCurrency } from "@/utils/currencyFormat";
 const Cart: React.FC = () => {
   const [isIllegal, setIsIllegal] = React.useState(false);
   const [totalSum, setTotalSum] = React.useState(0);
+  const [recommendations, setRecommendations] = React.useState<IProduct[]>([]);
 
-  const { cart } = useAppSelector((state) => state.productSlice);
+  const navigate = useNavigate();
+
+  const { cart, allProducts } = useAppSelector((state) => state.productSlice);
   const dispatch = useAppDispatch();
 
   function handleRemoveAllProductFromCart(product: IProduct) {
@@ -26,11 +29,38 @@ const Cart: React.FC = () => {
     localStorage.setItem("cart", JSON.stringify(filteredCartProducts));
   }
 
+  function getRecommendedProducts() {
+    if (allProducts) {
+      const categories = new Set(cart.map((item) => item.product.category_id));
+      setRecommendations(
+        allProducts.filter(
+          (product) =>
+            categories.has(product.category_id) &&
+            !cart.some((cartItem) => cartItem.product.id === product.id)
+        )
+      );
+    }
+  }
+
+  function calculateDiscounts() {
+    const discountedProducts = cart.filter((item) => item.product.discount);
+
+    const discountedPrices = discountedProducts.reduce(
+      (acc, product) =>
+        acc + product.quantity * parseFloat(product.product.discounted_price),
+      0
+    );
+
+    return discountedPrices;
+  }
+
   useEffect(() => {
     const sum = cart.reduce((acc, { product, quantity }) => {
       return acc + parseFloat(product.price) * quantity;
     }, 0);
     setTotalSum(sum);
+
+    getRecommendedProducts();
 
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -38,7 +68,7 @@ const Cart: React.FC = () => {
   return (
     <div className="cart-page">
       <div className="container">
-        <div className={cart.length ? "inner" : "inner empty"}>
+        <div className={cart.length ? "cart-inner" : "cart-inner empty"}>
           {cart.length ? (
             <>
               <div className="top">
@@ -51,7 +81,7 @@ const Cart: React.FC = () => {
                 </div>
               </div>
 
-              <div className="inner">
+              <div>
                 <div className="cart-products">
                   {cart.length
                     ? cart.map(({ product, quantity }, index) => (
@@ -275,16 +305,27 @@ const Cart: React.FC = () => {
                     </p>
                     <p>
                       <span>Chegirmangiz</span>
-                      <span>-0 so‘m</span>
+                      <span>-{formatCurrency(calculateDiscounts())}</span>
                     </p>
                     <p>
                       <span>Jami to‘lov </span>
                       <span>{formatCurrency(totalSum)}</span>
                     </p>
                   </div>
-                  <button className="order-btn">To‘lovga o‘tish</button>
+                  <button
+                    className="order-btn"
+                    onClick={() => navigate("/checkout")}
+                  >
+                    To‘lovga o‘tish
+                  </button>
                 </div>
               </div>
+
+              <Suggestion
+                title="Ushbu mahsulotlar bilan xarid qilishadi"
+                link=""
+                data={recommendations}
+              />
 
               <Services />
             </>

@@ -66,15 +66,34 @@ interface ICountry {
 
 interface IProfile {
   id: number;
-  is_legar: number;
   first_name: string;
   last_name: string;
   phone: string;
-  birthday: string | null;
-  company_name: string | null;
+  is_verified: number;
+  is_legal: number;
   inn: string | null;
-  is_verified: boolean;
-  deleted_at: string | null;
-  created_at: string;
-  updated_at: string;
+  company_name: string | null;
+  birthday: string | null;
+}
+
+interface IDeliveryMethods {
+  id: number;
+  name: DataNames;
+}
+
+interface IBranch {
+  id: number;
+  name: DataNames;
+  street: DataNames;
+  start_date: string;
+  end_date: string;
+  point_array: number[];
+  days: DataNames[];
+}
+
+interface IPaymanyMethod {
+  id: number;
+  name: DataNames;
+  photo: string;
+  text: DataNames;
 }

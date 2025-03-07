@@ -22,3 +22,5 @@ export { default as Checkbox } from "./UI/Checkbox";
 
 export { default as LoginModal } from "./Auth/Login";
 export { default as SignUpModal } from "./Auth/Signup";
+
+export { default as LeafLetMap } from "./Map/LeafLetMap";

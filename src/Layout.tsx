@@ -12,6 +12,8 @@ import { useAppDispatch, useAppSelector } from "./store/hooks";
 import axios from "axios";
 import { setAllCategories } from "@/store/categorySlice";
 import { setCartProducts, setFavourites } from "@/store/productSlice";
+import { setProfileInfo, setToken } from "./store/projectSlice";
+import { setBranches } from "./store/companySlice";
 
 const Layout: React.FC = () => {
   const [loginType, setLoginType] = useState("login");
@@ -20,6 +22,7 @@ const Layout: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const { authModal } = useAppSelector((state) => state.projectSlice);
+  const { token } = useAppSelector((state) => state.projectSlice);
 
   async function getAllCategories() {
     try {
@@ -34,25 +37,68 @@ const Layout: React.FC = () => {
     }
   }
 
+  async function getMe() {
+    if (token) {
+      try {
+        const response = await axios.get(
+          "https://bereket.webclub.uz/api/user/me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.status === 200) dispatch(setProfileInfo(response.data));
+      } catch (error) {
+        console.log(error);
+        dispatch(setToken(""));
+        localStorage.removeItem("token");
+      }
+    }
+  }
+
+  async function getBranches() {
+    try {
+      const response = await axios.get(
+        "https://bereket.webclub.uz/api/branches"
+      );
+      if (response.status === 200) {
+        dispatch(setBranches(response.data.data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
-    getAllCategories();
+    getBranches();
   }, []);
 
   useEffect(() => {
+    if (token) {
+      getMe();
+    }
+  }, [token]);
+
+  useEffect(() => {
+    getAllCategories();
+
     if (localStorage.getItem("cart")) {
       const cartProducts: { product: IProduct; quantity: number }[] = [];
       cartProducts.push(...JSON.parse(localStorage.getItem("cart") + ""));
       dispatch(setCartProducts(cartProducts));
     }
-  }, [localStorage.getItem("cart")]);
 
-  useEffect(() => {
     if (localStorage.getItem("favorites")) {
       const favorites: IProduct[] = [];
       favorites.push(...JSON.parse(localStorage.getItem("favorites") + ""));
       dispatch(setFavourites(favorites));
     }
-  }, [localStorage.getItem("favorites")]);
+
+    if (localStorage.getItem("token")) {
+      dispatch(setToken(localStorage.getItem("token") + ""));
+    }
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);

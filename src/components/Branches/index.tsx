@@ -1,7 +1,18 @@
-import React from "react";
+import { useAppSelector } from "@/store/hooks";
+import React, { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 
 const Branches: React.FC = () => {
+  const [selectedBranch, setSelectedBranch] = useState<IBranch | undefined>(
+    undefined
+  );
+
+  const { branches } = useAppSelector((state) => state.companySlice);
+
+  useEffect(() => {
+    setSelectedBranch(branches[0]);
+  }, [branches]);
+
   return (
     <>
       <div className="branches section">
@@ -13,13 +24,22 @@ const Branches: React.FC = () => {
             <div className="left">
               <div className="select-item">
                 <div className="selected">
-                  Nukus shahar, Nukus ko‘chasi, Gulzor 2-uy
+                  {selectedBranch?.street.uz}
                   <span>
                     <FaAngleDown />
                   </span>
                 </div>
+
+                <div className="menu">
+                  {branches.map((item, index) => (
+                    <p key={index} onClick={() => setSelectedBranch(item)}>
+                      {item.name.uz}
+                    </p>
+                  ))}
+                </div>
               </div>
 
+              {/* Location info */}
               <div className="location-info">
                 <p>
                   <svg
@@ -62,7 +82,7 @@ const Branches: React.FC = () => {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  Nukus filiali
+                  {selectedBranch?.name.uz}
                 </p>
                 <p>
                   <svg
@@ -92,7 +112,7 @@ const Branches: React.FC = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                  09:00 - 18:00
+                  {`${selectedBranch?.start_date}-${selectedBranch?.end_date}`}
                 </p>
                 <p>
                   <svg
@@ -138,7 +158,9 @@ const Branches: React.FC = () => {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  Seshanba, Yakshanba
+                  {selectedBranch?.days.map((item) =>
+                    `${item.uz}-`.split("-").join(", ")
+                  )}
                 </p>
                 <p>
                   <svg
@@ -181,36 +203,15 @@ const Branches: React.FC = () => {
                       strokeWidth="1.5"
                     />
                   </svg>
-                  Nukus shahar, Nukus ko‘chasi, Gulzor 2-uy
+                  {selectedBranch?.street.uz}
                 </p>
               </div>
+              {/* ==================== */}
             </div>
             <div className="right">
               <div style={{ position: "relative", overflow: "hidden" }}>
-                <a
-                  href="https://yandex.uz/maps/10337/nukus/?utm_medium=mapframe&utm_source=maps"
-                  style={{
-                    color: "#eee",
-                    fontSize: 12,
-                    position: "absolute",
-                    top: 0,
-                  }}
-                >
-                  Nukus
-                </a>
-                <a
-                  href="https://yandex.uz/maps/10337/nukus/?ll=59.614264%2C42.456963&utm_medium=mapframe&utm_source=maps&z=16"
-                  style={{
-                    color: "#eee",
-                    fontSize: 12,
-                    position: "absolute",
-                    top: 14,
-                  }}
-                >
-                  Yandex&nbsp;Maps – transport, navigatsiya, joylarni qidirish
-                </a>
                 <iframe
-                  src="https://yandex.uz/map-widget/v1/?ll=59.614264%2C42.456963&z=16"
+                  src={`https://yandex.uz/map-widget/v1/?ll=${selectedBranch?.point_array[0]}%2C${selectedBranch?.point_array[1]}&z=16`}
                   width={"100%"}
                   height={400}
                   frameBorder={1}

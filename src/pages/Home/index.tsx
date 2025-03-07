@@ -38,9 +38,9 @@ const Home: React.FC = () => {
       <Banner />
       <Banner2 />
       {/* <Categories /> */}
-      <Suggestion title="Eng yaxshi takliflar" category="" link="" />
+      <Suggestion title="Eng yaxshi takliflar" data={undefined} link="" />
       <Banner3 />
-      <Suggestion title="Har doim foydali bo'ladi" category="" link="" />
+      <Suggestion title="Har doim foydali bo'ladi" data={undefined} link="" />
       <Partners />
       <Branches />
       <Services />

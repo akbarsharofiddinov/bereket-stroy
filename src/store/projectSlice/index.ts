@@ -4,10 +4,8 @@ interface IState {
   authModal: boolean;
   catalogModal: boolean;
   searchModal: boolean;
-  profileInfo: {
-    info: IProfile;
-    token: string;
-  };
+  profileInfo: IProfile;
+  token: "";
 }
 
 const initialState: IState = {
@@ -15,22 +13,17 @@ const initialState: IState = {
   catalogModal: false,
   searchModal: false,
   profileInfo: {
-    info: {
-      id: 0,
-      is_legar: 0,
-      first_name: "",
-      last_name: "",
-      phone: "",
-      birthday: null,
-      company_name: null,
-      inn: null,
-      is_verified: false,
-      deleted_at: null,
-      created_at: "",
-      updated_at: "",
-    },
-    token: "",
+    birthday: "",
+    company_name: "",
+    first_name: "",
+    id: 0,
+    inn: "",
+    is_legal: 0,
+    is_verified: 0,
+    last_name: "",
+    phone: "",
   },
+  token: "",
 };
 
 export const projectSlice = createSlice({
@@ -52,10 +45,19 @@ export const projectSlice = createSlice({
     setProfileInfo: (state, { payload }) => {
       state.profileInfo = payload;
     },
+
+    setToken: (state, { payload }) => {
+      state.token = payload;
+    },
   },
 });
 
-export const { setAuthModal, setCatalogModal, setSearchModal, setProfileInfo } =
-  projectSlice.actions;
+export const {
+  setAuthModal,
+  setCatalogModal,
+  setSearchModal,
+  setProfileInfo,
+  setToken,
+} = projectSlice.actions;
 
 export default projectSlice.reducer;

@@ -223,7 +223,34 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
               {data.name.uz.slice(0, 68) +
                 (data.name.uz.length > 70 ? "..." : "")}
             </p>
-            <p className="price">{formatCurrency(parseInt(data.price))}</p>
+            <div className="price">
+              {formatCurrency(parseInt(data.discounted_price))}
+              <div className="discount-price">
+                {data.discount ? (
+                  data.discount_type === "%" ? (
+                    <>
+                      <p className="original-price">
+                        {formatCurrency(parseFloat(data.price))}
+                      </p>
+                      <p className="discount">
+                        {parseFloat(data.discount + "")}%
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="origianl-price">
+                        {formatCurrency(parseFloat(data.price))}
+                      </p>
+                      <p className="discount">
+                        {formatCurrency(data.discount)}
+                      </p>
+                    </>
+                  )
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
             <p className="monthly-price">15,400 so‘m / 24 oyga</p>
             <div className="count-box" onClick={(e) => e.stopPropagation()}>
               {checkProductInCart() ? (

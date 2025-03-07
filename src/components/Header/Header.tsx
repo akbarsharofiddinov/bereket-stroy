@@ -17,7 +17,7 @@ const Header: React.FC = () => {
   const [quantityCartProducts, setQuantityCartProducts] = useState(0);
   const [quantityFavoritesProducts, setQuantityFavoritesProducts] = useState(0);
 
-  const { searchModal, catalogModal } = useAppSelector(
+  const { searchModal, catalogModal, profileInfo, token } = useAppSelector(
     (state) => state.projectSlice
   );
   const dispatch = useAppDispatch();
@@ -293,11 +293,8 @@ const Header: React.FC = () => {
                 className={profileMenu ? "active" : ""}
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (localStorage.getItem("token"))
-                    setProfileMenu(!profileMenu);
-                  else {
-                    dispatch(setAuthModal(true));
-                  }
+                  if (token) setProfileMenu(!profileMenu);
+                  else dispatch(setAuthModal(true));
                 }}
               >
                 <svg
@@ -345,7 +342,7 @@ const Header: React.FC = () => {
                         />
                       </svg>
                     </span>
-                    Javohir Karimov
+                    {profileInfo.first_name}
                   </Link>
                   <Link to={""}>
                     <span>

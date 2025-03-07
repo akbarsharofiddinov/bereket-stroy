@@ -21,6 +21,7 @@ const Suggestions: React.FC<IProps> = ({ link, title, data }) => {
 
   useEffect(() => {
     if (data) setProducts(data);
+    else setProducts(allProducts);
   }, [data]);
 
   return (

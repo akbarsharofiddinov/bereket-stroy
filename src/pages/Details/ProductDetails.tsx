@@ -25,9 +25,13 @@ const ProductDetails: React.FC = () => {
     undefined
   );
 
+  const [recommendations, setRecommendations] = useState<IProduct[]>([]);
+
   const [currentImage, setCurrentImage] = useState("");
 
-  const { cart, favorites } = useAppSelector((state) => state.productSlice);
+  const { cart, allProducts, favorites } = useAppSelector(
+    (state) => state.productSlice
+  );
 
   const {
     selectedCategory,
@@ -160,6 +164,19 @@ const ProductDetails: React.FC = () => {
     return false;
   }
 
+  function getRecommendedProducts() {
+    if (allProducts) {
+      const categories = new Set(cart.map((item) => item.product.category_id));
+      setRecommendations(
+        allProducts.filter(
+          (product) =>
+            categories.has(product.category_id) &&
+            !cart.some((cartItem) => cartItem.product.id === product.id)
+        )
+      );
+    }
+  }
+
   useEffect(() => {
     getProductDetails(params.product_slug!);
   }, [params]);
@@ -187,6 +204,8 @@ const ProductDetails: React.FC = () => {
           dispatch(setSelectedSubSubCategory(findSubSubCategory));
         }
       }
+
+      getRecommendedProducts();
     }
   }, [productDetails]);
 
@@ -422,7 +441,8 @@ const ProductDetails: React.FC = () => {
                             <FaPlus />
                           </button>
                         </div>
-                        <button
+                        <Link
+                          to={"/cart"}
                           className={
                             productDetails.is_sale
                               ? "addtocart"
@@ -494,7 +514,7 @@ const ProductDetails: React.FC = () => {
                               </svg>
                             </span>
                           )}
-                        </button>
+                        </Link>
                       </div>
                     </>
                   ) : (
@@ -596,7 +616,7 @@ const ProductDetails: React.FC = () => {
             ""
           )}
 
-          <Suggestion title="Tavsiya qilamiz" link="" />
+          <Suggestion title="Tavsiya qilamiz" data={recommendations} link="" />
           <Partners />
           <Services />
         </div>
