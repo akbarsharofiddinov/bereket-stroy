@@ -1,6 +1,7 @@
 import { useAppSelector } from "@/store/hooks";
 import React, { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
+import { LeafLetMap } from "..";
 
 const Branches: React.FC = () => {
   const [selectedBranch, setSelectedBranch] = useState<IBranch | undefined>(
@@ -209,16 +210,11 @@ const Branches: React.FC = () => {
               {/* ==================== */}
             </div>
             <div className="right">
-              <div style={{ position: "relative", overflow: "hidden" }}>
-                <iframe
-                  src={`https://yandex.uz/map-widget/v1/?ll=${selectedBranch?.point_array[0]}%2C${selectedBranch?.point_array[1]}&z=16`}
-                  width={"100%"}
-                  height={400}
-                  frameBorder={1}
-                  allowFullScreen={true}
-                  style={{ position: "relative" }}
-                />
-              </div>
+              <LeafLetMap
+                locationButton={false}
+                clickable={false}
+                selectedBranch={selectedBranch}
+              />
             </div>
           </div>
         </div>

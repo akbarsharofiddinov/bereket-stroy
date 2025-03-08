@@ -11,6 +11,8 @@ import React from "react";
 import { FaMinus, FaPlus, FaStar } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 
+import noImage from "@/assets/no-image.webp";
+
 const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
   const dispatch = useAppDispatch();
   const { cart, favorites } = useAppSelector((state) => state.productSlice);
@@ -168,10 +170,14 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                 </svg>
               )}
             </span>
-            <img
-              src={`https://bereket.webclub.uz/storage/${data.photos[0]}`}
-              alt=""
-            />
+            {data.photos ? (
+              <img
+                src={`https://bereket.webclub.uz/storage/${data.photos[0]}`}
+                alt=""
+              />
+            ) : (
+              <img src={noImage} alt="" />
+            )}
           </div>
           <div className="body">
             <div className="extra-info">

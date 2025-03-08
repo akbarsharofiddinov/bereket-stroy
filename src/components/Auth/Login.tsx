@@ -146,9 +146,9 @@ const Login: React.FC<{
                   olishingiz mumkin
                 </p>
               ) : (
-                <Link to={""} onClick={getVerificationCode}>
+                <button onClick={getVerificationCode}>
                   Tasdiqlash kodni olish
-                </Link>
+                </button>
               )}
             </div>
           </div>

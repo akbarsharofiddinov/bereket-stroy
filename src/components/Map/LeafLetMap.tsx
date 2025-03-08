@@ -13,9 +13,18 @@ import { MdGpsFixed } from "react-icons/md";
 interface IProps {
   selectedBranch?: IBranch;
   locationButton: boolean;
+  clickable: boolean;
+  setLatitude?: React.Dispatch<React.SetStateAction<string>>;
+  setLongitude?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const LeafletMap: React.FC<IProps> = ({ locationButton, selectedBranch }) => {
+const LeafletMap: React.FC<IProps> = ({
+  locationButton,
+  selectedBranch,
+  clickable,
+  setLatitude,
+  setLongitude,
+}) => {
   const [position, setPosition] = useState<LatLngExpression | null>(null);
   const [mapInstance, setMapInstance] = useState<any>(null);
 
@@ -25,14 +34,18 @@ const LeafletMap: React.FC<IProps> = ({ locationButton, selectedBranch }) => {
       setMapInstance(map);
     }, [map]);
 
-    useMapEvents({
-      click(e) {
-        setPosition([e.latlng.lat, e.latlng.lng]); // Bir marta bosganda joylashuv belgilash
-      },
-      dblclick(e) {
-        map.setView([e.latlng.lat, e.latlng.lng], map.getZoom() + 1); // Ikki marta bosganda zoom oshirish
-      },
-    });
+    if (clickable) {
+      useMapEvents({
+        click(e) {
+          setPosition([e.latlng.lat, e.latlng.lng]); // Bir marta bosganda joylashuv belgilash
+          setLatitude!(e.latlng.lat + "");
+          setLongitude!(e.latlng.lng + "");
+        },
+        dblclick(e) {
+          map.setView([e.latlng.lat, e.latlng.lng], map.getZoom() + 1); // Ikki marta bosganda zoom oshirish
+        },
+      });
+    }
 
     return position ? <Marker position={position} /> : null;
   };

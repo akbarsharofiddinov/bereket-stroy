@@ -1,10 +1,14 @@
 import { LeafLetMap } from "@/components";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { formatCurrency } from "@/utils/currencyFormat";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+
+import noImage from "@/assets/no-image.webp";
+import { setAuthModal } from "@/store/projectSlice";
+import { toast } from "react-toastify";
 
 const Checkout: React.FC = () => {
   const [totalSum, setTotalSum] = useState(0);
@@ -18,8 +22,21 @@ const Checkout: React.FC = () => {
   const [paymantMethods, setPaymentMethods] = useState<IPaymanyMethod[]>([]);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(0);
 
+  const [userName, setUserName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [comment, setComment] = useState("");
+
+  const [region, setRegion] = useState("");
+  const [district, setDistrict] = useState("");
+  const [address, setAddress] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
+
   const { branches } = useAppSelector((state) => state.companySlice);
   const cart = useAppSelector((state) => state.productSlice.cart);
+  const { profileInfo, token } = useAppSelector((state) => state.projectSlice);
+
+  const dispatch = useAppDispatch();
 
   async function getDeliveryMethods() {
     try {
@@ -59,6 +76,54 @@ const Checkout: React.FC = () => {
     return discountedPrices;
   }
 
+  async function orderProcessing() {
+    if (token) {
+      const requestData = {
+        receiver_name: userName,
+        receiver_phone: phoneNumber,
+        receiver_comment: comment,
+        delivery_method_id: selectedDeliveryMethodID,
+        branch_id: selectedBranch?.id,
+        region,
+        district,
+        address,
+        latitude,
+        longitude,
+        payment_type_id: selectedPaymentMethod,
+        comment,
+        products: cart.map((item) => ({
+          product_id: item.product.id,
+          quantity: item.quantity,
+          price: parseFloat(item.product.discounted_price) * item.quantity,
+        })),
+      };
+
+      console.log(requestData);
+
+      try {
+        const response = await axios.post(
+          "https://bereket.webclub.uz/api/orders",
+          requestData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response);
+      } catch (error) {
+        toast("Iltimos ma'lumotlaringizni to'liq to'ldiring", {
+          type: "error",
+        });
+      }
+    } else {
+      toast("Buyurtma berish uchun avval ro'yxatdan o'ting", {
+        type: "warning",
+      });
+      dispatch(setAuthModal(true));
+    }
+  }
+
   useEffect(() => {
     getDeliveryMethods();
     getPaymantMethods();
@@ -74,6 +139,20 @@ const Checkout: React.FC = () => {
     }, 0);
     setTotalSum(sum);
   }, [cart]);
+
+  useEffect(() => {
+    if (profileInfo) {
+      setUserName(profileInfo.first_name);
+      setPhoneNumber(profileInfo.phone);
+    }
+  }, [profileInfo]);
+
+  useEffect(() => {
+    if (selectedBranch) {
+      setLatitude(selectedBranch.point_array[1] + "");
+      setLongitude(selectedBranch.point_array[0] + "");
+    }
+  }, [selectedBranch]);
 
   return (
     <>
@@ -348,6 +427,9 @@ const Checkout: React.FC = () => {
                       <LeafLetMap
                         locationButton={false}
                         selectedBranch={selectedBranch}
+                        clickable={false}
+                        setLatitude={setLatitude}
+                        setLongitude={setLongitude}
                       />
                     </div>
                   ) : (
@@ -356,24 +438,33 @@ const Checkout: React.FC = () => {
                         <div className="region-input">
                           <input
                             type="text"
+                            value={region}
+                            onChange={(e) => setRegion(e.target.value)}
                             placeholder="Viloyat yoki Shahar"
                           />
                         </div>
                         <div className="village-input">
                           <input
                             type="text"
+                            value={district}
+                            onChange={(e) => setDistrict(e.target.value)}
                             placeholder="Tuman yoki Ovul nomi"
                           />
                         </div>
                         <div className="home-number-input">
-                          <input type="text" placeholder="Xonadon raqami" />
+                          <input
+                            type="text"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            placeholder="Xonadon raqami"
+                          />
                         </div>
                         <div className="comment-input">
                           <input type="text" placeholder="Izoh..." />
                         </div>
                       </div>
 
-                      <LeafLetMap locationButton={true} />
+                      <LeafLetMap locationButton={true} clickable={false} />
                     </div>
                   )}
                 </div>
@@ -385,6 +476,8 @@ const Checkout: React.FC = () => {
                     type="text"
                     name="username"
                     id="username"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
                     placeholder="Ism va Familiya"
                   />
                   <div className="phone-input">
@@ -393,6 +486,8 @@ const Checkout: React.FC = () => {
                       type="text"
                       name="phone"
                       id="phone"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
                       placeholder="00 000 00 00"
                     />
                   </div>
@@ -408,6 +503,8 @@ const Checkout: React.FC = () => {
                   id="comment"
                   className="comment"
                   placeholder="Qo‘shimcha izoh..."
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
                 ></textarea>
               </div>
               <div className="orders section">
@@ -416,10 +513,14 @@ const Checkout: React.FC = () => {
                   ? cart.map((cartItem, index) => (
                       <div className="cart-item" key={index}>
                         <div className="img-box">
-                          <img
-                            src={`http://bereket.webclub.uz/storage/${cartItem.product.photos[0]}`}
-                            alt=""
-                          />
+                          {cartItem.product.photos ? (
+                            <img
+                              src={`http://bereket.webclub.uz/storage/${cartItem.product.photos[0]}`}
+                              alt=""
+                            />
+                          ) : (
+                            <img src={noImage} alt="" />
+                          )}
                         </div>
 
                         <div className="body">
@@ -592,7 +693,9 @@ const Checkout: React.FC = () => {
                   <span>{formatCurrency(totalSum)}</span>
                 </p>
               </div>
-              <button className="order-btn">To‘lovga o‘tish</button>
+              <button className="order-btn" onClick={orderProcessing}>
+                Rasmiylashtirish
+              </button>
               <p>
                 Buyurtma berish orqali shaxsiy maʼlumotlarning{" "}
                 <span>BEREKET SAWDA </span>

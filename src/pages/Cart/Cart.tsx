@@ -9,6 +9,9 @@ import {
   removeProductFromCart,
 } from "@/store/productSlice";
 import { formatCurrency } from "@/utils/currencyFormat";
+import { calculateDiscounts } from "@/utils/calculateDiscounts";
+
+import noImage from "@/assets/no-image.webp";
 
 const Cart: React.FC = () => {
   const [isIllegal, setIsIllegal] = React.useState(false);
@@ -40,18 +43,6 @@ const Cart: React.FC = () => {
         )
       );
     }
-  }
-
-  function calculateDiscounts() {
-    const discountedProducts = cart.filter((item) => item.product.discount);
-
-    const discountedPrices = discountedProducts.reduce(
-      (acc, product) =>
-        acc + product.quantity * parseFloat(product.product.discounted_price),
-      0
-    );
-
-    return discountedPrices;
   }
 
   useEffect(() => {
@@ -87,10 +78,14 @@ const Cart: React.FC = () => {
                     ? cart.map(({ product, quantity }, index) => (
                         <div className="cart-products_item" key={index}>
                           <div className="img-box">
-                            <img
-                              src={`http://bereket.webclub.uz/storage/${product.photos[0]}`}
-                              alt=""
-                            />
+                            {product.photos ? (
+                              <img
+                                src={`http://bereket.webclub.uz/storage/${product.photos[0]}`}
+                                alt=""
+                              />
+                            ) : (
+                              <img src={noImage} alt="" />
+                            )}
                           </div>
                           <div className="body">
                             <div className="cols col-1">
@@ -305,7 +300,12 @@ const Cart: React.FC = () => {
                     </p>
                     <p>
                       <span>Chegirmangiz</span>
-                      <span>-{formatCurrency(calculateDiscounts())}</span>
+                      <span>
+                        -
+                        {formatCurrency(
+                          parseFloat(calculateDiscounts(cart) + "")
+                        )}
+                      </span>
                     </p>
                     <p>
                       <span>Jami to‘lov </span>
