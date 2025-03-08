@@ -2,7 +2,6 @@ import { useAppDispatch } from "@/store/hooks";
 import { setAuthModal, setToken } from "@/store/projectSlice";
 import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Login: React.FC<{
