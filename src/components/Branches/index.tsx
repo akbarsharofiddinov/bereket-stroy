@@ -16,7 +16,7 @@ const Branches: React.FC = () => {
 
   return (
     <>
-      <div className="branches section">
+      <div className="branches section" id="branches">
         <div className="container">
           <div className="section-top">
             <h2 className="title">Filiallar</h2>

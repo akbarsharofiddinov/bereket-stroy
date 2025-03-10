@@ -22,6 +22,7 @@ const Orders: React.FC = () => {
           },
         }
       );
+      console.log(response);
       if (response.status === 200) {
         setOrders(response.data.data);
       }

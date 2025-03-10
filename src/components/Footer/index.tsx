@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Footer: React.FC = () => {
   return (
     <>
-      <footer>
+      <footer id="footer">
         <div className="container">
           <div className="inner">
             <div className="footer-menu">

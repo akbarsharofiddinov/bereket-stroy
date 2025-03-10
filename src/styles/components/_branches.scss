@@ -7,6 +7,10 @@
   justify-content: $justifyContent;
 }
 
+#branches {
+  scroll-margin-top: 200px;
+}
+
 .branches {
   .container {
     margin: 60px auto;

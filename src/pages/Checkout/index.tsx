@@ -534,7 +534,7 @@ const Checkout: React.FC = () => {
                         </div>
                       </div>
 
-                      <LeafLetMap locationButton={true} clickable={false} />
+                      <LeafLetMap locationButton={true} clickable={true} />
                     </div>
                   )}
                 </div>
