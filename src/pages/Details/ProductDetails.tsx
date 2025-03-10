@@ -379,11 +379,13 @@ const ProductDetails: React.FC = () => {
                   <div className="desc">
                     <p
                       dangerouslySetInnerHTML={{
-                        __html:
-                          productDetails.description.uz
-                            .split(" ")
-                            .slice(0, 40)
-                            .join(" ") + ` <a href="#description">batafsil</a>`,
+                        __html: productDetails.description.uz
+                          ? productDetails.description.uz
+                              .split(" ")
+                              .slice(0, 40)
+                              .join(" ") +
+                            ` <a href="#description">batafsil</a>`
+                          : "",
                       }}
                     />{" "}
                   </div>

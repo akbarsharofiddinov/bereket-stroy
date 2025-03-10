@@ -16,7 +16,7 @@ const Partners: React.FC = () => {
   async function getAllPartnerBrands() {
     try {
       const response = await axios.get("https://bereket.webclub.uz/api/brands");
-
+      console.log(response);
       if (response.status === 200) dispatch(setPartners(response.data.data));
     } catch (error) {
       console.log(error);
@@ -76,9 +76,9 @@ const Partners: React.FC = () => {
             >
               {partners.map((item, index) => (
                 <SwiperSlide key={index} className="partner">
-                  {item.icons ? (
+                  {item.icon ? (
                     <img
-                      src={`http://bereket.webclub.uz/storage/${item.icons}`}
+                      src={`http://bereket.webclub.uz/storage/${item.icon}`}
                       alt=""
                     />
                   ) : (

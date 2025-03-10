@@ -55,7 +55,7 @@ interface IProduct {
 
 interface IBrands {
   id: number;
-  icons: null | string;
+  icon: null | string;
   name: DataNames;
 }
 

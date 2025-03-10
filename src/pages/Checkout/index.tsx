@@ -98,7 +98,6 @@ const Checkout: React.FC = () => {
         products: cart.map((item) => ({
           product_id: item.product.id,
           quantity: item.quantity,
-          price: parseFloat(item.product.discounted_price) * item.quantity,
         })),
       };
 
@@ -165,8 +164,8 @@ const Checkout: React.FC = () => {
   }, [branches]);
 
   useEffect(() => {
-    const sum = cart.reduce((acc, { product, quantity }) => {
-      return acc + parseFloat(product.price) * quantity;
+    const sum = cart.reduce((acc, { product, quantity, isSelected }) => {
+      return isSelected ? acc + parseFloat(product.price) * quantity : acc + 0;
     }, 0);
     setTotalSum(sum);
   }, [cart]);
@@ -570,60 +569,68 @@ const Checkout: React.FC = () => {
               <div className="orders section">
                 <h2 className="title">Buyurtmangizda</h2>
                 {cart.length
-                  ? cart.map((cartItem, index) => (
-                      <div className="cart-item" key={index}>
-                        <div className="img-box">
-                          {cartItem.product.photos ? (
-                            <img
-                              src={`http://bereket.webclub.uz/storage/${cartItem.product.photos[0]}`}
-                              alt=""
-                            />
-                          ) : (
-                            <img src={noImage} alt="" />
-                          )}
-                        </div>
-
-                        <div className="body">
-                          <h2 className="product-name">
-                            {cartItem.product.name.uz}
-                          </h2>
-
-                          <div className="price-box">
-                            <p>{cartItem.quantity} dona</p>
-                            {cartItem.product.discount ? (
-                              cartItem.product.discount_type === "%" ? (
-                                <div className="discount">
-                                  <p className="old-price">
-                                    {formatCurrency(
-                                      parseFloat(cartItem.product.price)
-                                    )}
-                                  </p>
-                                  <span>{`${parseFloat(
-                                    cartItem.product.discount + ""
-                                  )}%`}</span>
-                                </div>
-                              ) : (
-                                <div className="discount">
-                                  <p className="old-price">
-                                    {formatCurrency(cartItem.product.discount)}
-                                  </p>
-                                  <span>
-                                    {parseFloat(cartItem.product.discount + "")}
-                                  </span>
-                                </div>
-                              )
+                  ? cart.map((cartItem, index) =>
+                      cartItem.isSelected ? (
+                        <div className="cart-item" key={index}>
+                          <div className="img-box">
+                            {cartItem.product.photos ? (
+                              <img
+                                src={`http://bereket.webclub.uz/storage/${cartItem.product.photos[0]}`}
+                                alt=""
+                              />
                             ) : (
-                              ""
+                              <img src={noImage} alt="" />
                             )}
-                            <p>
-                              {formatCurrency(
-                                parseFloat(cartItem.product.discounted_price)
+                          </div>
+
+                          <div className="body">
+                            <h2 className="product-name">
+                              {cartItem.product.name.uz}
+                            </h2>
+
+                            <div className="price-box">
+                              <p>{cartItem.quantity} dona</p>
+                              {cartItem.product.discount ? (
+                                cartItem.product.discount_type === "%" ? (
+                                  <div className="discount">
+                                    <p className="old-price">
+                                      {formatCurrency(
+                                        parseFloat(cartItem.product.price)
+                                      )}
+                                    </p>
+                                    <span>{`${parseFloat(
+                                      cartItem.product.discount + ""
+                                    )}%`}</span>
+                                  </div>
+                                ) : (
+                                  <div className="discount">
+                                    <p className="old-price">
+                                      {formatCurrency(
+                                        cartItem.product.discount
+                                      )}
+                                    </p>
+                                    <span>
+                                      {parseFloat(
+                                        cartItem.product.discount + ""
+                                      )}
+                                    </span>
+                                  </div>
+                                )
+                              ) : (
+                                ""
                               )}
-                            </p>
+                              <p>
+                                {formatCurrency(
+                                  parseFloat(cartItem.product.discounted_price)
+                                )}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))
+                      ) : (
+                        ""
+                      )
+                    )
                   : ""}
               </div>
 
@@ -760,7 +767,12 @@ const Checkout: React.FC = () => {
               </div>
               <div className="order-price_box">
                 <p>
-                  <span>{cart.length} ta mahsulot</span>
+                  <span>
+                    {cart.reduce((acc, item) => {
+                      return item.isSelected ? acc + item.quantity : acc + 0;
+                    }, 0) + " "}
+                    ta mahsulot
+                  </span>
                   <span>{formatCurrency(totalSum)}</span>
                 </p>
                 <p>

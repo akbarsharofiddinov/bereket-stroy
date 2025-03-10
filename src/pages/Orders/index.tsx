@@ -44,22 +44,22 @@ const Orders: React.FC = () => {
           {orders.length ? (
             <>
               <div className="page-inner">
-                <div className="top">
-                  
-                </div>
+                <div className="top"></div>
               </div>
             </>
           ) : (
-            <div className="no-orders">
-              <img src={noOrders} alt="" />
-              <h3 className="title">
-                Siz hali ham sevili mahsulot tanlamadingiz
-              </h3>
-              <p className="desc">
-                Sizga maʼqul kelgan mahsulotlarni <br /> sevimlilarga qo‘shing
-                va ularni buyurtma qiling
-              </p>
-              <Link to={"/"}>Bosh sahifaga o‘tish</Link>
+            <div className="centered">
+              <div className="no-orders">
+                <img src={noOrders} alt="" />
+                <h3 className="title">
+                  Siz hali ham sevili mahsulot tanlamadingiz
+                </h3>
+                <p className="desc">
+                  Sizga maʼqul kelgan mahsulotlarni <br /> sevimlilarga qo‘shing
+                  va ularni buyurtma qiling
+                </p>
+                <Link to={"/"}>Bosh sahifaga o‘tish</Link>
+              </div>
             </div>
           )}
         </div>
