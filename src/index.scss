@@ -140,3 +140,21 @@ body {
 .amo-button-holder {
   z-index: 80 !important;
 }
+
+@media screen and (max-width: 1440px) {
+  .container {
+    max-width: 1340px !important;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    max-width: 1100px !important;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .container {
+    max-width: 1000px !important;
+  }
+}
