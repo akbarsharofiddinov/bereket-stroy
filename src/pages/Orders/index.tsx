@@ -8,7 +8,7 @@ import noOrders from "@/assets/no-orders.png";
 import { Link } from "react-router-dom";
 
 const Orders: React.FC = () => {
-  const [status, setStatus] = useState("all");
+  const [status] = useState("all");
   const [orders, setOrders] = useState([]);
   const { token } = useAppSelector((state) => state.projectSlice);
   const dispatch = useAppDispatch();
