@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HeaderTop from "./HeaderTop/HeaderTop";
 import { Link, NavLink } from "react-router-dom";
-import logo from "@/assets/Vector.svg";
+import logo from "@/assets/Vector.png";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {

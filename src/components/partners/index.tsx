@@ -16,7 +16,6 @@ const Partners: React.FC = () => {
   async function getAllPartnerBrands() {
     try {
       const response = await axios.get("https://bereket.webclub.uz/api/brands");
-      console.log(response);
       if (response.status === 200) dispatch(setPartners(response.data.data));
     } catch (error) {
       console.log(error);
@@ -70,7 +69,7 @@ const Partners: React.FC = () => {
               slidesPerView={6}
               spaceBetween={"20px"}
               freeMode={true}
-              loop={true}
+              loop={partners.length > 6}
               className="partners-swiper"
               modules={[FreeMode]}
             >

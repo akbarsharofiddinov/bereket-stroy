@@ -170,8 +170,8 @@ const Cart: React.FC = () => {
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <path
-                              fill-rule="evenodd"
-                              clip-rule="evenodd"
+                              fillRule="evenodd"
+                              clipRule="evenodd"
                               d="M0 1C0 0.4477 0.44772 0 1 0H9C9.5523 0 10 0.4477 10 1C10 1.5523 9.5523 2 9 2H1C0.44772 2 0 1.5523 0 1Z"
                               fill="black"
                             />
@@ -430,7 +430,12 @@ const Cart: React.FC = () => {
 
                   <div className="order-price_box">
                     <p>
-                      <span>{cart.length} ta mahsulot</span>
+                      <span>
+                        {cart.reduce((acc, item) => {
+                          return item.isSelected ? acc + 1 : acc + 0;
+                        }, 0)}{" "}
+                        ta mahsulot
+                      </span>
                       <span>{formatCurrency(totalSum)}</span>
                     </p>
                     <p>
