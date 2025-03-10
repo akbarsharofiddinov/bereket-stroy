@@ -111,7 +111,13 @@ const Login: React.FC<{
             {isIllegal ? (
               <div className="inn-input">
                 <span>*</span>
-                <input type="text" name="inn" id="inn" placeholder="INN" />
+                <input
+                  type="text"
+                  autoComplete="off"
+                  name="inn"
+                  id="inn"
+                  placeholder="INN"
+                />
               </div>
             ) : (
               ""
@@ -124,6 +130,7 @@ const Login: React.FC<{
                 type="text"
                 name="phone"
                 id="phone"
+                autoComplete="off"
                 placeholder="00 000 00 00"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -135,6 +142,7 @@ const Login: React.FC<{
                 type="text"
                 name="sms"
                 id="sms"
+                autoComplete="off"
                 placeholder="SMS kod"
                 value={sms}
                 onChange={(e) => setSms(e.target.value)}

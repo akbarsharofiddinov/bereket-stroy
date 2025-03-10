@@ -57,7 +57,11 @@ const CatalogsModal: React.FC = () => {
                   <div className="sub-categories">
                     {selectedCategory.sub_category.map(
                       (sub_category, index) => (
-                        <Link to={""} key={index}>
+                        <Link
+                          to={`catalogs/${selectedCategory.slug}/${sub_category.slug}`}
+                          onClick={() => dispatch(setCatalogModal(false))}
+                          key={index}
+                        >
                           {sub_category.name.uz}
                         </Link>
                       )

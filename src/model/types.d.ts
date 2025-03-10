@@ -96,4 +96,5 @@ interface IPaymanyMethod {
   name: DataNames;
   photo: string;
   text: DataNames;
+  key: string;
 }

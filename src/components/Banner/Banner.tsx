@@ -15,7 +15,7 @@ const Banner: React.FC = () => {
               <div className="context">
                 <h1 className="title">Mukammal tamirlash</h1>
                 <p>Sifatli mebel bilan</p>
-                <Link to={"catalog-details"}>Batafsil</Link>
+                <Link to={""}>Batafsil</Link>
               </div>
             </div>
             <div className="box box-2">

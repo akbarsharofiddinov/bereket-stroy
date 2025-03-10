@@ -5,14 +5,17 @@ interface IState {
   cart: {
     product: IProduct;
     quantity: number;
+    isSelected: boolean;
   }[];
   favorites: IProduct[];
+  partners: IBrands[];
 }
 
 const initialState: IState = {
   allProducts: [],
   cart: [],
   favorites: [],
+  partners: [],
 };
 
 export const productSlice = createSlice({
@@ -32,7 +35,7 @@ export const productSlice = createSlice({
       if (product) {
         product.quantity += 1;
       } else {
-        state.cart.push({ product: payload, quantity: 1 });
+        state.cart.push({ product: payload, isSelected: true, quantity: 1 });
       }
     },
 
@@ -66,6 +69,15 @@ export const productSlice = createSlice({
         (item) => item.id !== payload.id
       );
     },
+
+    settleProductSelected: (state, { payload }) => {
+      const product = state.cart.find((item) => item.product.id === payload.id);
+      if (product) product.isSelected = !product.isSelected;
+    },
+
+    setPartners: (state, { payload }) => {
+      state.partners = payload;
+    },
   },
 });
 
@@ -77,6 +89,8 @@ export const {
   setFavourites,
   addToFavourites,
   removeFromFavourites,
-  instantRemoveProductsFromCart
+  instantRemoveProductsFromCart,
+  settleProductSelected,
+  setPartners,
 } = productSlice.actions;
 export default productSlice.reducer;

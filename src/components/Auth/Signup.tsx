@@ -171,6 +171,7 @@ const Signup: React.FC<{
                       name="company"
                       id="company"
                       value={company}
+                      autoComplete="off"
                       placeholder="Korxona nomi"
                       onChange={(e) => setCompany(e.target.value)}
                     />
@@ -183,6 +184,7 @@ const Signup: React.FC<{
                       name="inn"
                       id="inn"
                       value={inn}
+                      autoComplete="off"
                       onChange={(e) => setInn(e.target.value)}
                       placeholder="INN"
                     />
@@ -198,6 +200,7 @@ const Signup: React.FC<{
                     type="text"
                     name="sms"
                     id="sms"
+                    autoComplete="off"
                     value={smsCode}
                     onChange={(e) => setSmsCode(e.target.value)}
                     placeholder="SMS kodni kiriting"

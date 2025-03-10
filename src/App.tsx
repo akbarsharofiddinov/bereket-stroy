@@ -42,10 +42,7 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: "checkout",
-        element: <Checkout />,
-      },
+
       {
         path: "cart",
         element: <Cart />,
@@ -65,8 +62,18 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+        children: [
+          {
+            path: ":menu_slug",
+            element: <Profile />,
+          },
+        ],
       },
     ],
+  },
+  {
+    path: "checkout",
+    element: <Checkout />,
   },
 ]);
 

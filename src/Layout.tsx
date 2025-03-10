@@ -77,6 +77,7 @@ const Layout: React.FC = () => {
   useEffect(() => {
     if (token) {
       getMe();
+      dispatch(setToken(token));
     }
   }, [token]);
 
@@ -84,7 +85,11 @@ const Layout: React.FC = () => {
     getAllCategories();
 
     if (localStorage.getItem("cart")) {
-      const cartProducts: { product: IProduct; quantity: number }[] = [];
+      const cartProducts: {
+        product: IProduct;
+        isSelected: boolean;
+        quantity: number;
+      }[] = [];
       cartProducts.push(...JSON.parse(localStorage.getItem("cart") + ""));
       dispatch(setCartProducts(cartProducts));
     }

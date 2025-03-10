@@ -42,12 +42,16 @@
       position: absolute;
       top: -1px;
       right: -1px;
-
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
       transition: opacity 0.3s, visibility 0.3s ease-in-out;
     }
   }
 
-  input:checked + .checkmark {
+  input:checked + .checkmark,
+  &.active .checkmark {
     background-color: var(--yellow);
     border-color: var(--yellow);
 

@@ -2,25 +2,38 @@ import React, { useEffect } from "react";
 import emptyCart from "@/assets/empty-cart.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { Checkbox, Services, Suggestion } from "@/components";
+import { Services, Suggestion } from "@/components";
 import {
   addProductToCart,
   instantRemoveProductsFromCart,
   removeProductFromCart,
+  setCartProducts,
+  settleProductSelected,
 } from "@/store/productSlice";
 import { formatCurrency } from "@/utils/currencyFormat";
 import { calculateDiscounts } from "@/utils/calculateDiscounts";
 
 import noImage from "@/assets/no-image.webp";
+import { toast } from "react-toastify";
+
+interface ICart {
+  product: IProduct;
+  quantity: number;
+  isSelected: boolean;
+}
 
 const Cart: React.FC = () => {
   const [isIllegal, setIsIllegal] = React.useState(false);
   const [totalSum, setTotalSum] = React.useState(0);
   const [recommendations, setRecommendations] = React.useState<IProduct[]>([]);
 
+  const [cartProductsSelected, setCartProductsSelected] =
+    React.useState("none");
+
   const navigate = useNavigate();
 
   const { cart, allProducts } = useAppSelector((state) => state.productSlice);
+  const token = useAppSelector((state) => state.projectSlice.token);
   const dispatch = useAppDispatch();
 
   function handleRemoveAllProductFromCart(product: IProduct) {
@@ -45,15 +58,60 @@ const Cart: React.FC = () => {
     }
   }
 
+  function handleCartProductSelect(product: IProduct) {
+    const cartProducts: ICart[] = JSON.parse(localStorage.getItem("cart") + "");
+
+    const updatedCartProducts = cartProducts.map((item) => ({
+      ...item,
+      isSelected:
+        item.product.id === product.id ? !item.isSelected : item.isSelected,
+    }));
+
+    localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
+
+    dispatch(settleProductSelected(product));
+  }
+
+  function handleAllSelectedProducts() {
+    console.log("first");
+    const cartProducts: ICart[] = JSON.parse(localStorage.getItem("cart") + "");
+    if (cartProductsSelected === "all") {
+      const updateCartProducts = cartProducts.map((item) => ({
+        ...item,
+        isSelected: true,
+      }));
+
+      localStorage.setItem("cart", JSON.stringify(updateCartProducts));
+      dispatch(setCartProducts(updateCartProducts));
+    } else if (cartProductsSelected === "none") {
+      const updatedCartProducts = cartProducts.map((item) => ({
+        ...item,
+        isSelected: false,
+      }));
+      localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
+      dispatch(setCartProducts(updatedCartProducts));
+    }
+  }
+
   useEffect(() => {
-    const sum = cart.reduce((acc, { product, quantity }) => {
-      return acc + parseFloat(product.price) * quantity;
+    const sum = cart.reduce((acc, { isSelected, product, quantity }) => {
+      return isSelected
+        ? acc + parseFloat(product.discounted_price) * quantity
+        : acc;
     }, 0);
+
     setTotalSum(sum);
 
     getRecommendedProducts();
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+    const allSelected = cart.every((item) => item.isSelected);
+    const noneSelected = cart.every((item) => !item.isSelected);
+
+    const mixedSelected = !allSelected && !noneSelected;
+
+    if (allSelected) setCartProductsSelected("all");
+    else if (noneSelected) setCartProductsSelected("none");
+    else if (mixedSelected) setCartProductsSelected("mixed");
   }, [cart]);
 
   return (
@@ -68,16 +126,93 @@ const Cart: React.FC = () => {
                   <p>6 ta mahsulot</p>
                 </div>
                 <div>
-                  <Checkbox label="Hammasini tanlash" id="all" />
+                  <label
+                    htmlFor="select-cartProducts"
+                    className={
+                      cartProductsSelected === "all" ||
+                      cartProductsSelected === "mixed"
+                        ? "checkbox active"
+                        : "checkbox"
+                    }
+                    onClick={() => {
+                      if (cartProductsSelected === "all")
+                        setCartProductsSelected("none");
+                      else setCartProductsSelected("all");
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      id="select-cartProducts"
+                      checked={cartProductsSelected === "all"}
+                      onChange={() => handleAllSelectedProducts()}
+                    />
+                    <div className="checkmark">
+                      <span>
+                        {cartProductsSelected === "all" ? (
+                          <svg
+                            width="16"
+                            height="13"
+                            viewBox="0 0 16 13"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M15.4375 0.652411C15.6297 1.1702 15.3657 1.7457 14.8479 1.93782C13.7962 2.32801 12.6693 3.1399 11.5438 4.21544C10.4286 5.28114 9.3699 6.55194 8.4483 7.7861C7.5287 9.0176 6.7581 10.1958 6.2172 11.0669C5.9276 11.5332 5.6421 12.0027 5.3758 12.4829C5.2011 12.7993 4.8689 12.9976 4.5074 13.0002C4.1459 13.0029 3.8111 12.8103 3.6318 12.4964C2.68252 10.8352 1.89836 10.0873 1.42654 9.757C1.13674 9.5541 0.96606 9.5072 0.92605 9.4976C0.4083 9.4597 0 9.0277 0 8.5003C0 7.948 0.44772 7.5003 1 7.5003C1.56627 7.5042 2.12266 7.803 2.57346 8.1185C3.1234 8.5035 3.767 9.1168 4.4681 10.0925C5.0322 9.1802 5.8541 7.9175 6.8458 6.58946C7.8066 5.30277 8.9391 3.93815 10.1621 2.76948C11.3748 1.61064 12.7332 0.589201 14.1521 0.0627212C14.6699 -0.129389 15.2454 0.134621 15.4375 0.652411Z"
+                              fill="black"
+                            />
+                          </svg>
+                        ) : cartProductsSelected === "mixed" ? (
+                          <svg
+                            width="10"
+                            height="2"
+                            viewBox="0 0 10 2"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M0 1C0 0.4477 0.44772 0 1 0H9C9.5523 0 10 0.4477 10 1C10 1.5523 9.5523 2 9 2H1C0.44772 2 0 1.5523 0 1Z"
+                              fill="black"
+                            />
+                          </svg>
+                        ) : (
+                          ""
+                        )}
+                      </span>
+                    </div>
+                    <span className="label">Hammasini belgilash</span>
+                  </label>
                 </div>
               </div>
 
               <div>
                 <div className="cart-products">
                   {cart.length
-                    ? cart.map(({ product, quantity }, index) => (
+                    ? cart.map(({ product, quantity, isSelected }, index) => (
                         <div className="cart-products_item" key={index}>
                           <div className="img-box">
+                            <span
+                              className={
+                                isSelected ? "select-btn active" : "select-btn"
+                              }
+                              onClick={() => handleCartProductSelect(product)}
+                            >
+                              {isSelected && (
+                                <svg
+                                  width="16"
+                                  height="13"
+                                  viewBox="0 0 16 13"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M15.4375 0.652411C15.6297 1.1702 15.3657 1.7457 14.8479 1.93782C13.7962 2.32801 12.6693 3.1399 11.5438 4.21544C10.4286 5.28114 9.3699 6.55194 8.4483 7.7861C7.5287 9.0176 6.7581 10.1958 6.2172 11.0669C5.9276 11.5332 5.6421 12.0027 5.3758 12.4829C5.2011 12.7993 4.8689 12.9976 4.5074 13.0002C4.1459 13.0029 3.8111 12.8103 3.6318 12.4964C2.68252 10.8352 1.89836 10.0873 1.42654 9.757C1.13674 9.5541 0.96606 9.5072 0.92605 9.4976C0.4083 9.4597 0 9.0277 0 8.5003C0 7.948 0.44772 7.5003 1 7.5003C1.56627 7.5042 2.12266 7.803 2.57346 8.1185C3.1234 8.5035 3.767 9.1168 4.4681 10.0925C5.0322 9.1802 5.8541 7.9175 6.8458 6.58946C7.8066 5.30277 8.9391 3.93815 10.1621 2.76948C11.3748 1.61064 12.7332 0.589201 14.1521 0.0627212C14.6699 -0.129389 15.2454 0.134621 15.4375 0.652411Z"
+                                    fill="black"
+                                  />
+                                </svg>
+                              )}
+                            </span>
                             {product.photos ? (
                               <img
                                 src={`http://bereket.webclub.uz/storage/${product.photos[0]}`}
@@ -313,8 +448,24 @@ const Cart: React.FC = () => {
                     </p>
                   </div>
                   <button
-                    className="order-btn"
-                    onClick={() => navigate("/checkout")}
+                    className={
+                      cartProductsSelected !== "none"
+                        ? "order-btn"
+                        : "order-btn disable"
+                    }
+                    onClick={() => {
+                      if (token) {
+                        if (cartProductsSelected !== "none")
+                          navigate("/checkout");
+                      } else {
+                        toast(
+                          "Buyurtmani rasmiylashtirish uchun avval tizimdan ro'yxatdan o'ting",
+                          {
+                            type: "warning",
+                          }
+                        );
+                      }
+                    }}
                   >
                     To‘lovga o‘tish
                   </button>

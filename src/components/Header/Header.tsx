@@ -8,8 +8,10 @@ import {
   setAuthModal,
   setCatalogModal,
   setSearchModal,
+  setToken,
 } from "@/store/projectSlice";
 import styles from "./Header.module.scss";
+import axios from "axios";
 
 const Header: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -25,6 +27,15 @@ const Header: React.FC = () => {
   window.addEventListener("click", () => {
     if (profileMenu) setProfileMenu(false);
   });
+
+  async function searchProducts() {
+    try {
+      const response = await axios.get(`https://bereket.webclub.uz/api/product-search?name=${searchInput}`);
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const { cart, favorites } = useAppSelector((state) => state.productSlice);
 
@@ -145,7 +156,7 @@ const Header: React.FC = () => {
                     ""
                   )}
                 </div>
-                <button className="search-btn">
+                <button className="search-btn" onClick={() => searchProducts}>
                   <span>
                     <svg
                       width="20"
@@ -319,7 +330,7 @@ const Header: React.FC = () => {
                 </svg>
 
                 <div className="menu" onClick={(e) => e.stopPropagation()}>
-                  <Link to={"profile"}>
+                  <Link to={`profile/private-info`}>
                     <span>
                       <svg
                         width="24"
@@ -344,7 +355,7 @@ const Header: React.FC = () => {
                     </span>
                     {profileInfo.first_name}
                   </Link>
-                  <Link to={""}>
+                  <Link to={`profile/locations`}>
                     <span>
                       <svg
                         width="20"
@@ -364,10 +375,10 @@ const Header: React.FC = () => {
                           strokeWidth="1.5"
                         />
                       </svg>
-                    </span>{" "}
+                    </span>
                     Manzillar
                   </Link>
-                  <Link to={""}>
+                  <Link to={`profile/company`}>
                     <span>
                       <svg
                         width="20"
@@ -479,7 +490,14 @@ const Header: React.FC = () => {
                     </span>
                     Sevimlilar
                   </Link>
-                  <Link to={""}>
+                  <Link
+                    to={""}
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      dispatch(setToken(""));
+                      window.location.reload()
+                    }}
+                  >
                     <span>
                       <svg
                         width="20"

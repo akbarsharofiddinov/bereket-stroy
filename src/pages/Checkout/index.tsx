@@ -1,4 +1,4 @@
-import { LeafLetMap } from "@/components";
+import { CheckoutModal, Footer, LeafLetMap } from "@/components";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { formatCurrency } from "@/utils/currencyFormat";
 import axios from "axios";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import noImage from "@/assets/no-image.webp";
 import { setAuthModal } from "@/store/projectSlice";
 import { toast } from "react-toastify";
+import { setBranches } from "@/store/companySlice";
 
 const Checkout: React.FC = () => {
   const [totalSum, setTotalSum] = useState(0);
@@ -20,7 +21,7 @@ const Checkout: React.FC = () => {
   );
   const [selectedDeliveryMethodID, setSelectedDeliveryMethodID] = useState(1);
   const [paymantMethods, setPaymentMethods] = useState<IPaymanyMethod[]>([]);
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(0);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
 
   const [userName, setUserName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -31,6 +32,9 @@ const Checkout: React.FC = () => {
   const [address, setAddress] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+
+  const [fillInfoError, setFillInfoError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const { branches } = useAppSelector((state) => state.companySlice);
   const cart = useAppSelector((state) => state.productSlice.cart);
@@ -89,7 +93,7 @@ const Checkout: React.FC = () => {
         address,
         latitude,
         longitude,
-        payment_type_id: selectedPaymentMethod,
+        payment_type: selectedPaymentMethod,
         comment,
         products: cart.map((item) => ({
           product_id: item.product.id,
@@ -97,8 +101,6 @@ const Checkout: React.FC = () => {
           price: parseFloat(item.product.discounted_price) * item.quantity,
         })),
       };
-
-      console.log(requestData);
 
       try {
         const response = await axios.post(
@@ -110,11 +112,25 @@ const Checkout: React.FC = () => {
             },
           }
         );
+
         console.log(response);
+        if (response.status === 201) {
+          setSuccess(true);
+          if (response.data.url) {
+            setTimeout(() => {
+              window.location.href = response.data.url;
+            }, 500);
+          }
+        } else {
+          toast("Nimadir xato iltimos qaytadan urunib koring", {
+            type: "error",
+          });
+        }
       } catch (error) {
         toast("Iltimos ma'lumotlaringizni to'liq to'ldiring", {
           type: "error",
         });
+        setFillInfoError(true);
       }
     } else {
       toast("Buyurtma berish uchun avval ro'yxatdan o'ting", {
@@ -124,13 +140,28 @@ const Checkout: React.FC = () => {
     }
   }
 
+  async function getBranches() {
+    try {
+      const response = await axios.get(
+        "https://bereket.webclub.uz/api/branches"
+      );
+
+      if (response.status === 200) {
+        dispatch(setBranches(response.data.data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     getDeliveryMethods();
     getPaymantMethods();
+    getBranches();
   }, []);
 
   useEffect(() => {
-    setSeletedBranch(branches[0]);
+    if (branches) setSeletedBranch(branches[0]);
   }, [branches]);
 
   useEffect(() => {
@@ -434,12 +465,19 @@ const Checkout: React.FC = () => {
                     </div>
                   ) : (
                     <div className="delivery-location">
-                      <div className="inputs-grid">
+                      <div
+                        className={
+                          fillInfoError ? "inputs-grid error" : "inputs-grid"
+                        }
+                      >
                         <div className="region-input">
                           <input
                             type="text"
                             value={region}
-                            onChange={(e) => setRegion(e.target.value)}
+                            onChange={(e) => {
+                              setRegion(e.target.value);
+                              setFillInfoError(false);
+                            }}
                             placeholder="Viloyat yoki Shahar"
                           />
                         </div>
@@ -447,7 +485,10 @@ const Checkout: React.FC = () => {
                           <input
                             type="text"
                             value={district}
-                            onChange={(e) => setDistrict(e.target.value)}
+                            onChange={(e) => {
+                              setDistrict(e.target.value);
+                              setFillInfoError(false);
+                            }}
                             placeholder="Tuman yoki Ovul nomi"
                           />
                         </div>
@@ -455,12 +496,19 @@ const Checkout: React.FC = () => {
                           <input
                             type="text"
                             value={address}
-                            onChange={(e) => setAddress(e.target.value)}
+                            onChange={(e) => {
+                              setAddress(e.target.value);
+                              setFillInfoError(false);
+                            }}
                             placeholder="Xonadon raqami"
                           />
                         </div>
                         <div className="comment-input">
-                          <input type="text" placeholder="Izoh..." />
+                          <input
+                            type="text"
+                            onChange={() => setFillInfoError(false)}
+                            placeholder="Izoh..."
+                          />
                         </div>
                       </div>
 
@@ -469,7 +517,13 @@ const Checkout: React.FC = () => {
                   )}
                 </div>
               </div>
-              <div className="receiver-info section">
+              <div
+                className={
+                  fillInfoError
+                    ? "receiver-info section error"
+                    : "receiver-info section"
+                }
+              >
                 <h2 className="title">Qabul qiluvchi ma’lumoti</h2>
                 <div className="user-info_inputs">
                   <input
@@ -477,7 +531,10 @@ const Checkout: React.FC = () => {
                     name="username"
                     id="username"
                     value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
+                    onChange={(e) => {
+                      setUserName(e.target.value);
+                      setFillInfoError(false);
+                    }}
                     placeholder="Ism va Familiya"
                   />
                   <div className="phone-input">
@@ -487,7 +544,10 @@ const Checkout: React.FC = () => {
                       name="phone"
                       id="phone"
                       value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      onChange={(e) => {
+                        setPhoneNumber(e.target.value);
+                        setFillInfoError(false);
+                      }}
                       placeholder="00 000 00 00"
                     />
                   </div>
@@ -567,7 +627,13 @@ const Checkout: React.FC = () => {
                   : ""}
               </div>
 
-              <div className="payment-methods section">
+              <div
+                className={
+                  fillInfoError
+                    ? "payment-methods section error"
+                    : "payment-methods section"
+                }
+              >
                 <h2 className="title">To‘lov usuli</h2>
                 <div className="methods">
                   {paymantMethods.length
@@ -575,19 +641,32 @@ const Checkout: React.FC = () => {
                         <label
                           key={item.id}
                           className={
-                            selectedPaymentMethod === item.id ? "selected" : ""
+                            selectedPaymentMethod === item.key
+                              ? "selected"
+                              : item.key === "click" || item.key === "uzum_bank"
+                              ? "disable"
+                              : ""
                           }
+                          onClick={(e) => {
+                            if (
+                              item.key === "click" ||
+                              item.key === "uzum_bank"
+                            ) {
+                              e.preventDefault();
+                              e.stopPropagation();
+                            }
+                          }}
                         >
                           <input
                             type="radio"
                             name="payment-methods"
                             value={item.id}
-                            checked={selectedPaymentMethod === item.id}
-                            onChange={() => setSelectedPaymentMethod(item.id)}
+                            checked={selectedPaymentMethod === item.key}
+                            onChange={() => setSelectedPaymentMethod(item.key)}
                           />
                           <div className="radio-content">
                             <h2 className="title">
-                              {selectedPaymentMethod === item.id ? (
+                              {selectedPaymentMethod === item.key ? (
                                 <span>
                                   <svg
                                     width="24"
@@ -629,7 +708,7 @@ const Checkout: React.FC = () => {
                             <p className="desc">{item.text.uz}</p>
                           </div>
                           <img
-                            src={`http://bereket.webclub.uz/storage/${item.photo}`}
+                            src={`http://bereket.webclub.uz/${item.photo}`}
                             alt=""
                           />
                         </label>
@@ -708,6 +787,10 @@ const Checkout: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {success && <CheckoutModal />}
+
+      <Footer />
     </>
   );
 };

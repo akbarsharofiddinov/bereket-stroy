@@ -20,6 +20,8 @@ import {
   setCartProducts,
 } from "@/store/productSlice";
 
+import noImage from "@/assets/no-image.webp";
+
 const ProductDetails: React.FC = () => {
   const [productDetails, setProductDetails] = useState<IProduct | undefined>(
     undefined
@@ -183,7 +185,7 @@ const ProductDetails: React.FC = () => {
 
   useEffect(() => {
     if (productDetails) {
-      setCurrentImage(productDetails.photos[0]);
+      if (productDetails.photos) setCurrentImage(productDetails.photos[0]);
       const findCategory = allCategories.find(
         (item) => item.id === productDetails.category_id
       );
@@ -251,23 +253,28 @@ const ProductDetails: React.FC = () => {
                     spaceBetween={10}
                     className="images-swiper"
                   >
-                    {productDetails.photos.map((item, index) => (
-                      <SwiperSlide
-                        key={index}
-                        onClick={() => setCurrentImage(item)}
-                      >
-                        <img
-                          src={`http://bereket.webclub.uz/storage/${item}`}
-                          alt=""
-                        />
-                      </SwiperSlide>
-                    ))}
+                    {productDetails.photos &&
+                      productDetails.photos.map((item, index) => (
+                        <SwiperSlide
+                          key={index}
+                          onClick={() => setCurrentImage(item)}
+                        >
+                          <img
+                            src={`http://bereket.webclub.uz/storage/${item}`}
+                            alt=""
+                          />
+                        </SwiperSlide>
+                      ))}
                   </Swiper>
                   <div className="img-box">
-                    <img
-                      src={`http://bereket.webclub.uz/storage/${currentImage}`}
-                      alt=""
-                    />
+                    {productDetails.photos ? (
+                      <img
+                        src={`http://bereket.webclub.uz/storage/${currentImage}`}
+                        alt=""
+                      />
+                    ) : (
+                      <img src={noImage} alt="" />
+                    )}
                   </div>
                 </div>
                 <div className="info">
@@ -616,7 +623,15 @@ const ProductDetails: React.FC = () => {
             ""
           )}
 
-          <Suggestion title="Tavsiya qilamiz" data={recommendations} link="" />
+          {recommendations.length ? (
+            <Suggestion
+              title="Tavsiya qilamiz"
+              data={recommendations}
+              link=""
+            />
+          ) : (
+            ""
+          )}
           <Partners />
           <Services />
         </div>

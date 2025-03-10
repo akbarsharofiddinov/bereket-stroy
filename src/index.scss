@@ -19,6 +19,8 @@
 // modals
 @use "./styles/components/modal/search";
 @use "./styles/components/modal/catalogs";
+@use "./styles/components/UI/checkout-modal";
+
 // Auth-modal
 @use "./styles/components/Auth/login";
 
@@ -30,6 +32,7 @@
 @use "./styles/pages/productDetails";
 @use "./styles/pages/orders";
 @use "./styles/pages/checkout";
+@use "./styles/pages/profile";
 
 // error
 @use "./styles/components/error";

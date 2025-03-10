@@ -196,6 +196,22 @@
           color: #000;
         }
 
+        &.error {
+          input {
+            border: 2px solid var(--red) !important;
+          }
+
+          .user-info_inputs {
+            .phone-input {
+              border: 2px solid var(--red);
+
+              input {
+                border: none !important;
+              }
+            }
+          }
+        }
+
         .user-info_inputs {
           display: flex;
           align-items: center;
@@ -340,6 +356,13 @@
       }
 
       .payment-methods {
+        &.error {
+          label {
+            border: 2px solid var(--red);
+            background-color: var(--red-light);
+          }
+        }
+
         .title {
           margin: 10px 0 20px 0;
         }
@@ -355,6 +378,17 @@
             border-radius: 20px;
             display: flex;
             align-items: start;
+            justify-content: space-between;
+
+            &.disable {
+              cursor: not-allowed;
+              opacity: 0.5;
+
+              .title,
+              .desc {
+                text-decoration: line-through;
+              }
+            }
 
             .title {
               font-size: 18px;
@@ -371,6 +405,11 @@
             input {
               display: none;
             }
+
+            img {
+              width: 103px;
+              height: 103px;
+            }
           }
         }
       }
@@ -384,6 +423,13 @@
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 465px));
           gap: 20px;
+
+          &.error {
+            background-color: red;
+            input {
+              border: 2px solid var(--red) !important;
+            }
+          }
 
           input {
             width: 100%;
@@ -435,7 +481,7 @@
       flex-direction: column;
       gap: 20px;
       position: sticky;
-      top: 180px;
+      top: 30px;
 
       .switch-user_type {
         display: flex;
