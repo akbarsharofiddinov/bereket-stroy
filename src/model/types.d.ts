@@ -98,3 +98,20 @@ interface IPaymanyMethod {
   text: DataNames;
   key: string;
 }
+
+interface IOrder {
+  id: number;
+  address: string | null;
+  branch_id: number | null;
+  delivery_method: DataNames;
+  district: string | null;
+  latitude: string;
+  longitude: string;
+  order_id: string;
+  receiver_comment: string | null;
+  receiver_name: string | null;
+  receiver_phone: string;
+  region: string | null;
+  status: DataNames;
+  total_amount: string;
+}
