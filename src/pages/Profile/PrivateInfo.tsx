@@ -2,7 +2,6 @@ import { useAppSelector } from "@/store/hooks";
 import { DatePicker, DatePickerProps } from "antd";
 import React, { useEffect, useState } from "react";
 import { Dayjs } from "dayjs";
-import dayjs from "dayjs";
 
 const PrivateInfo: React.FC = () => {
   // const [birthDay, setBirthDay] = useState<Dayjs | null>(null);
