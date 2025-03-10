@@ -51,7 +51,7 @@ const Login: React.FC<{
           startTimer();
         }
       } catch (error: any) {
-        toast(error.response.data.message, { type: "error" });
+        toast("Telefon raqam tizimda mavjud emas", { type: "error" });
       }
     } else {
       toast("Iltimos telefon raqamingizni kiriting", { type: "error" });
