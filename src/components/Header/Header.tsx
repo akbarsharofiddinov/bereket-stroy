@@ -10,7 +10,6 @@ import {
   setSearchModal,
   setToken,
 } from "@/store/projectSlice";
-import styles from "./Header.module.scss";
 import axios from "axios";
 
 const Header: React.FC = () => {
@@ -30,10 +29,12 @@ const Header: React.FC = () => {
 
   async function searchProducts() {
     try {
-      const response = await axios.get(`https://bereket.webclub.uz/api/product-search?name=${searchInput}`);
-      console.log(response)
+      const response = await axios.get(
+        `https://bereket.webclub.uz/api/product-search?name=${searchInput}`
+      );
+      console.log(response);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -50,7 +51,7 @@ const Header: React.FC = () => {
   return (
     <>
       <HeaderTop />
-      <header className={styles.header}>
+      <header className="header">
         <div className="container">
           <div className="header-inner">
             <div className="left">
@@ -495,7 +496,7 @@ const Header: React.FC = () => {
                     onClick={() => {
                       localStorage.removeItem("token");
                       dispatch(setToken(""));
-                      window.location.reload()
+                      window.location.reload();
                     }}
                   >
                     <span>

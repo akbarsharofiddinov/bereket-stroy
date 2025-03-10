@@ -44,6 +44,7 @@
   src: url("./fonts/TT-Travels-regular.otf");
 }
 
+
 *,
 *::after,
 *::before {
@@ -143,7 +144,7 @@ body {
 
 @media screen and (max-width: 1440px) {
   .container {
-    max-width: 1340px !important;
+    max-width: 1240px !important;
   }
 }
 
