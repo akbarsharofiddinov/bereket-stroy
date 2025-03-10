@@ -105,8 +105,8 @@ const FilterSidebar: React.FC = () => {
             {brands.length
               ? brands.map((brand, index) => (
                   <Checkbox
-                    id={`${brand.id}-${brand.name.uz}`}
-                    label={brand.name.uz}
+                    id={`${brand.id}-${brand.name}`}
+                    label={brand.name}
                     key={index}
                   />
                 ))
@@ -146,8 +146,8 @@ const FilterSidebar: React.FC = () => {
               ? countries.map((country, index) => (
                   <Checkbox
                     key={index}
-                    id={`${country.id}-${country.name.uz}`}
-                    label={country.name.uz}
+                    id={`${country.id}-${country.name}`}
+                    label={country.name}
                   />
                 ))
               : ""}

@@ -25,7 +25,7 @@ const Branches: React.FC = () => {
             <div className="left">
               <div className="select-item">
                 <div className="selected">
-                  {selectedBranch?.street.uz}
+                  {selectedBranch?.street}
                   <span>
                     <FaAngleDown />
                   </span>
@@ -34,7 +34,7 @@ const Branches: React.FC = () => {
                 <div className="menu">
                   {branches.map((item, index) => (
                     <p key={index} onClick={() => setSelectedBranch(item)}>
-                      {item.name.uz}
+                      {item.name}
                     </p>
                   ))}
                 </div>
@@ -83,7 +83,7 @@ const Branches: React.FC = () => {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  {selectedBranch?.name.uz}
+                  {selectedBranch?.name}
                 </p>
                 <p>
                   <svg
@@ -160,7 +160,7 @@ const Branches: React.FC = () => {
                     />
                   </svg>
                   {selectedBranch?.days.map((item) =>
-                    `${item.uz}-`.split("-").join(", ")
+                    `${item.name}-`.split("-").join(", ")
                   )}
                 </p>
                 <p>
@@ -204,7 +204,7 @@ const Branches: React.FC = () => {
                       strokeWidth="1.5"
                     />
                   </svg>
-                  {selectedBranch?.street.uz}
+                  {selectedBranch?.street}
                 </p>
               </div>
               {/* ==================== */}

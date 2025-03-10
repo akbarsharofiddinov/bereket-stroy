@@ -45,7 +45,7 @@ const CatalogsModal: React.FC = () => {
                         dispatch(setSelectedCategory(category));
                       }}
                     >
-                      {category.name.uz}
+                      {category.name}
                     </Link>
                   ))
                 : ""}
@@ -53,7 +53,7 @@ const CatalogsModal: React.FC = () => {
             <div className="right">
               {selectedCategory ? (
                 <>
-                  <h2 className="title">{selectedCategory.name.uz}</h2>
+                  <h2 className="title">{selectedCategory.name}</h2>
                   <div className="sub-categories">
                     {selectedCategory.sub_category.map(
                       (sub_category, index) => (
@@ -62,7 +62,7 @@ const CatalogsModal: React.FC = () => {
                           onClick={() => dispatch(setCatalogModal(false))}
                           key={index}
                         >
-                          {sub_category.name.uz}
+                          {sub_category.name}
                         </Link>
                       )
                     )}

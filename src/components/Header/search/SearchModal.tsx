@@ -58,7 +58,7 @@ const SearchModal: React.FC = () => {
                             </defs>
                           </svg>
 
-                          {item.name.uz}
+                          {item.name}
                         </Link>
                       ) : (
                         ""
@@ -114,7 +114,7 @@ const SearchModal: React.FC = () => {
                             </defs>
                           </svg>
                         </span>
-                        {item.name.uz}
+                        {item.name}
                       </Link>
                     ))
                   : ""}

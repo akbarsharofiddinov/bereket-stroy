@@ -19,7 +19,12 @@ const Home: React.FC = () => {
   async function getAllProducts() {
     try {
       const response = await axios.get(
-        "https://bereket.webclub.uz/api/products"
+        "https://bereket.webclub.uz/api/products",
+        {
+          headers: {
+            "Accept-Language": "uz",
+          },
+        }
       );
       if (response.status === 200) {
         dispatch(setAllProducts(response.data.data));

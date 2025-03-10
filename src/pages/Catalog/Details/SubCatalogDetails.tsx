@@ -56,7 +56,7 @@ const SubCatalogDetails: React.FC = () => {
                 <FaAngleRight />
               </span>
               <Link to={`/catalogs/${selectedCategory?.slug!}`}>
-                {selectedCategory && selectedCategory.name.uz}
+                {selectedCategory && selectedCategory.name}
               </Link>
               <span>
                 <FaAngleRight />
@@ -64,12 +64,12 @@ const SubCatalogDetails: React.FC = () => {
               <Link
                 to={`/catalogs/${selectedCategory?.slug!}/${selectedSubCategory?.slug!}`}
               >
-                {selectedSubCategory && selectedSubCategory.name.uz}
+                {selectedSubCategory && selectedSubCategory.name}
               </Link>
             </div>
 
             <div className="top">
-              <h2 className="title">{selectedSubCategory?.name.uz}</h2>
+              <h2 className="title">{selectedSubCategory?.name}</h2>
               <p>{products.length} ta mahsulot topildi</p>
             </div>
 
@@ -90,7 +90,7 @@ const SubCatalogDetails: React.FC = () => {
                     ) : (
                       <img src={noImage} alt="" />
                     )}
-                    <span>{sub_sub_category.name.uz}</span>
+                    <span>{sub_sub_category.name}</span>
                   </Link>
                 )
               )}

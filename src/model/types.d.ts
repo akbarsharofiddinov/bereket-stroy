@@ -7,17 +7,17 @@ type DataNames = {
 
 interface ICategory {
   id: number;
-  name: DataNames;
+  name: string;
   photo: string | null;
   slug: string;
   sub_category: {
     id: number;
-    name: DataNames;
+    name: string;
     photo: string | null;
     slug: string;
     sub_sub_category: {
       id: number;
-      name: DataNames;
+      name: string;
       photo: string | null;
       slug: string;
     }[];
@@ -25,7 +25,7 @@ interface ICategory {
 
   sub_sub_category?: {
     id: number;
-    name: DataNames;
+    name: string;
     photo: string | null;
     slug: string;
   }[];
@@ -33,11 +33,11 @@ interface ICategory {
 
 interface IProduct {
   id: number;
-  name: DataNames;
+  name: string;
   slug: string;
   photos: string[];
   price: string;
-  brand: DataNames;
+  brand: string;
   status: string;
   discounted_price: string;
   discount: number;
@@ -48,7 +48,7 @@ interface IProduct {
   category_id: number;
   sub_category_id: number;
   sub_sub_category_id: number;
-  description: DataNames;
+  description: string;
   avg_rating: number;
   count_rating: number;
 }
@@ -56,12 +56,12 @@ interface IProduct {
 interface IBrands {
   id: number;
   icon: null | string;
-  name: DataNames;
+  name: string;
 }
 
 interface ICountry {
   id: number;
-  name: DataNames;
+  name: string;
 }
 
 interface IProfile {
@@ -78,24 +78,24 @@ interface IProfile {
 
 interface IDeliveryMethods {
   id: number;
-  name: DataNames;
+  name: string;
 }
 
 interface IBranch {
   id: number;
-  name: DataNames;
-  street: DataNames;
+  name: string;
+  street: string;
   start_date: string;
   end_date: string;
   point_array: number[];
-  days: DataNames[];
+  days: {name: string}[];
 }
 
 interface IPaymanyMethod {
   id: number;
-  name: DataNames;
+  name: string;
   photo: string;
-  text: DataNames;
+  text: string;
   key: string;
 }
 
@@ -103,7 +103,7 @@ interface IOrder {
   id: number;
   address: string | null;
   branch_id: number | null;
-  delivery_method: DataNames;
+  delivery_method: string;
   district: string | null;
   latitude: string;
   longitude: string;
@@ -112,6 +112,6 @@ interface IOrder {
   receiver_name: string | null;
   receiver_phone: string;
   region: string | null;
-  status: DataNames;
+  status: string;
   total_amount: string;
 }

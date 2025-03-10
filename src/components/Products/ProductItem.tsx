@@ -235,9 +235,8 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
               </p>
             </div>
             <p className="product-name">
-              {data.name.uz
-                ? data.name.uz.slice(0, 68) +
-                  (data.name.uz.length > 70 ? "..." : "")
+              {data.name
+                ? data.name.slice(0, 68) + (data.name.length > 70 ? "..." : "")
                 : ""}
             </p>
             <div className="price">

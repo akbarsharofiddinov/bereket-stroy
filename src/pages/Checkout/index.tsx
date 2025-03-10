@@ -45,7 +45,12 @@ const Checkout: React.FC = () => {
   async function getDeliveryMethods() {
     try {
       const response = await axios.get(
-        "https://bereket.webclub.uz/api/delivery-methods"
+        "https://bereket.webclub.uz/api/delivery-methods",
+        {
+          headers: {
+            "Accept-Language": "uz",
+          },
+        }
       );
       if (response.status === 200) {
         setDeliveryMethods(response.data.data.reverse());
@@ -58,7 +63,12 @@ const Checkout: React.FC = () => {
   async function getPaymantMethods() {
     try {
       const response = await axios.get(
-        "https://bereket.webclub.uz/api/payment-types"
+        "https://bereket.webclub.uz/api/payment-types",
+        {
+          headers: {
+            "Accept-Language": "uz",
+          },
+        }
       );
       if (response.status === 200) {
         setPaymentMethods(response.data.data);
@@ -82,6 +92,16 @@ const Checkout: React.FC = () => {
 
   async function orderProcessing() {
     if (token) {
+      const products: { product_id: number; quantity: number }[] = [];
+
+      cart.map((item) => {
+        if (item.isSelected)
+          products.push({
+            product_id: item.product.id,
+            quantity: item.quantity,
+          });
+      });
+
       const requestData = {
         receiver_name: userName,
         receiver_phone: phoneNumber,
@@ -95,10 +115,10 @@ const Checkout: React.FC = () => {
         longitude,
         payment_type: selectedPaymentMethod,
         comment,
-        products: cart.filter((item) => item.isSelected && item),
+        products,
       };
 
-      console.log(requestData)
+      console.log(requestData);
 
       try {
         const response = await axios.post(
@@ -111,7 +131,6 @@ const Checkout: React.FC = () => {
           }
         );
 
-        console.log(response);
         if (response.status === 201) {
           setSuccess(true);
           if (response.data.url) {
@@ -141,7 +160,12 @@ const Checkout: React.FC = () => {
   async function getBranches() {
     try {
       const response = await axios.get(
-        "https://bereket.webclub.uz/api/branches"
+        "https://bereket.webclub.uz/api/branches",
+        {
+          headers: {
+            "Accept-Language": "uz",
+          },
+        }
       );
 
       if (response.status === 200) {
@@ -229,7 +253,7 @@ const Checkout: React.FC = () => {
                         }
                         onClick={() => setSelectedDeliveryMethodID(item.id)}
                       >
-                        {item.name.uz}
+                        {item.name}
                       </button>
                     ))
                   : ""}
@@ -257,7 +281,7 @@ const Checkout: React.FC = () => {
                       <div className="left">
                         <div className="select-item">
                           <div className="selected">
-                            {selectedBranch?.name.uz}
+                            {selectedBranch?.name}
                             <span>
                               <FaAngleDown />
                             </span>
@@ -269,7 +293,7 @@ const Checkout: React.FC = () => {
                                 key={index}
                                 onClick={() => setSeletedBranch(item)}
                               >
-                                {item.name.uz}
+                                {item.name}
                               </p>
                             ))}
                           </div>
@@ -319,7 +343,7 @@ const Checkout: React.FC = () => {
                                 />
                               </svg>
                             </span>
-                            {selectedBranch?.name.uz}
+                            {selectedBranch?.name}
                           </p>
                           <p>
                             <span>
@@ -400,7 +424,7 @@ const Checkout: React.FC = () => {
                               </svg>
                             </span>
                             {selectedBranch?.days.map((item) =>
-                              `${item.uz}-`.split("-").join(", ")
+                              `${item.name}-`.split("-").join(", ")
                             )}
                           </p>
                           <p>
@@ -448,7 +472,7 @@ const Checkout: React.FC = () => {
                                 />
                               </svg>
                             </span>
-                            {selectedBranch?.street.uz}
+                            {selectedBranch?.street}
                           </p>
                         </div>
                       </div>
@@ -584,7 +608,7 @@ const Checkout: React.FC = () => {
 
                           <div className="body">
                             <h2 className="product-name">
-                              {cartItem.product.name.uz}
+                              {cartItem.product.name}
                             </h2>
 
                             <div className="price-box">
@@ -709,9 +733,9 @@ const Checkout: React.FC = () => {
                                   </svg>
                                 </span>
                               )}
-                              {item.name.uz}
+                              {item.name}
                             </h2>
-                            <p className="desc">{item.text.uz}</p>
+                            <p className="desc">{item.text}</p>
                           </div>
                           <img
                             src={`http://bereket.webclub.uz/${item.photo}`}

@@ -15,7 +15,14 @@ const Partners: React.FC = () => {
   const dispatch = useAppDispatch();
   async function getAllPartnerBrands() {
     try {
-      const response = await axios.get("https://bereket.webclub.uz/api/brands");
+      const response = await axios.get(
+        "https://bereket.webclub.uz/api/brands",
+        {
+          headers: {
+            "Accept-Language": "uz",
+          },
+        }
+      );
       if (response.status === 200) dispatch(setPartners(response.data.data));
     } catch (error) {
       console.log(error);
@@ -83,7 +90,7 @@ const Partners: React.FC = () => {
                   ) : (
                     <img src={noImage} alt="" />
                   )}
-                  <p>{item.name.uz}</p>
+                  <p>{item.name}</p>
                 </SwiperSlide>
               ))}
             </Swiper>

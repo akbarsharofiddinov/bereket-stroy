@@ -27,7 +27,12 @@ const Layout: React.FC = () => {
   async function getAllCategories() {
     try {
       const response = await axios.get(
-        "https://bereket.webclub.uz/api/categories"
+        "https://bereket.webclub.uz/api/categories",
+        {
+          headers: {
+            "Accept-Language": "uz",
+          },
+        }
       );
       if (response.status === 200) {
         dispatch(setAllCategories(response.data.data));
@@ -60,7 +65,12 @@ const Layout: React.FC = () => {
   async function getBranches() {
     try {
       const response = await axios.get(
-        "https://bereket.webclub.uz/api/branches"
+        "https://bereket.webclub.uz/api/branches",
+        {
+          headers: {
+            "Accept-Language": "uz",
+          },
+        }
       );
       if (response.status === 200) {
         dispatch(setBranches(response.data.data));

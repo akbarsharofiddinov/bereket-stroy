@@ -60,12 +60,12 @@ const Catalog: React.FC = () => {
                 <FaAngleRight />
               </span>
               <Link to={""}>
-                {selectedCategory ? selectedCategory.name.uz : ""}
+                {selectedCategory ? selectedCategory.name : ""}
               </Link>
             </div>
 
             <div className="top">
-              <h2 className="title">{selectedCategory?.name.uz}</h2>
+              <h2 className="title">{selectedCategory?.name}</h2>
               <p>{products.length} ta mahsulot topildi</p>
             </div>
 
@@ -83,7 +83,7 @@ const Catalog: React.FC = () => {
                   ) : (
                     <img src={noImage} alt="" />
                   )}
-                  <span>{sub_category.name.uz}</span>
+                  <span>{sub_category.name}</span>
                 </Link>
               ))}
             </div>

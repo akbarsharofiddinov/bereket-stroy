@@ -26,7 +26,7 @@ const SubSubCatalogDetails: React.FC = () => {
         `https://bereket.webclub.uz/api/products?sub_sub_category_slug=${category_slug}`
       );
 
-      console.log(response);
+      
 
       if (response.status === 200) {
         setProducts(response.data.data);
@@ -63,7 +63,7 @@ const SubSubCatalogDetails: React.FC = () => {
               <FaAngleRight />
             </span>
             <Link to={`/catalogs/${selectedCategory?.slug!}`}>
-              {selectedCategory && selectedCategory.name.uz}
+              {selectedCategory && selectedCategory.name}
             </Link>
             <span>
               <FaAngleRight />
@@ -71,16 +71,16 @@ const SubSubCatalogDetails: React.FC = () => {
             <Link
               to={`/catalogs/${selectedCategory?.slug!}/${selectedSubCategory?.slug!}`}
             >
-              {selectedSubCategory && selectedSubCategory.name.uz}
+              {selectedSubCategory && selectedSubCategory.name}
             </Link>
             <span>
               <FaAngleRight />
             </span>
-            <Link to={""}>{selectedSubSubCategory?.name.uz}</Link>
+            <Link to={""}>{selectedSubSubCategory?.name}</Link>
           </div>
 
           <div className="top">
-            <h2 className="title">{selectedSubSubCategory?.name.uz}</h2>
+            <h2 className="title">{selectedSubSubCategory?.name}</h2>
             <p>{products.length} ta mahsulot topildi</p>
           </div>
 

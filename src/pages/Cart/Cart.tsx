@@ -225,7 +225,7 @@ const Cart: React.FC = () => {
                           <div className="body">
                             <div className="cols col-1">
                               <h2 className="product_name">
-                                {product.name.uz}
+                                {product.name}
                               </h2>
                               <p>
                                 {/* <span>{product.id}</span> | */}
