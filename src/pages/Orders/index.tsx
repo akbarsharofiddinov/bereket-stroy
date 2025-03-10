@@ -8,6 +8,7 @@ import noOrders from "@/assets/no-orders.png";
 import { Link } from "react-router-dom";
 
 const Orders: React.FC = () => {
+  const [status, setStatus] = useState("all");
   const [orders, setOrders] = useState([]);
   const { token } = useAppSelector((state) => state.projectSlice);
   const dispatch = useAppDispatch();
@@ -40,11 +41,48 @@ const Orders: React.FC = () => {
   return (
     <>
       <div className="orders-page">
-        <div className="continer">
+        <div className="container">
           {orders.length ? (
             <>
               <div className="page-inner">
-                <div className="top"></div>
+                <div className="top">
+                  <Link to={"/"}>
+                    <span>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M4 11.9998H20"
+                          stroke="black"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M8.99997 17C8.99997 17 4.00002 13.3176 4 12C3.99999 10.6824 9 7 9 7"
+                          stroke="black"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                    Ortga
+                  </Link>
+                  <div>
+                    <h2 className="title">Buyurtmalar</h2>
+                  </div>
+                </div>
+
+                <div className="status-switcher">
+                  <button className={status === "all" ? "active" : ""}>
+                    Barchasi
+                  </button>
+                </div>
               </div>
             </>
           ) : (

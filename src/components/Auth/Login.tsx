@@ -9,6 +9,8 @@ const Login: React.FC<{
 }> = ({ setLoginType }) => {
   const [isIllegal, setIsIllegal] = React.useState(false);
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const [phone, setPhone] = React.useState("");
   const [phoneValidation, setPhoneValidation] = React.useState(false);
 
@@ -28,6 +30,7 @@ const Login: React.FC<{
   }
 
   async function getVerificationCode() {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("is_legal", isIllegal ? "1" : "0");
     formData.append("phone", phone);
@@ -42,7 +45,7 @@ const Login: React.FC<{
             },
           }
         );
-        
+
         if (response.status === 200) {
           toast(`Tasdiqlash kodi ${phone} raqamiga yuborildi`, {
             type: "success",
@@ -56,10 +59,12 @@ const Login: React.FC<{
     } else {
       toast("Iltimos telefon raqamingizni kiriting", { type: "error" });
       setPhoneValidation(true);
+      setIsLoading(false);
     }
   }
 
   async function handleLogin() {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("phone", phone);
     formData.append("code", sms);
@@ -145,7 +150,10 @@ const Login: React.FC<{
                 autoComplete="off"
                 placeholder="SMS kod"
                 value={sms}
-                onChange={(e) => setSms(e.target.value)}
+                onChange={(e) => {
+                  setSms(e.target.value);
+                  if (sms.length) setIsLoading(false);
+                }}
               />
               {timerStart ? (
                 <p className="desc">
@@ -153,7 +161,17 @@ const Login: React.FC<{
                   olishingiz mumkin
                 </p>
               ) : (
-                <button onClick={getVerificationCode}>
+                <button
+                  onClick={(e) => {
+                    if (isLoading && timeLeft >= 0) {
+                      e.stopPropagation();
+                      e.preventDefault();
+                    } else {
+                      getVerificationCode();
+                    }
+                  }}
+                  className={isLoading && timeLeft > 0 ? "loading" : ""}
+                >
                   Tasdiqlash kodni olish
                 </button>
               )}
@@ -161,7 +179,14 @@ const Login: React.FC<{
           </div>
 
           <div className="actions">
-            <button onClick={handleLogin}>Tizimga kirish</button>
+            <button
+              onClick={() => {
+                if (sms) handleLogin();
+              }}
+              className={isLoading ? "loading" : ""}
+            >
+              Tizimga kirish
+            </button>
             <button onClick={() => setLoginType("signup")}>
               Ro‘yhatdan o‘tish
             </button>

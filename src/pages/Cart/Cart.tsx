@@ -73,7 +73,6 @@ const Cart: React.FC = () => {
   }
 
   function handleAllSelectedProducts() {
-    console.log("first");
     const cartProducts: ICart[] = JSON.parse(localStorage.getItem("cart") + "");
     if (cartProductsSelected === "all") {
       const updateCartProducts = cartProducts.map((item) => ({
@@ -224,9 +223,7 @@ const Cart: React.FC = () => {
                           </div>
                           <div className="body">
                             <div className="cols col-1">
-                              <h2 className="product_name">
-                                {product.name}
-                              </h2>
+                              <h2 className="product_name">{product.name}</h2>
                               <p>
                                 {/* <span>{product.id}</span> | */}
                                 <span>

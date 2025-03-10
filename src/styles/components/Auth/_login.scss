@@ -131,6 +131,11 @@
             text-align: start;
             cursor: pointer;
             border: none;
+
+            &.loading {
+              cursor: not-allowed;
+              opacity: 0.5;
+            }
           }
 
           .desc {
@@ -171,6 +176,11 @@
           color: var(--text-) 300;
           border: none;
           cursor: pointer;
+
+          &.loading {
+            cursor: not-allowed;
+            opacity: 0.5;
+          }
 
           &:first-child {
             background-color: var(--yellow);

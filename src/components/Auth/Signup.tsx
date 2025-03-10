@@ -15,6 +15,8 @@ const Signup: React.FC<{
   const [userName, setUsername] = React.useState("");
   // const [userNameValidation, setUserNameValidation] = React.useState(false);
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const [company, setCompany] = React.useState("");
   const [inn, setInn] = React.useState("");
   const [getSms, setGetSms] = React.useState(false);
@@ -23,6 +25,7 @@ const Signup: React.FC<{
   const dispatch = useAppDispatch();
 
   async function getSMSCode() {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("is_legal", isIllegal ? "1" : "0");
     formData.append("phone", phone);
@@ -47,6 +50,7 @@ const Signup: React.FC<{
   }
 
   async function handleRegister() {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("phone", phone);
     formData.append("code", smsCode);
@@ -202,7 +206,11 @@ const Signup: React.FC<{
                     id="sms"
                     autoComplete="off"
                     value={smsCode}
-                    onChange={(e) => setSmsCode(e.target.value)}
+                    onChange={(e) => {
+                      setSmsCode(e.target.value);
+                      if (e.target.value) setIsLoading(false);
+                      else setIsLoading(true)
+                    }}
                     placeholder="SMS kodni kiriting"
                   />
                 </div>
@@ -215,6 +223,7 @@ const Signup: React.FC<{
                   if (getSms) handleRegister();
                   else getSMSCode();
                 }}
+                className={isLoading ? "loading" : ""}
               >
                 {getSms ? "Ro‘yhatdan o‘tish" : "SMS kodni olish"}
               </button>
