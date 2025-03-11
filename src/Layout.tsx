@@ -11,7 +11,7 @@ import {
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import axios from "axios";
 import { setAllCategories } from "@/store/categorySlice";
-import { setCartProducts, setFavourites } from "@/store/productSlice";
+import { addProductToCart, setFavourites } from "@/store/productSlice";
 import { setProfileInfo, setToken } from "./store/projectSlice";
 import { setBranches } from "./store/companySlice";
 
@@ -21,8 +21,8 @@ const Layout: React.FC = () => {
   const { pathname } = useLocation();
 
   const dispatch = useAppDispatch();
-  const { authModal } = useAppSelector((state) => state.projectSlice);
-  const { token } = useAppSelector((state) => state.projectSlice);
+  const { authModal, token } = useAppSelector((state) => state.projectSlice);
+  const { allProducts } = useAppSelector((state) => state.productSlice);
 
   async function getAllCategories() {
     try {
@@ -94,26 +94,45 @@ const Layout: React.FC = () => {
   useEffect(() => {
     getAllCategories();
 
-    if (localStorage.getItem("cart")) {
-      const cartProducts: {
-        product: IProduct;
-        isSelected: boolean;
-        quantity: number;
-      }[] = [];
-      cartProducts.push(...JSON.parse(localStorage.getItem("cart") + ""));
-      dispatch(setCartProducts(cartProducts));
-    }
-
-    if (localStorage.getItem("favorites")) {
-      const favorites: IProduct[] = [];
-      favorites.push(...JSON.parse(localStorage.getItem("favorites") + ""));
-      dispatch(setFavourites(favorites));
-    }
-
     if (localStorage.getItem("token")) {
       dispatch(setToken(localStorage.getItem("token") + ""));
     }
   }, []);
+
+  useEffect(() => {
+    if (allProducts.length) {
+      if (localStorage.getItem("cart")) {
+        const cartProducts: ICart[] = [];
+        const localProducts: ICart[] = JSON.parse(
+          localStorage.getItem("cart") + ""
+        );
+
+        localProducts.map((localProduct) =>
+          allProducts.map((product) => {
+            if (
+              JSON.stringify(localProduct.product) === JSON.stringify(product)
+            ) {
+              cartProducts.push(localProduct);
+              dispatch(addProductToCart(localProduct));
+            }
+          })
+        );
+      }
+
+      if (localStorage.getItem("favorites")) {
+        const favorites: IProduct[] = [];
+        const localProducts: IProduct[] = [];
+        localProducts.map((localProduct) =>
+          allProducts.map((product) => {
+            if (JSON.stringify(localProduct) === JSON.stringify(product)) {
+              favorites.push(localProduct);
+              dispatch(setFavourites(favorites));
+            }
+          })
+        );
+      }
+    }
+  }, [allProducts]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -88,7 +88,7 @@ interface IBranch {
   start_date: string;
   end_date: string;
   point_array: number[];
-  days: {name: string}[];
+  days: { name: string }[];
 }
 
 interface IPaymanyMethod {
@@ -111,7 +111,21 @@ interface IOrder {
   receiver_comment: string | null;
   receiver_name: string | null;
   receiver_phone: string;
+  products_count: number;
+  products: {
+    id: number;
+    name: string;
+    photos: string[];
+    price: string;
+    quantity: number;
+  };
   region: string | null;
   status: string;
   total_amount: string;
+}
+
+interface ICart {
+  product: IProduct;
+  quantity: number;
+  isSelected: boolean;
 }

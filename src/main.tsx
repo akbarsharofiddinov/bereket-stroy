@@ -5,6 +5,7 @@ import "swiper/swiper-bundle.css";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 import "react-toastify/dist/ReactToastify.css";
+import "./i18n";
 
 createRoot(document.getElementById("root")!).render(
   <>

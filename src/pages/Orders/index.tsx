@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Orders: React.FC = () => {
   const [status] = useState("all");
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState<IOrder[]>([]);
   const { token } = useAppSelector((state) => state.projectSlice);
   const dispatch = useAppDispatch();
   async function getAllOrders() {
@@ -22,7 +22,7 @@ const Orders: React.FC = () => {
           },
         }
       );
-      console.log(response);
+
       if (response.status === 200) {
         setOrders(response.data.data);
       }
@@ -83,6 +83,30 @@ const Orders: React.FC = () => {
                   <button className={status === "all" ? "active" : ""}>
                     Barchasi
                   </button>
+                  <button className={status === "inProgress" ? "active" : ""}>
+                    Amaldagi
+                  </button>
+                  <button className={status === "delivered" ? "active" : ""}>
+                    Yetib kelgan
+                  </button>
+                  <button className={status === "canceled" ? "active" : ""}>
+                    Bekor qilingan
+                  </button>
+                </div>
+
+                <div className="orders">
+                  {orders.length
+                    ? orders.map((orderItem, index) => (
+                        <div className="order-item" key={index}>
+                          <div className="order-info">
+                            <div className="info-top">
+                              <span>ID raqam: {orderItem.order_id}</span>
+                            </div>
+                          </div>
+                          <div className="order-products"></div>
+                        </div>
+                      ))
+                    : ""}
                 </div>
               </div>
             </>

@@ -41,6 +41,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        text-transform: capitalize;
 
         span {
           display: flex;
@@ -67,6 +68,42 @@
             &:first-child {
               color: var(--text-) 300;
             }
+          }
+        }
+
+        .language_menu {
+          position: absolute;
+          background-color: #fff;
+          border: 2px solid var(--border-color);
+          border-radius: 10px;
+          right: 0;
+
+          transform: translateY(-50%);
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+
+          overflow: hidden;
+
+          transition: opacity 0.2s, visibility 0.2s, transform 0.2s ease-in-out;
+
+          p {
+            padding: 10px 15px;
+
+            transition: background-color 0.2s ease-in-out;
+
+            &:hover {
+              background-color: var(--border-color);
+            }
+          }
+        }
+
+        &:hover {
+          .language_menu {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
           }
         }
       }

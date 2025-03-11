@@ -3,8 +3,34 @@ import { FaAngleDown } from "react-icons/fa6";
 import { PiGlobe } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import styles from "./HeaderTop.module.scss";
+import { useTranslation } from "react-i18next";
 
 const HeaderTop: React.FC = () => {
+  const { t, i18n } = useTranslation();
+
+  const languages: string[] = Object.keys(i18n.options.resources || {});
+
+  function convertLanguage(lang: string) {
+    switch (lang) {
+      case "uz":
+        return "O'zbek";
+        break;
+      case "en":
+        return "English";
+        break;
+      case "ru":
+        return "Русский";
+        break;
+      case "kr":
+        return "Qaraqalpaqsha";
+        break;
+
+      default:
+        return "";
+        break;
+    }
+  }
+
   return (
     <>
       <div className={styles.headerTop}>
@@ -37,7 +63,7 @@ const HeaderTop: React.FC = () => {
                   fill="white"
                 />
               </svg>
-              Chegirmalar
+              {t("discounts")}
             </button>
 
             <div className={styles.right}>
@@ -72,10 +98,17 @@ const HeaderTop: React.FC = () => {
                   <span>
                     <PiGlobe />
                   </span>
-                  <p>O'zb</p>
+                  <p>{convertLanguage(i18n.language)}</p>
                   <span>
                     <FaAngleDown />
                   </span>
+                </div>
+                <div className={styles.language_menu}>
+                  {languages.map((item, index) => (
+                    <p key={index} onClick={() => i18n.changeLanguage(item)}>
+                      {convertLanguage(item)}
+                    </p>
+                  ))}
                 </div>
               </div>
             </div>

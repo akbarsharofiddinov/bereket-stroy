@@ -32,7 +32,7 @@ const Header: React.FC = () => {
       const response = await axios.get(
         `https://bereket.webclub.uz/api/product-search?name=${searchInput}`
       );
-      console.log(response)
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
