@@ -202,8 +202,10 @@ const Checkout: React.FC = () => {
 
   useEffect(() => {
     if (selectedBranch) {
-      setLatitude(selectedBranch.point_array[1] + "");
-      setLongitude(selectedBranch.point_array[0] + "");
+      if (selectedBranch.point_array) {
+        setLatitude(selectedBranch.point_array[1] + "");
+        setLongitude(selectedBranch.point_array[0] + "");
+      }
     }
   }, [selectedBranch]);
 
