@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         element: <AllCatalogs />,
         children: [
           {
-            path: "catalogs/:catalog_slug",
+            path: ":catalog_slug",
             element: <Catalog />,
             children: [
               {
