@@ -45,6 +45,12 @@ const CatalogsModal: React.FC = () => {
                         dispatch(setSelectedCategory(category));
                       }}
                     >
+                      <span>
+                        <img
+                          src={`http://bereket.webclub.uz/storage/${category.icon}`}
+                          alt=""
+                        />
+                      </span>
                       {category.name}
                     </Link>
                   ))
