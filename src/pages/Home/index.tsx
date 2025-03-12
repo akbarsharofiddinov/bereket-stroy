@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import {
   Banner,
   Banner2,
-  Banner3,
   Branches,
-  // Categories,
+  Categories,
   Partners,
   Services,
   Suggestion,
@@ -42,9 +41,8 @@ const Home: React.FC = () => {
     <>
       <Banner />
       <Banner2 />
-      {/* <Categories /> */}
       <Suggestion title="Eng yaxshi takliflar" data={undefined} link="" />
-      <Banner3 />
+      <Categories />
       <Suggestion title="Har doim foydali bo'ladi" data={undefined} link="" />
       <Partners />
       <Branches />

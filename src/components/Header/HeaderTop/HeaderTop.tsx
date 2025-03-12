@@ -21,7 +21,7 @@ const HeaderTop: React.FC = () => {
       case "ru":
         return "Русский";
         break;
-      case "kr":
+      case "qr":
         return "Qaraqalpaqsha";
         break;
 
@@ -74,7 +74,7 @@ const HeaderTop: React.FC = () => {
                     href="#branches"
                     className={styles["header-menu_item__link"]}
                   >
-                    Do‘kon manzillari
+                    {t("shop_locations")}
                   </a>
                 </li>
                 <li className={styles["header-menu_item"]}>
@@ -82,12 +82,12 @@ const HeaderTop: React.FC = () => {
                     href="#footer"
                     className={styles["header-menu_item__link"]}
                   >
-                    Biz bilan bog’lanish
+                    {t("contact_with_us")}
                   </a>
                 </li>
                 <li className={styles["header-menu_item"]}>
                   <Link to="#" className={styles["header-menu_item__link"]}>
-                    Yordam
+                    {t("help")}
                   </Link>
                 </li>
               </ul>
@@ -105,7 +105,13 @@ const HeaderTop: React.FC = () => {
                 </div>
                 <div className={styles.language_menu}>
                   {languages.map((item, index) => (
-                    <p key={index} onClick={() => i18n.changeLanguage(item)}>
+                    <p
+                      key={index}
+                      onClick={() => {
+                        i18n.changeLanguage(item);
+                        localStorage.setItem("language", item);
+                      }}
+                    >
                       {convertLanguage(item)}
                     </p>
                   ))}

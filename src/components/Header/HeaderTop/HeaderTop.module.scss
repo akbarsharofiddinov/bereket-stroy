@@ -36,6 +36,7 @@
     .selectItem {
       position: relative;
       cursor: pointer;
+      z-index: 80;
 
       .selected {
         display: flex;

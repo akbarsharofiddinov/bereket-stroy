@@ -52,7 +52,7 @@ const LeafletMap: React.FC<IProps> = ({
 
   const defaultCenter: LatLngExpression = [
     42.45695229535686, 59.61407313472131,
-  ]; // Toshkent koordinatalari
+  ];
 
   const getCurrentLocation = () => {
     if (navigator.geolocation) {
@@ -78,11 +78,15 @@ const LeafletMap: React.FC<IProps> = ({
 
   useEffect(() => {
     if (selectedBranch) {
-      setPosition([
-        selectedBranch?.point_array[1]!,
-        selectedBranch?.point_array[0]!,
-      ]);
-      if (mapInstance) {
+      if (selectedBranch.point_array) {
+        setPosition([
+          selectedBranch?.point_array[1]!,
+          selectedBranch?.point_array[0]!,
+        ]);
+      } else {
+        setPosition([0, 0]);
+      }
+      if (mapInstance && selectedBranch.point_array) {
         mapInstance.setView(
           [selectedBranch?.point_array[1]!, selectedBranch?.point_array[0]!],
           mapInstance.getZoom()

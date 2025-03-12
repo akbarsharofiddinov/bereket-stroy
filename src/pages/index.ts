@@ -11,3 +11,4 @@ export { default as Cart } from "./Cart/Cart";
 export { default as Favorites } from "./Favorites";
 export { default as Orders } from "./Orders";
 export { default as Profile } from "./Profile";
+export { default as AllCatalogs } from "./Catalog/AllCatalogs";

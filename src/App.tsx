@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout";
 import {
+  AllCatalogs,
   Cart,
   Catalog,
   Checkout,
@@ -15,6 +16,7 @@ import {
 } from "@/pages";
 import { PageNotFound } from "@/components";
 import { ToastContainer } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const router = createBrowserRouter([
   {
@@ -27,16 +29,22 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "catalogs/:catalog_slug",
-        element: <Catalog />,
+        path: "catalogs",
+        element: <AllCatalogs />,
         children: [
           {
-            path: ":sub_catalog_slug",
-            element: <SubCatalogDetails />,
+            path: "catalogs/:catalog_slug",
+            element: <Catalog />,
             children: [
               {
-                path: ":sub_sub_catalog_slug",
-                element: <SubSubCatalogDetails />,
+                path: ":sub_catalog_slug",
+                element: <SubCatalogDetails />,
+                children: [
+                  {
+                    path: ":sub_sub_catalog_slug",
+                    element: <SubSubCatalogDetails />,
+                  },
+                ],
               },
             ],
           },
@@ -78,6 +86,13 @@ const router = createBrowserRouter([
 ]);
 
 const App: React.FC = () => {
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    const language = localStorage.getItem("language");
+    i18n.changeLanguage(language!);
+  }, []);
+
   return (
     <>
       <RouterProvider router={router} />

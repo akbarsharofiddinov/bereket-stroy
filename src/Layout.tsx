@@ -14,6 +14,7 @@ import { setAllCategories } from "@/store/categorySlice";
 import { addProductToCart, setFavourites } from "@/store/productSlice";
 import { setProfileInfo, setToken } from "./store/projectSlice";
 import { setBranches } from "./store/companySlice";
+import { useTranslation } from "react-i18next";
 
 const Layout: React.FC = () => {
   const [loginType, setLoginType] = useState("login");
@@ -21,6 +22,9 @@ const Layout: React.FC = () => {
   const { pathname } = useLocation();
 
   const dispatch = useAppDispatch();
+
+  const { i18n } = useTranslation();
+
   const { authModal, token } = useAppSelector((state) => state.projectSlice);
   const { allProducts } = useAppSelector((state) => state.productSlice);
 
@@ -30,7 +34,7 @@ const Layout: React.FC = () => {
         "https://bereket.webclub.uz/api/categories",
         {
           headers: {
-            "Accept-Language": "uz",
+            "Accept-Language": i18n.language,
           },
         }
       );
@@ -68,7 +72,7 @@ const Layout: React.FC = () => {
         "https://bereket.webclub.uz/api/branches",
         {
           headers: {
-            "Accept-Language": "uz",
+            "Accept-Language": i18n.language,
           },
         }
       );
@@ -82,7 +86,12 @@ const Layout: React.FC = () => {
 
   useEffect(() => {
     getBranches();
-  }, []);
+    getAllCategories();
+
+    if (localStorage.getItem("token")) {
+      dispatch(setToken(localStorage.getItem("token") + ""));
+    }
+  }, [i18n.language]);
 
   useEffect(() => {
     if (token) {
@@ -90,14 +99,6 @@ const Layout: React.FC = () => {
       dispatch(setToken(token));
     }
   }, [token]);
-
-  useEffect(() => {
-    getAllCategories();
-
-    if (localStorage.getItem("token")) {
-      dispatch(setToken(localStorage.getItem("token") + ""));
-    }
-  }, []);
 
   useEffect(() => {
     if (allProducts.length) {

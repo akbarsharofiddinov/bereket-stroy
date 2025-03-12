@@ -10,7 +10,7 @@ import translationEN from "./locales/en/translation.json";
 const resources = {
   ru: { translation: translationRU },
   uz: { translation: translationUZ },
-  kr: { translation: translationKR },
+  qr: { translation: translationKR },
   en: { translation: translationEN },
 };
 

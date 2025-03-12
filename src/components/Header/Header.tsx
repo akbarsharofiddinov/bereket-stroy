@@ -11,6 +11,7 @@ import {
   setToken,
 } from "@/store/projectSlice";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const Header: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -21,6 +22,8 @@ const Header: React.FC = () => {
   const { searchModal, catalogModal, profileInfo, token } = useAppSelector(
     (state) => state.projectSlice
   );
+
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   window.addEventListener("click", () => {
@@ -126,13 +129,13 @@ const Header: React.FC = () => {
                       </defs>
                     </svg>
                   )}
-                  Kategoriya
+                  {t("category")}
                 </button>
                 <div className="input-box">
                   <input
                     type="text"
                     className="search-input"
-                    placeholder="Mahsulotni qidirish..."
+                    placeholder={t("search_placeholder")}
                     value={searchInput}
                     onFocus={() => {
                       if (catalogModal) {
@@ -188,7 +191,7 @@ const Header: React.FC = () => {
                       </defs>
                     </svg>
                   </span>
-                  Qidirish
+                  {t("search")}
                 </button>
               </div>
             </div>

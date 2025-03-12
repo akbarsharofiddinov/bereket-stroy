@@ -1,4 +1,11 @@
 {
   "welcome": "Xush kelibsiz",
-  "discounts": "Chegirmalar"
+  "discounts": "Chegirmalar",
+  "shop_locations": "Do'kon manzillari",
+  "contact_with_us": "Biz bilan bog'lanish",
+  "help": "Yordam",
+  "category": "Kategoriya",
+  "search": "Qidirish",
+  "search_placeholder": "Mahsulotni qidirish...",
+  "login_title": "Tizimga kirish"
 }

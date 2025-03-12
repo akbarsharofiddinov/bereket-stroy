@@ -9,6 +9,7 @@ interface ICategory {
   id: number;
   name: string;
   photo: string | null;
+  icon: string | null;
   slug: string;
   sub_category: {
     id: number;
@@ -87,7 +88,7 @@ interface IBranch {
   street: string;
   start_date: string;
   end_date: string;
-  point_array: number[];
+  point_array: number[] | null;
   days: { name: string }[];
 }
 

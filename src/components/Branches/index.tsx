@@ -25,7 +25,7 @@ const Branches: React.FC = () => {
             <div className="left">
               <div className="select-item">
                 <div className="selected">
-                  {selectedBranch?.street}
+                  {selectedBranch?.name}
                   <span>
                     <FaAngleDown />
                   </span>

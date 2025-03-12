@@ -1,4 +1,11 @@
 {
   "welcome": "Welcome",
-  "discounts": "Discounts"
+  "discounts": "Discounts",
+  "shop_locations": "Store locations",
+  "contact_with_us": "Conact with us",
+  "help": "Help",
+  "category": "Category",
+  "search": "Search",
+  "search_placeholder": "Product search...",
+  "login_title": "Login to the system"
 }

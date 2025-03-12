@@ -1,4 +1,11 @@
 {
   "welcome": "добро пожаловать",
-  "discounts": "Скидки"
+  "discounts": "Скидки",
+  "shop_locations": "Расположение магазинов",
+  "contact_with_us": "Связаться с нами",
+  "help": "Помощь",
+  "category": "Категория",
+  "search": "Поиск",
+  "search_placeholder": "Поиск продукта...",
+  "login_title": "Вход в систему"
 }
