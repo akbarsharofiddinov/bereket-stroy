@@ -52,6 +52,8 @@ interface IProduct {
   description: string;
   avg_rating: number;
   count_rating: number;
+  country: string;
+  sales_count: number;
 }
 
 interface IBrands {

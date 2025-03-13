@@ -19,7 +19,9 @@ const Catalog: React.FC = () => {
     (state) => state.categorySlice
   );
 
-  const { allProducts } = useAppSelector((state) => state.productSlice);
+  const { allProducts, isFilter, filteredProducts } = useAppSelector(
+    (state) => state.productSlice
+  );
 
   async function getProducts(category_slug: string) {
     try {
@@ -36,15 +38,14 @@ const Catalog: React.FC = () => {
   }
 
   useEffect(() => {
-    if (selectedCategory) {
-      getProducts(selectedCategory.slug);
-    } else {
+    if (params.catalog_slug) {
       const findCategory = allCategories.find(
         (category) => category.slug === params.catalog_slug
       );
       dispatch(setSelectedCategory(findCategory));
+      getProducts(params.catalog_slug);
     }
-  }, [selectedCategory]);
+  }, [params]);
 
   return (
     <>
@@ -67,7 +68,10 @@ const Catalog: React.FC = () => {
 
             <div className="top">
               <h2 className="title">{selectedCategory?.name}</h2>
-              <p>{allProducts.length} ta mahsulot topildi</p>
+              <p>
+                {isFilter ? filteredProducts.length : allProducts.length} ta
+                mahsulot topildi
+              </p>
             </div>
 
             <div className="sub-categories">
@@ -89,7 +93,7 @@ const Catalog: React.FC = () => {
               ))}
             </div>
 
-            <Products data={allProducts} />
+            <Products data={isFilter ? filteredProducts : allProducts} />
             <Partners />
             <Services />
           </div>

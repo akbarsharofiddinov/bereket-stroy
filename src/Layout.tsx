@@ -11,7 +11,7 @@ import {
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import axios from "axios";
 import { setAllCategories } from "@/store/categorySlice";
-import { addProductToCart, setFavourites } from "@/store/productSlice";
+import { setCartProducts, setFavourites } from "@/store/productSlice";
 import { setProfileInfo, setToken } from "./store/projectSlice";
 import { setBranches } from "./store/companySlice";
 import { useTranslation } from "react-i18next";
@@ -114,10 +114,11 @@ const Layout: React.FC = () => {
               JSON.stringify(localProduct.product) === JSON.stringify(product)
             ) {
               cartProducts.push(localProduct);
-              dispatch(addProductToCart(localProduct.product));
             }
           })
         );
+
+        dispatch(setCartProducts(cartProducts));
       }
 
       if (localStorage.getItem("favorites")) {

@@ -3,9 +3,16 @@ import React, { useState } from "react";
 interface IProps {
   label: string;
   id: string;
+  setSelectedBrands?: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedCountries?: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const Checkbox: React.FC<IProps> = ({ label, id }) => {
+const Checkbox: React.FC<IProps> = ({
+  label,
+  id,
+  setSelectedBrands,
+  setSelectedCountries,
+}) => {
   const [checked, setChecked] = useState(false);
   return (
     <>
@@ -16,6 +23,18 @@ const Checkbox: React.FC<IProps> = ({ label, id }) => {
           checked={checked}
           onChange={() => {
             setChecked(!checked);
+            if (setSelectedBrands)
+              setSelectedBrands((prev) =>
+                prev.includes(label)
+                  ? prev.filter((item) => item !== label)
+                  : [...prev, label]
+              );
+            else if (setSelectedCountries)
+              setSelectedCountries((prev) =>
+                prev.includes(label)
+                  ? prev.filter((item) => item !== label)
+                  : [...prev, label]
+              );
           }}
         />
         <div className="checkmark">

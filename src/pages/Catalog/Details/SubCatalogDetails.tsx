@@ -1,20 +1,23 @@
 import { setSelectedSubCategory } from "@/store/categorySlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { Link, Outlet, useParams } from "react-router-dom";
 import noImage from "@/assets/no-image.webp";
 import { Partners, Products, Services } from "@/components";
 import axios from "axios";
+import { setAllProducts } from "@/store/productSlice";
 
 const SubCatalogDetails: React.FC = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
   const dispatch = useAppDispatch();
   const { selectedSubCategory, selectedCategory } = useAppSelector(
     (state) => state.categorySlice
   );
 
   const params = useParams();
+  const { allProducts, filteredProducts, isFilter } = useAppSelector(
+    (state) => state.productSlice
+  );
 
   async function getProducts(category_slug: string) {
     try {
@@ -23,7 +26,7 @@ const SubCatalogDetails: React.FC = () => {
       );
 
       if (response.status === 200) {
-        setProducts(response.data.data);
+        dispatch(setAllProducts(response.data.data));
       }
     } catch (error) {
       console.log(error);
@@ -39,7 +42,7 @@ const SubCatalogDetails: React.FC = () => {
       dispatch(setSelectedSubCategory(findSubCategory));
       getProducts(params.sub_catalog_slug);
     }
-  }, [selectedCategory]);
+  }, [params.sub_catalog_slug]);
 
   return (
     <>
@@ -70,7 +73,10 @@ const SubCatalogDetails: React.FC = () => {
 
             <div className="top">
               <h2 className="title">{selectedSubCategory?.name}</h2>
-              <p>{products.length} ta mahsulot topildi</p>
+              <p>
+                {isFilter ? filteredProducts.length : allProducts.length} ta
+                mahsulot topildi
+              </p>
             </div>
 
             <div className="sub-categories">
@@ -96,7 +102,7 @@ const SubCatalogDetails: React.FC = () => {
               )}
             </div>
 
-            <Products data={products} />
+            <Products data={isFilter ? filteredProducts : allProducts} />
             <Partners />
             <Services />
           </div>

@@ -4,6 +4,7 @@ import {
   setSelectedSubSubCategory,
 } from "@/store/categorySlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setAllProducts } from "@/store/productSlice";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaAngleRight } from "react-icons/fa6";
@@ -13,10 +14,12 @@ const SubSubCatalogDetails: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useAppDispatch();
 
-  const [products, setProducts] = useState<IProduct[]>([]);
-
   const { selectedCategory, selectedSubCategory, selectedSubSubCategory } =
     useAppSelector((state) => state.categorySlice);
+
+  const { allProducts, isFilter, filteredProducts } = useAppSelector(
+    (state) => state.productSlice
+  );
 
   const params = useParams();
 
@@ -26,10 +29,8 @@ const SubSubCatalogDetails: React.FC = () => {
         `https://bereket.webclub.uz/api/products?sub_sub_category_slug=${category_slug}`
       );
 
-      
-
       if (response.status === 200) {
-        setProducts(response.data.data);
+        dispatch(setAllProducts(response.data.data));
         setLoading(false);
       }
     } catch (error) {
@@ -81,10 +82,14 @@ const SubSubCatalogDetails: React.FC = () => {
 
           <div className="top">
             <h2 className="title">{selectedSubSubCategory?.name}</h2>
-            <p>{products.length} ta mahsulot topildi</p>
+            <p>{isFilter ? filteredProducts.length : allProducts.length} ta mahsulot topildi</p>
           </div>
 
-          {loading ? <h1>Loading...</h1> : <Products data={products} />}
+          {loading ? (
+            <h1>Loading...</h1>
+          ) : (
+            <Products data={isFilter ? filteredProducts : allProducts} />
+          )}
         </div>
       </div>
     </>

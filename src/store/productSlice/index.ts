@@ -14,6 +14,7 @@ interface IState {
   searchValue: string;
   isInSale: boolean;
   filterType: string;
+  isFilter: boolean;
 }
 
 const initialState: IState = {
@@ -26,6 +27,7 @@ const initialState: IState = {
   searchValue: "",
   isInSale: false,
   filterType: "new",
+  isFilter: false,
 };
 
 export const productSlice = createSlice({
@@ -110,6 +112,9 @@ export const productSlice = createSlice({
     setFilterType: (state, { payload }) => {
       state.filterType = payload;
     },
+    setIsFilter: (state, { payload }) => {
+      state.isFilter = payload;
+    },
   },
 });
 
@@ -129,5 +134,6 @@ export const {
   setIsInSalve,
   setFilteredProducts,
   setFilterType,
+  setIsFilter,
 } = productSlice.actions;
 export default productSlice.reducer;

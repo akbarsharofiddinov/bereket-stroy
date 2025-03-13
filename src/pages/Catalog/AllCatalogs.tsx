@@ -20,20 +20,26 @@ const AllCatalogs: React.FC = () => {
 
   const { catalog_slug } = useParams();
 
-  const { allProducts, filterType, filteredProducts } = useAppSelector(
-    (state) => state.productSlice
-  );
+  const { allProducts, filterType, filteredProducts, isFilter } =
+    useAppSelector((state) => state.productSlice);
   const { catalogModal } = useAppSelector((state) => state.projectSlice);
   const { allCategories } = useAppSelector((state) => state.categorySlice);
 
   async function getProducts() {
     try {
-      const response = await axios.get(
-        `https://bereket.webclub.uz/api/products`
-      );
+      if (filterType) {
+        const response = await axios.get(
+          `https://bereket.webclub.uz/api/products?sort_by=${filterType}`
+        );
+        dispatch(setFilteredProducts(response.data.data));
+      } else {
+        const response = await axios.get(
+          `https://bereket.webclub.uz/api/products`
+        );
 
-      if (response.status === 200) {
-        dispatch(setAllProducts(response.data.data));
+        if (response.status === 200) {
+          dispatch(setAllProducts(response.data.data));
+        }
       }
     } catch (error) {
       console.log(error);
@@ -55,27 +61,6 @@ const AllCatalogs: React.FC = () => {
     }
   }, [catalogModal]);
 
-  useEffect(() => {
-    if (filterType === "low-price") {
-      const filterproducts = [...allProducts];
-
-      filterproducts.sort(
-        (a, b) =>
-          parseFloat(b.discounted_price) - parseFloat(a.discounted_price)
-      );
-
-      dispatch(setFilteredProducts(filterproducts));
-    } else if (filterType === "rating") {
-      const filterproducts = [...allProducts];
-
-      filterproducts.sort((a, b) => a.rating - b.rating);
-
-      dispatch(setFilteredProducts(filterproducts));
-    } else {
-      dispatch(setFilteredProducts([]));
-    }
-  }, [filterType]);
-
   return (
     <>
       {catalog_slug ? (
@@ -89,7 +74,10 @@ const AllCatalogs: React.FC = () => {
 
             <div className="top">
               <h2 className="title">{t("category")}</h2>
-              <p>{allProducts.length} ta mahsulot topildi</p>
+              <p>
+                {isFilter ? filteredProducts.length : allProducts.length} ta
+                mahsulot topildi
+              </p>
             </div>
 
             <div className="sub-categories">
@@ -111,9 +99,7 @@ const AllCatalogs: React.FC = () => {
               ))}
             </div>
 
-            <Products
-              data={filteredProducts.length ? filteredProducts : allProducts}
-            />
+            <Products data={isFilter ? filteredProducts : allProducts} />
             <Partners />
             <Services />
           </div>
