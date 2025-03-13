@@ -15,9 +15,7 @@ const SubCatalogDetails: React.FC = () => {
   );
 
   const params = useParams();
-  const { allProducts, filteredProducts, isFilter } = useAppSelector(
-    (state) => state.productSlice
-  );
+  const { allProducts } = useAppSelector((state) => state.productSlice);
 
   async function getProducts(category_slug: string) {
     try {
@@ -73,10 +71,7 @@ const SubCatalogDetails: React.FC = () => {
 
             <div className="top">
               <h2 className="title">{selectedSubCategory?.name}</h2>
-              <p>
-                {isFilter ? filteredProducts.length : allProducts.length} ta
-                mahsulot topildi
-              </p>
+              <p>{allProducts.length} ta mahsulot topildi</p>
             </div>
 
             <div className="sub-categories">
@@ -102,7 +97,7 @@ const SubCatalogDetails: React.FC = () => {
               )}
             </div>
 
-            <Products data={isFilter ? filteredProducts : allProducts} />
+            <Products data={allProducts} />
             <Partners />
             <Services />
           </div>

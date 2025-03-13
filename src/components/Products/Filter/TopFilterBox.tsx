@@ -1,63 +1,9 @@
-import { useAppDispatch } from "@/store/hooks";
-import { setFilteredProducts, setIsFilter } from "@/store/productSlice";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-type SortOption = "popularity" | "price" | "rating";
-type PriceSortState = "default" | "asc" | "desc";
+type SortOption = "popularity" | "price" | "rating" | "";
 
 const TopFilterBox: React.FC = () => {
-  const [activeSort, setActiveSort] = useState<SortOption>("popularity");
-  const [priceSortState, setPriceSortState] =
-    useState<PriceSortState>("default");
-
-  const dispatch = useAppDispatch();
-
-  async function getFilteredProducts(sortBy: string) {
-    try {
-      if (sortBy) {
-        const response = await axios.get(
-          `https://bereket.webclub.uz/api/products?sort_by=${sortBy}`
-        );
-        if (response.status === 200)
-          dispatch(setFilteredProducts(response.data.data));
-      } else {
-        const response = await axios.get(
-          `https://bereket.webclub.uz/api/products`
-        );
-        if (response.status === 200)
-          dispatch(setFilteredProducts(response.data.data));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const handleSort = (option: SortOption) => {
-    if (option === "price") {
-      setPriceSortState((prev) => {
-        if (prev === "default") return "desc";
-        if (prev === "desc") return "asc";
-        return "default";
-      });
-      setActiveSort("price");
-    } else {
-      setActiveSort(option);
-      setPriceSortState("default");
-    }
-
-    dispatch(setIsFilter(true));
-  };
-
-  useEffect(() => {
-    if (activeSort === "price") {
-      if (priceSortState === "asc") getFilteredProducts("price");
-      else if (priceSortState === "desc") getFilteredProducts(`-price`);
-      else getFilteredProducts("");
-    } else {
-      getFilteredProducts(activeSort);
-    }
-  }, [priceSortState]);
+  const [activeSort, setActiveSort] = useState<SortOption>("");
 
   return (
     <>
@@ -65,7 +11,7 @@ const TopFilterBox: React.FC = () => {
         <p>Saralash:</p>
         <button
           className={activeSort === "popularity" ? "active" : ""}
-          onClick={() => handleSort("popularity")}
+          onClick={() => setActiveSort("popularity")}
         >
           <span>
             <svg
@@ -92,16 +38,8 @@ const TopFilterBox: React.FC = () => {
           Avval ommaboplari
         </button>
         <button
-          className={
-            activeSort === "price"
-              ? priceSortState === "asc"
-                ? "rotate active"
-                : "active"
-              : priceSortState === "default"
-              ? ""
-              : ""
-          }
-          onClick={() => handleSort("price")}
+          className={activeSort === "price" ? "active" : ""}
+          onClick={() => setActiveSort("price")}
         >
           <span>
             <svg
@@ -148,15 +86,13 @@ const TopFilterBox: React.FC = () => {
               />
             </svg>
           </span>
-          {priceSortState === "desc"
-            ? "Narxlar quyi"
-            : priceSortState === "asc"
-            ? "Narxlar yuqori"
-            : "Narxlar"}
+          Narxlar quyiga
         </button>
         <button
           className={activeSort === "rating" ? "active" : ""}
-          onClick={() => handleSort("rating")}
+          onClick={() => {
+            setActiveSort("rating");
+          }}
         >
           <span>
             <svg

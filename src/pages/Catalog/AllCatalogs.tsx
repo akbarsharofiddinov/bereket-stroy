@@ -10,7 +10,7 @@ import { Partners, Products, Services } from "@/components";
 import axios from "axios";
 
 import noImage from "@/assets/no-image.webp";
-import { setAllProducts, setFilteredProducts } from "@/store/productSlice";
+import { setAllProducts } from "@/store/productSlice";
 import { useTranslation } from "react-i18next";
 
 const AllCatalogs: React.FC = () => {
@@ -20,26 +20,18 @@ const AllCatalogs: React.FC = () => {
 
   const { catalog_slug } = useParams();
 
-  const { allProducts, filterType, filteredProducts, isFilter } =
-    useAppSelector((state) => state.productSlice);
+  const { allProducts } = useAppSelector((state) => state.productSlice);
   const { catalogModal } = useAppSelector((state) => state.projectSlice);
   const { allCategories } = useAppSelector((state) => state.categorySlice);
 
   async function getProducts() {
     try {
-      if (filterType) {
-        const response = await axios.get(
-          `https://bereket.webclub.uz/api/products?sort_by=${filterType}`
-        );
-        dispatch(setFilteredProducts(response.data.data));
-      } else {
-        const response = await axios.get(
-          `https://bereket.webclub.uz/api/products`
-        );
+      const response = await axios.get(
+        `https://bereket.webclub.uz/api/products`
+      );
 
-        if (response.status === 200) {
-          dispatch(setAllProducts(response.data.data));
-        }
+      if (response.status === 200) {
+        dispatch(setAllProducts(response.data.data));
       }
     } catch (error) {
       console.log(error);
@@ -74,10 +66,7 @@ const AllCatalogs: React.FC = () => {
 
             <div className="top">
               <h2 className="title">{t("category")}</h2>
-              <p>
-                {isFilter ? filteredProducts.length : allProducts.length} ta
-                mahsulot topildi
-              </p>
+              <p>{allProducts.length} ta mahsulot topildi</p>
             </div>
 
             <div className="sub-categories">
@@ -99,7 +88,7 @@ const AllCatalogs: React.FC = () => {
               ))}
             </div>
 
-            <Products data={isFilter ? filteredProducts : allProducts} />
+            <Products data={allProducts} />
             <Partners />
             <Services />
           </div>
