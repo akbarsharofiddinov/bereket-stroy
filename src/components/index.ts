@@ -18,9 +18,11 @@ export { default as Branches } from "./Branches";
 export { default as PageNotFound } from "./Error/PageNotFound";
 
 export { default as Checkbox } from "./UI/Checkbox";
+export { default as RadioBox } from "./UI/RadioBox";
 export { default as CheckoutModal } from "./UI/Modal/CheckoutModal";
 
 export { default as LoginModal } from "./Auth/Login";
 export { default as SignUpModal } from "./Auth/Signup";
 
 export { default as LeafLetMap } from "./Map/LeafLetMap";
+export { default as Comments } from "./Comments/Comments";

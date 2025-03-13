@@ -10,18 +10,22 @@ import {
   setSearchModal,
   setToken,
 } from "@/store/projectSlice";
-import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { setSearchedProducts, setSearchValue } from "@/store/productSlice";
 
 const Header: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
+
   const [profileMenu, setProfileMenu] = useState(false);
   const [quantityCartProducts, setQuantityCartProducts] = useState(0);
   const [quantityFavoritesProducts, setQuantityFavoritesProducts] = useState(0);
 
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+
   const { searchModal, catalogModal, profileInfo, token } = useAppSelector(
     (state) => state.projectSlice
   );
+  const { allProducts } = useAppSelector((state) => state.productSlice);
 
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -30,14 +34,20 @@ const Header: React.FC = () => {
     if (profileMenu) setProfileMenu(false);
   });
 
-  async function searchProducts() {
-    try {
-      const response = await axios.get(
-        `https://bereket.webclub.uz/api/product-search?name=${searchInput}`
+  function handleSearchInput(value: string) {
+    setSearchInput(value);
+    dispatch(setSearchValue(value));
+
+    if (value) {
+      const results = allProducts.filter((product) =>
+        product.name.toLowerCase().includes(value.toLowerCase())
       );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+
+      setFilteredProducts(results);
+      dispatch(setSearchedProducts(results));
+    } else {
+      setFilteredProducts([]);
+      dispatch(setSearchedProducts([]));
     }
   }
 
@@ -135,7 +145,11 @@ const Header: React.FC = () => {
                   <input
                     type="text"
                     className="search-input"
-                    placeholder={t("search_placeholder")}
+                    placeholder={
+                      filteredProducts.length > 0
+                        ? filteredProducts[0].name
+                        : t("search_placeholder")
+                    }
                     value={searchInput}
                     onFocus={() => {
                       if (catalogModal) {
@@ -145,7 +159,7 @@ const Header: React.FC = () => {
                         }, 400);
                       } else dispatch(setSearchModal(true));
                     }}
-                    onChange={(e) => setSearchInput(e.target.value)}
+                    onChange={(e) => handleSearchInput(e.target.value)}
                   />
                   {searchModal ? (
                     <span
@@ -160,7 +174,10 @@ const Header: React.FC = () => {
                     ""
                   )}
                 </div>
-                <button className="search-btn" onClick={() => searchProducts}>
+                <button
+                  className="search-btn"
+                  onClick={() => dispatch(setSearchModal(true))}
+                >
                   <span>
                     <svg
                       width="20"

@@ -3,19 +3,29 @@ import React, { useState } from "react";
 interface IProps {
   label: string;
   id: string;
+  name: string;
+  setSelectedBrandID?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Checkbox: React.FC<IProps> = ({ label, id }) => {
+const RadioBox: React.FC<IProps> = ({
+  id,
+  label,
+  name,
+  setSelectedBrandID,
+}) => {
   const [checked, setChecked] = useState(false);
   return (
     <>
-      <label htmlFor={id} className="checkbox">
+      <label htmlFor={id} className="radio-box">
         <input
-          type="checkbox"
+          type="radio"
+          name={name}
           id={id}
           checked={checked}
+          value={id}
           onChange={() => {
             setChecked(!checked);
+            setSelectedBrandID!(parseInt(id));
           }}
         />
         <div className="checkmark">
@@ -40,4 +50,4 @@ const Checkbox: React.FC<IProps> = ({ label, id }) => {
   );
 };
 
-export default Checkbox;
+export default RadioBox;

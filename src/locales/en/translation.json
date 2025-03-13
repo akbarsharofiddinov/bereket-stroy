@@ -1,11 +1,18 @@
 {
   "welcome": "Welcome",
   "discounts": "Discounts",
-  "shop_locations": "Store locations",
-  "contact_with_us": "Conact with us",
-  "help": "Help",
+  "favourites": "Favourites",
+  "cart": "Cart",
+  "orders": "Orders",
   "category": "Category",
   "search": "Search",
   "search_placeholder": "Product search...",
-  "login_title": "Login to the system"
+  "login_title": "Login to the system",
+  "legal": "Legal person",
+  "physical": "Physical person",
+  "sms_code": "SMS code",
+  "get_sms_code": "Get verification code",
+  "sign_up": "Sign up",
+  "login": "Log in",
+  "fixed_payment": "Installment payment"
 }

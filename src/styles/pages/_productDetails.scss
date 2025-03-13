@@ -148,6 +148,22 @@
         }
       }
 
+      .rasrochka {
+        padding: 10px;
+        border: 2px solid var(--border-color);
+        color: var(--text-200);
+        border-radius: 10px;
+
+        span {
+          color: #000;
+          font-weight: 600;
+
+          &:last-child {
+            color: var(--green);
+          }
+        }
+      }
+
       .count-box {
         display: flex;
         align-items: center;

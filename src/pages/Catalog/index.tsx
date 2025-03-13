@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { Link, Outlet, useParams } from "react-router-dom";
 import {
@@ -10,15 +10,16 @@ import { Partners, Products, Services } from "@/components";
 import axios from "axios";
 
 import noImage from "@/assets/no-image.webp";
+import { setAllProducts } from "@/store/productSlice";
 
 const Catalog: React.FC = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
-
   const dispatch = useAppDispatch();
   const params = useParams();
   const { selectedCategory, allCategories } = useAppSelector(
     (state) => state.categorySlice
   );
+
+  const { allProducts } = useAppSelector((state) => state.productSlice);
 
   async function getProducts(category_slug: string) {
     try {
@@ -27,7 +28,7 @@ const Catalog: React.FC = () => {
       );
 
       if (response.status === 200) {
-        setProducts(response.data.data);
+        dispatch(setAllProducts(response.data.data));
       }
     } catch (error) {
       console.log(error);
@@ -66,7 +67,7 @@ const Catalog: React.FC = () => {
 
             <div className="top">
               <h2 className="title">{selectedCategory?.name}</h2>
-              <p>{products.length} ta mahsulot topildi</p>
+              <p>{allProducts.length} ta mahsulot topildi</p>
             </div>
 
             <div className="sub-categories">
@@ -88,7 +89,7 @@ const Catalog: React.FC = () => {
               ))}
             </div>
 
-            <Products data={products} />
+            <Products data={allProducts} />
             <Partners />
             <Services />
           </div>

@@ -2,12 +2,15 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import React, { useEffect } from "react";
 
 import { Link, Outlet, useParams } from "react-router-dom";
-import { setSelectedSubCategory } from "@/store/categorySlice";
+import {
+  setSelectedCategory,
+  setSelectedSubCategory,
+} from "@/store/categorySlice";
 import { Partners, Products, Services } from "@/components";
 import axios from "axios";
 
 import noImage from "@/assets/no-image.webp";
-import { setAllProducts } from "@/store/productSlice";
+import { setAllProducts, setFilteredProducts } from "@/store/productSlice";
 import { useTranslation } from "react-i18next";
 
 const AllCatalogs: React.FC = () => {
@@ -17,7 +20,10 @@ const AllCatalogs: React.FC = () => {
 
   const { catalog_slug } = useParams();
 
-  const { allProducts } = useAppSelector((state) => state.productSlice);
+  const { allProducts, filterType, filteredProducts } = useAppSelector(
+    (state) => state.productSlice
+  );
+  const { catalogModal } = useAppSelector((state) => state.projectSlice);
   const { allCategories } = useAppSelector((state) => state.categorySlice);
 
   async function getProducts() {
@@ -37,6 +43,38 @@ const AllCatalogs: React.FC = () => {
   useEffect(() => {
     if (!allProducts) getProducts();
   }, [allProducts]);
+
+  useEffect(() => {
+    if (!catalogModal) {
+      if (catalog_slug) {
+        const findCategory = allCategories.find(
+          (item) => item.slug === catalog_slug
+        );
+        dispatch(setSelectedCategory(findCategory));
+      }
+    }
+  }, [catalogModal]);
+
+  useEffect(() => {
+    if (filterType === "low-price") {
+      const filterproducts = [...allProducts];
+
+      filterproducts.sort(
+        (a, b) =>
+          parseFloat(b.discounted_price) - parseFloat(a.discounted_price)
+      );
+
+      dispatch(setFilteredProducts(filterproducts));
+    } else if (filterType === "rating") {
+      const filterproducts = [...allProducts];
+
+      filterproducts.sort((a, b) => a.rating - b.rating);
+
+      dispatch(setFilteredProducts(filterproducts));
+    } else {
+      dispatch(setFilteredProducts([]));
+    }
+  }, [filterType]);
 
   return (
     <>
@@ -73,7 +111,9 @@ const AllCatalogs: React.FC = () => {
               ))}
             </div>
 
-            <Products data={allProducts} />
+            <Products
+              data={filteredProducts.length ? filteredProducts : allProducts}
+            />
             <Partners />
             <Services />
           </div>

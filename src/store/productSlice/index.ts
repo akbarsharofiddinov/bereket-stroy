@@ -1,7 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IState {
   allProducts: IProduct[];
+  filteredProducts: IProduct[];
   cart: {
     product: IProduct;
     quantity: number;
@@ -9,13 +10,22 @@ interface IState {
   }[];
   favorites: IProduct[];
   partners: IBrands[];
+  searchedProducts: IProduct[];
+  searchValue: string;
+  isInSale: boolean;
+  filterType: string;
 }
 
 const initialState: IState = {
   allProducts: [],
+  filteredProducts: [],
   cart: [],
   favorites: [],
   partners: [],
+  searchedProducts: [],
+  searchValue: "",
+  isInSale: false,
+  filterType: "new",
 };
 
 export const productSlice = createSlice({
@@ -30,10 +40,12 @@ export const productSlice = createSlice({
       state.cart = payload;
     },
 
-    addProductToCart: (state, { payload }) => {
-      const product = state.cart.find((item) => item.product.id === payload.id);
-      if (product) {
-        product.quantity += 1;
+    addProductToCart: (state, { payload }: PayloadAction<IProduct>) => {
+      const findProduct = state.cart.find(
+        (item) => item.product.id === payload.id
+      );
+      if (findProduct) {
+        findProduct.quantity += 1;
       } else {
         state.cart.push({ product: payload, isSelected: true, quantity: 1 });
       }
@@ -78,6 +90,26 @@ export const productSlice = createSlice({
     setPartners: (state, { payload }) => {
       state.partners = payload;
     },
+
+    setSearchedProducts: (state, { payload }) => {
+      state.searchedProducts = payload;
+    },
+
+    setSearchValue: (state, { payload }) => {
+      state.searchValue = payload;
+    },
+
+    setIsInSalve: (state, { payload }) => {
+      state.isInSale = payload;
+    },
+
+    setFilteredProducts: (state, { payload }) => {
+      state.filteredProducts = payload;
+    },
+
+    setFilterType: (state, { payload }) => {
+      state.filterType = payload;
+    },
   },
 });
 
@@ -92,5 +124,10 @@ export const {
   instantRemoveProductsFromCart,
   settleProductSelected,
   setPartners,
+  setSearchedProducts,
+  setSearchValue,
+  setIsInSalve,
+  setFilteredProducts,
+  setFilterType,
 } = productSlice.actions;
 export default productSlice.reducer;

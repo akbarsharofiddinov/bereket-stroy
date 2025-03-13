@@ -1,11 +1,18 @@
 {
   "welcome": "Xush kelibsiz",
   "discounts": "Chegirmalar",
-  "shop_locations": "Do'kon manzillari",
-  "contact_with_us": "Biz bilan bog'lanish",
-  "help": "Yordam",
+  "favourites": "Sevimlilar",
+  "cart": "Savat",
+  "orders": "Buyurtmalar",
   "category": "Kategoriya",
   "search": "Qidirish",
   "search_placeholder": "Mahsulotni qidirish...",
-  "login_title": "Tizimga kirish"
+  "login_title": "Tizimga kirish",
+  "legal": "Yuridik shaxs",
+  "physical": "Jismoniy shaxs",
+  "sms_code": "SMS kod",
+  "get_sms_code": "Tasdiqlash kodni olish",
+  "sign_up": "Ro'yxatdan o'tish",
+  "login": "Tizimga kirish",
+  "fixed_payment": "Muddatli to'lov"
 }

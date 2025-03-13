@@ -70,24 +70,27 @@ const HeaderTop: React.FC = () => {
               {/* Header menu */}
               <ul className={styles["header-menu"]}>
                 <li className={styles["header-menu_item"]}>
-                  <a
-                    href="#branches"
+                  <Link
+                    to={"/favorites"}
                     className={styles["header-menu_item__link"]}
                   >
-                    {t("shop_locations")}
-                  </a>
+                    {t("favourites")}
+                  </Link>
                 </li>
                 <li className={styles["header-menu_item"]}>
-                  <a
-                    href="#footer"
+                  <Link
+                    to={"/cart"}
                     className={styles["header-menu_item__link"]}
                   >
-                    {t("contact_with_us")}
-                  </a>
+                    {t("cart")}
+                  </Link>
                 </li>
                 <li className={styles["header-menu_item"]}>
-                  <Link to="#" className={styles["header-menu_item__link"]}>
-                    {t("help")}
+                  <Link
+                    to="/orders"
+                    className={styles["header-menu_item__link"]}
+                  >
+                    {t("orders")}
                   </Link>
                 </li>
               </ul>

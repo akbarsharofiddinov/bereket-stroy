@@ -267,7 +267,12 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                 )}
               </div>
             </div>
-            <p className="monthly-price">15,400 so‘m / 24 oyga</p>
+            <p className="monthly-price">
+              {formatCurrency(
+                Math.round(parseFloat(data.discounted_price) / 12)
+              )}{" "}
+              / 12 oyga
+            </p>
             <div className="count-box" onClick={(e) => e.stopPropagation()}>
               {checkProductInCart() ? (
                 <>

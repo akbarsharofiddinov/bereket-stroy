@@ -1,11 +1,18 @@
 {
   "welcome": "добро пожаловать",
   "discounts": "Скидки",
-  "shop_locations": "Расположение магазинов",
-  "contact_with_us": "Связаться с нами",
-  "help": "Помощь",
+  "favourites": "Избранное",
+  "cart": "Корзина",
+  "orders": "Заказы",
   "category": "Категория",
   "search": "Поиск",
   "search_placeholder": "Поиск продукта...",
-  "login_title": "Вход в систему"
+  "login_title": "Войти в систему",
+  "legal": "Юридическое лицо",
+  "physical": "Физическое лицо",
+  "sms_code": "СМС-код",
+  "get_sms_code": "Получить код подтверждения",
+  "sign_up": "Регистрация",
+  "login": "Войти",
+  "fixed_payment": "Рассрочка платежа"
 }

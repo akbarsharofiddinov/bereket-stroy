@@ -21,6 +21,7 @@ import {
 } from "@/store/productSlice";
 
 import noImage from "@/assets/no-image.webp";
+import { useTranslation } from "react-i18next";
 
 const ProductDetails: React.FC = () => {
   const [productDetails, setProductDetails] = useState<IProduct | undefined>(
@@ -30,6 +31,8 @@ const ProductDetails: React.FC = () => {
   const [recommendations, setRecommendations] = useState<IProduct[]>([]);
 
   const [currentImage, setCurrentImage] = useState("");
+
+  const { t } = useTranslation();
 
   const { cart, allProducts, favorites } = useAppSelector(
     (state) => state.productSlice
@@ -390,7 +393,7 @@ const ProductDetails: React.FC = () => {
                               .slice(0, 40)
                               .join(" ") +
                             ` <a href="#description">batafsil</a>`
-                          : "",
+                          : "<p>Tavsif yo'q</p>",
                       }}
                     />{" "}
                   </div>
@@ -419,6 +422,18 @@ const ProductDetails: React.FC = () => {
                       ""
                     )}
                   </div>
+                  <p className="rasrochka">
+                    <span>{t("fixed_payment")}: </span>
+                    12 / oyga
+                    <span>
+                      {" " +
+                        formatCurrency(
+                          Math.round(
+                            parseFloat(productDetails.discounted_price) / 12
+                          )
+                        )}
+                    </span>
+                  </p>
                   {checkProductInCart(productDetails) ? (
                     <>
                       <div
@@ -523,7 +538,7 @@ const ProductDetails: React.FC = () => {
                                   stroke="black"
                                   strokeOpacity="0.5"
                                   strokeWidth="2"
-                                  stroke-linecap="round"
+                                  strokeLinecap="round"
                                 />
                               </svg>
                             </span>
@@ -607,7 +622,7 @@ const ProductDetails: React.FC = () => {
                               stroke="black"
                               strokeOpacity="0.5"
                               strokeWidth="2"
-                              stroke-linecap="round"
+                              strokeLinecap="round"
                             />
                           </svg>
                         </span>
@@ -621,7 +636,9 @@ const ProductDetails: React.FC = () => {
                 <h2 className="title">Tavsif</h2>
                 <p
                   dangerouslySetInnerHTML={{
-                    __html: productDetails?.description!,
+                    __html: productDetails.description
+                      ? productDetails.description
+                      : "<p>Tavsif yo'q</p>",
                   }}
                 />
               </div>

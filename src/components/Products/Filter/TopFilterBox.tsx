@@ -1,11 +1,19 @@
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setFilterType } from "@/store/productSlice";
 import React from "react";
 
 const TopFilterBox: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { filterType } = useAppSelector((state) => state.productSlice);
+
   return (
     <>
       <div className="top-filter_box">
         <p>Saralash:</p>
-        <button>
+        <button
+          onClick={() => dispatch(setFilterType("new"))}
+          className={filterType === "new" ? "active" : ""}
+        >
           <span>
             <svg
               width="24"
@@ -30,7 +38,10 @@ const TopFilterBox: React.FC = () => {
           </span>
           Avval ommaboplari
         </button>
-        <button>
+        <button
+          onClick={() => dispatch(setFilterType("low-price"))}
+          className={filterType === "low-price" ? "active" : ""}
+        >
           <span>
             <svg
               width="24"
@@ -78,7 +89,10 @@ const TopFilterBox: React.FC = () => {
           </span>
           Narxlar quyiga
         </button>
-        <button>
+        <button
+          onClick={() => dispatch(setFilterType("rating"))}
+          className={filterType === "rating" ? "active" : ""}
+        >
           <span>
             <svg
               width="22"

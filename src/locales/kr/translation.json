@@ -1,10 +1,18 @@
 {
   "welcome": "Xosh kelipsiz",
   "discounts": "Shegirmeler",
-  "shop_locations": "Dúkanlardıń jaylasıwı",
-  "contact_with_us": "Biz menen baylanısıw",
-  "help": "Járdem",
+  "favourites": "Saylanǵanlar",
+  "cart": "Sébét",
+  "orders": "Buyırtpalar",
   "category": "Kategoriyaler",
   "search": "Qıdırıw",
-  "search_placeholder": "Ónimdi qıdırıw..."
+  "search_placeholder": "Ónimdi qıdırıw...",
+  "login_title": "Sistemaǵa kirisiw",
+  "legal": "Yuridikalıq shaxs",
+  "physical": "Fizikalıq shaxs",
+  "sms_code": "SMS kodı",
+  "get_sms_code": "Tastıyıqlaw kodın alıw",
+  "sign_up": "Dizimnen ótiw",
+  "login": "Kiriw",
+  "fixed_payment": "Bolıp -bolıp tólew"
 }

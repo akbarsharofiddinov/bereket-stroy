@@ -37,9 +37,9 @@ const Categories: React.FC = () => {
                         <path
                           d="M2.75 3.32196C2.75 3.32196 37.9594 0.353895 43.3031 5.69708C48.6463 11.0403 45.6775 46.25 45.6775 46.25"
                           stroke="black"
-                          stroke-width="5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeWidth="5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </span>

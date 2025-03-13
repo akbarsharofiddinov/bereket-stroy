@@ -2,6 +2,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { setAuthModal, setToken } from "@/store/projectSlice";
 import axios from "axios";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
 const Login: React.FC<{
@@ -18,6 +19,8 @@ const Login: React.FC<{
 
   const [timerStart, setTimerStart] = React.useState(false);
   const [timeLeft, setTimeLeft] = React.useState(120);
+
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
@@ -90,7 +93,7 @@ const Login: React.FC<{
     <div className="login-modal" onClick={() => dispatch(setAuthModal(false))}>
       <div className="inner" onClick={(e) => e.stopPropagation()}>
         <form onSubmit={(e) => e.preventDefault()}>
-          <h2 className="title">Tizimga kirish</h2>
+          <h2 className="title">{t("login_title")}</h2>
           <div className="switch-user_type">
             <button
               className={isIllegal ? "physical" : "physical active"}
@@ -99,7 +102,7 @@ const Login: React.FC<{
                 e.preventDefault();
               }}
             >
-              Jismoniy shaxs
+              {t("physical")}
             </button>
             <button
               className={isIllegal ? "legal active" : "legal"}
@@ -108,7 +111,7 @@ const Login: React.FC<{
                 e.preventDefault();
               }}
             >
-              Yuridik shaxs
+              {t("legal")}
             </button>
           </div>
 
@@ -148,7 +151,7 @@ const Login: React.FC<{
                 name="sms"
                 id="sms"
                 autoComplete="off"
-                placeholder="SMS kod"
+                placeholder={t("sms_code")}
                 value={sms}
                 onChange={(e) => {
                   setSms(e.target.value);
@@ -172,7 +175,7 @@ const Login: React.FC<{
                   }}
                   className={isLoading && timeLeft > 0 ? "loading" : ""}
                 >
-                  Tasdiqlash kodni olish
+                  {t("get_sms_code")}
                 </button>
               )}
             </div>
@@ -185,7 +188,7 @@ const Login: React.FC<{
               }}
               className={isLoading ? "loading" : ""}
             >
-              Tizimga kirish
+              {t("login")}
             </button>
             <button onClick={() => setLoginType("signup")}>
               Ro‘yhatdan o‘tish

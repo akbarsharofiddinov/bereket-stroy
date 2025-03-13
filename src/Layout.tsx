@@ -108,13 +108,13 @@ const Layout: React.FC = () => {
           localStorage.getItem("cart") + ""
         );
 
-        localProducts.map((localProduct) =>
-          allProducts.map((product) => {
+        localProducts.forEach((localProduct) =>
+          allProducts.forEach((product) => {
             if (
               JSON.stringify(localProduct.product) === JSON.stringify(product)
             ) {
               cartProducts.push(localProduct);
-              dispatch(addProductToCart(localProduct));
+              dispatch(addProductToCart(localProduct.product));
             }
           })
         );
@@ -122,15 +122,17 @@ const Layout: React.FC = () => {
 
       if (localStorage.getItem("favorites")) {
         const favorites: IProduct[] = [];
-        const localProducts: IProduct[] = [];
-        localProducts.map((localProduct) =>
-          allProducts.map((product) => {
+        const localProducts: IProduct[] = JSON.parse(
+          localStorage.getItem("favorites") + ""
+        );
+        localProducts.forEach((localProduct) =>
+          allProducts.forEach((product) => {
             if (JSON.stringify(localProduct) === JSON.stringify(product)) {
               favorites.push(localProduct);
-              dispatch(setFavourites(favorites));
             }
           })
         );
+        dispatch(setFavourites(favorites));
       }
     }
   }, [allProducts]);

@@ -11,9 +11,12 @@ import {
 import axios from "axios";
 import { useAppDispatch } from "@/store/hooks";
 import { setAllProducts } from "@/store/productSlice";
+import { useTranslation } from "react-i18next";
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
+
+  const { i18n } = useTranslation();
 
   async function getAllProducts() {
     try {
@@ -21,7 +24,7 @@ const Home: React.FC = () => {
         "https://bereket.webclub.uz/api/products",
         {
           headers: {
-            "Accept-Language": "uz",
+            "Accept-Language": i18n.language,
           },
         }
       );
