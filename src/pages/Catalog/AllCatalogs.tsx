@@ -7,11 +7,10 @@ import {
   setSelectedSubCategory,
 } from "@/store/categorySlice";
 import { Partners, Products, Services } from "@/components";
-import axios from "axios";
 
 import noImage from "@/assets/no-image.webp";
-import { setAllProducts } from "@/store/productSlice";
 import { useTranslation } from "react-i18next";
+import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
 
 const AllCatalogs: React.FC = () => {
   const { t } = useTranslation();
@@ -20,27 +19,15 @@ const AllCatalogs: React.FC = () => {
 
   const { catalog_slug } = useParams();
 
-  const { allProducts } = useAppSelector((state) => state.productSlice);
   const { catalogModal } = useAppSelector((state) => state.projectSlice);
   const { allCategories } = useAppSelector((state) => state.categorySlice);
 
-  async function getProducts() {
-    try {
-      const response = await axios.get(
-        `https://bereket.webclub.uz/api/products`
-      );
-
-      if (response.status === 200) {
-        dispatch(setAllProducts(response.data.data));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    if (!allProducts) getProducts();
-  }, [allProducts]);
+  const {
+    isLoading,
+    isError,
+    isSuccess,
+    data: productsData,
+  } = useGetAllProductsQuery();
 
   useEffect(() => {
     if (!catalogModal) {
@@ -64,31 +51,42 @@ const AllCatalogs: React.FC = () => {
               <Link to={"/"}>Bosh sahifa</Link>
             </div>
 
-            <div className="top">
-              <h2 className="title">{t("category")}</h2>
-              <p>{allProducts.length} ta mahsulot topildi</p>
-            </div>
+            {isLoading ? (
+              <h1>Loading...</h1>
+            ) : isError ? (
+              <h1>Error</h1>
+            ) : isSuccess ? (
+              <>
+                <div className="top">
+                  <h2 className="title">{t("category")}</h2>
+                  <p>{productsData.data.length} ta mahsulot topildi</p>
+                </div>
 
-            <div className="sub-categories">
-              {allCategories.map((category, index) => (
-                <Link
-                  to={`/catalogs/${category.slug}`}
-                  key={index}
-                  onClick={() => dispatch(setSelectedSubCategory(category))}
-                >
-                  {category.photo ? (
-                    <img
-                      src={`http://bereket.webclub.uz/storage/${category.photo}`}
-                    />
-                  ) : (
-                    <img src={noImage} alt="" />
-                  )}
-                  <span>{category.name}</span>
-                </Link>
-              ))}
-            </div>
+                <div className="sub-categories">
+                  {allCategories.map((category, index) => (
+                    <Link
+                      to={`/catalogs/${category.slug}`}
+                      key={index}
+                      onClick={() => dispatch(setSelectedSubCategory(category))}
+                    >
+                      {category.photo ? (
+                        <img
+                          src={`http://bereket.webclub.uz/storage/${category.photo}`}
+                        />
+                      ) : (
+                        <img src={noImage} alt="" />
+                      )}
+                      <span>{category.name}</span>
+                    </Link>
+                  ))}
+                </div>
 
-            <Products data={allProducts} />
+                <Products data={productsData.data} />
+              </>
+            ) : (
+              ""
+            )}
+
             <Partners />
             <Services />
           </div>

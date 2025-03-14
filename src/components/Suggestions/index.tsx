@@ -1,29 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { ProductItem } from "@/components";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useAppSelector } from "@/store/hooks";
 
 interface IProps {
   title: string;
   link: string;
-  data?: IProduct[];
+  data: IProduct[];
 }
 
 const Suggestions: React.FC<IProps> = ({ link, title, data }) => {
-  const [products, setProducts] = useState<IProduct[]>([]);
-  const { allProducts } = useAppSelector((state) => state.productSlice);
-
-  useEffect(() => {
-    if (allProducts) setProducts(allProducts);
-  }, [allProducts]);
-
-  useEffect(() => {
-    if (data) setProducts(data);
-    else setProducts(allProducts);
-  }, [data]);
-
   return (
     <>
       <div className="suggestions section">
@@ -45,8 +32,8 @@ const Suggestions: React.FC<IProps> = ({ link, title, data }) => {
                 spaceBetween={20}
                 className="suggestions-swiper"
               >
-                {products.length
-                  ? products.map((product, index) => (
+                {data.length
+                  ? data!.map((product, index) => (
                       <SwiperSlide key={index}>
                         <ProductItem data={product} />
                       </SwiperSlide>

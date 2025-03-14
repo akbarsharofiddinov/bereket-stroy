@@ -5,7 +5,8 @@ interface IState {
   catalogModal: boolean;
   searchModal: boolean;
   profileInfo: IProfile;
-  token: "";
+  token: string;
+  currentLanguage: string;
 }
 
 const initialState: IState = {
@@ -24,6 +25,7 @@ const initialState: IState = {
     phone: "",
   },
   token: "",
+  currentLanguage: "ru",
 };
 
 export const projectSlice = createSlice({
@@ -49,6 +51,10 @@ export const projectSlice = createSlice({
     setToken: (state, { payload }) => {
       state.token = payload;
     },
+
+    setCurrentLanguage: (state, { payload }) => {
+      state.currentLanguage = payload;
+    },
   },
 });
 
@@ -58,6 +64,7 @@ export const {
   setSearchModal,
   setProfileInfo,
   setToken,
+  setCurrentLanguage,
 } = projectSlice.actions;
 
 export default projectSlice.reducer;

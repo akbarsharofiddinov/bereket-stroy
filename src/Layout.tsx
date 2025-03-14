@@ -10,11 +10,19 @@ import {
 } from "@/components";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import axios from "axios";
-import { setAllCategories } from "@/store/categorySlice";
 import { setCartProducts, setFavourites } from "@/store/productSlice";
-import { setProfileInfo, setToken } from "./store/projectSlice";
+import {
+  setCurrentLanguage,
+  setProfileInfo,
+  setToken,
+} from "./store/projectSlice";
 import { setBranches } from "./store/companySlice";
 import { useTranslation } from "react-i18next";
+import {
+  useGetAllCategoriesQuery,
+  useGetUserInfoQuery,
+} from "./store/API/RTKQuery";
+import { setAllCategories } from "./store/categorySlice";
 
 const Layout: React.FC = () => {
   const [loginType, setLoginType] = useState("login");
@@ -25,46 +33,16 @@ const Layout: React.FC = () => {
 
   const { i18n } = useTranslation();
 
-  const { authModal, token } = useAppSelector((state) => state.projectSlice);
+  const { authModal } = useAppSelector((state) => state.projectSlice);
   const { allProducts } = useAppSelector((state) => state.productSlice);
 
-  async function getAllCategories() {
-    try {
-      const response = await axios.get(
-        "https://bereket.webclub.uz/api/categories",
-        {
-          headers: {
-            "Accept-Language": i18n.language,
-          },
-        }
-      );
-      if (response.status === 200) {
-        dispatch(setAllCategories(response.data.data));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // Get All Categories
+  const { isSuccess, data: categoriesResponse } = useGetAllCategoriesQuery();
+  if (isSuccess) dispatch(setAllCategories(categoriesResponse.data));
 
-  async function getMe() {
-    if (token) {
-      try {
-        const response = await axios.get(
-          "https://bereket.webclub.uz/api/user/me",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        if (response.status === 200) dispatch(setProfileInfo(response.data));
-      } catch (error) {
-        console.log(error);
-        dispatch(setToken(""));
-        localStorage.removeItem("token");
-      }
-    }
-  }
+  // Get User Info
+  const { isSuccess: userInfoSuccess, data: userInfo } = useGetUserInfoQuery();
+  if (userInfoSuccess) dispatch(setProfileInfo(userInfo));
 
   async function getBranches() {
     try {
@@ -86,19 +64,19 @@ const Layout: React.FC = () => {
 
   useEffect(() => {
     getBranches();
-    getAllCategories();
+    dispatch(setCurrentLanguage(i18n.language));
+  }, [i18n.language]);
+
+  useEffect(() => {
+    if (localStorage.getItem("language")) {
+      dispatch(setCurrentLanguage(localStorage.getItem("language")));
+      i18n.changeLanguage(localStorage.getItem("language") + "");
+    }
 
     if (localStorage.getItem("token")) {
       dispatch(setToken(localStorage.getItem("token") + ""));
     }
-  }, [i18n.language]);
-
-  useEffect(() => {
-    if (token) {
-      getMe();
-      dispatch(setToken(token));
-    }
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     if (allProducts.length) {

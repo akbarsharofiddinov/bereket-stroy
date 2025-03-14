@@ -13,8 +13,7 @@ interface IState {
   searchedProducts: IProduct[];
   searchValue: string;
   isInSale: boolean;
-  filterType: string;
-  isFilter: boolean;
+  
 }
 
 const initialState: IState = {
@@ -26,8 +25,6 @@ const initialState: IState = {
   searchedProducts: [],
   searchValue: "",
   isInSale: false,
-  filterType: "new",
-  isFilter: false,
 };
 
 export const productSlice = createSlice({
@@ -108,13 +105,6 @@ export const productSlice = createSlice({
     setFilteredProducts: (state, { payload }) => {
       state.filteredProducts = payload;
     },
-
-    setFilterType: (state, { payload }) => {
-      state.filterType = payload;
-    },
-    setIsFilter: (state, { payload }) => {
-      state.isFilter = payload;
-    },
   },
 });
 
@@ -133,7 +123,5 @@ export const {
   setSearchValue,
   setIsInSalve,
   setFilteredProducts,
-  setFilterType,
-  setIsFilter,
 } = productSlice.actions;
 export default productSlice.reducer;

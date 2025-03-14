@@ -8,7 +8,6 @@ import {
   setSelectedSubCategory,
   setSelectedSubSubCategory,
 } from "@/store/categorySlice";
-import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { formatCurrency } from "@/utils/currencyFormat";
 import { Partners, Services, Suggestion } from "@/components";
@@ -22,12 +21,9 @@ import {
 
 import noImage from "@/assets/no-image.webp";
 import { useTranslation } from "react-i18next";
+import { useGetProductDetailsQuery } from "@/store/API/RTKQuery";
 
 const ProductDetails: React.FC = () => {
-  const [productDetails, setProductDetails] = useState<IProduct | undefined>(
-    undefined
-  );
-
   const [recommendations, setRecommendations] = useState<IProduct[]>([]);
 
   const [currentImage, setCurrentImage] = useState("");
@@ -48,6 +44,13 @@ const ProductDetails: React.FC = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
 
+  const {
+    isLoading,
+    isError,
+    isSuccess,
+    data: productDetails,
+  } = useGetProductDetailsQuery(params.product_slug + "");
+
   function handleAddToFavorites() {
     if (productDetails) {
       if (!localStorage.getItem("favorites")) {
@@ -58,10 +61,10 @@ const ProductDetails: React.FC = () => {
           localStorage.getItem("favorites") + ""
         );
         const findProduct = favorites.find(
-          (product) => product.id === productDetails.id
+          (product) => product.id === productDetails.data[0].id
         );
         if (!findProduct) {
-          favorites.push(productDetails);
+          favorites.push(productDetails.data[0]);
           localStorage.setItem("favorites", JSON.stringify(favorites));
         }
       }
@@ -76,28 +79,10 @@ const ProductDetails: React.FC = () => {
         localStorage.getItem("favorites") + ""
       );
       const newFavorites = favorites.filter(
-        (product) => product.id !== productDetails.id
+        (product) => product.id !== productDetails.data[0].id
       );
       localStorage.setItem("favorites", JSON.stringify(newFavorites));
       dispatch(removeFromFavourites(productDetails));
-    }
-  }
-
-  async function getProductDetails(name: string) {
-    try {
-      const response = await axios.get(
-        `https://bereket.webclub.uz/api/products?slug=${name}`,
-        {
-          headers: {
-            "Accept-Language": "uz",
-          },
-        }
-      );
-      if (response.status === 200) {
-        setProductDetails(response.data.data[0]);
-      }
-    } catch (error) {
-      console.log(error);
     }
   }
 
@@ -114,16 +99,16 @@ const ProductDetails: React.FC = () => {
         const cartProducts: { product: IProduct; quantity: number }[] =
           JSON.parse(localStorage.getItem("cart") + "");
         const findProduct = cartProducts.find(
-          (product) => product.product.id === productDetails.id
+          (product) => product.product.id === productDetails.data[0].id
         );
         if (!findProduct) {
-          cartProducts.push({ product: productDetails, quantity: 1 });
+          cartProducts.push({ product: productDetails.data[0], quantity: 1 });
           localStorage.setItem("cart", JSON.stringify(cartProducts));
-          dispatch(addProductToCart(productDetails));
+          dispatch(addProductToCart(productDetails.data[0]));
         } else {
           findProduct.quantity += 1;
           localStorage.setItem("cart", JSON.stringify(cartProducts));
-          dispatch(addProductToCart(productDetails));
+          dispatch(addProductToCart(productDetails.data[0]));
         }
       }
     }
@@ -134,12 +119,12 @@ const ProductDetails: React.FC = () => {
       const cartProducts: { product: IProduct; quantity: number }[] =
         JSON.parse(localStorage.getItem("cart") + "");
       const findProduct = cartProducts.find(
-        (product) => product.product.id === productDetails.id
+        (product) => product.product.id === productDetails.data[0].id
       );
       if (findProduct) {
         if (findProduct.quantity === 1) {
           const newCartProducts = cartProducts.filter(
-            (product) => product.product.id !== productDetails.id
+            (product) => product.product.id !== productDetails.data[0].id
           );
           localStorage.setItem("cart", JSON.stringify(newCartProducts));
           dispatch(removeProductFromCart(productDetails));
@@ -163,7 +148,7 @@ const ProductDetails: React.FC = () => {
     if (productDetails) {
       if (favorites) {
         const findProduct = favorites.find(
-          (product) => product.id === productDetails.id
+          (product) => product.id === productDetails.data[0].id
         );
         if (findProduct) {
           return true;
@@ -188,27 +173,24 @@ const ProductDetails: React.FC = () => {
   }
 
   useEffect(() => {
-    getProductDetails(params.product_slug!);
-  }, [params]);
-
-  useEffect(() => {
     if (productDetails) {
-      if (productDetails.photos) setCurrentImage(productDetails.photos[0]);
+      if (productDetails.data[0].photos)
+        setCurrentImage(productDetails.data[0].photos[0]);
       const findCategory = allCategories.find(
-        (item) => item.id === productDetails.category_id
+        (item) => item.id === productDetails.data[0].category_id
       );
       dispatch(setSelectedCategory(findCategory));
 
       if (findCategory) {
         const findSubCategory = findCategory.sub_category.find(
-          (item) => item.id === productDetails.sub_category_id
+          (item) => item.id === productDetails.data[0].sub_category_id
         );
 
         dispatch(setSelectedSubCategory(findSubCategory));
 
         if (findSubCategory) {
           const findSubSubCategory = findSubCategory.sub_sub_category.find(
-            (item) => item.id === productDetails.sub_sub_category_id
+            (item) => item.id === productDetails.data[0].sub_sub_category_id
           );
 
           dispatch(setSelectedSubSubCategory(findSubSubCategory));
@@ -251,7 +233,11 @@ const ProductDetails: React.FC = () => {
             )}
           </div>
 
-          {productDetails ? (
+          {isLoading ? (
+            <h1>Loading</h1>
+          ) : isError ? (
+            <h1>Error</h1>
+          ) : isSuccess ? (
             <>
               <div className="product-details">
                 <div className="images">
@@ -261,8 +247,8 @@ const ProductDetails: React.FC = () => {
                     spaceBetween={10}
                     className="images-swiper"
                   >
-                    {productDetails.photos &&
-                      productDetails.photos.map((item, index) => (
+                    {productDetails.data[0].photos &&
+                      productDetails.data[0].photos.map((item, index) => (
                         <SwiperSlide
                           key={index}
                           onClick={() => setCurrentImage(item)}
@@ -275,7 +261,7 @@ const ProductDetails: React.FC = () => {
                       ))}
                   </Swiper>
                   <div className="img-box">
-                    {productDetails.photos ? (
+                    {productDetails.data[0].photos ? (
                       <img
                         src={`http://bereket.webclub.uz/storage/${currentImage}`}
                         alt=""
@@ -288,7 +274,7 @@ const ProductDetails: React.FC = () => {
                 <div className="info">
                   <div className="top">
                     <h2 className="title">
-                      {productDetails.name}
+                      {productDetails.data[0].name}
                       <button
                         onClick={() => {
                           if (checkProductInFavourites())
@@ -333,20 +319,22 @@ const ProductDetails: React.FC = () => {
                       </button>
                     </h2>
                     <div className="extra-info">
-                      <p>{productDetails.id}</p>|
+                      <p>{productDetails.data[0].id}</p>|
                       <p>
                         <span>
                           <FaStar />
                         </span>
-                        <span>{`${productDetails.avg_rating} (${productDetails.count_rating})`}</span>
+                        <span>{`${productDetails.data[0].avg_rating} (${productDetails.data[0].count_rating})`}</span>
                       </p>
                       |
                       <p
                         className={
-                          productDetails.is_sale ? "status active" : "status"
+                          productDetails.data[0].is_sale
+                            ? "status active"
+                            : "status"
                         }
                       >
-                        {productDetails.is_sale ? (
+                        {productDetails.data[0].is_sale ? (
                           <span>
                             <svg
                               width="18"
@@ -380,15 +368,17 @@ const ProductDetails: React.FC = () => {
                           </span>
                         )}
 
-                        {productDetails.is_sale ? "Sotuvda" : "Sotuvda yo’q"}
+                        {productDetails.data[0].is_sale
+                          ? "Sotuvda"
+                          : "Sotuvda yo’q"}
                       </p>
                     </div>
                   </div>
                   <div className="desc">
                     <p
                       dangerouslySetInnerHTML={{
-                        __html: productDetails.description
-                          ? productDetails.description
+                        __html: productDetails.data[0].description
+                          ? productDetails.data[0].description
                               .split(" ")
                               .slice(0, 40)
                               .join(" ") +
@@ -400,20 +390,26 @@ const ProductDetails: React.FC = () => {
                   <div className="price">
                     <span className="discounted-price">
                       {formatCurrency(
-                        parseFloat(productDetails.discounted_price)
+                        parseFloat(productDetails.data[0].discounted_price)
                       )}
                     </span>
-                    {productDetails.discount ? (
+                    {productDetails.data[0].discount ? (
                       <>
                         <span className="original-price">
-                          {formatCurrency(parseFloat(productDetails.price))}
+                          {formatCurrency(
+                            parseFloat(productDetails.data[0].price)
+                          )}
                         </span>
                         <span className="discount">
-                          {productDetails.discount
-                            ? productDetails.discount_type === "%"
-                              ? parseFloat(productDetails.discount + "") + "%"
+                          {productDetails.data[0].discount
+                            ? productDetails.data[0].discount_type === "%"
+                              ? parseFloat(
+                                  productDetails.data[0].discount + ""
+                                ) + "%"
                               : formatCurrency(
-                                  parseFloat(productDetails.discount + "")
+                                  parseFloat(
+                                    productDetails.data[0].discount + ""
+                                  )
                                 )
                             : ""}
                         </span>
@@ -429,16 +425,18 @@ const ProductDetails: React.FC = () => {
                       {" " +
                         formatCurrency(
                           Math.round(
-                            parseFloat(productDetails.discounted_price) / 12
+                            parseFloat(
+                              productDetails.data[0].discounted_price
+                            ) / 12
                           )
                         )}
                     </span>
                   </p>
-                  {checkProductInCart(productDetails) ? (
+                  {checkProductInCart(productDetails.data[0]) ? (
                     <>
                       <div
                         className={
-                          productDetails.is_sale
+                          productDetails.data[0].is_sale
                             ? "count-box"
                             : "count-box disable"
                         }
@@ -446,7 +444,7 @@ const ProductDetails: React.FC = () => {
                         <div className="count">
                           <button
                             onClick={() => {
-                              if (productDetails.is_sale) {
+                              if (productDetails.data[0].is_sale) {
                                 handleRemoveProductFromCart();
                               }
                             }}
@@ -456,13 +454,14 @@ const ProductDetails: React.FC = () => {
                           <span>
                             {
                               cart.find(
-                                (item) => item.product.id === productDetails.id
+                                (item) =>
+                                  item.product.id === productDetails.data[0].id
                               )?.quantity
                             }
                           </span>
                           <button
                             onClick={() => {
-                              if (productDetails.is_sale) {
+                              if (productDetails.data[0].is_sale) {
                                 handleAddProductToCart();
                               }
                             }}
@@ -473,13 +472,13 @@ const ProductDetails: React.FC = () => {
                         <Link
                           to={"/cart"}
                           className={
-                            productDetails.is_sale
+                            productDetails.data[0].is_sale
                               ? "addtocart"
                               : "addtocart disable"
                           }
                         >
                           Savatchaga
-                          {productDetails.is_sale ? (
+                          {productDetails.data[0].is_sale ? (
                             <span>
                               <svg
                                 width="25"
@@ -549,12 +548,12 @@ const ProductDetails: React.FC = () => {
                   ) : (
                     <div
                       className={
-                        productDetails.is_sale
+                        productDetails.data[0].is_sale
                           ? "addtocart"
                           : "addtocart disable"
                       }
                       onClick={(e) => {
-                        if (productDetails.is_sale) {
+                        if (productDetails.data[0].is_sale) {
                           handleAddProductToCart();
                         } else {
                           e.preventDefault();
@@ -563,7 +562,7 @@ const ProductDetails: React.FC = () => {
                       }}
                     >
                       Savatga solish
-                      {productDetails.is_sale ? (
+                      {productDetails.data[0].is_sale ? (
                         <span>
                           <svg
                             width="25"
@@ -636,8 +635,8 @@ const ProductDetails: React.FC = () => {
                 <h2 className="title">Tavsif</h2>
                 <p
                   dangerouslySetInnerHTML={{
-                    __html: productDetails.description
-                      ? productDetails.description
+                    __html: productDetails.data[0].description
+                      ? productDetails.data[0].description
                       : "<p>Tavsif yo'q</p>",
                   }}
                 />
