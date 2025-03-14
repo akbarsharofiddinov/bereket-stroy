@@ -13,7 +13,7 @@ interface IState {
   searchedProducts: IProduct[];
   searchValue: string;
   isInSale: boolean;
-  
+  totalProducts: number;
 }
 
 const initialState: IState = {
@@ -25,6 +25,7 @@ const initialState: IState = {
   searchedProducts: [],
   searchValue: "",
   isInSale: false,
+  totalProducts: 0
 };
 
 export const productSlice = createSlice({
@@ -105,6 +106,10 @@ export const productSlice = createSlice({
     setFilteredProducts: (state, { payload }) => {
       state.filteredProducts = payload;
     },
+
+    setTotalProductsCount: (state, {payload}) => {
+      state.totalProducts = payload
+    }
   },
 });
 
@@ -123,5 +128,6 @@ export const {
   setSearchValue,
   setIsInSalve,
   setFilteredProducts,
+  setTotalProductsCount
 } = productSlice.actions;
 export default productSlice.reducer;

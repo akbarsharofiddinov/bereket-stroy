@@ -10,7 +10,6 @@ import { Partners, Products, Services } from "@/components";
 
 import noImage from "@/assets/no-image.webp";
 import { useTranslation } from "react-i18next";
-import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
 
 const AllCatalogs: React.FC = () => {
   const { t } = useTranslation();
@@ -21,13 +20,7 @@ const AllCatalogs: React.FC = () => {
 
   const { catalogModal } = useAppSelector((state) => state.projectSlice);
   const { allCategories } = useAppSelector((state) => state.categorySlice);
-
-  const {
-    isLoading,
-    isError,
-    isSuccess,
-    data: productsData,
-  } = useGetAllProductsQuery();
+  const { totalProducts } = useAppSelector((state) => state.productSlice);
 
   useEffect(() => {
     if (!catalogModal) {
@@ -51,41 +44,31 @@ const AllCatalogs: React.FC = () => {
               <Link to={"/"}>Bosh sahifa</Link>
             </div>
 
-            {isLoading ? (
-              <h1>Loading...</h1>
-            ) : isError ? (
-              <h1>Error</h1>
-            ) : isSuccess ? (
-              <>
-                <div className="top">
-                  <h2 className="title">{t("category")}</h2>
-                  <p>{productsData.data.length} ta mahsulot topildi</p>
-                </div>
+            <div className="top">
+              <h2 className="title">{t("category")}</h2>
+              <p>{totalProducts} ta mahsulot topildi</p>
+            </div>
 
-                <div className="sub-categories">
-                  {allCategories.map((category, index) => (
-                    <Link
-                      to={`/catalogs/${category.slug}`}
-                      key={index}
-                      onClick={() => dispatch(setSelectedSubCategory(category))}
-                    >
-                      {category.photo ? (
-                        <img
-                          src={`http://bereket.webclub.uz/storage/${category.photo}`}
-                        />
-                      ) : (
-                        <img src={noImage} alt="" />
-                      )}
-                      <span>{category.name}</span>
-                    </Link>
-                  ))}
-                </div>
+            <div className="sub-categories">
+              {allCategories.map((category, index) => (
+                <Link
+                  to={`/catalogs/${category.slug}`}
+                  key={index}
+                  onClick={() => dispatch(setSelectedSubCategory(category))}
+                >
+                  {category.photo ? (
+                    <img
+                      src={`http://bereket.webclub.uz/storage/${category.photo}`}
+                    />
+                  ) : (
+                    <img src={noImage} alt="" />
+                  )}
+                  <span>{category.name}</span>
+                </Link>
+              ))}
+            </div>
 
-                <Products data={productsData.data} />
-              </>
-            ) : (
-              ""
-            )}
+            <Products />
 
             <Partners />
             <Services />

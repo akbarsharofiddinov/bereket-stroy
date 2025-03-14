@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 
-type SortOption = "popularity" | "price" | "rating" | "";
+type SortOption = "popular" | "price" | "-price" | "rating" | "";
 
-const TopFilterBox: React.FC = () => {
-  const [activeSort, setActiveSort] = useState<SortOption>("");
+interface IProps {
+  activeSort: SortOption;
+  setActiveSort: React.Dispatch<React.SetStateAction<SortOption>>;
+}
 
+const TopFilterBox: React.FC<IProps> = ({ activeSort, setActiveSort }) => {
   return (
     <>
       <div className="top-filter_box">
         <p>Saralash:</p>
         <button
-          className={activeSort === "popularity" ? "active" : ""}
-          onClick={() => setActiveSort("popularity")}
+          className={activeSort === "popular" ? "active" : ""}
+          onClick={() => {
+            if (activeSort === "popular") setActiveSort("");
+            else setActiveSort("popular");
+          }}
         >
           <span>
             <svg
@@ -38,8 +44,14 @@ const TopFilterBox: React.FC = () => {
           Avval ommaboplari
         </button>
         <button
-          className={activeSort === "price" ? "active" : ""}
-          onClick={() => setActiveSort("price")}
+          className={
+            activeSort === "price" || activeSort === "-price" ? "active" : ""
+          }
+          onClick={() => {
+            if (activeSort === "price") setActiveSort("-price");
+            else if (activeSort === "-price") setActiveSort("");
+            else setActiveSort("price");
+          }}
         >
           <span>
             <svg
@@ -86,12 +98,18 @@ const TopFilterBox: React.FC = () => {
               />
             </svg>
           </span>
-          Narxlar quyiga
+          Narxlar
+          {activeSort === "price"
+            ? " : arzonroq"
+            : activeSort === "-price"
+            ? " : qimmatroq"
+            : ""}
         </button>
         <button
           className={activeSort === "rating" ? "active" : ""}
           onClick={() => {
-            setActiveSort("rating");
+            if (activeSort === "rating") setActiveSort("");
+            else setActiveSort("rating");
           }}
         >
           <span>

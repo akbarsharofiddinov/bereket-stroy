@@ -1,23 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../";
 
-interface APIResponse<T> {
-  data: T;
-  status: string;
-  message: string;
-  pagination: {
-    current_page: number;
-    total_page: number;
-    total: number;
-    per_page: number;
-    links: {
-      first: string;
-      last: string;
-      prev: null | string;
-      next: null | string;
-    };
-  };
-}
+type productsParams = {
+  page?: number;
+  category_slug?: string;
+  sub_category_slug?: string;
+  sub_sub_category_slug?: string;
+  sort_by?: string;
+};
 
 export const bereketAPI = createApi({
   reducerPath: "bereketAPI",
@@ -27,19 +17,36 @@ export const bereketAPI = createApi({
       const state = getState() as RootState;
       const projectSlice = state.projectSlice;
 
+      const token = localStorage.getItem("token");
+
       if (projectSlice.currentLanguage) {
         headers.set("Access-Language", projectSlice.currentLanguage);
       }
-      if (projectSlice.token) {
-        headers.set("Authorization", `Bearer ${projectSlice.token}`);
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
       }
 
       return headers;
     },
   }),
   endpoints: (build) => ({
-    getAllProducts: build.query<APIResponse<IProduct[]>, void>({
-      query: () => `/products`,
+    getAllProducts: build.query<APIResponse<IProduct[]>, productsParams>({
+      query: ({
+        page,
+        category_slug,
+        sub_category_slug,
+        sub_sub_category_slug,
+        sort_by,
+      }) => ({
+        url: `/products`,
+        params: {
+          page,
+          category_slug,
+          sub_category_slug,
+          sub_sub_category_slug,
+          sort_by,
+        },
+      }),
     }),
 
     getProductDetails: build.query<APIResponse<IProduct[]>, string>({

@@ -132,3 +132,21 @@ interface ICart {
   quantity: number;
   isSelected: boolean;
 }
+
+interface APIResponse<T> {
+  data: T;
+  status: string;
+  message: string;
+  pagination: {
+    current_page: number;
+    total_pages: number;
+    total: number;
+    per_page: number;
+    links: {
+      first: string;
+      last: string;
+      prev: null | string;
+      next: null | string;
+    };
+  };
+}

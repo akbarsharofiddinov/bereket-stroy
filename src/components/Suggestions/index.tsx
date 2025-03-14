@@ -3,14 +3,19 @@ import { FaAngleRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { ProductItem } from "@/components";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
+import SkeletonImage from "antd/es/skeleton/Image";
 
 interface IProps {
   title: string;
   link: string;
-  data: IProduct[];
+  // data?: IProduct[];
 }
 
-const Suggestions: React.FC<IProps> = ({ link, title, data }) => {
+const Suggestions: React.FC<IProps> = ({ link, title }) => {
+  const { isLoading, isError, data, isSuccess } = useGetAllProductsQuery({
+    page: 1,
+  });
   return (
     <>
       <div className="suggestions section">
@@ -27,19 +32,45 @@ const Suggestions: React.FC<IProps> = ({ link, title, data }) => {
             </div>
 
             <div className="products">
-              <Swiper
-                slidesPerView={"auto"}
-                spaceBetween={20}
-                className="suggestions-swiper"
-              >
-                {data.length
-                  ? data!.map((product, index) => (
-                      <SwiperSlide key={index}>
-                        <ProductItem data={product} />
-                      </SwiperSlide>
-                    ))
-                  : ""}
-              </Swiper>
+              {isLoading ? (
+                <Swiper
+                  slidesPerView={"auto"}
+                  spaceBetween={20}
+                  className="suggestions-swiper"
+                >
+                  <SwiperSlide>
+                    <SkeletonImage active />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <SkeletonImage active />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <SkeletonImage active />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <SkeletonImage active />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <SkeletonImage active />
+                  </SwiperSlide>
+                </Swiper>
+              ) : isError ? (
+                <h1>Error</h1>
+              ) : isSuccess ? (
+                <Swiper
+                  slidesPerView={"auto"}
+                  spaceBetween={20}
+                  className="suggestions-swiper"
+                >
+                  {data!.data.map((item, index) => (
+                    <SwiperSlide key={index}>
+                      <ProductItem data={item} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>

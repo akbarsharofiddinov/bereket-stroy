@@ -47,31 +47,6 @@ const Partners: React.FC = () => {
             </Link>
           </div>
           <div className="inner">
-            {/* <div className="partner">
-              <img src={partner} alt="partner" />
-              <p>Bauproffe</p>
-            </div>
-            <div className="partner">
-              <img src={partner} alt="partner" />
-              <p>Bauproffe</p>
-            </div>
-            <div className="partner">
-              <img src={partner} alt="partner" />
-              <p>Bauproffe</p>
-            </div>
-            <div className="partner">
-              <img src={partner} alt="partner" />
-              <p>Bauproffe</p>
-            </div>
-            <div className="partner">
-              <img src={partner} alt="partner" />
-              <p>Bauproffe</p>
-            </div>
-            <div className="partner">
-              <img src={partner} alt="partner" />
-              <p>Bauproffe</p>
-            </div> */}
-
             <Swiper
               slidesPerView={6}
               spaceBetween={"20px"}

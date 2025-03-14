@@ -1,49 +1,95 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
-import { FilterSidebar, TopFilterBox } from "@/components";
+import { FilterSidebar, SelectItem, TopFilterBox } from "@/components";
+import { Pagination } from "antd";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
+import { setTotalProductsCount } from "@/store/productSlice";
+import { useParams } from "react-router-dom";
 
-const Products: React.FC<{ data: IProduct[] }> = ({ data }) => {
+type SortOption = "popular" | "price" | "-price" | "rating" | "";
+
+const Products: React.FC = () => {
+  const [productsData, setProductsData] = useState<APIResponse<IProduct[]>>();
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [activeSort, setActiveSort] = useState<SortOption>("");
+
+  const params = useParams();
+
+  const { isLoading, isError, isSuccess, data, refetch } =
+    useGetAllProductsQuery({
+      page: currentPage,
+      category_slug: params.catalog_slug,
+      sub_category_slug: params.sub_catalog_slug,
+      sub_sub_category_slug: params.sub_sub_catalog_slug,
+      sort_by: activeSort,
+    });
+
+  const { totalProducts } = useAppSelector((state) => state.productSlice);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    console.log("first");
+    if (isSuccess) {
+      dispatch(setTotalProductsCount(data.pagination.total));
+      setProductsData(data);
+    }
+  }, [data]);
+
+  useEffect(() => {}, [activeSort]);
+
+  useEffect(() => {
+    refetch();
+  }, [currentPage]);
+
+  useEffect(() => {
+    refetch();
+  }, [params]);
+
   return (
     <>
       <div className="products">
         <FilterSidebar />
         <div className="right">
-          <TopFilterBox />
-          <div className="products-grid">
-            {data.length
-              ? data.map((product, index) => (
-                  <ProductItem data={product} key={`${index}-${product.id}`} />
-                ))
-              : ""}
-          </div>
-          <div className="pagination-box">
-            <div className="select-item">
-              <div className="selected">
-                <h2 className="title">
-                  Ko‘statish: {data.length}
-                  <span>
-                    <svg
-                      width="10"
-                      height="6"
-                      viewBox="0 0 10 6"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9 1.00003C9 1.00003 6.05407 5 5 5C3.94587 5 1 1 1 1"
-                        stroke="black"
-                        strokeOpacity="0.5"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+          <TopFilterBox activeSort={activeSort} setActiveSort={setActiveSort} />
+          {isLoading ? (
+            <h1>Loading</h1>
+          ) : isError ? (
+            <h1>Error</h1>
+          ) : isSuccess ? (
+            <>
+              <div className="products-grid">
+                {productsData?.data.length
+                  ? productsData?.data.map((product, index) => (
+                      <ProductItem
+                        data={product}
+                        key={`${index}-${product.id}`}
                       />
-                    </svg>
-                  </span>
-                </h2>
+                    ))
+                  : ""}
               </div>
-              <div className="menu"></div>
-            </div>
-          </div>
+              <div className="pagination-box">
+                <SelectItem
+                  title="Ko‘statish:"
+                  productsCount={totalProducts}
+                  menu={["5", "10", "20", "25"]}
+                />
+
+                <Pagination
+                  defaultCurrent={currentPage}
+                  total={productsData?.pagination.total_pages}
+                  showSizeChanger={false}
+                  onChange={(page) => {
+                    setCurrentPage(page);
+                  }}
+                />
+              </div>
+            </>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </>

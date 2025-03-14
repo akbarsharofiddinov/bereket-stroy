@@ -20,6 +20,7 @@ export { default as PageNotFound } from "./Error/PageNotFound";
 export { default as Checkbox } from "./UI/Checkbox";
 export { default as RadioBox } from "./UI/RadioBox";
 export { default as CheckoutModal } from "./UI/Modal/CheckoutModal";
+export { default as SelectItem } from "./UI/MySelectItem/SelectItem";
 
 export { default as LoginModal } from "./Auth/Login";
 export { default as SignUpModal } from "./Auth/Signup";
