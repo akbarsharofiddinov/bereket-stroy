@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 type SortOption = "popular" | "price" | "-price" | "rating" | "";
 
@@ -8,6 +9,7 @@ interface IProps {
 }
 
 const TopFilterBox: React.FC<IProps> = ({ activeSort, setActiveSort }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="top-filter_box">
@@ -15,8 +17,13 @@ const TopFilterBox: React.FC<IProps> = ({ activeSort, setActiveSort }) => {
         <button
           className={activeSort === "popular" ? "active" : ""}
           onClick={() => {
-            if (activeSort === "popular") setActiveSort("");
-            else setActiveSort("popular");
+            if (activeSort === "popular") {
+              setActiveSort("");
+              navigate("");
+            } else {
+              setActiveSort("popular");
+              navigate(`?sort_by=popular`);
+            }
           }}
         >
           <span>
@@ -48,9 +55,16 @@ const TopFilterBox: React.FC<IProps> = ({ activeSort, setActiveSort }) => {
             activeSort === "price" || activeSort === "-price" ? "active" : ""
           }
           onClick={() => {
-            if (activeSort === "price") setActiveSort("-price");
-            else if (activeSort === "-price") setActiveSort("");
-            else setActiveSort("price");
+            if (activeSort === "price") {
+              setActiveSort("-price");
+              navigate("?sort_by=-price");
+            } else if (activeSort === "-price") {
+              setActiveSort("");
+              navigate("");
+            } else {
+              setActiveSort("price");
+              navigate(`?sort_by=price`);
+            }
           }}
         >
           <span>
@@ -108,8 +122,13 @@ const TopFilterBox: React.FC<IProps> = ({ activeSort, setActiveSort }) => {
         <button
           className={activeSort === "rating" ? "active" : ""}
           onClick={() => {
-            if (activeSort === "rating") setActiveSort("");
-            else setActiveSort("rating");
+            if (activeSort === "rating") {
+              setActiveSort("");
+              navigate("");
+            } else {
+              setActiveSort("rating");
+              navigate(`?sort_by=rating`);
+            }
           }}
         >
           <span>

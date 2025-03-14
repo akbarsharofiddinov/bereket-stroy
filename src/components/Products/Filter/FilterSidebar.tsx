@@ -3,7 +3,7 @@ import { Checkbox } from "@/components";
 import axios from "axios";
 import { Switch } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setFilteredProducts } from "@/store/productSlice";
+import { setIsInSalve } from "@/store/productSlice";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -18,7 +18,6 @@ const FilterSidebar: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const { allProducts } = useAppSelector((state) => state.productSlice);
   const { allCategories } = useAppSelector((state) => state.categorySlice);
 
   const { i18n } = useTranslation();
@@ -201,18 +200,7 @@ const FilterSidebar: React.FC = () => {
             <input type="text" name="min_price" placeholder="Dan" />
             <input type="text" name="max_price" placeholder="Gacha" />
             <div className="switch-item">
-              <Switch
-                onChange={(value) => {
-                  if (value) {
-                    const filteredproducts = allProducts.filter(
-                      (item) => item.is_sale === 1
-                    );
-                    dispatch(setFilteredProducts(filteredproducts));
-                  } else {
-                    dispatch(setFilteredProducts([]));
-                  }
-                }}
-              />
+              <Switch onChange={(value) => dispatch(setIsInSalve(value))} />
               Sotuvda mavjud
             </div>
           </div>

@@ -43,6 +43,10 @@ const Layout: React.FC = () => {
   // Get User Info
   const { isSuccess: userInfoSuccess, data: userInfo } = useGetUserInfoQuery();
   if (userInfoSuccess) dispatch(setProfileInfo(userInfo));
+  else {
+    dispatch(setToken(""));
+    localStorage.setItem("token", "");
+  }
 
   async function getBranches() {
     try {
@@ -75,6 +79,16 @@ const Layout: React.FC = () => {
 
     if (localStorage.getItem("token")) {
       dispatch(setToken(localStorage.getItem("token") + ""));
+    }
+
+    if (localStorage.getItem("favorites")) {
+      dispatch(
+        setFavourites(JSON.parse(localStorage.getItem("favorites") + ""))
+      );
+    }
+
+    if (localStorage.getItem("cart")) {
+      dispatch(setCartProducts(JSON.parse(localStorage.getItem("cart") + "")));
     }
   }, []);
 

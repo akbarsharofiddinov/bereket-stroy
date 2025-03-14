@@ -5,17 +5,19 @@ import { Pagination } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
 import { setTotalProductsCount } from "@/store/productSlice";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 type SortOption = "popular" | "price" | "-price" | "rating" | "";
 
 const Products: React.FC = () => {
   const [productsData, setProductsData] = useState<APIResponse<IProduct[]>>();
   const [currentPage, setCurrentPage] = useState(1);
-
   const [activeSort, setActiveSort] = useState<SortOption>("");
+  const [inSaleProducts, setInSaleProducts] = useState<IProduct[]>([]);
 
   const params = useParams();
+
+  const [searchParams] = useSearchParams();
 
   const { isLoading, isError, isSuccess, data, refetch } =
     useGetAllProductsQuery({
@@ -23,22 +25,21 @@ const Products: React.FC = () => {
       category_slug: params.catalog_slug,
       sub_category_slug: params.sub_catalog_slug,
       sub_sub_category_slug: params.sub_sub_catalog_slug,
-      sort_by: activeSort,
+      sort_by: searchParams.get("sort_by")!,
     });
 
-  const { totalProducts } = useAppSelector((state) => state.productSlice);
+  const { totalProducts, isInSale } = useAppSelector(
+    (state) => state.productSlice
+  );
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log("first");
     if (isSuccess) {
       dispatch(setTotalProductsCount(data.pagination.total));
       setProductsData(data);
     }
   }, [data]);
-
-  useEffect(() => {}, [activeSort]);
 
   useEffect(() => {
     refetch();
@@ -47,6 +48,20 @@ const Products: React.FC = () => {
   useEffect(() => {
     refetch();
   }, [params]);
+
+  useEffect(() => {
+    refetch();
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (isInSale) {
+      if (data?.data) {
+        const filteredProducts = data.data.filter((item) => item.is_sale === 1);
+
+        setInSaleProducts(filteredProducts);
+      }
+    }
+  }, [isInSale]);
 
   return (
     <>
@@ -61,7 +76,16 @@ const Products: React.FC = () => {
           ) : isSuccess ? (
             <>
               <div className="products-grid">
-                {productsData?.data.length
+                {isInSale
+                  ? inSaleProducts?.length
+                    ? inSaleProducts?.map((product, index) => (
+                        <ProductItem
+                          data={product}
+                          key={`${index}-${product.id}`}
+                        />
+                      ))
+                    : "fkopfkp"
+                  : productsData?.data.length
                   ? productsData?.data.map((product, index) => (
                       <ProductItem
                         data={product}
