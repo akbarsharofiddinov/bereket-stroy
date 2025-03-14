@@ -647,11 +647,7 @@ const ProductDetails: React.FC = () => {
           )}
 
           {recommendations.length ? (
-            <Suggestion
-              title="Tavsiya qilamiz"
-              data={recommendations}
-              link=""
-            />
+            <Suggestion title="Tavsiya qilamiz" link="" />
           ) : (
             ""
           )}
