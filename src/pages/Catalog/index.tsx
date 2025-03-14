@@ -87,7 +87,7 @@ const Catalog: React.FC = () => {
               ))}
             </div>
 
-            <Products data={products} />
+            <Products />
             <Partners />
             <Services />
           </div>

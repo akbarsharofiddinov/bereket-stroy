@@ -83,7 +83,7 @@ const SubSubCatalogDetails: React.FC = () => {
             <p>{allProducts.length} ta mahsulot topildi</p>
           </div>
 
-          {loading ? <h1>Loading...</h1> : <Products data={allProducts} />}
+          {loading ? <h1>Loading...</h1> : <Products />}
         </div>
       </div>
     </>

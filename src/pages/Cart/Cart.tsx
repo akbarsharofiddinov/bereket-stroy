@@ -25,14 +25,13 @@ interface ICart {
 const Cart: React.FC = () => {
   const [isIllegal, setIsIllegal] = React.useState(false);
   const [totalSum, setTotalSum] = React.useState(0);
-  const [recommendations, setRecommendations] = React.useState<IProduct[]>([]);
 
   const [cartProductsSelected, setCartProductsSelected] =
     React.useState("none");
 
   const navigate = useNavigate();
 
-  const { cart, allProducts } = useAppSelector((state) => state.productSlice);
+  const { cart } = useAppSelector((state) => state.productSlice);
   const token = useAppSelector((state) => state.projectSlice.token);
   const dispatch = useAppDispatch();
 
@@ -43,19 +42,6 @@ const Cart: React.FC = () => {
     );
 
     localStorage.setItem("cart", JSON.stringify(filteredCartProducts));
-  }
-
-  function getRecommendedProducts() {
-    if (allProducts) {
-      const categories = new Set(cart.map((item) => item.product.category_id));
-      setRecommendations(
-        allProducts.filter(
-          (product) =>
-            categories.has(product.category_id) &&
-            !cart.some((cartItem) => cartItem.product.id === product.id)
-        )
-      );
-    }
   }
 
   function handleCartProductSelect(product: IProduct) {
@@ -100,8 +86,6 @@ const Cart: React.FC = () => {
     }, 0);
 
     setTotalSum(sum);
-
-    getRecommendedProducts();
 
     const allSelected = cart.every((item) => item.isSelected);
     const noneSelected = cart.every((item) => !item.isSelected);

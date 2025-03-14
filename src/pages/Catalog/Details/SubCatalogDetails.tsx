@@ -97,7 +97,7 @@ const SubCatalogDetails: React.FC = () => {
               )}
             </div>
 
-            <Products data={allProducts} />
+            <Products />
             <Partners />
             <Services />
           </div>
