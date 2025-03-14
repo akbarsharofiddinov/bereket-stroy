@@ -477,7 +477,6 @@ const Cart: React.FC = () => {
               <Suggestion
                 title="Ushbu mahsulotlar bilan xarid qilishadi"
                 link=""
-                data={recommendations}
               />
 
               <Services />
