@@ -183,7 +183,11 @@ const Cart: React.FC = () => {
                 <div className="cart-products">
                   {cart.length
                     ? cart.map(({ product, quantity, isSelected }, index) => (
-                        <div className="cart-products_item" key={index}>
+                        <div
+                          className="cart-products_item"
+                          key={index}
+                          onClick={() => navigate(`/details/${product.slug}`)}
+                        >
                           <div className="img-box">
                             <span
                               className={

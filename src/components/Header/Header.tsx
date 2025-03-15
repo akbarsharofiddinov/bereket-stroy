@@ -326,8 +326,14 @@ const Header: React.FC = () => {
                 className={profileMenu ? "active" : ""}
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (token) setProfileMenu(!profileMenu);
-                  else dispatch(setAuthModal(true));
+                  dispatch(setCatalogModal(false));
+                  dispatch(setSearchModal(false));
+                  if (searchModal || catalogModal) {
+                    setTimeout(() => {
+                      if (token) setProfileMenu(!profileMenu);
+                      else dispatch(setAuthModal(true));
+                    }, 300);
+                  }
                 }}
               >
                 <svg

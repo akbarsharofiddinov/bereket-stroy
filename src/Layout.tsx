@@ -16,8 +16,10 @@ import {
   setFavourites,
 } from "@/store/productSlice";
 import {
+  setCatalogModal,
   setCurrentLanguage,
   setProfileInfo,
+  setSearchModal,
   setToken,
 } from "./store/projectSlice";
 import { setBranches } from "./store/companySlice";
@@ -37,6 +39,8 @@ const Layout: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const { i18n } = useTranslation();
+
+  const location = useLocation();
 
   const { authModal } = useAppSelector((state) => state.projectSlice);
 
@@ -91,6 +95,11 @@ const Layout: React.FC = () => {
     useGetAllProductsQuery({});
 
   if (allProductsSuccess) dispatch(setAllProducts(allProducts.data));
+
+  useEffect(() => {
+    dispatch(setCatalogModal(false));
+    dispatch(setSearchModal(false));
+  }, [location.pathname]);
 
   useEffect(() => {
     getBranches();
