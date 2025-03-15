@@ -3,19 +3,26 @@ import { FaAngleRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { ProductItem } from "@/components";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
+
 import SkeletonImage from "antd/es/skeleton/Image";
 
 interface IProps {
   title: string;
   link: string;
-  // data?: IProduct[];
+  data: IProduct[];
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
 }
 
-const Suggestions: React.FC<IProps> = ({ link, title }) => {
-  const { isLoading, isError, data, isSuccess } = useGetAllProductsQuery({
-    page: 1,
-  });
+const Suggestions: React.FC<IProps> = ({
+  link,
+  title,
+  isLoading,
+  data,
+  isError,
+  isSuccess,
+}) => {
   return (
     <>
       <div className="suggestions section">
@@ -62,7 +69,7 @@ const Suggestions: React.FC<IProps> = ({ link, title }) => {
                   spaceBetween={20}
                   className="suggestions-swiper"
                 >
-                  {data!.data.map((item, index) => (
+                  {data.map((item, index) => (
                     <SwiperSlide key={index}>
                       <ProductItem data={item} />
                     </SwiperSlide>

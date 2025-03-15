@@ -41,6 +41,9 @@ const ProductDetails: React.FC = () => {
     allCategories,
   } = useAppSelector((state) => state.categorySlice);
 
+  console.log(selectedCategory?.name);
+  console.log(selectedSubCategory?.name);
+
   const params = useParams();
   const dispatch = useAppDispatch();
 
@@ -179,21 +182,22 @@ const ProductDetails: React.FC = () => {
       const findCategory = allCategories.find(
         (item) => item.id === productDetails.data[0].category_id
       );
-      dispatch(setSelectedCategory(findCategory));
 
       if (findCategory) {
+        dispatch(setSelectedCategory(findCategory));
         const findSubCategory = findCategory.sub_category.find(
           (item) => item.id === productDetails.data[0].sub_category_id
         );
 
-        dispatch(setSelectedSubCategory(findSubCategory));
-
         if (findSubCategory) {
+          dispatch(setSelectedSubCategory(findSubCategory));
           const findSubSubCategory = findSubCategory.sub_sub_category.find(
             (item) => item.id === productDetails.data[0].sub_sub_category_id
           );
 
-          dispatch(setSelectedSubSubCategory(findSubSubCategory));
+          if (findSubSubCategory) {
+            dispatch(setSelectedSubSubCategory(findSubSubCategory));
+          }
         }
       }
 
@@ -219,7 +223,9 @@ const ProductDetails: React.FC = () => {
               <FaAngleRight />
             </span>
             {selectedSubCategory && (
-              <Link to={`/catalogs/${selectedSubCategory?.slug}`}>
+              <Link
+                to={`/catalogs/${selectedCategory?.slug}/${selectedSubCategory?.slug}`}
+              >
                 {selectedSubCategory.name}
               </Link>
             )}
@@ -227,7 +233,9 @@ const ProductDetails: React.FC = () => {
               <FaAngleRight />
             </span>
             {selectedSubSubCategory && (
-              <Link to={`/catalogs/${selectedSubSubCategory.slug}`}>
+              <Link
+                to={`/catalogs/${selectedSubCategory?.slug}/${selectedSubSubCategory.slug}`}
+              >
                 {selectedSubSubCategory.name}
               </Link>
             )}
@@ -647,7 +655,14 @@ const ProductDetails: React.FC = () => {
           )}
 
           {recommendations.length ? (
-            <Suggestion title="Tavsiya qilamiz" link="" />
+            <Suggestion
+              title="Tavsiya qilamiz"
+              link=""
+              data={[]}
+              isError={false}
+              isLoading={false}
+              isSuccess={true}
+            />
           ) : (
             ""
           )}

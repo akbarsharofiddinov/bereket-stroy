@@ -10,7 +10,11 @@ import {
 } from "@/components";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import axios from "axios";
-import { setCartProducts, setFavourites } from "@/store/productSlice";
+import {
+  setAllProducts,
+  setCartProducts,
+  setFavourites,
+} from "@/store/productSlice";
 import {
   setCurrentLanguage,
   setProfileInfo,
@@ -20,6 +24,7 @@ import { setBranches } from "./store/companySlice";
 import { useTranslation } from "react-i18next";
 import {
   useGetAllCategoriesQuery,
+  useGetAllProductsQuery,
   useGetUserInfoQuery,
 } from "./store/API/RTKQuery";
 import { setAllCategories } from "./store/categorySlice";
@@ -65,6 +70,10 @@ const Layout: React.FC = () => {
       console.log(error);
     }
   }
+
+  const { isSuccess: allProductsSuccess, data } = useGetAllProductsQuery({});
+
+  if (allProductsSuccess) dispatch(setAllProducts(data.data));
 
   useEffect(() => {
     getBranches();

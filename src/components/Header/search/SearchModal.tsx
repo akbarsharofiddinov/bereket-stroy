@@ -3,6 +3,20 @@ import { setSearchModal } from "@/store/projectSlice";
 import React from "react";
 import { Link } from "react-router-dom";
 
+const highlightText = (text: string, highlight: string) => {
+  if (!highlight) return text;
+  const regex = new RegExp(`(${highlight})`, "gi");
+  return text.split(regex).map((part, index) =>
+    regex.test(part) ? (
+      <mark key={index} className="bg-transparent text-black font-bold">
+        {part}
+      </mark>
+    ) : (
+      part
+    )
+  );
+};
+
 const SearchModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const searchModal = useAppSelector((state) => state.projectSlice.searchModal);
@@ -59,14 +73,7 @@ const SearchModal: React.FC = () => {
                               </clipPath>
                             </defs>
                           </svg>
-                          <p
-                            dangerouslySetInnerHTML={{
-                              __html: `<span>${item.name.slice(
-                                0,
-                                searchValue.length
-                              )}</span>${item.name.slice(searchValue.length)}`,
-                            }}
-                          />
+                          {highlightText(item.name, searchValue)}
                         </Link>
                       ) : (
                         ""
