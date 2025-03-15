@@ -12,7 +12,10 @@ type SortOption = "popular" | "price" | "-price" | "rating" | "";
 
 const Products: React.FC = () => {
   const [productsData, setProductsData] = useState<APIResponse<IProduct[]>>();
+
+  const [perPage, setPerPage] = useState(12);
   const [currentPage, setCurrentPage] = useState(1);
+
   const [activeSort, setActiveSort] = useState<SortOption>("");
   const [inSaleProducts, setInSaleProducts] = useState<IProduct[]>([]);
 
@@ -40,13 +43,12 @@ const Products: React.FC = () => {
       countryIDsStr: countriesQuesy,
       min_price: debouncedMinPrice.length ? debouncedMinPrice : undefined,
       max_price: debouncedMaxPrice.length ? debouncedMaxPrice : undefined,
+      pagination: perPage,
     });
 
   const { isInSale, filteredProducts } = useAppSelector(
     (state) => state.productSlice
   );
-
-  console.log(productsData);
 
   const dispatch = useAppDispatch();
 
@@ -120,20 +122,29 @@ const Products: React.FC = () => {
                   : ""}
               </div>
               <div className="pagination-box">
-                <SelectItem
-                  title="Ko‘statish:"
-                  productsCount={productsData?.pagination.per_page!}
-                  menu={["5", "10", "20", "25"]}
-                />
+                {productsData?.pagination.per_page! <
+                productsData?.pagination.total! ? (
+                  <>
+                    <SelectItem
+                      title="Ko‘statish:"
+                      productsCount={productsData?.pagination.per_page!}
+                      setPerPage={setPerPage}
+                      menu={["5", "10", "20", "25"]}
+                    />
 
-                <Pagination
-                  defaultCurrent={currentPage}
-                  total={productsData?.pagination.total}
-                  showSizeChanger={false}
-                  onChange={(page) => {
-                    setCurrentPage(page);
-                  }}
-                />
+                    <Pagination
+                      defaultCurrent={currentPage}
+                      pageSize={productsData?.pagination.per_page!}
+                      total={productsData?.pagination.total}
+                      showSizeChanger={false}
+                      onChange={(page) => {
+                        setCurrentPage(page);
+                      }}
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
               </div>
             </>
           ) : (

@@ -5,9 +5,15 @@ interface IProps {
   title: string;
   menu: string[];
   productsCount: number;
+  setPerPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const SelectItem: React.FC<IProps> = ({ menu, title, productsCount }) => {
+const SelectItem: React.FC<IProps> = ({
+  menu,
+  title,
+  productsCount,
+  setPerPage,
+}) => {
   return (
     <>
       <div className={styles.mySelect_item}>
@@ -35,7 +41,15 @@ const SelectItem: React.FC<IProps> = ({ menu, title, productsCount }) => {
         </h2>
         <div className={styles.menu}>
           {menu.map((item, index) => (
-            <p key={index}>{item}</p>
+            <p
+              key={index}
+              onClick={() => {
+                window.scrollTo(0, 0);
+                setPerPage(parseInt(item));
+              }}
+            >
+              {item}
+            </p>
           ))}
         </div>
       </div>

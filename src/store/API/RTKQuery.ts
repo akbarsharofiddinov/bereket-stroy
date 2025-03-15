@@ -11,6 +11,7 @@ type productsParams = {
   countryIDsStr?: string;
   min_price?: string;
   max_price?: string;
+  pagination?: number;
 };
 
 // type createOrderParams = {
@@ -55,6 +56,7 @@ export const bereketAPI = createApi({
     getAllProducts: build.query<APIResponse<IProduct[]>, productsParams>({
       query: ({
         page,
+        pagination,
         category_slug,
         sub_category_slug,
         sub_sub_category_slug,
@@ -74,6 +76,7 @@ export const bereketAPI = createApi({
           }`,
           params: {
             page,
+            pagination,
             category_slug,
             sub_category_slug,
             sub_sub_category_slug,
@@ -111,7 +114,7 @@ export const bereketAPI = createApi({
 
     createOrder: build.mutation<any, any>({
       query: (data) => {
-        console.log(data)
+        console.log(data);
         return {
           url: "/orders",
           method: "POST",
