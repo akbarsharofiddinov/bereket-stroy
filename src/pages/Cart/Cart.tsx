@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import emptyCart from "@/assets/empty-cart.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -40,6 +40,8 @@ const Cart: React.FC = () => {
   const { isLoading, isSuccess, isError, data } = useGetAllProductsQuery({
     category_slug: selectedCategory?.slug,
   });
+
+  const { allCategories } = useAppSelector((state) => state.categorySlice);
 
   function handleRemoveAllProductFromCart(product: IProduct) {
     dispatch(instantRemoveProductsFromCart(product));
@@ -83,6 +85,18 @@ const Cart: React.FC = () => {
       dispatch(setCartProducts(updatedCartProducts));
     }
   }
+
+  const [currentCategory, setCurrentCategory] = useState<ICategory | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    const findCategory = allCategories.find(
+      (item) => item.id === cart[0].product.category_id
+    );
+
+    setCurrentCategory(findCategory!);
+  }, [cart]);
 
   useEffect(() => {
     const calculateSumAndSelection = async () => {
@@ -223,7 +237,7 @@ const Cart: React.FC = () => {
                             <div className="cols col-1">
                               <h2 className="product_name">{product.name}</h2>
                               <p>
-                                {/* <span>{product.id}</span> | */}
+                                <span>№{product.id}</span> |
                                 <span>
                                   <svg
                                     width="20"
@@ -473,12 +487,12 @@ const Cart: React.FC = () => {
               </div>
 
               <Suggestion
-                title="Ushbu mahsulotlar bilan xarid qilishadi"
+                title="O‘xshash mahsulotlar"
                 data={data?.data!}
                 isError={isError}
                 isLoading={isLoading}
                 isSuccess={isSuccess}
-                link="/catalogs"
+                link={`/catalogs/${currentCategory?.slug}`}
               />
 
               <Services />

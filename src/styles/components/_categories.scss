@@ -4,7 +4,7 @@
   .inner {
     .category-boxes {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 272px));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 232px));
       gap: 20px;
 
       a {
