@@ -136,6 +136,8 @@ const Layout: React.FC = () => {
           })
         );
 
+        localStorage.setItem("cart", JSON.stringify(cartProducts));
+
         dispatch(setCartProducts(cartProducts));
       }
 
@@ -151,6 +153,7 @@ const Layout: React.FC = () => {
             }
           })
         );
+        localStorage.setItem("favorites", JSON.stringify(favorites));
         dispatch(setFavourites(favorites));
       }
     }
