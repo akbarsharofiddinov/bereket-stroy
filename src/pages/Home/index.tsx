@@ -34,7 +34,7 @@ const Home: React.FC = () => {
       <Banner2 />
       <Suggestions
         title="Eng yaxshi takliflar"
-        link=""
+        link="/catalogs"
         data={bestOfferData?.data!}
         isError={bestOfferError}
         isLoading={bestOfferLoading}
@@ -43,7 +43,7 @@ const Home: React.FC = () => {
       <Categories />
       <Suggestions
         title="Har doim foydali bo'ladi"
-        link=""
+        link="/catalogs"
         data={usefullData?.data!}
         isError={usefullError}
         isLoading={usefullLoading}

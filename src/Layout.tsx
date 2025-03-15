@@ -39,7 +39,6 @@ const Layout: React.FC = () => {
   const { i18n } = useTranslation();
 
   const { authModal } = useAppSelector((state) => state.projectSlice);
-  const { allProducts } = useAppSelector((state) => state.productSlice);
 
   // Get All Categories
   const { isSuccess, data: categoriesResponse } = useGetAllCategoriesQuery();
@@ -88,9 +87,10 @@ const Layout: React.FC = () => {
     }
   }
 
-  const { isSuccess: allProductsSuccess, data } = useGetAllProductsQuery({});
+  const { isSuccess: allProductsSuccess, data: allProducts } =
+    useGetAllProductsQuery({});
 
-  if (allProductsSuccess) dispatch(setAllProducts(data.data));
+  if (allProductsSuccess) dispatch(setAllProducts(allProducts.data));
 
   useEffect(() => {
     getBranches();
@@ -119,45 +119,24 @@ const Layout: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (allProducts.length) {
+    if (allProducts) {
       if (localStorage.getItem("cart")) {
-        const cartProducts: ICart[] = [];
-        const localProducts: ICart[] = JSON.parse(
+        const cartProducts: ICart[] = JSON.parse(
           localStorage.getItem("cart") + ""
         );
-
-        localProducts.forEach((localProduct) =>
-          allProducts.forEach((product) => {
-            if (
-              JSON.stringify(localProduct.product) === JSON.stringify(product)
-            ) {
-              cartProducts.push(localProduct);
-            }
-          })
-        );
-
-        localStorage.setItem("cart", JSON.stringify(cartProducts));
 
         dispatch(setCartProducts(cartProducts));
       }
 
       if (localStorage.getItem("favorites")) {
-        const favorites: IProduct[] = [];
-        const localProducts: IProduct[] = JSON.parse(
+        const favorites: IProduct[] = JSON.parse(
           localStorage.getItem("favorites") + ""
         );
-        localProducts.forEach((localProduct) =>
-          allProducts.forEach((product) => {
-            if (JSON.stringify(localProduct) === JSON.stringify(product)) {
-              favorites.push(localProduct);
-            }
-          })
-        );
-        localStorage.setItem("favorites", JSON.stringify(favorites));
+
         dispatch(setFavourites(favorites));
       }
     }
-  }, [allProducts]);
+  }, [allProducts?.data.length]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

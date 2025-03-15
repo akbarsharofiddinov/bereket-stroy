@@ -15,6 +15,7 @@ import { calculateDiscounts } from "@/utils/calculateDiscounts";
 
 import noImage from "@/assets/no-image.webp";
 import { toast } from "react-toastify";
+import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
 
 interface ICart {
   product: IProduct;
@@ -32,8 +33,13 @@ const Cart: React.FC = () => {
   const navigate = useNavigate();
 
   const { cart } = useAppSelector((state) => state.productSlice);
+  const { selectedCategory } = useAppSelector((state) => state.categorySlice);
   const token = useAppSelector((state) => state.projectSlice.token);
   const dispatch = useAppDispatch();
+
+  const { isLoading, isSuccess, isError, data } = useGetAllProductsQuery({
+    category_slug: selectedCategory?.slug,
+  });
 
   function handleRemoveAllProductFromCart(product: IProduct) {
     dispatch(instantRemoveProductsFromCart(product));
@@ -79,22 +85,26 @@ const Cart: React.FC = () => {
   }
 
   useEffect(() => {
-    const sum = cart.reduce((acc, { isSelected, product, quantity }) => {
-      return isSelected
-        ? acc + parseFloat(product.discounted_price) * quantity
-        : acc;
-    }, 0);
+    const calculateSumAndSelection = async () => {
+      const sum = cart.reduce((acc, { isSelected, product, quantity }) => {
+        return isSelected
+          ? acc + parseFloat(product.discounted_price) * quantity
+          : acc;
+      }, 0);
 
-    setTotalSum(sum);
+      setTotalSum(sum);
 
-    const allSelected = cart.every((item) => item.isSelected);
-    const noneSelected = cart.every((item) => !item.isSelected);
+      const allSelected = cart.every((item) => item.isSelected);
+      const noneSelected = cart.every((item) => !item.isSelected);
 
-    const mixedSelected = !allSelected && !noneSelected;
+      const mixedSelected = !allSelected && !noneSelected;
 
-    if (allSelected) setCartProductsSelected("all");
-    else if (noneSelected) setCartProductsSelected("none");
-    else if (mixedSelected) setCartProductsSelected("mixed");
+      if (allSelected) setCartProductsSelected("all");
+      else if (noneSelected) setCartProductsSelected("none");
+      else if (mixedSelected) setCartProductsSelected("mixed");
+    };
+
+    calculateSumAndSelection();
   }, [cart]);
 
   return (
@@ -460,7 +470,11 @@ const Cart: React.FC = () => {
 
               <Suggestion
                 title="Ushbu mahsulotlar bilan xarid qilishadi"
-                link=""
+                data={data?.data!}
+                isError={isError}
+                isLoading={isLoading}
+                isSuccess={isSuccess}
+                link="/catalogs"
               />
 
               <Services />
