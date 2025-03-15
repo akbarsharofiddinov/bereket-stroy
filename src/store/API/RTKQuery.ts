@@ -82,6 +82,10 @@ export const bereketAPI = createApi({
     getBestOfferedProducts: build.query<APIResponse<IProduct[]>, void>({
       query: () => "/best-offers",
     }),
+
+    getSiteSettings: build.query<APIResponse<ISiteSetting>, void>({
+      query: () => "/setting",
+    }),
   }),
 });
 
@@ -91,4 +95,5 @@ export const {
   useGetAllCategoriesQuery,
   useGetUserInfoQuery,
   useGetBestOfferedProductsQuery,
+  useGetSiteSettingsQuery,
 } = bereketAPI;

@@ -150,3 +150,13 @@ interface APIResponse<T> {
     };
   };
 }
+
+interface ISiteSetting {
+  id: number;
+  email: string;
+  facebook: string;
+  instagram: string;
+  phone: string;
+  telegram: string;
+  youtube: string;
+}

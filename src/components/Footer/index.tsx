@@ -1,7 +1,13 @@
+import { useGetSiteSettingsQuery } from "@/store/API/RTKQuery";
+import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
+  const { data } = useGetSiteSettingsQuery();
+
+  const { email, facebook, instagram, phone, telegram, youtube } = data?.data!;
+
   return (
     <>
       <footer id="footer">
@@ -67,13 +73,13 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="footer-links">
-              <a href="tel:+998900000000">+998 90 000 00 00</a>
+              <a href="tel:+998900000000">{formatPhoneNumber(phone)}</a>
               <a href="mailto:bereketsawda@info.com" className="email">
-                Bereketsawda@info.com
+                {email}
               </a>
               <ul>
                 <li>
-                  <a href="#">
+                  <a href={telegram}>
                     <svg
                       width="22"
                       height="20"
@@ -92,7 +98,7 @@ const Footer: React.FC = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href={instagram}>
                     <svg
                       width="24"
                       height="24"
@@ -122,7 +128,7 @@ const Footer: React.FC = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href={facebook}>
                     <svg
                       width="16"
                       height="22"
@@ -142,7 +148,7 @@ const Footer: React.FC = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href={youtube}>
                     <svg
                       width="24"
                       height="24"
