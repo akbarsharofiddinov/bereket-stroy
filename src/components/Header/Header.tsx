@@ -328,12 +328,8 @@ const Header: React.FC = () => {
                   e.stopPropagation();
                   dispatch(setCatalogModal(false));
                   dispatch(setSearchModal(false));
-                  if (searchModal || catalogModal) {
-                    setTimeout(() => {
-                      if (token) setProfileMenu(!profileMenu);
-                      else dispatch(setAuthModal(true));
-                    }, 300);
-                  }
+                  if (token) setProfileMenu(!profileMenu);
+                  else dispatch(setAuthModal(true));
                 }}
               >
                 <svg
