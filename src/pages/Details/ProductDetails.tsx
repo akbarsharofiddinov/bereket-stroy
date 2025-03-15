@@ -21,18 +21,17 @@ import {
 
 import noImage from "@/assets/no-image.webp";
 import { useTranslation } from "react-i18next";
-import { useGetProductDetailsQuery } from "@/store/API/RTKQuery";
+import {
+  useGetProductDetailsQuery,
+  useGetSimilarProductsQuery,
+} from "@/store/API/RTKQuery";
 
 const ProductDetails: React.FC = () => {
-  const [recommendations, setRecommendations] = useState<IProduct[]>([]);
-
   const [currentImage, setCurrentImage] = useState("");
 
   const { t } = useTranslation();
 
-  const { cart, allProducts, favorites } = useAppSelector(
-    (state) => state.productSlice
-  );
+  const { cart, favorites } = useAppSelector((state) => state.productSlice);
 
   const {
     selectedCategory,
@@ -41,11 +40,15 @@ const ProductDetails: React.FC = () => {
     allCategories,
   } = useAppSelector((state) => state.categorySlice);
 
-  console.log(selectedCategory?.name);
-  console.log(selectedSubCategory?.name);
-
   const params = useParams();
   const dispatch = useAppDispatch();
+
+  const {
+    data: similarProducts,
+    isLoading: similarProductsLoading,
+    isError: similarProductsError,
+    isSuccess: similarProductsSuccess,
+  } = useGetSimilarProductsQuery(params.product_slug!);
 
   const {
     isLoading,
@@ -162,19 +165,6 @@ const ProductDetails: React.FC = () => {
     return false;
   }
 
-  function getRecommendedProducts() {
-    if (allProducts) {
-      const categories = new Set(cart.map((item) => item.product.category_id));
-      setRecommendations(
-        allProducts.filter(
-          (product) =>
-            categories.has(product.category_id) &&
-            !cart.some((cartItem) => cartItem.product.id === product.id)
-        )
-      );
-    }
-  }
-
   useEffect(() => {
     if (productDetails) {
       if (productDetails.data[0].photos)
@@ -200,8 +190,6 @@ const ProductDetails: React.FC = () => {
           }
         }
       }
-
-      getRecommendedProducts();
     }
   }, [productDetails]);
 
@@ -654,14 +642,14 @@ const ProductDetails: React.FC = () => {
             ""
           )}
 
-          {recommendations.length ? (
+          {similarProductsSuccess ? (
             <Suggestion
-              title="Tavsiya qilamiz"
+              title="Ushbu mahsulot bilan xarid qilishadi"
               link=""
-              data={[]}
-              isError={false}
-              isLoading={false}
-              isSuccess={true}
+              data={similarProducts.data}
+              isError={similarProductsError}
+              isLoading={similarProductsLoading}
+              isSuccess={similarProductsSuccess}
             />
           ) : (
             ""

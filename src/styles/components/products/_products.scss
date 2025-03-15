@@ -165,9 +165,13 @@
 
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 358px));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       width: 100%;
+
+      .product-item {
+        max-width: 360px !important;
+      }
     }
 
     .pagination-box {

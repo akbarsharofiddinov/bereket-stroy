@@ -7,9 +7,9 @@ import { FaAngleDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 import noImage from "@/assets/no-image.webp";
-import { setAuthModal } from "@/store/projectSlice";
 import { toast } from "react-toastify";
 import { setBranches } from "@/store/companySlice";
+import { useCreateOrderMutation } from "@/store/API/RTKQuery";
 
 const Checkout: React.FC = () => {
   const [totalSum, setTotalSum] = useState(0);
@@ -34,13 +34,16 @@ const Checkout: React.FC = () => {
   const [longitude, setLongitude] = useState("");
 
   const [fillInfoError, setFillInfoError] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   const { branches } = useAppSelector((state) => state.companySlice);
   const cart = useAppSelector((state) => state.productSlice.cart);
-  const { profileInfo, token } = useAppSelector((state) => state.projectSlice);
+  const { profileInfo } = useAppSelector((state) => state.projectSlice);
 
   const dispatch = useAppDispatch();
+
+  const [createOrder, { isSuccess }] = useCreateOrderMutation();
+  if (isSuccess)
+    toast("Buyurtma muvofaqqiyatli yaratildi", { type: "success" });
 
   async function getDeliveryMethods() {
     try {
@@ -90,73 +93,6 @@ const Checkout: React.FC = () => {
     return discountedPrices;
   }
 
-  async function orderProcessing() {
-    if (token) {
-      const products: { product_id: number; quantity: number }[] = [];
-
-      cart.map((item) => {
-        if (item.isSelected)
-          products.push({
-            product_id: item.product.id,
-            quantity: item.quantity,
-          });
-      });
-
-      const requestData = {
-        receiver_name: userName,
-        receiver_phone: phoneNumber,
-        receiver_comment: comment,
-        delivery_method_id: selectedDeliveryMethodID,
-        branch_id: selectedBranch?.id,
-        region,
-        district,
-        address,
-        latitude,
-        longitude,
-        payment_type: selectedPaymentMethod,
-        comment,
-        products,
-      };
-
-      console.log(requestData);
-
-      try {
-        const response = await axios.post(
-          "https://bereket.webclub.uz/api/orders",
-          requestData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (response.status === 201) {
-          setSuccess(true);
-          if (response.data.url) {
-            setTimeout(() => {
-              window.location.href = response.data.url;
-            }, 500);
-          }
-        } else {
-          toast("Nimadir xato iltimos qaytadan urunib koring", {
-            type: "error",
-          });
-        }
-      } catch (error) {
-        toast("Iltimos ma'lumotlaringizni to'liq to'ldiring", {
-          type: "error",
-        });
-        setFillInfoError(true);
-      }
-    } else {
-      toast("Buyurtma berish uchun avval ro'yxatdan o'ting", {
-        type: "warning",
-      });
-      dispatch(setAuthModal(true));
-    }
-  }
-
   async function getBranches() {
     try {
       const response = await axios.get(
@@ -170,6 +106,57 @@ const Checkout: React.FC = () => {
 
       if (response.status === 200) {
         dispatch(setBranches(response.data.data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleCreateOrder() {
+    const products: { product_id: number; quantity: number }[] = [];
+
+    cart.map((item) => {
+      if (item.isSelected)
+        products.push({
+          product_id: item.product.id,
+          quantity: item.quantity,
+        });
+    });
+
+    const deliveryBodyData = {
+      receiver_name: userName,
+      receiver_phone: phoneNumber,
+      receiver_comment: comment,
+      delivery_method_id: selectedDeliveryMethodID,
+      comment,
+      payment_type: selectedPaymentMethod,
+      products,
+      region,
+      district,
+      address,
+      latitude,
+      longitude,
+    };
+
+    const takeAwayBodyData = {
+      receiver_name: userName,
+      receiver_phone: phoneNumber,
+      receiver_comment: comment,
+      delivery_method_id: selectedDeliveryMethodID,
+      branch_id: selectedBranch?.id,
+      comment,
+      payment_type: selectedPaymentMethod,
+      products,
+    };
+
+    try {
+      const response = await createOrder(
+        selectedDeliveryMethodID === 1 ? takeAwayBodyData : deliveryBodyData
+      );
+      if (response.data.url) {
+        setTimeout(() => {
+          window.location.href = response.data.url;
+        }, 500);
       }
     } catch (error) {
       console.log(error);
@@ -809,7 +796,7 @@ const Checkout: React.FC = () => {
                   <span>{formatCurrency(totalSum)}</span>
                 </p>
               </div>
-              <button className="order-btn" onClick={orderProcessing}>
+              <button className="order-btn" onClick={() => handleCreateOrder()}>
                 Rasmiylashtirish
               </button>
               <p>
@@ -825,7 +812,7 @@ const Checkout: React.FC = () => {
         </div>
       </div>
 
-      {success && <CheckoutModal />}
+      {isSuccess && <CheckoutModal />}
 
       <Footer />
     </>

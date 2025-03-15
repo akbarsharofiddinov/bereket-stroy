@@ -42,9 +42,11 @@ const Products: React.FC = () => {
       max_price: debouncedMaxPrice.length ? debouncedMaxPrice : undefined,
     });
 
-  const { totalProducts, isInSale, filteredProducts } = useAppSelector(
+  const { isInSale, filteredProducts } = useAppSelector(
     (state) => state.productSlice
   );
+
+  console.log(productsData);
 
   const dispatch = useAppDispatch();
 
@@ -120,21 +122,13 @@ const Products: React.FC = () => {
               <div className="pagination-box">
                 <SelectItem
                   title="Ko‘statish:"
-                  productsCount={
-                    filteredProducts.length
-                      ? filteredProducts.length
-                      : totalProducts
-                  }
+                  productsCount={productsData?.pagination.per_page!}
                   menu={["5", "10", "20", "25"]}
                 />
 
                 <Pagination
                   defaultCurrent={currentPage}
-                  total={
-                    filteredProducts.length
-                      ? filteredProducts.length
-                      : productsData?.pagination.total_pages
-                  }
+                  total={productsData?.pagination.total}
                   showSizeChanger={false}
                   onChange={(page) => {
                     setCurrentPage(page);

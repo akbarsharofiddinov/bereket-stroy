@@ -13,6 +13,24 @@ type productsParams = {
   max_price?: string;
 };
 
+// type createOrderParams = {
+//   receiver_name: string;
+//   receiver_phone: string;
+//   receiver_comment: string;
+//   delivery_method_id: number;
+//   region: string;
+//   district: string;
+//   address: string;
+//   latitude: string;
+//   longitude: string;
+//   payment_type: string;
+//   comment: string;
+//   products: {
+//     product_id: number;
+//     quantity: number;
+//   }[];
+// };
+
 export const bereketAPI = createApi({
   reducerPath: "bereketAPI",
   baseQuery: fetchBaseQuery({
@@ -86,6 +104,21 @@ export const bereketAPI = createApi({
     getSiteSettings: build.query<APIResponse<ISiteSetting>, void>({
       query: () => "/setting",
     }),
+
+    getSimilarProducts: build.query<APIResponse<IProduct[]>, string>({
+      query: (product_slug) => `/similar-products/${product_slug}`,
+    }),
+
+    createOrder: build.mutation<any, any>({
+      query: (data) => {
+        console.log(data)
+        return {
+          url: "/orders",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
@@ -96,4 +129,6 @@ export const {
   useGetUserInfoQuery,
   useGetBestOfferedProductsQuery,
   useGetSiteSettingsQuery,
+  useCreateOrderMutation,
+  useGetSimilarProductsQuery,
 } = bereketAPI;

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const highlightText = (text: string, highlight: string) => {
   if (!highlight) return text;
   const regex = new RegExp(`(${highlight})`, "gi");
-  return text.split(regex).map((part, index) =>
+  return text?.split(regex).map((part, index) =>
     regex.test(part) ? (
       <mark key={index} className="bg-transparent text-black font-bold">
         {part}

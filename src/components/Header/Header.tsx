@@ -12,6 +12,7 @@ import {
 } from "@/store/projectSlice";
 import { useTranslation } from "react-i18next";
 import { setSearchedProducts, setSearchValue } from "@/store/productSlice";
+import axios from "axios";
 
 const Header: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -20,12 +21,9 @@ const Header: React.FC = () => {
   const [quantityCartProducts, setQuantityCartProducts] = useState(0);
   const [quantityFavoritesProducts, setQuantityFavoritesProducts] = useState(0);
 
-  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
-
   const { searchModal, catalogModal, profileInfo, token } = useAppSelector(
     (state) => state.projectSlice
   );
-  const { allProducts } = useAppSelector((state) => state.productSlice);
 
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -34,19 +32,26 @@ const Header: React.FC = () => {
     if (profileMenu) setProfileMenu(false);
   });
 
+  async function searchProducts() {
+    try {
+      const response = await axios.get(
+        `https://bereket.webclub.uz/api/product-search?name=${searchInput}`
+      );
+      if (response.status === 200) {
+        dispatch(setSearchedProducts(response.data.data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function handleSearchInput(value: string) {
     setSearchInput(value);
     dispatch(setSearchValue(value));
 
     if (value) {
-      const results = allProducts.filter((product) =>
-        product.name.toLowerCase().includes(value.toLowerCase())
-      );
-
-      setFilteredProducts(results);
-      dispatch(setSearchedProducts(results));
+      searchProducts();
     } else {
-      setFilteredProducts([]);
       dispatch(setSearchedProducts([]));
     }
   }
@@ -145,11 +150,7 @@ const Header: React.FC = () => {
                   <input
                     type="text"
                     className="search-input"
-                    placeholder={
-                      filteredProducts.length > 0
-                        ? filteredProducts[0].name
-                        : t("search_placeholder")
-                    }
+                    placeholder={t("search_placeholder")}
                     value={searchInput}
                     onFocus={() => {
                       if (catalogModal) {
