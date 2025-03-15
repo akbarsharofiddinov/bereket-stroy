@@ -45,12 +45,29 @@ const Layout: React.FC = () => {
   const { isSuccess, data: categoriesResponse } = useGetAllCategoriesQuery();
   if (isSuccess) dispatch(setAllCategories(categoriesResponse.data));
 
+  const token = localStorage.getItem("token");
   // Get User Info
-  const { isSuccess: userInfoSuccess, data: userInfo } = useGetUserInfoQuery();
+  const {
+    isSuccess: userInfoSuccess,
+    isError,
+    data: userInfo,
+  } = useGetUserInfoQuery(undefined, { skip: token?.length ? false : true });
   if (userInfoSuccess) dispatch(setProfileInfo(userInfo));
-  else {
-    dispatch(setToken(""));
-    localStorage.setItem("token", "");
+  else if (isError) {
+    dispatch(
+      setProfileInfo({
+        birthday: "",
+        company_name: "",
+        first_name: "",
+        id: 0,
+        inn: "",
+        is_legal: 0,
+        is_verified: 0,
+        last_name: "",
+        phone: "",
+      })
+    );
+    localStorage.removeItem("token");
   }
 
   async function getBranches() {

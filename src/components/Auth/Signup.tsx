@@ -209,7 +209,7 @@ const Signup: React.FC<{
                     onChange={(e) => {
                       setSmsCode(e.target.value);
                       if (e.target.value) setIsLoading(false);
-                      else setIsLoading(true)
+                      else setIsLoading(true);
                     }}
                     placeholder="SMS kodni kiriting"
                   />
