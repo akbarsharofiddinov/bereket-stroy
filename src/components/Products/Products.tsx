@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
 import { setTotalProductsCount } from "@/store/productSlice";
 import { useParams, useSearchParams } from "react-router-dom";
+import { useDebounce } from "@/hooks/useDebounce";
 
 type SortOption = "popular" | "price" | "-price" | "rating" | "";
 
@@ -14,6 +15,15 @@ const Products: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeSort, setActiveSort] = useState<SortOption>("");
   const [inSaleProducts, setInSaleProducts] = useState<IProduct[]>([]);
+
+  const [brandsQuery, setBrandsQuery] = useState("");
+  const [countriesQuesy, setCountriesQuery] = useState("");
+
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+
+  const debouncedMinPrice = useDebounce(minPrice, 500);
+  const debouncedMaxPrice = useDebounce(maxPrice, 500);
 
   const params = useParams();
 
@@ -26,9 +36,13 @@ const Products: React.FC = () => {
       sub_category_slug: params.sub_catalog_slug,
       sub_sub_category_slug: params.sub_sub_catalog_slug,
       sort_by: searchParams.get("sort_by")!,
+      brandIDsStr: brandsQuery,
+      countryIDsStr: countriesQuesy,
+      min_price: debouncedMinPrice.length ? debouncedMinPrice : undefined,
+      max_price: debouncedMaxPrice.length ? debouncedMaxPrice : undefined,
     });
 
-  const { totalProducts, isInSale } = useAppSelector(
+  const { totalProducts, isInSale, filteredProducts } = useAppSelector(
     (state) => state.productSlice
   );
 
@@ -66,7 +80,12 @@ const Products: React.FC = () => {
   return (
     <>
       <div className="products">
-        <FilterSidebar />
+        <FilterSidebar
+          setBrandsQuery={setBrandsQuery}
+          setCountriesQuery={setCountriesQuery}
+          setMaxPrice={setMaxPrice}
+          setMinPrice={setMinPrice}
+        />
         <div className="right">
           <TopFilterBox activeSort={activeSort} setActiveSort={setActiveSort} />
           {isLoading ? (
@@ -84,7 +103,11 @@ const Products: React.FC = () => {
                           key={`${index}-${product.id}`}
                         />
                       ))
-                    : "fkopfkp"
+                    : ""
+                  : filteredProducts.length
+                  ? filteredProducts.map((product, index) => (
+                      <ProductItem key={index} data={product} />
+                    ))
                   : productsData?.data.length
                   ? productsData?.data.map((product, index) => (
                       <ProductItem
@@ -97,13 +120,21 @@ const Products: React.FC = () => {
               <div className="pagination-box">
                 <SelectItem
                   title="Ko‘statish:"
-                  productsCount={totalProducts}
+                  productsCount={
+                    filteredProducts.length
+                      ? filteredProducts.length
+                      : totalProducts
+                  }
                   menu={["5", "10", "20", "25"]}
                 />
 
                 <Pagination
                   defaultCurrent={currentPage}
-                  total={productsData?.pagination.total_pages}
+                  total={
+                    filteredProducts.length
+                      ? filteredProducts.length
+                      : productsData?.pagination.total_pages
+                  }
                   showSizeChanger={false}
                   onChange={(page) => {
                     setCurrentPage(page);

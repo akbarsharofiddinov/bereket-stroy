@@ -3,8 +3,10 @@ import React, { useState } from "react";
 interface IProps {
   label: string;
   id: string;
-  setSelectedBrands?: React.Dispatch<React.SetStateAction<string[]>>;
-  setSelectedCountries?: React.Dispatch<React.SetStateAction<string[]>>;
+  isWaiting: boolean;
+  setSelectedBrands?: React.Dispatch<React.SetStateAction<number[]>>;
+  setSelectedCountries?: React.Dispatch<React.SetStateAction<number[]>>;
+  setIsWating: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Checkbox: React.FC<IProps> = ({
@@ -12,29 +14,49 @@ const Checkbox: React.FC<IProps> = ({
   id,
   setSelectedBrands,
   setSelectedCountries,
+  isWaiting,
+  setIsWating,
 }) => {
   const [checked, setChecked] = useState(false);
+
+  function handleOnChange() {
+    if (setSelectedBrands) {
+      setSelectedBrands((prev) =>
+        prev.includes(parseInt(id))
+          ? prev.filter((item) => item !== parseInt(id))
+          : [...prev, parseInt(id)]
+      );
+    } else if (setSelectedCountries) {
+      setSelectedCountries((prev) =>
+        prev.includes(parseInt(id))
+          ? prev.filter((item) => item !== parseInt(id))
+          : [...prev, parseInt(id)]
+      );
+    }
+  }
+
   return (
     <>
-      <label htmlFor={id} className="checkbox">
+      <label
+        htmlFor={id}
+        className={isWaiting ? "checkbox loading" : "checkbox"}
+      >
         <input
           type="checkbox"
           id={id}
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
-            if (setSelectedBrands)
-              setSelectedBrands((prev) =>
-                prev.includes(label)
-                  ? prev.filter((item) => item !== label)
-                  : [...prev, label]
-              );
-            else if (setSelectedCountries)
-              setSelectedCountries((prev) =>
-                prev.includes(label)
-                  ? prev.filter((item) => item !== label)
-                  : [...prev, label]
-              );
+          onChange={(e) => {
+            setIsWating(true);
+            if (isWaiting) {
+              e.stopPropagation();
+              e.preventDefault();
+            } else {
+              setChecked(!checked);
+              setTimeout(() => {
+                handleOnChange();
+                setIsWating(false);
+              }, 1000);
+            }
           }}
         />
         <div className="checkmark">

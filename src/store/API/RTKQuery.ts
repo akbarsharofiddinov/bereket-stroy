@@ -7,6 +7,10 @@ type productsParams = {
   sub_category_slug?: string;
   sub_sub_category_slug?: string;
   sort_by?: string;
+  brandIDsStr?: string;
+  countryIDsStr?: string;
+  min_price?: string;
+  max_price?: string;
 };
 
 export const bereketAPI = createApi({
@@ -37,16 +41,30 @@ export const bereketAPI = createApi({
         sub_category_slug,
         sub_sub_category_slug,
         sort_by,
-      }) => ({
-        url: `/products`,
-        params: {
-          page,
-          category_slug,
-          sub_category_slug,
-          sub_sub_category_slug,
-          sort_by,
-        },
-      }),
+        brandIDsStr,
+        countryIDsStr,
+        max_price,
+        min_price,
+      }) => {
+        return {
+          url: `/products?${
+            brandIDsStr
+              ? `${brandIDsStr}`
+              : countryIDsStr
+              ? `${countryIDsStr}`
+              : ""
+          }`,
+          params: {
+            page,
+            category_slug,
+            sub_category_slug,
+            sub_sub_category_slug,
+            sort_by,
+            min_price,
+            max_price,
+          },
+        };
+      },
     }),
 
     getProductDetails: build.query<APIResponse<IProduct[]>, string>({

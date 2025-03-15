@@ -14,9 +14,7 @@
   }
 
   &.loading {
-    .checkmark {
-      background-color: var(--border-color) !important;
-    }
+    opacity: 0.5;
   }
 
   .checkmark {
@@ -61,6 +59,7 @@
   &.active .checkmark {
     background-color: var(--yellow);
     border-color: var(--yellow);
+    opacity: 1 !important;
 
     span {
       opacity: 1;
