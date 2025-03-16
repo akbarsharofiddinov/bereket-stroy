@@ -121,10 +121,11 @@ interface IOrder {
     photos: string[];
     price: string;
     quantity: number;
-  };
+  }[];
   region: string | null;
   status: string;
   total_amount: string;
+  created_at: string;
 }
 
 interface ICart {

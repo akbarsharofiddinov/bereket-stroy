@@ -7,6 +7,7 @@ import { ProductItem } from "@/components";
 
 const Favorites: React.FC = () => {
   const { favorites } = useAppSelector((state) => state.productSlice);
+  console.log(favorites)
   return (
     <>
       <div className="favorites-page">

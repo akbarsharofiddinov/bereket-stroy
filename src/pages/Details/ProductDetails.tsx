@@ -75,7 +75,7 @@ const ProductDetails: React.FC = () => {
         }
       }
 
-      dispatch(addToFavourites(productDetails));
+      dispatch(addToFavourites(productDetails.data[0]));
     }
   }
 
@@ -88,7 +88,7 @@ const ProductDetails: React.FC = () => {
         (product) => product.id !== productDetails.data[0].id
       );
       localStorage.setItem("favorites", JSON.stringify(newFavorites));
-      dispatch(removeFromFavourites(productDetails));
+      dispatch(removeFromFavourites(productDetails.data[0]));
     }
   }
 
@@ -133,11 +133,11 @@ const ProductDetails: React.FC = () => {
             (product) => product.product.id !== productDetails.data[0].id
           );
           localStorage.setItem("cart", JSON.stringify(newCartProducts));
-          dispatch(removeProductFromCart(productDetails));
+          dispatch(removeProductFromCart(productDetails.data[0]));
         } else {
           findProduct.quantity -= 1;
           localStorage.setItem("cart", JSON.stringify(cartProducts));
-          dispatch(removeProductFromCart(productDetails));
+          dispatch(removeProductFromCart(productDetails.data[0]));
         }
       }
     }

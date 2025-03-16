@@ -91,11 +91,13 @@ const Cart: React.FC = () => {
   );
 
   useEffect(() => {
-    const findCategory = allCategories.find(
-      (item) => item.id === cart[0].product.category_id
-    );
+    if (cart.length) {
+      const findCategory = allCategories.find(
+        (item) => item.id === cart[0].product.category_id
+      );
 
-    setCurrentCategory(findCategory!);
+      setCurrentCategory(findCategory!);
+    }
   }, [cart]);
 
   useEffect(() => {
@@ -200,14 +202,20 @@ const Cart: React.FC = () => {
                         <div
                           className="cart-products_item"
                           key={index}
-                          onClick={() => navigate(`/details/${product.slug}`)}
+                          onClick={() => {
+                            navigate(`/details/${product.slug}`);
+                          }}
                         >
                           <div className="img-box">
                             <span
                               className={
                                 isSelected ? "select-btn active" : "select-btn"
                               }
-                              onClick={() => handleCartProductSelect(product)}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                handleCartProductSelect(product);
+                              }}
                             >
                               {isSelected && (
                                 <svg
@@ -258,9 +266,11 @@ const Cart: React.FC = () => {
                               </p>
                               <button
                                 className="delete-btn"
-                                onClick={() =>
-                                  handleRemoveAllProductFromCart(product)
-                                }
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  handleRemoveAllProductFromCart(product);
+                                }}
                               >
                                 <svg
                                   width="24"
@@ -323,7 +333,13 @@ const Cart: React.FC = () => {
                                   ""
                                 )}
                               </div>
-                              <div className="count-box">
+                              <div
+                                className="count-box"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                }}
+                              >
                                 <button
                                   onClick={() =>
                                     dispatch(removeProductFromCart(product))

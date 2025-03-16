@@ -37,7 +37,7 @@
       p {
         font-size: 18px;
         font-weight: 600;
-        color: var(--text-)200;
+        color: var(--text-) 200;
       }
     }
   }
@@ -47,7 +47,7 @@
 
     .fav-products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 345px));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 315px));
       gap: 20px;
     }
 
@@ -71,7 +71,7 @@
         .desc {
           text-align: center;
           font-size: 18px;
-          color: var(--text-)200;
+          color: var(--text-) 200;
         }
 
         a {

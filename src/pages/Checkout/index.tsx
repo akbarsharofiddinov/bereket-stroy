@@ -10,6 +10,7 @@ import noImage from "@/assets/no-image.webp";
 import { toast } from "react-toastify";
 import { setBranches } from "@/store/companySlice";
 import { useCreateOrderMutation } from "@/store/API/RTKQuery";
+import { useTranslation } from "react-i18next";
 
 const Checkout: React.FC = () => {
   const [totalSum, setTotalSum] = useState(0);
@@ -41,6 +42,8 @@ const Checkout: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
+  const { i18n } = useTranslation();
+
   const [createOrder, { isSuccess }] = useCreateOrderMutation();
   if (isSuccess)
     toast("Buyurtma muvofaqqiyatli yaratildi", { type: "success" });
@@ -51,7 +54,7 @@ const Checkout: React.FC = () => {
         "https://bereket.webclub.uz/api/delivery-methods",
         {
           headers: {
-            "Accept-Language": "uz",
+            "Accept-Language": i18n.language,
           },
         }
       );
@@ -69,7 +72,7 @@ const Checkout: React.FC = () => {
         "https://bereket.webclub.uz/api/payment-types",
         {
           headers: {
-            "Accept-Language": "uz",
+            "Accept-Language": i18n.language,
           },
         }
       );
@@ -99,7 +102,7 @@ const Checkout: React.FC = () => {
         "https://bereket.webclub.uz/api/branches",
         {
           headers: {
-            "Accept-Language": "uz",
+            "Accept-Language": i18n.language,
           },
         }
       );

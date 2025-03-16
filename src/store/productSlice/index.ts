@@ -25,7 +25,7 @@ const initialState: IState = {
   searchedProducts: [],
   searchValue: "",
   isInSale: false,
-  totalProducts: 0
+  totalProducts: 0,
 };
 
 export const productSlice = createSlice({
@@ -107,9 +107,9 @@ export const productSlice = createSlice({
       state.filteredProducts = payload;
     },
 
-    setTotalProductsCount: (state, {payload}) => {
-      state.totalProducts = payload
-    }
+    setTotalProductsCount: (state, { payload }) => {
+      state.totalProducts = payload;
+    },
   },
 });
 
@@ -128,6 +128,6 @@ export const {
   setSearchValue,
   setIsInSalve,
   setFilteredProducts,
-  setTotalProductsCount
+  setTotalProductsCount,
 } = productSlice.actions;
 export default productSlice.reducer;

@@ -45,34 +45,36 @@ const SearchModal: React.FC = () => {
                           onClick={() => dispatch(setSearchModal(false))}
                           key={index}
                         >
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 20 20"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <g clipPath="url(#clip0_246_5305)">
-                              <path
-                                d="M14.5833 14.5833L18.3333 18.3333"
-                                stroke="black"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M16.6667 9.16667C16.6667 5.02454 13.3089 1.66667 9.16675 1.66667C5.02461 1.66667 1.66675 5.02454 1.66675 9.16667C1.66675 13.3088 5.02461 16.6667 9.16675 16.6667C13.3089 16.6667 16.6667 13.3088 16.6667 9.16667Z"
-                                stroke="black"
-                                strokeWidth="1.5"
-                                strokeLinejoin="round"
-                              />
-                            </g>
-                            <defs>
-                              <clipPath id="clip0_246_5305">
-                                <rect width="20" height="20" fill="white" />
-                              </clipPath>
-                            </defs>
-                          </svg>
+                          <span>
+                            <svg
+                              width="20"
+                              height="20"
+                              viewBox="0 0 20 20"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <g clipPath="url(#clip0_246_5305)">
+                                <path
+                                  d="M14.5833 14.5833L18.3333 18.3333"
+                                  stroke="black"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                                <path
+                                  d="M16.6667 9.16667C16.6667 5.02454 13.3089 1.66667 9.16675 1.66667C5.02461 1.66667 1.66675 5.02454 1.66675 9.16667C1.66675 13.3088 5.02461 16.6667 9.16675 16.6667C13.3089 16.6667 16.6667 13.3088 16.6667 9.16667Z"
+                                  stroke="black"
+                                  strokeWidth="1.5"
+                                  strokeLinejoin="round"
+                                />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_246_5305">
+                                  <rect width="20" height="20" fill="white" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </span>
                           {highlightText(item.name, searchValue)}
                         </Link>
                       ) : (
@@ -87,34 +89,36 @@ const SearchModal: React.FC = () => {
                           onClick={() => dispatch(setSearchModal(false))}
                           key={index}
                         >
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 20 20"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <g clipPath="url(#clip0_246_5305)">
-                              <path
-                                d="M14.5833 14.5833L18.3333 18.3333"
-                                stroke="black"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M16.6667 9.16667C16.6667 5.02454 13.3089 1.66667 9.16675 1.66667C5.02461 1.66667 1.66675 5.02454 1.66675 9.16667C1.66675 13.3088 5.02461 16.6667 9.16675 16.6667C13.3089 16.6667 16.6667 13.3088 16.6667 9.16667Z"
-                                stroke="black"
-                                strokeWidth="1.5"
-                                strokeLinejoin="round"
-                              />
-                            </g>
-                            <defs>
-                              <clipPath id="clip0_246_5305">
-                                <rect width="20" height="20" fill="white" />
-                              </clipPath>
-                            </defs>
-                          </svg>
+                          <span>
+                            <svg
+                              width="20"
+                              height="20"
+                              viewBox="0 0 20 20"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <g clipPath="url(#clip0_246_5305)">
+                                <path
+                                  d="M14.5833 14.5833L18.3333 18.3333"
+                                  stroke="black"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                                <path
+                                  d="M16.6667 9.16667C16.6667 5.02454 13.3089 1.66667 9.16675 1.66667C5.02461 1.66667 1.66675 5.02454 1.66675 9.16667C1.66675 13.3088 5.02461 16.6667 9.16675 16.6667C13.3089 16.6667 16.6667 13.3088 16.6667 9.16667Z"
+                                  stroke="black"
+                                  strokeWidth="1.5"
+                                  strokeLinejoin="round"
+                                />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_246_5305">
+                                  <rect width="20" height="20" fill="white" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </span>
 
                           {item.name}
                         </Link>

@@ -122,6 +122,10 @@ export const bereketAPI = createApi({
         };
       },
     }),
+
+    getOrders: build.query<APIResponse<IOrder[]>, void>({
+      query: () => "/orders",
+    }),
   }),
 });
 
@@ -134,4 +138,5 @@ export const {
   useGetSiteSettingsQuery,
   useCreateOrderMutation,
   useGetSimilarProductsQuery,
+  useGetOrdersQuery,
 } = bereketAPI;
