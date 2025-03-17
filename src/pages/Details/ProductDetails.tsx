@@ -425,7 +425,7 @@ const ProductDetails: React.FC = () => {
                           )}
                         </Link>
                         <button
-                        className="fav-btn"
+                          className="fav-btn"
                           onClick={() => {
                             if (checkProductInFavourites())
                               handleRemoveFromFavorites();

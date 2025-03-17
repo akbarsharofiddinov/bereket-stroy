@@ -5,6 +5,10 @@
 
 .mini-banner {
   .discount-banner_swiper {
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: none;
+    }
     .swiper-slide {
       width: 100%;
       height: 200px;
@@ -35,11 +39,11 @@
         }
       }
 
-      &:first-child {
+      &:nth-child(odd) {
         background: #d5dac6;
       }
 
-      &:last-child {
+      &:nth-child(even) {
         background: #e1e4ea;
       }
     }
