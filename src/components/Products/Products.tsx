@@ -46,12 +46,11 @@ const Products: React.FC = () => {
       pagination: perPage,
     });
 
-  const { isInSale, filteredProducts } = useAppSelector(
+  const { isInSale, filteredProducts, searchedProducts } = useAppSelector(
     (state) => state.productSlice
   );
 
   const dispatch = useAppDispatch();
-
   useEffect(() => {
     if (isSuccess) {
       dispatch(setTotalProductsCount(data.pagination.total));
@@ -106,6 +105,12 @@ const Products: React.FC = () => {
                           data={product}
                           key={`${index}-${product.id}`}
                         />
+                      ))
+                    : ""
+                  : searchedProducts
+                  ? searchedProducts.length
+                    ? searchedProducts.map((item, index) => (
+                        <ProductItem key={index} data={item} />
                       ))
                     : ""
                   : filteredProducts.length

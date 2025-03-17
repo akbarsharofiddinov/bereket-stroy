@@ -54,6 +54,7 @@ interface IProduct {
   count_rating: number;
   country: string;
   sales_count: number;
+  search?: string;
 }
 
 interface IBrands {

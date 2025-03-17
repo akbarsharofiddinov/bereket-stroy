@@ -75,7 +75,7 @@ const SearchModal: React.FC = () => {
                               </defs>
                             </svg>
                           </span>
-                          {highlightText(item.name, searchValue)}
+                          {highlightText(item.search!, searchValue)}
                         </Link>
                       ) : (
                         ""

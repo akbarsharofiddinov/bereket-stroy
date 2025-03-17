@@ -11,6 +11,7 @@ import {
   Orders,
   ProductDetails,
   Profile,
+  SearchProducts,
   SubCatalogDetails,
   SubSubCatalogDetails,
 } from "@/pages";
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
             element: <Profile />,
           },
         ],
+      },
+      {
+        path: "search/:product_name",
+        element: <SearchProducts />,
       },
     ],
   },

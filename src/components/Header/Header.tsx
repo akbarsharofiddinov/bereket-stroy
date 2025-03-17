@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HeaderTop from "./HeaderTop/HeaderTop";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import logo from "@/assets/Vector.png";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -25,17 +25,27 @@ const Header: React.FC = () => {
     (state) => state.projectSlice
   );
 
-  const { t } = useTranslation();
+  const { searchValue } = useAppSelector((state) => state.productSlice);
+
+  const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const { product_name } = useParams();
 
   window.addEventListener("click", () => {
     if (profileMenu) setProfileMenu(false);
   });
 
-  async function searchProducts() {
+  async function searchProducts(query: string) {
     try {
       const response = await axios.get(
-        `https://bereket.webclub.uz/api/product-search?name=${searchInput}`
+        `https://bereket.webclub.uz/api/product-search?name=${query}`,
+        {
+          headers: {
+            "Accept-Language": i18n.language,
+          },
+        }
       );
       if (response.status === 200) {
         dispatch(setSearchedProducts(response.data.data));
@@ -50,7 +60,7 @@ const Header: React.FC = () => {
     dispatch(setSearchValue(value));
 
     if (value) {
-      searchProducts();
+      searchProducts(value);
     } else {
       dispatch(setSearchedProducts([]));
     }
@@ -65,6 +75,16 @@ const Header: React.FC = () => {
   useEffect(() => {
     if (favorites) setQuantityFavoritesProducts(favorites.length);
   }, [favorites.length]);
+
+  useEffect(() => {
+    if (searchValue) {
+      setSearchInput(searchValue);
+    }
+  }, [searchValue]);
+
+  useEffect(() => {
+    if (product_name) setSearchInput(product_name);
+  }, [product_name]);
 
   return (
     <>
@@ -177,7 +197,15 @@ const Header: React.FC = () => {
                 </div>
                 <button
                   className="search-btn"
-                  onClick={() => dispatch(setSearchModal(true))}
+                  onClick={() => {
+                    if (searchModal) {
+                      if (searchInput) {
+                        setTimeout(() => {
+                          navigate(`/search/${searchInput}`);
+                        }, 500);
+                      }
+                    } else dispatch(setSearchModal(true));
+                  }}
                 >
                   <span>
                     <svg
