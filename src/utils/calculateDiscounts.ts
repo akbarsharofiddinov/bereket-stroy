@@ -1,11 +1,14 @@
-export function calculateDiscounts(
-  cart: { product: IProduct; quantity: number }[]
-) {
+export function calculateDiscounts(cart: ICart[]) {
   if (cart) {
-    const discountedProducts = cart.filter((item) => item.product.discount);
+    const discountedProducts = cart.filter(
+      (item) => item.product.discount && item
+    );
 
     const discountedPrices = discountedProducts.reduce(
-      (acc, product) => acc + product.quantity * product.product.discount,
+      (acc, product) =>
+        product.isSelected
+          ? acc + product.quantity * product.product.discount
+          : acc,
       0
     );
 
