@@ -30,12 +30,16 @@ const Suggestions: React.FC<IProps> = ({
           <div className="inner">
             <div className="section-top">
               <h2 className="title">{title}</h2>
-              <Link to={link}>
-                Barchasi
-                <span>
-                  <FaAngleRight />
-                </span>
-              </Link>
+              {link ? (
+                <Link to={link}>
+                  Barchasi
+                  <span>
+                    <FaAngleRight />
+                  </span>
+                </Link>
+              ) : (
+                ""
+              )}
             </div>
 
             <div className="products">

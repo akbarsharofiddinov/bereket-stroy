@@ -10,7 +10,7 @@ import {
 } from "@/store/categorySlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { formatCurrency } from "@/utils/currencyFormat";
-import { Partners, Services, Suggestion } from "@/components";
+import { Comments, Partners, Services, Suggestion } from "@/components";
 import {
   addProductToCart,
   addToFavourites,
@@ -25,10 +25,12 @@ import {
   useGetProductDetailsQuery,
   useGetSimilarProductsQuery,
 } from "@/store/API/RTKQuery";
+import axios from "axios";
 
 const ProductDetails: React.FC = () => {
   const [fixedToTop, setFixedToTop] = useState(false);
   const [currentImage, setCurrentImage] = useState("");
+  const [comments, setComments] = useState<IComment[]>([]);
 
   const { t } = useTranslation();
 
@@ -58,6 +60,17 @@ const ProductDetails: React.FC = () => {
     isSuccess,
     data: productDetails,
   } = useGetProductDetailsQuery(params.product_slug + "");
+
+  async function getComments() {
+    try {
+      const response = await axios.get(
+        `https://bereket.webclub.uz/api/comments?product_id=${productDetails?.data[0].id}`
+      );
+      if (response.status === 200) setComments(response.data.data);
+    } catch (error) {
+      console.log(resizeBy);
+    }
+  }
 
   function handleAddToFavorites() {
     if (productDetails) {
@@ -169,6 +182,7 @@ const ProductDetails: React.FC = () => {
 
   useEffect(() => {
     if (productDetails) {
+      getComments();
       if (productDetails.data[0].photos)
         setCurrentImage(productDetails.data[0].photos[0]);
 
@@ -199,7 +213,8 @@ const ProductDetails: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      setFixedToTop(scrollPosition > 225);
+      if (scrollPosition >= 500) setFixedToTop(true);
+      else if (scrollPosition <= 0) setFixedToTop(false);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -301,11 +316,6 @@ const ProductDetails: React.FC = () => {
                         {formatCurrency(
                           parseFloat(productDetails.data[0].price)
                         )}
-                      </p>
-                      <p className="discount">
-                        {productDetails.data[0].discount_type === "%"
-                          ? `${productDetails.data[0].discount}%`
-                          : formatCurrency(productDetails.data[0].discount)}
                       </p>
                     </>
                   ) : (
@@ -424,49 +434,6 @@ const ProductDetails: React.FC = () => {
                             </span>
                           )}
                         </Link>
-                        <button
-                          className="fav-btn"
-                          onClick={() => {
-                            if (checkProductInFavourites())
-                              handleRemoveFromFavorites();
-                            else handleAddToFavorites();
-                          }}
-                        >
-                          {checkProductInFavourites() ? (
-                            <svg
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.22172 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z"
-                                fill="#E31E24"
-                                stroke="#E31E24"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              width="22"
-                              height="20"
-                              viewBox="0 0 22 20"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M18.4626 1.99415C15.7809 0.349231 13.4404 1.01211 12.0344 2.06801C11.4578 2.50096 11.1696 2.71743 11 2.71743C10.8304 2.71743 10.5422 2.50096 9.9656 2.06801C8.55962 1.01211 6.21909 0.349231 3.53744 1.99415C0.0180688 4.15294 -0.77828 11.2749 7.33953 17.2834C8.88572 18.4278 9.6588 19 11 19C12.3412 19 13.1143 18.4278 14.6605 17.2834C22.7783 11.2749 21.9819 4.15294 18.4626 1.99415Z"
-                                fill="black"
-                                fillOpacity="0.5"
-                                stroke="#E2E5EB"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                          )}
-                        </button>
                       </div>
                     </>
                   ) : (
@@ -552,6 +519,49 @@ const ProductDetails: React.FC = () => {
                       )}
                     </div>
                   )}
+                  <button
+                    className="fav-btn"
+                    onClick={() => {
+                      if (checkProductInFavourites())
+                        handleRemoveFromFavorites();
+                      else handleAddToFavorites();
+                    }}
+                  >
+                    {checkProductInFavourites() ? (
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.22172 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z"
+                          fill="#E31E24"
+                          stroke="#E31E24"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        width="22"
+                        height="20"
+                        viewBox="0 0 22 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M18.4626 1.99415C15.7809 0.349231 13.4404 1.01211 12.0344 2.06801C11.4578 2.50096 11.1696 2.71743 11 2.71743C10.8304 2.71743 10.5422 2.50096 9.9656 2.06801C8.55962 1.01211 6.21909 0.349231 3.53744 1.99415C0.0180688 4.15294 -0.77828 11.2749 7.33953 17.2834C8.88572 18.4278 9.6588 19 11 19C12.3412 19 13.1143 18.4278 14.6605 17.2834C22.7783 11.2749 21.9819 4.15294 18.4626 1.99415Z"
+                          fill="black"
+                          fillOpacity="0.5"
+                          stroke="#E2E5EB"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
@@ -598,11 +608,7 @@ const ProductDetails: React.FC = () => {
             <h1>Error</h1>
           ) : isSuccess ? (
             <>
-              <div
-                className={
-                  fixedToTop ? "product-details hide" : "product-details"
-                }
-              >
+              <div className="product-details">
                 <div className="images">
                   <Swiper
                     direction={"vertical"}
@@ -762,19 +768,6 @@ const ProductDetails: React.FC = () => {
                           {formatCurrency(
                             parseFloat(productDetails.data[0].price)
                           )}
-                        </span>
-                        <span className="discount">
-                          {productDetails.data[0].discount
-                            ? productDetails.data[0].discount_type === "%"
-                              ? parseFloat(
-                                  productDetails.data[0].discount + ""
-                                ) + "%"
-                              : formatCurrency(
-                                  parseFloat(
-                                    productDetails.data[0].discount + ""
-                                  )
-                                )
-                            : ""}
                         </span>
                       </>
                     ) : (
@@ -1008,6 +1001,12 @@ const ProductDetails: React.FC = () => {
           ) : (
             ""
           )}
+
+          <Comments
+            data={comments}
+            rating_count={productDetails?.data[0].count_rating!}
+            avg_rating={productDetails?.data[0].avg_rating!}
+          />
 
           {similarProducts?.data.length ? (
             <Suggestion

@@ -167,5 +167,25 @@ interface ICard {
   id: number;
   name: string;
   priority: number;
-  products: IProduct[]
+  products: IProduct[];
 }
+
+interface IComment {
+  id: number;
+  last_name: null | string;
+  first_name: null | string;
+  comment: string;
+  rating: number;
+  photo: string;
+}
+
+interface IBanner {
+  id: number;
+  banner_type: string;
+  url: string;
+  photo: string;
+  header: string;
+  text: string;
+}
+
+
