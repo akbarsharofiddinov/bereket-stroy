@@ -141,7 +141,7 @@ const Cart: React.FC = () => {
               <div className="top">
                 <div>
                   <h2 className="title">Savatcha</h2>
-                  <p>6 ta mahsulot</p>
+                  <p>{cart.length} ta mahsulot</p>
                 </div>
                 <div>
                   <label
