@@ -51,7 +51,7 @@
 
     .right {
       flex: 80%;
-      max-height: 700px;
+      max-height: 1200px;
       overflow: auto;
 
       display: flex;
@@ -90,6 +90,19 @@
                 gap: 6px;
               }
             }
+          }
+        }
+
+        .images {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 20px;
+
+          img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
           }
         }
       }
