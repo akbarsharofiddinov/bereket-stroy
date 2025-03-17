@@ -10,9 +10,9 @@ interface IProps {
   title: string;
   link: string;
   data: IProduct[];
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
+  isLoading?: boolean;
+  isError?: boolean;
+  isSuccess?: boolean;
 }
 
 const Suggestions: React.FC<IProps> = ({

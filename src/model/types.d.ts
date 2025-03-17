@@ -162,3 +162,10 @@ interface ISiteSetting {
   telegram: string;
   youtube: string;
 }
+
+interface ICard {
+  id: number;
+  name: string;
+  priority: number;
+  products: IProduct[]
+}

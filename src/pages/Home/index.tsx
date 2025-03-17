@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Banner,
   Banner2,
@@ -13,9 +13,10 @@ import {
   useGetAllProductsQuery,
   useGetBestOfferedProductsQuery,
 } from "@/store/API/RTKQuery";
+import axios from "axios";
 
 const Home: React.FC = () => {
-  const [] = useState([]);
+  const [cards, setCards] = useState<ICard[]>([]);
   const {
     isLoading: bestOfferLoading,
     isError: bestOfferError,
@@ -28,6 +29,19 @@ const Home: React.FC = () => {
     isSuccess: usefullSuccess,
     data: usefullData,
   } = useGetAllProductsQuery({});
+
+  async function getCards() {
+    try {
+      const response = await axios.get("https://bereket.webclub.uz/api/cards");
+      if (response.status === 200) setCards(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getCards();
+  }, []);
 
   return (
     <>
@@ -50,6 +64,17 @@ const Home: React.FC = () => {
         isLoading={usefullLoading}
         isSuccess={usefullSuccess}
       />
+      {cards.length
+        ? cards.map((item, index) => (
+            <Suggestions
+              title={item.name}
+              data={item.products}
+              link=""
+              key={index}
+              isSuccess={true}
+            />
+          ))
+        : ""}
       <Partners />
       <Branches />
       <Services />
