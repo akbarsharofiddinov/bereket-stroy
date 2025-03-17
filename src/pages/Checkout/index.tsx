@@ -622,7 +622,7 @@ const Checkout: React.FC = () => {
                                   <div className="discount">
                                     <p className="old-price">
                                       {formatCurrency(
-                                        cartItem.product.discount
+                                        parseFloat(cartItem.product.price + "")
                                       )}
                                     </p>
                                   </div>
