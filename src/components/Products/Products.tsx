@@ -32,6 +32,10 @@ const Products: React.FC = () => {
 
   const [searchParams] = useSearchParams();
 
+  const { selectedCardProducts } = useAppSelector(
+    (state) => state.productSlice
+  );
+
   const { isLoading, isError, isSuccess, data, refetch } =
     useGetAllProductsQuery({
       page: currentPage,
@@ -51,7 +55,7 @@ const Products: React.FC = () => {
   );
 
   const dispatch = useAppDispatch();
-  console.log(productsData);
+
   useEffect(() => {
     if (isSuccess) {
       dispatch(setTotalProductsCount(data.pagination.total));
@@ -113,6 +117,10 @@ const Products: React.FC = () => {
                   : filteredProducts.length
                   ? filteredProducts.map((product, index) => (
                       <ProductItem key={index} data={product} />
+                    ))
+                  : selectedCardProducts.length
+                  ? selectedCardProducts.map((item, index) => (
+                      <ProductItem key={index} data={item} />
                     ))
                   : productsData?.data.length
                   ? productsData?.data.map((product, index) => (

@@ -14,6 +14,7 @@ interface IState {
   searchValue: string;
   isInSale: boolean;
   totalProducts: number;
+  selectedCardProducts: IProduct[];
 }
 
 const initialState: IState = {
@@ -26,6 +27,7 @@ const initialState: IState = {
   searchValue: "",
   isInSale: false,
   totalProducts: 0,
+  selectedCardProducts: [],
 };
 
 export const productSlice = createSlice({
@@ -110,6 +112,10 @@ export const productSlice = createSlice({
     setTotalProductsCount: (state, { payload }) => {
       state.totalProducts = payload;
     },
+
+    setSelectedCardProducts: (state, { payload }) => {
+      state.selectedCardProducts = payload;
+    },
   },
 });
 
@@ -129,5 +135,6 @@ export const {
   setIsInSalve,
   setFilteredProducts,
   setTotalProductsCount,
+  setSelectedCardProducts,
 } = productSlice.actions;
 export default productSlice.reducer;

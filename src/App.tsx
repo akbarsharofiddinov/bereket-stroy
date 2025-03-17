@@ -6,6 +6,7 @@ import {
   Cart,
   Catalog,
   Checkout,
+  Discount,
   Favorites,
   Home,
   Orders,
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "search/:product_name",
         element: <SearchProducts />,
+      },
+      {
+        path: "cards/:card_slug",
+        element: <Discount />,
       },
     ],
   },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { ProductItem } from "@/components";
@@ -6,6 +6,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import SkeletonImage from "antd/es/skeleton/Image";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "@/store/hooks";
+import { setSelectedCardProducts } from "@/store/productSlice";
 
 interface IProps {
   title: string;
@@ -26,6 +28,12 @@ const Suggestions: React.FC<IProps> = ({
 }) => {
   const { t } = useTranslation();
 
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (data) dispatch(setSelectedCardProducts(data));
+  }, [data]);
+
   return (
     <>
       <div className="suggestions section">
@@ -41,7 +49,12 @@ const Suggestions: React.FC<IProps> = ({
                   </span>
                 </Link>
               ) : (
-                ""
+                <Link to={`/cards/${title.split(" ").join("_").toLowerCase()}`}>
+                  {t("all")}
+                  <span>
+                    <FaAngleRight />
+                  </span>
+                </Link>
               )}
             </div>
 
