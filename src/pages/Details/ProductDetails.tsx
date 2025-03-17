@@ -62,7 +62,7 @@ const ProductDetails: React.FC = () => {
   function handleAddToFavorites() {
     if (productDetails) {
       if (!localStorage.getItem("favorites")) {
-        const favorites = productDetails;
+        const favorites = productDetails.data[0];
         localStorage.setItem("favorites", JSON.stringify([favorites]));
       } else {
         const favorites: IProduct[] = JSON.parse(
