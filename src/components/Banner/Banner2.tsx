@@ -1,37 +1,16 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import axios from "axios";
 import SkeletonImage from "antd/es/skeleton/Image";
 import { useNavigate } from "react-router-dom";
 
-const Banner2: React.FC = () => {
-  const [discounts, setDiscounts] = useState<IDiscount[]>([]);
-  const [loading, setLoading] = useState(false);
+interface IProps {
+  loading: boolean;
+  discounts: IDiscount[];
+}
 
-  async function getDiscounts() {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        "https://bereket.webclub.uz/api/discounts"
-      );
-      if (response.status === 200) {
-        setDiscounts(response.data.data);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  }
-
+const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getDiscounts();
-  }, []);
-
   return (
     <>
       <div className="mini-banner section">

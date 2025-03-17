@@ -4,6 +4,7 @@ import {
   Banner2,
   Branches,
   Categories,
+  DiscountSlicer,
   Partners,
   Services,
 } from "@/components";
@@ -17,6 +18,9 @@ import axios from "axios";
 import { t } from "i18next";
 
 const Home: React.FC = () => {
+  const [discounts, setDiscounts] = useState<IDiscount[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const [cards, setCards] = useState<ICard[]>([]);
   const {
     isLoading: bestOfferLoading,
@@ -40,14 +44,31 @@ const Home: React.FC = () => {
     }
   }
 
+  async function getDiscounts() {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        "https://bereket.webclub.uz/api/discounts"
+      );
+      if (response.status === 200) {
+        setDiscounts(response.data.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     getCards();
+    getDiscounts();
   }, []);
 
   return (
     <>
       <Banner />
-      <Banner2 />
+      <Banner2 loading={loading} discounts={discounts} />
       <Suggestions
         title={t("best_offers")}
         link="/catalogs"
@@ -65,6 +86,13 @@ const Home: React.FC = () => {
         isLoading={usefullLoading}
         isSuccess={usefullSuccess}
       />
+
+      {discounts.length
+        ? discounts.map((item, index) => (
+            <DiscountSlicer key={index} discount_data={item} />
+          ))
+        : ""}
+
       {cards.length
         ? cards.map((item, index) => (
             <Suggestions

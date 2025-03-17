@@ -29,3 +29,4 @@ export { default as LeafLetMap } from "./Map/LeafLetMap";
 export { default as Comments } from "./Comments/Comments";
 
 export { default as CommentModal } from "./UI/Modal/CommentModal";
+export { default as DiscountSlicer } from "./Sliders/DiscountSlider";
