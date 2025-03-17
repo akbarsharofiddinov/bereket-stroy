@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { ProductItem } from "@/components";
@@ -30,10 +30,6 @@ const Suggestions: React.FC<IProps> = ({
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (data) dispatch(setSelectedCardProducts(data));
-  }, [data]);
-
   return (
     <>
       <div className="suggestions section">
@@ -49,7 +45,10 @@ const Suggestions: React.FC<IProps> = ({
                   </span>
                 </Link>
               ) : (
-                <Link to={`/cards/${title.split(" ").join("_").toLowerCase()}`}>
+                <Link
+                  to={`/cards/${title.split(" ").join("_").toLowerCase()}`}
+                  onClick={() => dispatch(setSelectedCardProducts(data))}
+                >
                   {t("all")}
                   <span>
                     <FaAngleRight />
