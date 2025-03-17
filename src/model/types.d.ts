@@ -189,4 +189,12 @@ interface IBanner {
   text: string;
 }
 
-
+interface IDiscount {
+  id: number;
+  deadline: string;
+  discount_amount: number | null;
+  name: string;
+  photo: string;
+  slug: string;
+  type: null;
+}

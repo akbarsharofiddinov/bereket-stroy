@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import SkeletonImage from "antd/es/skeleton/Image";
 
 const Banner: React.FC = () => {
   const [bigBanners, setBigBanners] = useState<IBanner>();
   const [smallBanners, setSmallBanners] = useState<IBanner[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const { i18n, t } = useTranslation();
 
   async function getBanners() {
+    setLoading(true);
     try {
       const smallBannerRes = await axios.get(
         "https://bereket.webclub.uz/api/small-banner",
@@ -31,9 +34,13 @@ const Banner: React.FC = () => {
         }
       );
 
-      if (bigBannerRes.status === 200) setBigBanners(bigBannerRes.data.data);
+      if (bigBannerRes.status === 200) {
+        setBigBanners(bigBannerRes.data.data);
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }
 
@@ -46,52 +53,50 @@ const Banner: React.FC = () => {
       <div className="banner">
         <div className="container">
           <div className="inner">
-            {/* <div className="box box-1">
-              <img src={banner1} alt="banner image" />
-              <div className="context">
-                <h1 className="title">Mukammal tamirlash</h1>
-                <p>Sifatli mebel bilan</p>
-                <Link to={""}>Batafsil</Link>
-              </div>
-            </div>
-            <div className="box box-2">
-              <img src={banner2} alt="banner image" />
-              <div className="context">
-                <h1 className="title">Bejirim ko‘rinish</h1>
-                <p>Qulay narxlarda</p>
-              </div>
-            </div>
-            <div className="box box-3">
-              <img src={banner3} alt="banner image" />
-              <div className="context">
-                <h1 className="title">Oshxona buyumlari</h1>
-                <p>Xursandchilik bilan pishiring</p>
-              </div>
-            </div> */}
-
             <div className="box box-1">
-              <img
-                src={`http://bereket.webclub.uz/storage/${bigBanners?.photo}`}
-                alt=""
-              />
-              <div className="context">
-                <h1 className="title">{bigBanners?.header}</h1>
-                <p>{bigBanners?.text}</p>
-                <Link to={bigBanners?.url!}>{t('all')}</Link>
-              </div>
+              {loading ? (
+                <SkeletonImage active />
+              ) : (
+                <>
+                  <img
+                    src={`http://bereket.webclub.uz/storage/${bigBanners?.photo}`}
+                    alt=""
+                  />
+                  <div className="context">
+                    <h1 className="title">{bigBanners?.header}</h1>
+                    <p>{bigBanners?.text}</p>
+                    <Link to={bigBanners?.url!}>{t("all")}</Link>
+                  </div>
+                </>
+              )}
             </div>
-            {smallBanners.map((item, index) => (
-              <a href={item.url} className={`box box-${index + 2}`} key={index}>
-                <img
-                  src={`http://bereket.webclub.uz/storage/${item.photo}`}
-                  alt=""
-                />
-                <div className="context">
-                  <h1 className="title">{item.header}</h1>
-                  <p>{item.text}</p>
+            {loading ? (
+              <>
+                <div className="box box-2">
+                  <SkeletonImage active />
                 </div>
-              </a>
-            ))}
+                <div className="box box-3">
+                  <SkeletonImage active />
+                </div>
+              </>
+            ) : (
+              smallBanners.map((item, index) => (
+                <a
+                  href={item.url}
+                  className={`box box-${index + 2}`}
+                  key={index}
+                >
+                  <img
+                    src={`http://bereket.webclub.uz/storage/${item.photo}`}
+                    alt=""
+                  />
+                  <div className="context">
+                    <h1 className="title">{item.header}</h1>
+                    <p>{item.text}</p>
+                  </div>
+                </a>
+              ))
+            )}
           </div>
         </div>
       </div>

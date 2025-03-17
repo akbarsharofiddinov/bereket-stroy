@@ -105,6 +105,8 @@
           & > span {
             background-color: var(--yellow);
             color: var(--text-300);
+            display: flex;
+            align-items: center;
           }
         }
 
