@@ -48,6 +48,7 @@ const ProductDetails: React.FC = () => {
     isLoading: similarProductsLoading,
     isError: similarProductsError,
     isSuccess: similarProductsSuccess,
+    refetch,
   } = useGetSimilarProductsQuery(params.product_slug!);
 
   const {
@@ -169,6 +170,7 @@ const ProductDetails: React.FC = () => {
     if (productDetails) {
       if (productDetails.data[0].photos)
         setCurrentImage(productDetails.data[0].photos[0]);
+
       const findCategory = allCategories.find(
         (item) => item.id === productDetails.data[0].category_id
       );
@@ -192,6 +194,10 @@ const ProductDetails: React.FC = () => {
       }
     }
   }, [productDetails]);
+
+  useEffect(() => {
+    if (params.product_slug) refetch();
+  }, [params]);
 
   return (
     <>
@@ -642,7 +648,7 @@ const ProductDetails: React.FC = () => {
             ""
           )}
 
-          {similarProductsSuccess ? (
+          {similarProducts?.data.length ? (
             <Suggestion
               title="Ushbu mahsulot bilan xarid qilishadi"
               link=""

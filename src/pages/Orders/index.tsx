@@ -7,6 +7,7 @@ import noOrders from "@/assets/no-orders.png";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "@/utils/currencyFormat";
 import { useGetOrdersQuery } from "@/store/API/RTKQuery";
+import { Loading } from "@/pages";
 
 type statusType = "all" | "inProgress" | "delivered" | "canceled";
 
@@ -49,7 +50,7 @@ const Orders: React.FC = () => {
       <div className="orders-page">
         <div className="container">
           {isLoading ? (
-            <h1>Loading</h1>
+            <Loading />
           ) : isError ? (
             <div className="centered">
               <div className="no-orders">
