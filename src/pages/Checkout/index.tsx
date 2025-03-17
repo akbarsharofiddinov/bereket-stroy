@@ -12,9 +12,11 @@ import { setBranches } from "@/store/companySlice";
 import { useCreateOrderMutation } from "@/store/API/RTKQuery";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
+import { calculateDiscounts } from "@/utils/calculateDiscounts";
 
 const Checkout: React.FC = () => {
   const [totalSum, setTotalSum] = useState(0);
+  const [totalDiscountedSum, setTotalDiscountedSum] = useState(0);
   const [selectedBranch, setSeletedBranch] = useState<IBranch | undefined>(
     undefined
   );
@@ -83,18 +85,6 @@ const Checkout: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  function calculateDiscounts() {
-    const discountedProducts = cart.filter((item) => item.product.discount);
-
-    const discountedPrices = discountedProducts.reduce(
-      (acc, product) =>
-        acc + product.quantity * parseFloat(product.product.discounted_price),
-      0
-    );
-
-    return discountedPrices;
   }
 
   async function getBranches() {
@@ -182,6 +172,16 @@ const Checkout: React.FC = () => {
       return isSelected ? acc + parseFloat(product.price) * quantity : acc + 0;
     }, 0);
     setTotalSum(sum);
+    const discountedSum = cart.reduce(
+      (acc, { isSelected, product, quantity }) => {
+        return isSelected
+          ? acc + parseFloat(product.discounted_price) * quantity
+          : acc;
+      },
+      0
+    );
+
+    setTotalDiscountedSum(discountedSum);
   }, [cart]);
 
   useEffect(() => {
@@ -230,7 +230,7 @@ const Checkout: React.FC = () => {
                   />
                 </svg>
               </span>
-              {t('back')}
+              {t("back")}
             </Link>
             <h2 className="title">Buyurtmani rasmiylashtirish</h2>
           </div>
@@ -625,11 +625,6 @@ const Checkout: React.FC = () => {
                                         cartItem.product.discount
                                       )}
                                     </p>
-                                    <span>
-                                      {parseFloat(
-                                        cartItem.product.discount + ""
-                                      )}
-                                    </span>
                                   </div>
                                 )
                               ) : (
@@ -793,11 +788,13 @@ const Checkout: React.FC = () => {
                 </p>
                 <p>
                   <span>Chegirmangiz</span>
-                  <span>-{formatCurrency(calculateDiscounts())}</span>
+                  <span>
+                    -{formatCurrency(parseFloat(calculateDiscounts(cart) + ""))}
+                  </span>
                 </p>
                 <p>
                   <span>Jami to‘lov </span>
-                  <span>{formatCurrency(totalSum)}</span>
+                  <span>{formatCurrency(totalDiscountedSum)}</span>
                 </p>
               </div>
               <button className="order-btn" onClick={() => handleCreateOrder()}>
