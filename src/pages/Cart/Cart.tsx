@@ -26,6 +26,7 @@ interface ICart {
 const Cart: React.FC = () => {
   const [isIllegal, setIsIllegal] = React.useState(false);
   const [totalSum, setTotalSum] = React.useState(0);
+  const [totalDiscountedSum, setTotalDiscountedSum] = useState(0);
 
   const [cartProductsSelected, setCartProductsSelected] =
     React.useState("none");
@@ -102,13 +103,21 @@ const Cart: React.FC = () => {
 
   useEffect(() => {
     const calculateSumAndSelection = async () => {
-      const sum = cart.reduce((acc, { isSelected, product, quantity }) => {
-        return isSelected
-          ? acc + parseFloat(product.discounted_price) * quantity
-          : acc;
+      const totalSum = cart.reduce((acc, { isSelected, product, quantity }) => {
+        return isSelected ? acc + parseFloat(product.price) * quantity : acc;
       }, 0);
 
-      setTotalSum(sum);
+      const discountedSum = cart.reduce(
+        (acc, { isSelected, product, quantity }) => {
+          return isSelected
+            ? acc + parseFloat(product.discounted_price) * quantity
+            : acc;
+        },
+        0
+      );
+
+      setTotalSum(totalSum);
+      setTotalDiscountedSum(discountedSum);
 
       const allSelected = cart.every((item) => item.isSelected);
       const noneSelected = cart.every((item) => !item.isSelected);
@@ -463,7 +472,7 @@ const Cart: React.FC = () => {
                       <span>
                         {cart.reduce((acc, item) => {
                           return item.isSelected ? acc + 1 : acc + 0;
-                        }, 0)}{" "}
+                        }, 0)}
                         ta mahsulot
                       </span>
                       <span>{formatCurrency(totalSum)}</span>
@@ -479,7 +488,7 @@ const Cart: React.FC = () => {
                     </p>
                     <p>
                       <span>Jami to‘lov </span>
-                      <span>{formatCurrency(totalSum)}</span>
+                      <span>{formatCurrency(totalDiscountedSum)}</span>
                     </p>
                   </div>
                   <button
