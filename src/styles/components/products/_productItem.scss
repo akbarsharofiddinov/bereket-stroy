@@ -136,12 +136,12 @@
 
     .count-box {
       @include flexStyle();
-      gap: 10px;
+      gap: 5px;
       width: 100%;
 
       .add-cart_btn {
         @include flexStyle();
-
+        flex: 65% !important;
         width: 100%;
         justify-content: center;
         gap: 20px;
@@ -181,7 +181,8 @@
           background-color: var(--green);
           border-color: var(--green);
           color: #fff;
-          flex: 50%;
+          flex: 65%;
+          padding: 10px;
 
           &.disable {
             background-color: var(--background-color) !important;
@@ -222,6 +223,7 @@
         background-color: var(--background-color);
         padding: 10px 15px;
         height: 50px;
+        flex: 35% !important;
         border-radius: 10px;
         flex: 50% !important;
 

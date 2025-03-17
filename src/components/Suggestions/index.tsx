@@ -5,6 +5,7 @@ import { ProductItem } from "@/components";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import SkeletonImage from "antd/es/skeleton/Image";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   title: string;
@@ -23,6 +24,8 @@ const Suggestions: React.FC<IProps> = ({
   isError,
   isSuccess,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="suggestions section">
@@ -32,7 +35,7 @@ const Suggestions: React.FC<IProps> = ({
               <h2 className="title">{title}</h2>
               {link ? (
                 <Link to={link}>
-                  Barchasi
+                  {t("all")}
                   <span>
                     <FaAngleRight />
                   </span>

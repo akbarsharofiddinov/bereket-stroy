@@ -14,5 +14,16 @@
   "get_sms_code": "Получить код подтверждения",
   "sign_up": "Регистрация",
   "login": "Войти",
-  "fixed_payment": "Рассрочка платежа"
+  "fixed_payment": "Рассрочка платежа",
+  "all": "Все",
+  "best_offers": "Лучшие предложения",
+  "add_to_cart": "Добавить в корзину",
+  "in_cart": "В корзине",
+  "show_all": "Показать все",
+  "always_usefull": "Всегда полезно",
+  "famous_brands": "Популярные бренды",
+  "branches": "Филиалы",
+  "fast_delivery": "Быстрая доставка",
+  "product_selection": "Широкий выбор продукции",
+  "affordable_price": "Самые доступные цены"
 }

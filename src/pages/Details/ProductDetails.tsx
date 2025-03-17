@@ -68,7 +68,7 @@ const ProductDetails: React.FC = () => {
       );
       if (response.status === 200) setComments(response.data.data);
     } catch (error) {
-      console.log(resizeBy);
+      console.log(error);
     }
   }
 

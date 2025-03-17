@@ -7,7 +7,7 @@ const Banner: React.FC = () => {
   const [bigBanners, setBigBanners] = useState<IBanner>();
   const [smallBanners, setSmallBanners] = useState<IBanner[]>([]);
 
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   async function getBanners() {
     try {
@@ -77,7 +77,7 @@ const Banner: React.FC = () => {
               <div className="context">
                 <h1 className="title">{bigBanners?.header}</h1>
                 <p>{bigBanners?.text}</p>
-                <Link to={bigBanners?.url!}>Barchasi</Link>
+                <Link to={bigBanners?.url!}>{t('all')}</Link>
               </div>
             </div>
             {smallBanners.map((item, index) => (

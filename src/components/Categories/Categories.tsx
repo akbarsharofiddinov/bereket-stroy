@@ -1,9 +1,11 @@
 import { useAppSelector } from "@/store/hooks";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const Categories: React.FC = () => {
   const { allCategories } = useAppSelector((state) => state.categorySlice);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -44,7 +46,7 @@ const Categories: React.FC = () => {
                       </svg>
                     </span>
 
-                    <h2 className="title">Barchasini ko‘rish</h2>
+                    <h2 className="title">{t("show_all")}</h2>
                   </Link>
                 </>
               ) : (

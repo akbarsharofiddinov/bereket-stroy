@@ -14,6 +14,7 @@ import {
   useGetBestOfferedProductsQuery,
 } from "@/store/API/RTKQuery";
 import axios from "axios";
+import { t } from "i18next";
 
 const Home: React.FC = () => {
   const [cards, setCards] = useState<ICard[]>([]);
@@ -48,7 +49,7 @@ const Home: React.FC = () => {
       <Banner />
       <Banner2 />
       <Suggestions
-        title="Eng yaxshi takliflar"
+        title={t("best_offers")}
         link="/catalogs"
         data={bestOfferData?.data!}
         isError={bestOfferError}
@@ -57,7 +58,7 @@ const Home: React.FC = () => {
       />
       <Categories />
       <Suggestions
-        title="Har doim foydali bo'ladi"
+        title={t("always_usefull")}
         link="/catalogs"
         data={usefullData?.data!}
         isError={usefullError}

@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Services: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="services">
@@ -57,7 +59,7 @@ const Services: React.FC = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <p>Tezkor yetkazib berish</p>
+              <p>{t("fast_delivery")}</p>
             </div>
             <div className="service-box">
               <svg
@@ -93,7 +95,7 @@ const Services: React.FC = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <p>Mahsulotlarning keng tanlov</p>
+              <p>{t("product_selection")}</p>
             </div>
             <div className="service-box">
               <svg

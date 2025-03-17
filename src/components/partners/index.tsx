@@ -7,10 +7,12 @@ import { setPartners } from "@/store/productSlice";
 import { FreeMode } from "swiper/modules";
 
 import noImage from "@/assets/no-image.webp";
+import { useTranslation } from "react-i18next";
 
 const Partners: React.FC = () => {
   const { partners } = useAppSelector((state) => state.productSlice);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   async function getAllPartnerBrands() {
     try {
       const response = await axios.get(
@@ -36,7 +38,7 @@ const Partners: React.FC = () => {
       <div className="partners section">
         <div className="container">
           <div className="section-top">
-            <h2 className="title">Mashhur brendlar</h2>
+            <h2 className="title">{t("famous_brands")}</h2>
           </div>
           <div className="inner">
             <Swiper

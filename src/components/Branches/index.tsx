@@ -2,6 +2,7 @@ import { useAppSelector } from "@/store/hooks";
 import React, { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { LeafLetMap } from "..";
+import { useTranslation } from "react-i18next";
 
 const Branches: React.FC = () => {
   const [selectedBranch, setSelectedBranch] = useState<IBranch | undefined>(
@@ -9,6 +10,7 @@ const Branches: React.FC = () => {
   );
 
   const { branches } = useAppSelector((state) => state.companySlice);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSelectedBranch(branches[0]);
@@ -19,7 +21,7 @@ const Branches: React.FC = () => {
       <div className="branches section" id="branches">
         <div className="container">
           <div className="section-top">
-            <h2 className="title">Filiallar</h2>
+            <h2 className="title">{t("branches")}</h2>
           </div>
           <div className="inner">
             <div className="left">

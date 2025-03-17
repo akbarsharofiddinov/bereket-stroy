@@ -12,6 +12,7 @@ import { FaMinus, FaPlus, FaStar } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 
 import noImage from "@/assets/no-image.webp";
+import { t } from "i18next";
 
 const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
   const dispatch = useAppDispatch();
@@ -293,7 +294,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                         : "add-cart_btn in-cart disable"
                     }
                   >
-                    Savatda
+                    {t("in_cart")}
                     <span>
                       {data.is_sale ? (
                         <svg
@@ -410,7 +411,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                     }
                   }}
                 >
-                  Savatga solish
+                  {t("add_to_cart")}
                   <span>
                     {data.is_sale ? (
                       <svg

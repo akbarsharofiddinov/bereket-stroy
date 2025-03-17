@@ -9,6 +9,7 @@ import { formatCurrency } from "@/utils/currencyFormat";
 import { useGetOrdersQuery } from "@/store/API/RTKQuery";
 import { Loading } from "@/pages";
 import { CommentModal } from "@/components";
+import { useTranslation } from "react-i18next";
 
 type statusType = "all" | "inProgress" | "delivered" | "canceled";
 
@@ -43,7 +44,7 @@ const Orders: React.FC = () => {
 
   const { isLoading, isSuccess, isError, data } = useGetOrdersQuery();
 
-  console.log(data);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isSuccess) if (isSuccess) setOrders(data.data);
@@ -117,7 +118,7 @@ const Orders: React.FC = () => {
                     className={status === "all" ? "active" : ""}
                     onClick={() => setStatus("all")}
                   >
-                    Barchasi
+                    {t("all")}
                   </button>
                   <button
                     className={status === "inProgress" ? "active" : ""}
@@ -148,7 +149,7 @@ const Orders: React.FC = () => {
                             <span>ID raqam:</span>
                             {orderItem.id}
                           </p>
-                          <span>Yo‘lda</span>
+                          <span>{orderItem.status}</span>
                         </div>
 
                         <div className="content">

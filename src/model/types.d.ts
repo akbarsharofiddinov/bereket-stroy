@@ -177,6 +177,7 @@ interface IComment {
   comment: string;
   rating: number;
   photo: string;
+  created_at: string;
 }
 
 interface IBanner {

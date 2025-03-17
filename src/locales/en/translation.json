@@ -14,5 +14,16 @@
   "get_sms_code": "Get verification code",
   "sign_up": "Sign up",
   "login": "Log in",
-  "fixed_payment": "Installment payment"
+  "fixed_payment": "Installment payment",
+  "all": "All",
+  "best_offers": "Best offers",
+  "add_to_cart": "Add to cart",
+  "in_cart": "In Cart",
+  "show_all": "Show All",
+  "always_usefull": "It will always be useful",
+  "famous_brands": "Popular brands",
+  "branches": "Branches",
+  "fast_delivery": "Fast delivery",
+  "product_selection": "A wide selection of products",
+  "affordable_price": "The most affordable prices"
 }
