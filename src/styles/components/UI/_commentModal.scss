@@ -1,0 +1,27 @@
+.comment-modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 99;
+
+  .inner {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 450px;
+    min-height: 500px;
+    width: 100%;
+
+    .top {
+      .close-btn {
+        background-color: var(--border-color) !important;
+        border-radius: 100px;
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 20px;
+      }
+    }
+  }
+}

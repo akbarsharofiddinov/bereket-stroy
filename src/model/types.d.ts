@@ -106,7 +106,7 @@ interface IPaymanyMethod {
 interface IOrder {
   id: number;
   address: string | null;
-  branch_id: number | null;
+  branch: string;
   delivery_method: string;
   district: string | null;
   latitude: string;

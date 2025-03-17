@@ -51,6 +51,7 @@ const Products: React.FC = () => {
   );
 
   const dispatch = useAppDispatch();
+  console.log(productsData);
   useEffect(() => {
     if (isSuccess) {
       dispatch(setTotalProductsCount(data.pagination.total));
@@ -98,21 +99,17 @@ const Products: React.FC = () => {
           ) : isSuccess ? (
             <>
               <div className="products-grid">
-                {isInSale
-                  ? inSaleProducts?.length
-                    ? inSaleProducts?.map((product, index) => (
-                        <ProductItem
-                          data={product}
-                          key={`${index}-${product.id}`}
-                        />
-                      ))
-                    : ""
-                  : searchedProducts
-                  ? searchedProducts.length
-                    ? searchedProducts.map((item, index) => (
-                        <ProductItem key={index} data={item} />
-                      ))
-                    : ""
+                {inSaleProducts?.length
+                  ? inSaleProducts?.map((product, index) => (
+                      <ProductItem
+                        data={product}
+                        key={`${index}-${product.id}`}
+                      />
+                    ))
+                  : searchedProducts.length
+                  ? searchedProducts.map((item, index) => (
+                      <ProductItem key={index} data={item} />
+                    ))
                   : filteredProducts.length
                   ? filteredProducts.map((product, index) => (
                       <ProductItem key={index} data={product} />

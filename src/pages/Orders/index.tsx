@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { formatCurrency } from "@/utils/currencyFormat";
 import { useGetOrdersQuery } from "@/store/API/RTKQuery";
 import { Loading } from "@/pages";
+import { CommentModal } from "@/components";
 
 type statusType = "all" | "inProgress" | "delivered" | "canceled";
 
@@ -15,6 +16,7 @@ const Orders: React.FC = () => {
   const [status, setStatus] = useState<statusType>("all");
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [showProducts, setShowProducts] = useState(false);
+  const [commentModal, setCommentModal] = useState(false);
 
   const dispatch = useAppDispatch();
   // async function getAllOrders() {
@@ -40,6 +42,8 @@ const Orders: React.FC = () => {
   // }
 
   const { isLoading, isSuccess, isError, data } = useGetOrdersQuery();
+
+  console.log(data);
 
   useEffect(() => {
     if (isSuccess) if (isSuccess) setOrders(data.data);
@@ -142,7 +146,7 @@ const Orders: React.FC = () => {
                         <div className="info-top">
                           <p>
                             <span>ID raqam:</span>
-                            {orderItem.order_id}
+                            {orderItem.id}
                           </p>
                           <span>Yo‘lda</span>
                         </div>
@@ -151,10 +155,7 @@ const Orders: React.FC = () => {
                           <div className="left">
                             <p>
                               Do‘kon manzil:
-                              <span>
-                                Nukus shahar, Nukus ko‘chasi, Gulzor 2-uy (Nukus
-                                filiali)
-                              </span>
+                              <span>{orderItem.branch}</span>
                             </p>
 
                             <button className="cancel-order">
@@ -169,23 +170,23 @@ const Orders: React.FC = () => {
                                   <path
                                     d="M15 9L12 12M12 12L9 15M12 12L15 15M12 12L9 9"
                                     stroke="#E31E24"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                   />
                                   <path
                                     d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47713 17.5228 1.99997 12 1.99997"
                                     stroke="#E31E24"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                   />
                                   <path
                                     d="M2.5 8.49997C2.86239 7.67054 3.3189 6.89163 3.85601 6.17675M6.17681 3.85596C6.89168 3.31885 7.67058 2.86236 8.5 2.49997"
                                     stroke="#E31E24"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                   />
                                 </svg>
                               </span>
@@ -241,31 +242,47 @@ const Orders: React.FC = () => {
                               <path
                                 d="M13 1.00005C13 1.00005 8.5811 7 7 7C5.4188 7 1 1 1 1"
                                 stroke="black"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                               />
                             </svg>
                           </button>
                         </div>
-                        {orderItem.products.map((item, index) => (
-                          <div className="order-product" key={index}>
-                            <div className="img-box">
-                              <img
-                                src={`http://bereket.webclub.uz/storage/${item.photos[0]}`}
-                                alt=""
-                              />
-                            </div>
-                            <div className="body">
-                              <p className="name">{item.name}</p>
-                              <p className="quantity">
-                                Mahsulot soni:
-                                <span>{item.quantity} ta</span>
+                        <div className="content">
+                          {orderItem.products.map((item, index) => (
+                            <div className="order-product" key={index}>
+                              <div className="left">
+                                <div className="img-box">
+                                  <img
+                                    src={`http://bereket.webclub.uz/storage/${item.photos[0]}`}
+                                    alt=""
+                                  />
+                                </div>
+                                <div className="body">
+                                  <p className="name">{item.name}</p>
+                                  <p className="quantity">
+                                    Mahsulot soni:
+                                    <span>{item.quantity} ta</span>
+                                  </p>
+                                </div>
+                              </div>
+                              <p
+                                className="right"
+                                onClick={() => setCommentModal(true)}
+                              >
+                                Komment qoldirish
                               </p>
+
+                              {commentModal ? (
+                                <CommentModal product_id={item.id} setModal={setCommentModal} />
+                              ) : (
+                                ""
+                              )}
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
                     </div>
                   ))}

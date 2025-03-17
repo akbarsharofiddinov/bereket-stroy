@@ -228,10 +228,22 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                 )}
               </p>
               <p>
-                <span>
-                  <FaStar />
-                </span>
-                sharhlar yo‘q
+                {data.count_rating ? (
+                  <>
+                    <span>
+                      <FaStar />
+                    </span>
+                    <span>{data.avg_rating}</span>
+                    <span>{`(${data.count_rating})`}</span>
+                  </>
+                ) : (
+                  <>
+                    <span>
+                      <FaStar />
+                    </span>
+                    sharhlar yo‘q
+                  </>
+                )}
               </p>
             </div>
             <p className="product-name">
@@ -254,11 +266,8 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                     </>
                   ) : (
                     <>
-                      <p className="origianl-price">
+                      <p className="original-price">
                         {formatCurrency(parseFloat(data.price))}
-                      </p>
-                      <p className="discount">
-                        {formatCurrency(data.discount)}
                       </p>
                     </>
                   )

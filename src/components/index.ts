@@ -27,3 +27,5 @@ export { default as SignUpModal } from "./Auth/Signup";
 
 export { default as LeafLetMap } from "./Map/LeafLetMap";
 export { default as Comments } from "./Comments/Comments";
+
+export { default as CommentModal } from "./UI/Modal/CommentModal";
