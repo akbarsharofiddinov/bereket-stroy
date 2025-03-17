@@ -307,7 +307,7 @@ const ProductDetails: React.FC = () => {
                 <div className="price">
                   <p className="discounted-price">
                     {formatCurrency(
-                      parseFloat(productDetails.data[0].discounted_price)
+                      parseInt(productDetails.data[0].discounted_price)
                     )}
                   </p>
                   {productDetails.data[0].discount ? (

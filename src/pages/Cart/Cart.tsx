@@ -322,12 +322,6 @@ const Cart: React.FC = () => {
                                         parseFloat(product.price)
                                       )}
                                     </p>
-                                    <p className="discount">
-                                      {product.discount_type === "%"
-                                        ? parseFloat(product.discount + "") +
-                                          "%"
-                                        : product.discount}
-                                    </p>
                                   </>
                                 ) : (
                                   ""
@@ -341,21 +335,20 @@ const Cart: React.FC = () => {
                                 }}
                               >
                                 <button
-                                  onClick={() =>
-                                    dispatch(() => {
-                                      const cartProducts: ICart[] = JSON.parse(
-                                        localStorage.getItem("cart") + ""
-                                      );
-                                      const filtered = cartProducts.filter(
-                                        (item) => item.product.id !== product.id
-                                      );
-                                      localStorage.setItem(
-                                        "cart",
-                                        JSON.stringify(filtered)
-                                      );
-                                      removeProductFromCart(product);
-                                    })
-                                  }
+                                  onClick={() => {
+                                    const cartProducts: ICart[] = JSON.parse(
+                                      localStorage.getItem("cart") + ""
+                                    );
+                                    const filtered = cartProducts.filter(
+                                      (item) => item.product.id !== product.id
+                                    );
+                                    localStorage.setItem(
+                                      "cart",
+                                      JSON.stringify(filtered)
+                                    );
+
+                                    dispatch(removeProductFromCart(product));
+                                  }}
                                 >
                                   <svg
                                     width="17"
