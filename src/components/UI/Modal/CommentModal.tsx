@@ -40,7 +40,7 @@ const CommentModal: React.FC<IProps> = ({ product_id, setModal }) => {
     formData.append("product_id", product_id + "");
     formData.append("comment", comment);
     formData.append("rating", rating + "");
-    formData.append("photo", imageFile!);
+    if (imageFile) formData.append("photo", imageFile);
 
     try {
       const response = await axios.post(
@@ -70,7 +70,7 @@ const CommentModal: React.FC<IProps> = ({ product_id, setModal }) => {
       <div className="comment-modal modal" onClick={() => setModal(false)}>
         <div className="inner" onClick={(e) => e.stopPropagation()}>
           <div className="top">
-            <p className="title">Комментарий</p>
+            <p className="title">Комменkтарий</p>
             <button className="close-btn" onClick={() => setModal(false)}>
               <span>&times;</span>
             </button>
@@ -113,7 +113,7 @@ const CommentModal: React.FC<IProps> = ({ product_id, setModal }) => {
                   <label className="img-input">
                     <input
                       type="file"
-                      accept="image/*"
+                      accept="image/png, image/jpg, image/jpeg"
                       onChange={handleImageChange}
                     />
                     <span>

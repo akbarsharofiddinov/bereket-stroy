@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Banner,
   Banner2,
@@ -15,6 +15,7 @@ import {
 } from "@/store/API/RTKQuery";
 
 const Home: React.FC = () => {
+  const [] = useState([]);
   const {
     isLoading: bestOfferLoading,
     isError: bestOfferError,
