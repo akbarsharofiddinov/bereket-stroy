@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import favImage from "@/assets/fav.png";
 import { useAppSelector } from "@/store/hooks";
 import { ProductItem } from "@/components";
+import { t } from "i18next";
 
 const Favorites: React.FC = () => {
   const { favorites } = useAppSelector((state) => state.productSlice);
-  console.log(favorites)
+  console.log(favorites);
   return (
     <>
       <div className="favorites-page">
@@ -38,11 +39,17 @@ const Favorites: React.FC = () => {
                   />
                 </svg>
               </span>
-              Ortga
+              {t("back")}
             </Link>
             <div>
-              <h2 className="title">Sevimlilar</h2>
-              {favorites.length ? <p>{favorites.length} ta mahsulot</p> : ""}
+              <h2 className="title">{t("favourites")}</h2>
+              {favorites.length ? (
+                <p>
+                  {favorites.length} ta {t("product")}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
           </div>
 

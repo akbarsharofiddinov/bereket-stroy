@@ -342,7 +342,19 @@ const Cart: React.FC = () => {
                               >
                                 <button
                                   onClick={() =>
-                                    dispatch(removeProductFromCart(product))
+                                    dispatch(() => {
+                                      const cartProducts: ICart[] = JSON.parse(
+                                        localStorage.getItem("cart") + ""
+                                      );
+                                      const filtered = cartProducts.filter(
+                                        (item) => item.product.id !== product.id
+                                      );
+                                      localStorage.setItem(
+                                        "cart",
+                                        JSON.stringify(filtered)
+                                      );
+                                      removeProductFromCart(product);
+                                    })
                                   }
                                 >
                                   <svg

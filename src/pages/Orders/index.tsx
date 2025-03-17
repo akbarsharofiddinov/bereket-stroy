@@ -106,7 +106,7 @@ const Orders: React.FC = () => {
                         />
                       </svg>
                     </span>
-                    Ortga
+                    {t("back")}
                   </Link>
                   <div>
                     <h2 className="title">Buyurtmalar</h2>

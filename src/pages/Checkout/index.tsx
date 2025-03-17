@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { setBranches } from "@/store/companySlice";
 import { useCreateOrderMutation } from "@/store/API/RTKQuery";
 import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 
 const Checkout: React.FC = () => {
   const [totalSum, setTotalSum] = useState(0);
@@ -229,7 +230,7 @@ const Checkout: React.FC = () => {
                   />
                 </svg>
               </span>
-              Ortga
+              {t('back')}
             </Link>
             <h2 className="title">Buyurtmani rasmiylashtirish</h2>
           </div>
