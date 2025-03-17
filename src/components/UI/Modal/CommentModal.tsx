@@ -6,6 +6,7 @@ interface IProps {
 }
 
 const CommentModal: React.FC<IProps> = ({ product_id, setModal }) => {
+  console.log(product_id)
   return (
     <>
       <div className="comment-modal modal" onClick={() => setModal(false)}>
