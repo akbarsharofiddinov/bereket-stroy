@@ -129,15 +129,13 @@ const Banner2: React.FC = () => {
                 // </>
 
                 <SwiperSlide key={index}>
+                  <img
+                    src={`http://bereket.webclub.uz/storage/${item.photo}`}
+                    alt=""
+                  />
                   <div className="context">
                     <h2 className="title">{item.name}</h2>
-                    {/* <p className="desc">{}</p> */}
-                    <div className="img-box">
-                      <img
-                        src={`http://bereket.webclub.uz/storage/${item.photo}`}
-                        alt=""
-                      />
-                    </div>
+                    {/* <p className="desc"></p> */}
                   </div>
                 </SwiperSlide>
               ))
