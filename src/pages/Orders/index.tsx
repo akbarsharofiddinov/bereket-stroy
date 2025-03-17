@@ -232,22 +232,25 @@ const Orders: React.FC = () => {
                           </p>
 
                           <button>
-                            <svg
-                              width="14"
-                              height="8"
-                              viewBox="0 0 14 8"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M13 1.00005C13 1.00005 8.5811 7 7 7C5.4188 7 1 1 1 1"
-                                stroke="black"
-                                strokeOpacity="0.5"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
+                            Ko'rsatish
+                            <span>
+                              <svg
+                                width="14"
+                                height="8"
+                                viewBox="0 0 14 8"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M13 1.00005C13 1.00005 8.5811 7 7 7C5.4188 7 1 1 1 1"
+                                  stroke="black"
+                                  strokeOpacity="0.5"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            </span>
                           </button>
                         </div>
                         <div className="content">
@@ -276,7 +279,10 @@ const Orders: React.FC = () => {
                               </p>
 
                               {commentModal ? (
-                                <CommentModal product_id={item.id} setModal={setCommentModal} />
+                                <CommentModal
+                                  product_id={item.id}
+                                  setModal={setCommentModal}
+                                />
                               ) : (
                                 ""
                               )}

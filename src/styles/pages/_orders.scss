@@ -193,8 +193,17 @@
             background-color: transparent;
             border: none;
             margin-right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            color: var(--text-300);
+            font-weight: 500;
+            cursor: pointer;
 
-            transition: transform 0.3s ease-in-out;
+            span {
+              transition: transform 0.3s ease-in-out;
+            }
           }
         }
 
@@ -203,7 +212,9 @@
           .top {
             margin: 20px 0;
             button {
-              transform: rotate(180deg);
+              span {
+                transform: rotate(180deg);
+              }
             }
           }
 
