@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import axios from "axios";
 import SkeletonImage from "antd/es/skeleton/Image";
+import { useNavigate } from "react-router-dom";
 
 const Banner2: React.FC = () => {
   const [discounts, setDiscounts] = useState<IDiscount[]>([]);
@@ -24,6 +25,8 @@ const Banner2: React.FC = () => {
       setLoading(false);
     }
   }
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getDiscounts();
@@ -128,7 +131,10 @@ const Banner2: React.FC = () => {
                 // </SwiperSlide>
                 // </>
 
-                <SwiperSlide key={index}>
+                <SwiperSlide
+                  key={index}
+                  onClick={() => navigate(`/discounts/${item.slug}`)}
+                >
                   <img
                     src={`http://bereket.webclub.uz/storage/${item.photo}`}
                     alt=""

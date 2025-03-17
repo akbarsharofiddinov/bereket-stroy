@@ -87,6 +87,10 @@ const router = createBrowserRouter([
         path: "cards/:card_slug",
         element: <Discount />,
       },
+      {
+        path: "discounts/:discount_slug",
+        element: <Discount />
+      }
     ],
   },
   {
