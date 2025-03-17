@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { FaAngleRight } from "react-icons/fa6";
-import { Link } from "react-router-dom";
 
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -39,12 +37,6 @@ const Partners: React.FC = () => {
         <div className="container">
           <div className="section-top">
             <h2 className="title">Mashhur brendlar</h2>
-            <Link to={""}>
-              Barchasi
-              <span>
-                <FaAngleRight />
-              </span>
-            </Link>
           </div>
           <div className="inner">
             <Swiper

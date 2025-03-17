@@ -1,11 +1,14 @@
-import { createRoot } from "react-dom/client";
-import "./index.scss";
 import App from "./App";
-import "swiper/swiper-bundle.css";
+import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
+
 import { store } from "@/store";
-import "react-toastify/dist/ReactToastify.css";
 import "./i18n";
+
+import "./index.scss";
+
+import "react-toastify/dist/ReactToastify.css";
+import "swiper/swiper-bundle.css";
 
 createRoot(document.getElementById("root")!).render(
   <>
