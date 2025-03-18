@@ -13,11 +13,9 @@ const Footer: React.FC = () => {
           <div className="inner">
             <div className="footer-menu">
               <ul className="columns column-1">
+                <li className="column-item">Katalog</li>
                 <li className="column-item">
-                  <Link to={""}>Katalog</Link>
-                </li>
-                <li className="column-item">
-                  <Link to={""}>Chegirmalar</Link>
+                  <Link to={"/catalogs"}>Chegirmalar</Link>
                 </li>
                 <li className="column-item">
                   <Link to={""}>Xizmatlar</Link>
@@ -27,9 +25,7 @@ const Footer: React.FC = () => {
                 </li>
               </ul>
               <ul className="columns column-2">
-                <li className="column-item">
-                  <Link to={""}>Kompaniya</Link>
-                </li>
+                <li className="column-item">Kompaniya</li>
                 <li className="column-item">
                   <Link to={""}>Biz haqimizda</Link>
                 </li>
@@ -41,9 +37,7 @@ const Footer: React.FC = () => {
                 </li>
               </ul>
               <ul className="columns column-3">
-                <li className="column-item">
-                  <Link to={""}>Ma’lumot</Link>
-                </li>
+                <li className="column-item">Ma’lumot</li>
                 <li className="column-item">
                   <Link to={""}>To‘lov usullari</Link>
                 </li>
@@ -55,9 +49,7 @@ const Footer: React.FC = () => {
                 </li>
               </ul>
               <ul className="columns column-4">
-                <li className="column-item">
-                  <Link to={""}>Yordam</Link>
-                </li>
+                <li className="column-item">Yordam</li>
                 <li className="column-item">
                   <Link to={""}>To‘lov bilan bog’liq yordam</Link>
                 </li>

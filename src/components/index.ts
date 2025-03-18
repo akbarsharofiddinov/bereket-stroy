@@ -30,3 +30,4 @@ export { default as Comments } from "./Comments/Comments";
 
 export { default as CommentModal } from "./UI/Modal/CommentModal";
 export { default as DiscountSlicer } from "./Sliders/DiscountSlider";
+export { default as Authorization } from "./Auth/Authorization";

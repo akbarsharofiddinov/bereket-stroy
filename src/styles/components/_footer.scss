@@ -21,16 +21,14 @@ footer {
 
       .column-item {
         a {
-          color: var(--text-)200;
+          color: var(--text-) 200;
         }
 
         &:first-child {
           margin-bottom: 5px;
-          a {
-            color: #fff !important;
-            font-size: 20px;
-            font-weight: 600;
-          }
+          color: #fff;
+          font-size: 20px;
+          font-weight: 600;
         }
       }
 
@@ -87,7 +85,7 @@ footer {
       justify-content: space-between;
 
       & > p {
-        color: var(--text-)200;
+        color: var(--text-) 200;
       }
 
       div {
@@ -96,7 +94,7 @@ footer {
         gap: 40px;
 
         p {
-          color: var(--text-)150;
+          color: var(--text-) 150;
         }
       }
     }

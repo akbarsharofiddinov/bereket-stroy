@@ -14,9 +14,9 @@ import { formatCurrency } from "@/utils/currencyFormat";
 import { calculateDiscounts } from "@/utils/calculateDiscounts";
 
 import noImage from "@/assets/no-image.webp";
-import { toast } from "react-toastify";
 import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
 import { useTranslation } from "react-i18next";
+import { setAuthorization } from "@/store/projectSlice";
 
 interface ICart {
   product: IProduct;
@@ -25,7 +25,6 @@ interface ICart {
 }
 
 const Cart: React.FC = () => {
-  const [isIllegal, setIsIllegal] = React.useState(false);
   const [totalSum, setTotalSum] = React.useState(0);
   const [totalDiscountedSum, setTotalDiscountedSum] = useState(0);
 
@@ -413,26 +412,6 @@ const Cart: React.FC = () => {
                 </div>
 
                 <div className="order-content">
-                  <div className="switch-user_type">
-                    <button
-                      className={isIllegal ? "physical" : "physical active"}
-                      onClick={(e) => {
-                        setIsIllegal(false);
-                        e.preventDefault();
-                      }}
-                    >
-                      {t("physical")}
-                    </button>
-                    <button
-                      className={isIllegal ? "legal active" : "legal"}
-                      onClick={(e) => {
-                        setIsIllegal(true);
-                        e.preventDefault();
-                      }}
-                    >
-                      {t("legal")}
-                    </button>
-                  </div>
                   <h2 className="title">{t("your_order")}:</h2>
                   <div className="promo_code">
                     <input
@@ -508,12 +487,7 @@ const Cart: React.FC = () => {
                         if (cartProductsSelected !== "none")
                           navigate("/checkout");
                       } else {
-                        toast(
-                          "Buyurtmani rasmiylashtirish uchun avval tizimdan ro'yxatdan o'ting",
-                          {
-                            type: "warning",
-                          }
-                        );
+                        dispatch(setAuthorization(true));
                       }
                     }}
                   >

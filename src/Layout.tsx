@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import {
+  Authorization,
   CatalogsModal,
   Footer,
   Header,
@@ -42,7 +43,7 @@ const Layout: React.FC = () => {
 
   const location = useLocation();
 
-  const { authModal } = useAppSelector((state) => state.projectSlice);
+  const { authModal, authorization } = useAppSelector((state) => state.projectSlice);
 
   // Get All Categories
   const { isSuccess, data: categoriesResponse } = useGetAllCategoriesQuery();
@@ -170,6 +171,10 @@ const Layout: React.FC = () => {
       ) : (
         ""
       )}
+
+      {authorization ? (
+        <Authorization />
+      ) : ""}
     </>
   );
 };

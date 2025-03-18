@@ -89,8 +89,8 @@ const router = createBrowserRouter([
       },
       {
         path: "discounts/:discount_slug",
-        element: <Discount />
-      }
+        element: <Discount />,
+      },
     ],
   },
   {

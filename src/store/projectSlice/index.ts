@@ -7,6 +7,7 @@ interface IState {
   profileInfo: IProfile;
   token: string;
   currentLanguage: string;
+  authorization: boolean;
 }
 
 const initialState: IState = {
@@ -26,6 +27,7 @@ const initialState: IState = {
   },
   token: "",
   currentLanguage: "ru",
+  authorization: false,
 };
 
 export const projectSlice = createSlice({
@@ -55,6 +57,10 @@ export const projectSlice = createSlice({
     setCurrentLanguage: (state, { payload }) => {
       state.currentLanguage = payload;
     },
+
+    setAuthorization: (state, { payload }) => {
+      state.authorization = payload;
+    },
   },
 });
 
@@ -65,6 +71,7 @@ export const {
   setProfileInfo,
   setToken,
   setCurrentLanguage,
+  setAuthorization,
 } = projectSlice.actions;
 
 export default projectSlice.reducer;
