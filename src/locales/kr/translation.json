@@ -53,5 +53,22 @@
   "information": "Maǵlıwmat",
   "payment_methods": "Tólem usılları",
   "delivery_service": "Jetkerip beriw xızmeti",
-  "product_guarantee": "Product guarantee"
+  "product_guarantee": "Ónim kepilligi",
+  "help": "Járdem",
+  "payment_assistance": "Tólemge baylanıslı járdem",
+  "q&a": "Qısqa soraw-juwaplar",
+  "contact_with_us": "Processte",
+  "arrived": "Jetip kelgen",
+  "canceled": "Biykarlanǵan",
+  "number": "nomer",
+  "address": "Mánzil",
+  "cancel_order": "Buyırtpanı biykarlaw",
+  "order_date": "Buyırtpa berilgen sáne",
+  "total_amount": "Jámi summa",
+  "quantity_products": "Tovarlar sanı",
+  "show": "Kórsetiw",
+  "quantity": "Muǵdarı",
+  "leave_comment": "Pikir jazıw",
+  "company_info": "Kárxana maǵlıwmatları",
+  "log_out": "Shıǵıw"
 }

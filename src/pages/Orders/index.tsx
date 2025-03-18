@@ -115,7 +115,7 @@ const Orders: React.FC = () => {
                     {t("back")}
                   </Link>
                   <div>
-                    <h2 className="title">Buyurtmalar</h2>
+                    <h2 className="title">{t("orders")}</h2>
                   </div>
                 </div>
 
@@ -130,19 +130,19 @@ const Orders: React.FC = () => {
                     className={status === "inProgress" ? "active" : ""}
                     onClick={() => setStatus("inProgress")}
                   >
-                    Amaldagi
+                    {t("active")}
                   </button>
                   <button
                     className={status === "delivered" ? "active" : ""}
                     onClick={() => setStatus("delivered")}
                   >
-                    Yetib kelgan
+                    {t("arrived")}
                   </button>
                   <button
                     className={status === "canceled" ? "active" : ""}
                     onClick={() => setStatus("canceled")}
                   >
-                    Bekor qilingan
+                    {t("canceled")}
                   </button>
                 </div>
 
@@ -152,7 +152,7 @@ const Orders: React.FC = () => {
                       <div className="order-info">
                         <div className="info-top">
                           <p>
-                            <span>ID raqam:</span>
+                            <span>ID {t("number")}:</span>
                             {orderItem.id}
                           </p>
                           <span>{orderItem.status}</span>
@@ -161,8 +161,7 @@ const Orders: React.FC = () => {
                         <div className="content">
                           <div className="left">
                             <p>
-                              Do‘kon manzil:
-                              <span>{orderItem.branch}</span>
+                              {t("address")}:<span>{orderItem.branch}</span>
                             </p>
 
                             <button className="cancel-order">
@@ -197,12 +196,12 @@ const Orders: React.FC = () => {
                                   />
                                 </svg>
                               </span>
-                              Buyurtmani bekor qilish
+                              {t("cancel_order")}
                             </button>
                           </div>
                           <div className="right">
                             <p className="order-date">
-                              Buyurtma berilgan sana:
+                              {t("order_date")}:
                               <span>
                                 {orderItem.created_at
                                   .split(" ")[0]
@@ -212,7 +211,7 @@ const Orders: React.FC = () => {
                               </span>
                             </p>
                             <p className="total-price">
-                              Umumiy summa:
+                              {t("total_amount")}:
                               <span>
                                 {formatCurrency(
                                   parseFloat(orderItem.total_amount)
@@ -234,12 +233,14 @@ const Orders: React.FC = () => {
                           onClick={() => setShowProducts((prev) => !prev)}
                         >
                           <p className="title">
-                            Mahsulotlar soni:
-                            <span>{orderItem.products_count} ta</span>
+                            {t("quantity_products")}:
+                            <span>
+                              {orderItem.products_count} {t("counting")}
+                            </span>
                           </p>
 
                           <button>
-                            Ko'rsatish
+                            {t("show")}
                             <span>
                               <svg
                                 width="14"
@@ -273,8 +274,10 @@ const Orders: React.FC = () => {
                                 <div className="body">
                                   <p className="name">{item.name}</p>
                                   <p className="quantity">
-                                    Mahsulot soni:
-                                    <span>{item.quantity} ta</span>
+                                    {t("quantity")}:
+                                    <span>
+                                      {item.quantity} {t("counting")}
+                                    </span>
                                   </p>
                                 </div>
                               </div>
@@ -282,7 +285,7 @@ const Orders: React.FC = () => {
                                 className="right"
                                 onClick={() => setCommentModal(true)}
                               >
-                                Komment qoldirish
+                                {t("leave_comment")}
                               </p>
 
                               {commentModal ? (

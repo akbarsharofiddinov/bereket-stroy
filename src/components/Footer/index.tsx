@@ -32,34 +32,34 @@ const Footer: React.FC = () => {
                   <a href={data?.data.telegram!}>{t("about_us")}</a>
                 </li>
                 <li className="column-item">
-                  <a href="#branches">{t("services")}</a>
+                  <a href="#branches">{t("addresses")}</a>
                 </li>
                 <li className="column-item">
-                  <a href="#partners">{t("services")}</a>
+                  <a href="#partners">{t("partners")}</a>
                 </li>
               </ul>
               <ul className="columns column-3">
-                <li className="column-item">{t("services")}</li>
+                <li className="column-item">{t("information")}</li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>{t("services")}</a>
+                  <a href={data?.data.telegram!}>{t("payment_methods")}</a>
                 </li>
                 <li className="column-item">
-                  <a href="#services">{t("services")}</a>
+                  <a href="#services">{t("delivery_service")}</a>
                 </li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>{t("services")}</a>
+                  <a href={data?.data.telegram!}>{t("product_guarantee")}</a>
                 </li>
               </ul>
               <ul className="columns column-4">
-                <li className="column-item">{t("services")}</li>
+                <li className="column-item">{t("help")}</li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>{t("services")}</a>
+                  <a href={data?.data.telegram!}>{t("payment_assistance")}</a>
                 </li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>{t("services")}</a>
+                  <a href={data?.data.telegram!}>{t("q&a")}</a>
                 </li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>{t("services")}</a>
+                  <a href={data?.data.telegram!}>{t("contact_with_us")}</a>
                 </li>
               </ul>
             </div>

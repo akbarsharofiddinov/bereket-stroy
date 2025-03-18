@@ -428,7 +428,7 @@ const Header: React.FC = () => {
                         />
                       </svg>
                     </span>
-                    Manzillar
+                    {t("addresses")}
                   </Link>
                   <Link to={`profile/company`}>
                     <span>
@@ -480,7 +480,7 @@ const Header: React.FC = () => {
                         </defs>
                       </svg>
                     </span>
-                    Korxona ma’lumotlari
+                    {t("company_info")}
                   </Link>
                   <Link to={"/orders"}>
                     <span>
@@ -521,7 +521,7 @@ const Header: React.FC = () => {
                         />
                       </svg>
                     </span>
-                    Buyurtmalar
+                    {t("orders")}
                   </Link>
                   <Link to={"/favorites"}>
                     <span>
@@ -540,7 +540,7 @@ const Header: React.FC = () => {
                         />
                       </svg>
                     </span>
-                    Sevimlilar
+                    {t("favourites")}
                   </Link>
                   <Link
                     to={""}
@@ -573,7 +573,7 @@ const Header: React.FC = () => {
                         />
                       </svg>
                     </span>
-                    Chiqish
+                    {t("log_out")}
                   </Link>
                 </div>
               </button>
