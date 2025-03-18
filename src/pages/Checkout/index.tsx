@@ -9,10 +9,15 @@ import { Link } from "react-router-dom";
 import noImage from "@/assets/no-image.webp";
 import { toast } from "react-toastify";
 import { setBranches } from "@/store/companySlice";
-import { useCreateOrderMutation } from "@/store/API/RTKQuery";
+import {
+  useCreateOrderMutation,
+  useGetUserInfoQuery,
+} from "@/store/API/RTKQuery";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
 import { calculateDiscounts } from "@/utils/calculateDiscounts";
+import { setCartProducts } from "@/store/productSlice";
+import { setProfileInfo } from "@/store/projectSlice";
 
 const Checkout: React.FC = () => {
   const [totalSum, setTotalSum] = useState(0);
@@ -46,6 +51,13 @@ const Checkout: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const { i18n } = useTranslation();
+
+  const token = localStorage.getItem("token");
+
+  const { isSuccess: userInfoSuccess, data: userInfo } = useGetUserInfoQuery(
+    undefined,
+    { skip: token?.length ? false : true }
+  );
 
   const [createOrder, { isSuccess }] = useCreateOrderMutation();
   if (isSuccess)
@@ -161,6 +173,11 @@ const Checkout: React.FC = () => {
     getDeliveryMethods();
     getPaymantMethods();
     getBranches();
+
+    if (localStorage.getItem("cart")) {
+      const cartProducts = JSON.parse(localStorage.getItem("cart") + "");
+      dispatch(setCartProducts(cartProducts));
+    }
   }, []);
 
   useEffect(() => {
@@ -185,11 +202,19 @@ const Checkout: React.FC = () => {
   }, [cart]);
 
   useEffect(() => {
-    if (profileInfo) {
+    if (profileInfo.phone) {
       setUserName(profileInfo.first_name);
       setPhoneNumber(profileInfo.phone);
     }
   }, [profileInfo]);
+
+  useEffect(() => {
+    if (userInfoSuccess) {
+      dispatch(setProfileInfo(userInfo));
+      setUserName(userInfo.first_name);
+      setPhoneNumber(userInfo.phone);
+    }
+  }, [userInfoSuccess]);
 
   useEffect(() => {
     if (selectedBranch) {
