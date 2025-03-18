@@ -118,10 +118,6 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
                     src={`http://bereket.webclub.uz/storage/${item.photo}`}
                     alt=""
                   />
-                  <div className="context">
-                    <h2 className="title">{item.name}</h2>
-                    {/* <p className="desc"></p> */}
-                  </div>
                 </SwiperSlide>
               ))
             ) : (

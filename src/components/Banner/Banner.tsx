@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import SkeletonImage from "antd/es/skeleton/Image";
@@ -9,7 +8,7 @@ const Banner: React.FC = () => {
   const [smallBanners, setSmallBanners] = useState<IBanner[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
 
   async function getBanners() {
     setLoading(true);
@@ -53,23 +52,16 @@ const Banner: React.FC = () => {
       <div className="banner">
         <div className="container">
           <div className="inner">
-            <div className="box box-1">
+            <a href={bigBanners?.url} className="box box-1">
               {loading ? (
                 <SkeletonImage active />
               ) : (
-                <>
-                  <img
-                    src={`http://bereket.webclub.uz/storage/${bigBanners?.photo}`}
-                    alt=""
-                  />
-                  <div className="context">
-                    <h1 className="title">{bigBanners?.header}</h1>
-                    <p>{bigBanners?.text}</p>
-                    <Link to={bigBanners?.url!}>{t("all")}</Link>
-                  </div>
-                </>
+                <img
+                  src={`http://bereket.webclub.uz/storage/${bigBanners?.photo}`}
+                  alt=""
+                />
               )}
-            </div>
+            </a>
             {loading ? (
               <>
                 <div className="box box-2">
@@ -90,10 +82,6 @@ const Banner: React.FC = () => {
                     src={`http://bereket.webclub.uz/storage/${item.photo}`}
                     alt=""
                   />
-                  <div className="context">
-                    <h1 className="title">{item.header}</h1>
-                    <p>{item.text}</p>
-                  </div>
                 </a>
               ))
             )}
