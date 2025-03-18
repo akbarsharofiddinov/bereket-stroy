@@ -14,8 +14,6 @@ const Discount: React.FC = () => {
       const response = await axios.get(
         `https://bereket.webclub.uz/api/discount-products?discount_slug=${discount_slug}`
       );
-      console.log(discount_slug)
-      console.log(response);
       if (response.status === 200)
         dispatch(setSelectedCardProducts(response.data.data));
     } catch (error) {

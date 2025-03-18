@@ -7,7 +7,7 @@ import {
 import axios from "axios";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Authorization: React.FC = () => {
@@ -22,6 +22,8 @@ const Authorization: React.FC = () => {
   const [userName, setUsername] = React.useState("");
   const [timerStart, setTimerStart] = React.useState(false);
   const [timeLeft, setTimeLeft] = React.useState(120);
+
+  const location = useLocation();
 
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -95,7 +97,7 @@ const Authorization: React.FC = () => {
         toast("Tizimga muvaffaqiyatli kirdingiz", { type: "success" });
         localStorage.setItem("token", response.data.token);
         dispatch(setToken(response.data.token));
-        navigate("/checkout");
+        if (location.pathname.includes("cart")) navigate("/checkout");
         dispatch(setAuthorization(false));
         dispatch(setProfileInfo(response.data.customer));
       }
