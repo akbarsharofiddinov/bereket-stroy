@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setSearchModal } from "@/store/projectSlice";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const highlightText = (text: string, highlight: string) => {
@@ -26,6 +27,8 @@ const SearchModal: React.FC = () => {
     (state) => state.productSlice
   );
 
+  const { t } = useTranslation();
+
   return (
     <>
       <div
@@ -35,7 +38,7 @@ const SearchModal: React.FC = () => {
         <div className="inner" onClick={(e) => e.stopPropagation()}>
           <div className="container">
             <div className="most-searched">
-              <h2 className="title">Ko'pincha qidiriladi</h2>
+              <h2 className="title">{t("most_searched")}</h2>
               <div>
                 {searchedProducts.length
                   ? searchedProducts.map((item, index) =>
@@ -130,7 +133,7 @@ const SearchModal: React.FC = () => {
               </div>
             </div>
             <div className="popular-categories">
-              <h2 className="title">Mashhur kategoriyalar</h2>
+              <h2 className="title">{t("famous_categories")}</h2>
               <div>
                 {allCategories.length
                   ? allCategories.map((item, index) => (

@@ -27,5 +27,21 @@
   "product_selection": "Ónimlerdiń keń tańlaw",
   "affordable_price": "Eń qolay bahalar",
   "back": "Artqa",
-  "product": "Ónim"
+  "product": "Ónim",
+  "no_favs_title": "Siz ele súyikli ónimdi tańlamadınız.",
+  "no_favs_desc": "Jaqsı kórgen ónimlerdi tańlawǵa kirgiziń hám buyırtpa beriń",
+  "go_home_page": "Bas betke ótiw",
+  "most_searched": "Kóbinese izlenedi",
+  "famous_categories": "Belgili kategoriyalar",
+  "counting": "dana",
+  "select_all": "Hámmesin tańlaw",
+  "your_order": "Buyırtpańız",
+  "promo_code": "Promokod",
+  "discount": "Shegirme",
+  "total_fee": "Jámi tólem",
+  "proceed_payment": "Tólemge ótiw",
+  "delete": "Óshiriw",
+  "in_sale": "Sotuvda",
+  "not_in_sale": "Satıwda joq",
+  "similar_prodcuts": "Uqsas ónimler"
 }

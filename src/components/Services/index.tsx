@@ -122,7 +122,7 @@ const Services: React.FC = () => {
                   strokeLinecap="round"
                 />
               </svg>
-              <p>Eng qulay narxlar</p>
+              <p>{t("affordable_price")}</p>
             </div>
           </div>
         </div>

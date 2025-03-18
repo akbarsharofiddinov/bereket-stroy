@@ -27,5 +27,21 @@
   "product_selection": "Mahsulotlarning keng tanlov",
   "affordable_price": "Eng qulay narxlar",
   "back": "Ortga",
-  "product": "Mahsulot"
+  "product": "Mahsulot",
+  "no_favs_title": "Siz hali ham sevimli mahsulot tanlamadingiz",
+  "no_favs_desc": "Sizga maʼqul kelgan mahsulotlarni sevimlilarga qo‘shing va ularni buyurtma qiling",
+  "go_home_page": "Bosh sahifaga o‘tish",
+  "most_searched": "Ko'pincha qidiriladi",
+  "famous_categories": "Mashhur kategoriyalar",
+  "counting": "ta",
+  "select_all": "Hammasini tanlash",
+  "your_order": "Buyurtmangiz",
+  "promo_code": "Promokod",
+  "discount": "Chegirma",
+  "total_fee": "Jami tolov",
+  "proceed_payment": "To'lovga o'tish",
+  "delete": "Oʻchirish",
+  "in_sale": "Sotuvda",
+  "not_in_sale": "Sotuvda yo'q",
+  "similar_prodcuts": "O‘xshash mahsulotlar"
 }

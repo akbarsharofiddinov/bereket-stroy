@@ -16,6 +16,7 @@ import { calculateDiscounts } from "@/utils/calculateDiscounts";
 import noImage from "@/assets/no-image.webp";
 import { toast } from "react-toastify";
 import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
+import { useTranslation } from "react-i18next";
 
 interface ICart {
   product: IProduct;
@@ -43,6 +44,7 @@ const Cart: React.FC = () => {
   });
 
   const { allCategories } = useAppSelector((state) => state.categorySlice);
+  const { t } = useTranslation();
 
   function handleRemoveAllProductFromCart(product: IProduct) {
     dispatch(instantRemoveProductsFromCart(product));
@@ -140,8 +142,10 @@ const Cart: React.FC = () => {
             <>
               <div className="top">
                 <div>
-                  <h2 className="title">Savatcha</h2>
-                  <p>{cart.length} ta mahsulot</p>
+                  <h2 className="title">{t("cart")}</h2>
+                  <p>
+                    {cart.length} {t("counting")} {t("product").toLowerCase()}
+                  </p>
                 </div>
                 <div>
                   <label
@@ -199,7 +203,7 @@ const Cart: React.FC = () => {
                         )}
                       </span>
                     </div>
-                    <span className="label">Hammasini belgilash</span>
+                    <span className="label">{t("select_all")}</span>
                   </label>
                 </div>
               </div>
@@ -270,7 +274,9 @@ const Cart: React.FC = () => {
                                   </svg>
                                 </span>
                                 <span>
-                                  {product.is_sale ? "Sotuvda" : "Sotuvda yo'q"}
+                                  {product.is_sale
+                                    ? t("in_sale")
+                                    : "Sotuvda yo'q"}
                                 </span>
                               </p>
                               <button
@@ -313,7 +319,7 @@ const Cart: React.FC = () => {
                                     strokeLinecap="round"
                                   />
                                 </svg>
-                                O‘chirish
+                                {t("delete")}
                               </button>
                             </div>
                             <div className="cols col-2">
@@ -415,7 +421,7 @@ const Cart: React.FC = () => {
                         e.preventDefault();
                       }}
                     >
-                      Jismoniy shaxs
+                      {t("physical")}
                     </button>
                     <button
                       className={isIllegal ? "legal active" : "legal"}
@@ -424,14 +430,14 @@ const Cart: React.FC = () => {
                         e.preventDefault();
                       }}
                     >
-                      Yuridik shaxs
+                      {t("legal")}
                     </button>
                   </div>
-                  <h2 className="title">Buyurtmangizda:</h2>
+                  <h2 className="title">{t("your_order")}:</h2>
                   <div className="promo_code">
                     <input
                       type="text"
-                      placeholder="Promokod"
+                      placeholder={t("promo_code")}
                       name="promo-code"
                       id="promo-code"
                     />
@@ -473,12 +479,12 @@ const Cart: React.FC = () => {
                         {cart.reduce((acc, item) => {
                           return item.isSelected ? acc + 1 : acc + 0;
                         }, 0)}
-                        ta mahsulot
+                        {t("counting")} {t("product").toLowerCase()}
                       </span>
                       <span>{formatCurrency(totalSum)}</span>
                     </p>
                     <p>
-                      <span>Chegirmangiz</span>
+                      <span>{t("discount")}</span>
                       <span>
                         -
                         {formatCurrency(
@@ -487,7 +493,7 @@ const Cart: React.FC = () => {
                       </span>
                     </p>
                     <p>
-                      <span>Jami to‘lov </span>
+                      <span>{t("total_fee")} </span>
                       <span>{formatCurrency(totalDiscountedSum)}</span>
                     </p>
                   </div>
@@ -511,13 +517,13 @@ const Cart: React.FC = () => {
                       }
                     }}
                   >
-                    To‘lovga o‘tish
+                    {t("proceed_payment")}
                   </button>
                 </div>
               </div>
 
               <Suggestion
-                title="O‘xshash mahsulotlar"
+                title={t("similar_prodcuts")}
                 data={data?.data!}
                 isError={isError}
                 isLoading={isLoading}

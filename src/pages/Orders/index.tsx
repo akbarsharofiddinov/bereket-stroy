@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setAuthModal } from "@/store/projectSlice";
 
 import React, { useEffect, useState } from "react";
@@ -46,6 +46,8 @@ const Orders: React.FC = () => {
 
   const { t } = useTranslation();
 
+  const { token } = useAppSelector((state) => state.projectSlice);
+
   useEffect(() => {
     if (isSuccess) if (isSuccess) setOrders(data.data);
   }, [isSuccess]);
@@ -67,13 +69,17 @@ const Orders: React.FC = () => {
                   Sizga maʼqul kelgan mahsulotlarni <br /> sevimlilarga qo‘shing
                   va ularni buyurtma qiling
                 </p>
-                <p
-                  onClick={() => {
-                    dispatch(setAuthModal(true));
-                  }}
-                >
-                  Buyurtmalaringizni ko'rish uchun tizimga kiring
-                </p>
+                {token ? (
+                  ""
+                ) : (
+                  <p
+                    onClick={() => {
+                      dispatch(setAuthModal(true));
+                    }}
+                  >
+                    Buyurtmalaringizni ko'rish uchun tizimga kiring
+                  </p>
+                )}
                 <Link to={"/"}>Bosh sahifaga o‘tish</Link>
               </div>
             </div>

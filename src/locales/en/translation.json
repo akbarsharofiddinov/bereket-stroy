@@ -27,5 +27,21 @@
   "product_selection": "A wide selection of products",
   "affordable_price": "The most affordable prices",
   "back": "Back",
-  "product": "Product"
+  "product": "Product",
+  "no_favs_title": "You haven't chosen a favorite product yet.",
+  "no_favs_desc": "Add the products you like to your favorites and order them",
+  "go_home_page": "Go to the main page",
+  "most_searched": "Most searched for",
+  "famous_categories": "Popular categories",
+  "counting": "pcs",
+  "select_all": "Select all",
+  "your_order": "Your order",
+  "promo_code": "Promo code",
+  "discount": "Discount",
+  "total_fee": "Total fee",
+  "proceed_payment": "Proceed to payment",
+  "delete": "Delete",
+  "in_sale": "In Sale",
+  "not_in_sale": "Not in sale",
+  "similar_prodcuts": "Similar products"
 }

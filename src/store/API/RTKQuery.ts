@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { RootState } from "../";
 
 type productsParams = {
   page?: number;
@@ -36,17 +35,15 @@ export const bereketAPI = createApi({
   reducerPath: "bereketAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: `https://bereket.webclub.uz/api`,
-    prepareHeaders: (headers, { getState }) => {
-      const state = getState() as RootState;
-      const projectSlice = state.projectSlice;
-
+    prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
+      const language = localStorage.getItem("language");
 
-      if (projectSlice.currentLanguage) {
-        headers.set("Access-Language", projectSlice.currentLanguage);
+      if (language) {
+        headers.append("Access-Language", "uz");
       }
       if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
+        headers.append("Authorization", `Bearer ${token}`);
       }
 
       return headers;
@@ -93,7 +90,11 @@ export const bereketAPI = createApi({
     }),
 
     getAllCategories: build.query<APIResponse<ICategory[]>, void>({
-      query: () => `/categories`,
+      query: () => {
+        return {
+          url: `/categories`,
+        };
+      },
     }),
 
     getUserInfo: build.query<any, void>({

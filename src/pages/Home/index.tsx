@@ -16,6 +16,7 @@ import {
 } from "@/store/API/RTKQuery";
 import axios from "axios";
 import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const Home: React.FC = () => {
   const [discounts, setDiscounts] = useState<IDiscount[]>([]);
@@ -34,10 +35,15 @@ const Home: React.FC = () => {
     isSuccess: usefullSuccess,
     data: usefullData,
   } = useGetAllProductsQuery({});
+  const { i18n } = useTranslation();
 
   async function getCards() {
     try {
-      const response = await axios.get("https://bereket.webclub.uz/api/cards");
+      const response = await axios.get("https://bereket.webclub.uz/api/cards", {
+        headers: {
+          "Accept-Language": i18n.language,
+        },
+      });
       if (response.status === 200) setCards(response.data.data);
     } catch (error) {
       console.log(error);
@@ -48,7 +54,12 @@ const Home: React.FC = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "https://bereket.webclub.uz/api/discounts"
+        "https://bereket.webclub.uz/api/discounts",
+        {
+          headers: {
+            "Accept-Language": i18n.language,
+          },
+        }
       );
       if (response.status === 200) {
         setDiscounts(response.data.data);

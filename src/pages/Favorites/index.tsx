@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import favImage from "@/assets/fav.png";
 import { useAppSelector } from "@/store/hooks";
 import { ProductItem } from "@/components";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const Favorites: React.FC = () => {
   const { favorites } = useAppSelector((state) => state.productSlice);
-  console.log(favorites);
+
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="favorites-page">
@@ -45,7 +47,7 @@ const Favorites: React.FC = () => {
               <h2 className="title">{t("favourites")}</h2>
               {favorites.length ? (
                 <p>
-                  {favorites.length} ta {t("product")}
+                  {favorites.length} {t("counting")} {t("product")}
                 </p>
               ) : (
                 ""
@@ -63,14 +65,9 @@ const Favorites: React.FC = () => {
             ) : (
               <div className="no-favs">
                 <img src={favImage} alt="" />
-                <h3 className="title">
-                  Siz hali ham sevili mahsulot tanlamadingiz
-                </h3>
-                <p className="desc">
-                  Sizga maʼqul kelgan mahsulotlarni <br /> sevimlilarga qo‘shing
-                  va ularni buyurtma qiling
-                </p>
-                <Link to={"/"}>Bosh sahifaga o‘tish</Link>
+                <h3 className="title">{t("no_favs_title")}</h3>
+                <p className="desc">{t("no_favs_desc")}</p>
+                <Link to={"/"}>{t("go_home_page")}</Link>
               </div>
             )}
           </div>
