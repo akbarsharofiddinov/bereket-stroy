@@ -21,7 +21,7 @@ const Authorization: React.FC = () => {
 
   const [userName, setUsername] = React.useState("");
   const [timerStart, setTimerStart] = React.useState(false);
-  const [timeLeft, setTimeLeft] = React.useState(60);
+  const [timeLeft, setTimeLeft] = React.useState(120);
 
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -66,7 +66,7 @@ const Authorization: React.FC = () => {
         }
       } catch (error: any) {
         const message = error.response.data.message.ru;
-        toast(message, {type: "warning"});
+        toast(message, { type: "warning" });
         setIsLoading(false);
       }
     } else {
