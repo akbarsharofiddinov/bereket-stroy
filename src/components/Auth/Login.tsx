@@ -8,8 +8,6 @@ import { toast } from "react-toastify";
 const Login: React.FC<{
   setLoginType: React.Dispatch<React.SetStateAction<string>>;
 }> = ({ setLoginType }) => {
-  const [isIllegal, setIsIllegal] = React.useState(false);
-
   const [isLoading, setIsLoading] = React.useState(false);
 
   const [phone, setPhone] = React.useState("");
@@ -35,7 +33,6 @@ const Login: React.FC<{
   async function getVerificationCode() {
     setIsLoading(true);
     const formData = new FormData();
-    formData.append("is_legal", isIllegal ? "1" : "0");
     formData.append("phone", phone);
     if (phone) {
       try {
@@ -95,42 +92,8 @@ const Login: React.FC<{
       <div className="inner" onClick={(e) => e.stopPropagation()}>
         <form onSubmit={(e) => e.preventDefault()}>
           <h2 className="title">{t("login_title")}</h2>
-          <div className="switch-user_type">
-            <button
-              className={isIllegal ? "physical" : "physical active"}
-              onClick={(e) => {
-                setIsIllegal(false);
-                e.preventDefault();
-              }}
-            >
-              {t("physical")}
-            </button>
-            <button
-              className={isIllegal ? "legal active" : "legal"}
-              onClick={(e) => {
-                setIsIllegal(true);
-                e.preventDefault();
-              }}
-            >
-              {t("legal")}
-            </button>
-          </div>
 
           <div className="inner-form">
-            {isIllegal ? (
-              <div className="inn-input">
-                <span>*</span>
-                <input
-                  type="text"
-                  autoComplete="off"
-                  name="inn"
-                  id="inn"
-                  placeholder="INN"
-                />
-              </div>
-            ) : (
-              ""
-            )}
             <div
               className={phoneValidation ? "phone-input error" : "phone-input"}
             >

@@ -7,8 +7,6 @@ import { toast } from "react-toastify";
 const Signup: React.FC<{
   setLoginType: React.Dispatch<React.SetStateAction<string>>;
 }> = ({ setLoginType }) => {
-  const [isIllegal, setIsIllegal] = React.useState(false);
-
   const [phone, setPhone] = React.useState("");
   // const [phoneValidation, setPhoneValidation] = React.useState(false);
 
@@ -17,8 +15,6 @@ const Signup: React.FC<{
 
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const [company, setCompany] = React.useState("");
-  const [inn, setInn] = React.useState("");
   const [getSms, setGetSms] = React.useState(false);
   const [smsCode, setSmsCode] = React.useState("");
 
@@ -27,13 +23,8 @@ const Signup: React.FC<{
   async function getSMSCode() {
     setIsLoading(true);
     const formData = new FormData();
-    formData.append("is_legal", isIllegal ? "1" : "0");
     formData.append("phone", phone);
     formData.append("name", userName);
-    if (isIllegal) {
-      formData.append("company", company);
-      formData.append("inn", inn);
-    }
     try {
       const response = await axios.post(
         `https://bereket.webclub.uz/api/register`,
@@ -118,28 +109,6 @@ const Signup: React.FC<{
               )}
               Ro‘yhatdan o‘tish
             </h2>
-            {!getSms && (
-              <div className="switch-user_type">
-                <button
-                  className={isIllegal ? "physical" : "physical active"}
-                  onClick={(e) => {
-                    setIsIllegal(false);
-                    e.preventDefault();
-                  }}
-                >
-                  Jismoniy shaxs
-                </button>
-                <button
-                  className={isIllegal ? "legal active" : "legal"}
-                  onClick={(e) => {
-                    setIsIllegal(true);
-                    e.preventDefault();
-                  }}
-                >
-                  Yuridik shaxs
-                </button>
-              </div>
-            )}
             <div className="inner-form">
               <div className="phone-input">
                 <span>+998</span>
@@ -165,38 +134,6 @@ const Signup: React.FC<{
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
-
-              {isIllegal ? (
-                <>
-                  <div className="company-input">
-                    <span>*</span>
-                    <input
-                      type="text"
-                      name="company"
-                      id="company"
-                      value={company}
-                      autoComplete="off"
-                      placeholder="Korxona nomi"
-                      onChange={(e) => setCompany(e.target.value)}
-                    />
-                  </div>
-
-                  <div className="inn-input">
-                    <span>*</span>
-                    <input
-                      type="text"
-                      name="inn"
-                      id="inn"
-                      value={inn}
-                      autoComplete="off"
-                      onChange={(e) => setInn(e.target.value)}
-                      placeholder="INN"
-                    />
-                  </div>
-                </>
-              ) : (
-                ""
-              )}
 
               {getSms && (
                 <div className="sms-input">
