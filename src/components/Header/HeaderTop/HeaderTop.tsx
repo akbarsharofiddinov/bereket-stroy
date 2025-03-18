@@ -4,11 +4,14 @@ import { PiGlobe } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import styles from "./HeaderTop.module.scss";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "@/store/hooks";
 
 const HeaderTop: React.FC = () => {
   const { t, i18n } = useTranslation();
 
   const languages: string[] = Object.keys(i18n.options.resources || {});
+
+  const { discounts } = useAppSelector((state) => state.productSlice);
 
   function convertLanguage(lang: string) {
     switch (lang) {
@@ -37,7 +40,10 @@ const HeaderTop: React.FC = () => {
         <div className="container">
           <div className={styles.inner}>
             {/* Discount button */}
-            <button className={styles["discount-btn"]}>
+            <a
+              href={`/discounts/${discounts[0]?.slug}`}
+              className={styles["discount-btn"]}
+            >
               <svg
                 width="20"
                 height="20"
@@ -64,7 +70,7 @@ const HeaderTop: React.FC = () => {
                 />
               </svg>
               {t("discounts")}
-            </button>
+            </a>
 
             <div className={styles.right}>
               {/* Header menu */}

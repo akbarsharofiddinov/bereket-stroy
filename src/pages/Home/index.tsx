@@ -17,10 +17,13 @@ import {
 import axios from "axios";
 import { t } from "i18next";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setDiscounts } from "@/store/productSlice";
 
 const Home: React.FC = () => {
-  const [discounts, setDiscounts] = useState<IDiscount[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   const [cards, setCards] = useState<ICard[]>([]);
   const {
@@ -36,6 +39,8 @@ const Home: React.FC = () => {
     data: usefullData,
   } = useGetAllProductsQuery({});
   const { i18n } = useTranslation();
+
+  const { discounts } = useAppSelector((state) => state.productSlice);
 
   async function getCards() {
     try {
@@ -62,7 +67,7 @@ const Home: React.FC = () => {
         }
       );
       if (response.status === 200) {
-        setDiscounts(response.data.data);
+        dispatch(setDiscounts(response.data.data));
         setLoading(false);
       }
     } catch (error) {
