@@ -35,7 +35,7 @@ const Partners: React.FC = () => {
 
   return (
     <>
-      <div className="partners section">
+      <div className="partners section" id="partners">
         <div className="container">
           <div className="section-top">
             <h2 className="title">{t("famous_brands")}</h2>

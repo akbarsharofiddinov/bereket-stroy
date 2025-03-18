@@ -5,7 +5,7 @@ const Services: React.FC = () => {
   const { t } = useTranslation();
   return (
     <>
-      <div className="services">
+      <div className="services" id="services">
         <div className="container">
           <div className="inner">
             <div className="service-box">

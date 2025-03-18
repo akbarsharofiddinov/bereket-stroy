@@ -13,7 +13,7 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="mini-banner section">
+      <div className="mini-banner section" id="banner">
         <div className="container">
           <Swiper
             spaceBetween={20}

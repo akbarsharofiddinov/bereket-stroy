@@ -1,7 +1,6 @@
 import { useGetSiteSettingsQuery } from "@/store/API/RTKQuery";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import React from "react";
-import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   const { isSuccess, data } = useGetSiteSettingsQuery();
@@ -15,49 +14,49 @@ const Footer: React.FC = () => {
               <ul className="columns column-1">
                 <li className="column-item">Katalog</li>
                 <li className="column-item">
-                  <Link to={"/catalogs"}>Chegirmalar</Link>
+                  <a href="/catalogs">Chegirmalar</a>
                 </li>
                 <li className="column-item">
-                  <Link to={""}>Xizmatlar</Link>
+                  <a href={data?.data.telegram!}>Xizmatlar</a>
                 </li>
                 <li className="column-item">
-                  <Link to={""}>Brendlar</Link>
+                  <a href="#partners">Brendlar</a>
                 </li>
               </ul>
               <ul className="columns column-2">
                 <li className="column-item">Kompaniya</li>
                 <li className="column-item">
-                  <Link to={""}>Biz haqimizda</Link>
+                  <a href={data?.data.telegram!}>Biz haqimizda</a>
                 </li>
                 <li className="column-item">
-                  <Link to={""}>Do‘kon manzillari</Link>
+                  <a href="#branches">Do‘kon manzillari</a>
                 </li>
                 <li className="column-item">
-                  <Link to={""}>Hamkorlarimiz</Link>
+                  <a href="#partners">Hamkorlarimiz</a>
                 </li>
               </ul>
               <ul className="columns column-3">
                 <li className="column-item">Ma’lumot</li>
                 <li className="column-item">
-                  <Link to={""}>To‘lov usullari</Link>
+                  <a href={data?.data.telegram!}>To‘lov usullari</a>
                 </li>
                 <li className="column-item">
-                  <Link to={""}>Yetkazish xizmaati</Link>
+                  <a href="#services">Yetkazish xizmaati</a>
                 </li>
                 <li className="column-item">
-                  <Link to={""}>Mahsulot kafolati</Link>
+                  <a href={data?.data.telegram!}>Mahsulot kafolati</a>
                 </li>
               </ul>
               <ul className="columns column-4">
                 <li className="column-item">Yordam</li>
                 <li className="column-item">
-                  <Link to={""}>To‘lov bilan bog’liq yordam</Link>
+                  <a href={data?.data.telegram!}>To‘lov bilan bog’liq yordam</a>
                 </li>
                 <li className="column-item">
-                  <Link to={""}>Qisqa savol-javoblar</Link>
+                  <a href={data?.data.telegram!}>Qisqa savol-javoblar</a>
                 </li>
                 <li className="column-item">
-                  <Link to={""}>Biz bilan bog’lanish</Link>
+                  <a href={data?.data.telegram!}>Biz bilan bog’lanish</a>
                 </li>
               </ul>
             </div>
