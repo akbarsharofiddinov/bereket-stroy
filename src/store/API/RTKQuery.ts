@@ -40,7 +40,7 @@ export const bereketAPI = createApi({
       const language = localStorage.getItem("language");
 
       if (language) {
-        headers.append("Access-Language", "uz");
+        headers.append("Access-Language", language);
       }
       if (token) {
         headers.append("Authorization", `Bearer ${token}`);
