@@ -42,6 +42,8 @@
 @use "./styles/components/UI/commentModal";
 @use "./styles/pages/comments";
 
+@use "./styles/responsive";
+
 @font-face {
   font-family: "TT-Travels";
   src: url("./fonts/TT-Travels-regular.otf");
@@ -144,24 +146,6 @@ body {
 
 .amo-button-holder {
   z-index: 80 !important;
-}
-
-@media screen and (max-width: 1440px) {
-  .container {
-    max-width: 1240px !important;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .container {
-    max-width: 1100px !important;
-  }
-}
-
-@media screen and (max-width: 1100px) {
-  .container {
-    max-width: 1000px !important;
-  }
 }
 
 .loading-box {
