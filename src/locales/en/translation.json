@@ -43,5 +43,15 @@
   "delete": "Delete",
   "in_sale": "In Sale",
   "not_in_sale": "Not in sale",
-  "similar_prodcuts": "Similar products"
+  "similar_prodcuts": "Similar products",
+  "services": "Services",
+  "brands": "Brands",
+  "company": "Company",
+  "about_us": "About us",
+  "addresses": "Addresses",
+  "partners": "Partners",
+  "information": "Information",
+  "payment_methods": "Payment methods",
+  "delivery_service": "Delivery service",
+  "product_guarantee": "Product guarantee"
 }

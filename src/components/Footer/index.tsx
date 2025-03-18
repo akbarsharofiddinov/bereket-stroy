@@ -1,9 +1,12 @@
 import { useGetSiteSettingsQuery } from "@/store/API/RTKQuery";
 import { formatPhoneNumber } from "@/utils/formatPhoneNumber";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Footer: React.FC = () => {
   const { isSuccess, data } = useGetSiteSettingsQuery();
+
+  const { t } = useTranslation();
 
   return (
     <>
@@ -12,51 +15,51 @@ const Footer: React.FC = () => {
           <div className="inner">
             <div className="footer-menu">
               <ul className="columns column-1">
-                <li className="column-item">Katalog</li>
+                <li className="column-item">{t("category")}</li>
                 <li className="column-item">
-                  <a href="/catalogs">Chegirmalar</a>
+                  <a href="/catalogs">{t("discounts")}</a>
                 </li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>Xizmatlar</a>
+                  <a href={data?.data.telegram!}>{t("services")}</a>
                 </li>
                 <li className="column-item">
-                  <a href="#partners">Brendlar</a>
+                  <a href="#partners">{t("brands")}</a>
                 </li>
               </ul>
               <ul className="columns column-2">
-                <li className="column-item">Kompaniya</li>
+                <li className="column-item">{t("company")}</li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>Biz haqimizda</a>
+                  <a href={data?.data.telegram!}>{t("about_us")}</a>
                 </li>
                 <li className="column-item">
-                  <a href="#branches">Do‘kon manzillari</a>
+                  <a href="#branches">{t("services")}</a>
                 </li>
                 <li className="column-item">
-                  <a href="#partners">Hamkorlarimiz</a>
+                  <a href="#partners">{t("services")}</a>
                 </li>
               </ul>
               <ul className="columns column-3">
-                <li className="column-item">Ma’lumot</li>
+                <li className="column-item">{t("services")}</li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>To‘lov usullari</a>
+                  <a href={data?.data.telegram!}>{t("services")}</a>
                 </li>
                 <li className="column-item">
-                  <a href="#services">Yetkazish xizmaati</a>
+                  <a href="#services">{t("services")}</a>
                 </li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>Mahsulot kafolati</a>
+                  <a href={data?.data.telegram!}>{t("services")}</a>
                 </li>
               </ul>
               <ul className="columns column-4">
-                <li className="column-item">Yordam</li>
+                <li className="column-item">{t("services")}</li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>To‘lov bilan bog’liq yordam</a>
+                  <a href={data?.data.telegram!}>{t("services")}</a>
                 </li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>Qisqa savol-javoblar</a>
+                  <a href={data?.data.telegram!}>{t("services")}</a>
                 </li>
                 <li className="column-item">
-                  <a href={data?.data.telegram!}>Biz bilan bog’lanish</a>
+                  <a href={data?.data.telegram!}>{t("services")}</a>
                 </li>
               </ul>
             </div>

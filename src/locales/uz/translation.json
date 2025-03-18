@@ -43,5 +43,15 @@
   "delete": "Oʻchirish",
   "in_sale": "Sotuvda",
   "not_in_sale": "Sotuvda yo'q",
-  "similar_prodcuts": "O‘xshash mahsulotlar"
+  "similar_prodcuts": "O‘xshash mahsulotlar",
+  "services": "Xizmatlar",
+  "brands": "Brendlar",
+  "company": "Kompaniya",
+  "about_us": "Biz haqimizda",
+  "addresses": "Manzillar",
+  "partners": "Hamkorlar",
+  "information": "Ma’lumot",
+  "payment_methods": "To‘lov usullari",
+  "delivery_service": "Yetkazish xizmaati",
+  "product_guarantee": "Product guarantee"
 }

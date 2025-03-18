@@ -43,5 +43,15 @@
   "delete": "Удалить",
   "in_sale": "В продаже",
   "not_in_sale": "Нет в продаже",
-  "similar_prodcuts": "Похожие продукты"
+  "similar_prodcuts": "Похожие продукты",
+  "services": "Услуги",
+  "brands": "Бренды",
+  "company": "Компания",
+  "about_us": "О нас",
+  "addresses": "Адреса",
+  "partners": "Партнеры",
+  "information": "Информация",
+  "payment_methods": "Способы оплаты",
+  "delivery_service": "Служба доставки",
+  "product_guarantee": "Product guarantee"
 }

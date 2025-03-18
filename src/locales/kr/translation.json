@@ -43,5 +43,15 @@
   "delete": "Óshiriw",
   "in_sale": "Sotuvda",
   "not_in_sale": "Satıwda joq",
-  "similar_prodcuts": "Uqsas ónimler"
+  "similar_prodcuts": "Uqsas ónimler",
+  "services": "Xizmetler",
+  "brands": "Brendler",
+  "company": "Kompaniya",
+  "about_us": "Biz haqımızda",
+  "addresses": "Mánziller",
+  "partners": "Sherikler",
+  "information": "Maǵlıwmat",
+  "payment_methods": "Tólem usılları",
+  "delivery_service": "Jetkerip beriw xızmeti",
+  "product_guarantee": "Product guarantee"
 }
