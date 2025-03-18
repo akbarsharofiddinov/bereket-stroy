@@ -5,7 +5,7 @@ import logo from "@/assets/Vector.png";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
-  setAuthModal,
+  setAuthorization,
   setCatalogModal,
   setSearchModal,
   setToken,
@@ -357,7 +357,7 @@ const Header: React.FC = () => {
                   dispatch(setCatalogModal(false));
                   dispatch(setSearchModal(false));
                   if (token) setProfileMenu(!profileMenu);
-                  else dispatch(setAuthModal(true));
+                  else dispatch(setAuthorization(true));
                 }}
               >
                 <svg
