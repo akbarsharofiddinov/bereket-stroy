@@ -43,6 +43,7 @@
   "delete": "Delete",
   "in_sale": "In Sale",
   "not_in_sale": "Not in sale",
+  "no_comment": "no comments",
   "similar_prodcuts": "Similar products",
   "services": "Services",
   "brands": "Brands",
@@ -71,5 +72,6 @@
   "quantity": "Quantity",
   "leave_comment": "Leave a comment",
   "company_info": "Company information",
-  "log_out": "Log out"
+  "log_out": "Log out",
+  "per_month": "month"
 }

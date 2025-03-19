@@ -43,6 +43,7 @@
   "delete": "Oʻchirish",
   "in_sale": "Sotuvda",
   "not_in_sale": "Sotuvda yo'q",
+  "no_comment": "sharhlar yo'q",
   "similar_prodcuts": "O‘xshash mahsulotlar",
   "services": "Xizmatlar",
   "brands": "Brendlar",
@@ -71,5 +72,6 @@
   "quantity": "Miqdori",
   "leave_comment": "Sharh qoldirish",
   "company_info": "Korxona ma’lumotlari",
-  "log_out": "Chiqish"
+  "log_out": "Chiqish",
+  "per_month": "oyga"
 }

@@ -43,6 +43,7 @@
   "delete": "Óshiriw",
   "in_sale": "Sotuvda",
   "not_in_sale": "Satıwda joq",
+  "no_comment": "kommentler joq",
   "similar_prodcuts": "Uqsas ónimler",
   "services": "Xizmetler",
   "brands": "Brendler",
@@ -70,5 +71,6 @@
   "quantity": "Muǵdarı",
   "leave_comment": "Pikir jazıw",
   "company_info": "Kárxana maǵlıwmatları",
-  "log_out": "Shıǵıw"
+  "log_out": "Shıǵıw",
+  "per_month": "ayǵa"
 }

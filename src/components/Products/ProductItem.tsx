@@ -206,7 +206,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                         fill="#009846"
                       />
                     </svg>
-                    Sotuvda
+                    {t('in_sale')}
                   </span>
                 ) : (
                   <span>
@@ -224,7 +224,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                         fill="#E31E24"
                       />
                     </svg>
-                    Sotuvda yo’q
+                    {t('not_in_sale')}
                   </span>
                 )}
               </p>
@@ -242,7 +242,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                     <span>
                       <FaStar />
                     </span>
-                    sharhlar yo‘q
+                    {t('no_comment')}
                   </>
                 )}
               </p>
@@ -281,7 +281,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
               {formatCurrency(
                 Math.round(parseFloat(data.discounted_price) / 12)
               )}{" "}
-              / 12 oyga
+              / 12 {t('per_month')}
             </p>
             <div className="count-box" onClick={(e) => e.stopPropagation()}>
               {checkProductInCart() ? (
@@ -371,9 +371,9 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                         data.is_sale
                           ? handleRemoveProductFromCart()
                           : () => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                            }
+                            e.preventDefault();
+                            e.stopPropagation();
+                          }
                       }
                     >
                       <FaMinus />
@@ -389,9 +389,9 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                         data.is_sale
                           ? handleAddProductToCart()
                           : () => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                            }
+                            e.preventDefault();
+                            e.stopPropagation();
+                          }
                       }
                     >
                       <FaPlus />
