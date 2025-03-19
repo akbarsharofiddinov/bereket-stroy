@@ -30,7 +30,7 @@ const Categories: React.FC = () => {
                   <Link to={"catalogs"}>
                     <span>
                       <svg
-                        width="49"
+                        width="49"  
                         height="49"
                         viewBox="0 0 49 49"
                         fill="none"

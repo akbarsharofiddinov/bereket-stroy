@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import SkeletonImage from "antd/es/skeleton/Image";
+import { Link } from "react-router-dom";
 
 const Banner: React.FC = () => {
   const [bigBanners, setBigBanners] = useState<IBanner>();
@@ -52,7 +53,12 @@ const Banner: React.FC = () => {
       <div className="banner">
         <div className="container">
           <div className="inner">
-            <a href={bigBanners?.url} className="box box-1">
+            <a
+              href={`/catalogs/${
+                bigBanners?.url.split("/")[bigBanners.url.split("/").length - 1]
+              }`}
+              className="box box-1"
+            >
               {loading ? (
                 <SkeletonImage active />
               ) : (
@@ -73,8 +79,10 @@ const Banner: React.FC = () => {
               </>
             ) : (
               smallBanners.map((item, index) => (
-                <a
-                  href={item.url}
+                <Link
+                  to={`/catalogs/${
+                    item?.url.split("/")[item.url.split("/").length - 1]
+                  }`}
                   className={`box box-${index + 2}`}
                   key={index}
                 >
@@ -82,7 +90,7 @@ const Banner: React.FC = () => {
                     src={`http://bereket.webclub.uz/storage/${item.photo}`}
                     alt=""
                   />
-                </a>
+                </Link>
               ))
             )}
           </div>
