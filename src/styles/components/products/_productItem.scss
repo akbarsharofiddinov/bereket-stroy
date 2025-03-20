@@ -91,9 +91,12 @@
 
         span {
           @include flexStyle();
-          display: flex;
           gap: 5px;
         }
+      }
+
+      .response-rating_box {
+        display: none !important;
       }
     }
 
@@ -113,7 +116,7 @@
         gap: 5px;
 
         .original-price {
-          font-size: 16px !important;
+          font-size: 16px;
           font-weight: 500;
           text-decoration: line-through;
         }
@@ -141,7 +144,7 @@
 
       .add-cart_btn {
         @include flexStyle();
-        flex: 65% !important;
+        flex: 65%;
         width: 100%;
         justify-content: center;
         gap: 20px;

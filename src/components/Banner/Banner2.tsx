@@ -21,6 +21,14 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
             loop={true}
             navigation={true}
             modules={[Pagination, Navigation]}
+            breakpoints={{
+              400: {
+                direction: "vertical"
+              },
+              800: {
+                direction: "horizontal"
+              }
+            }}
             className="discount-banner_swiper"
           >
             {/* <SwiperSlide>
@@ -114,10 +122,12 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
                   key={index}
                   onClick={() => navigate(`/discounts/${item.slug}`)}
                 >
-                  <img
-                    src={`http://bereket.webclub.uz/storage/${item.photo}`}
-                    alt=""
-                  />
+                  <div className="img-box">
+                    <img
+                      src={`http://bereket.webclub.uz/storage/${item.photo}`}
+                      alt=""
+                    />
+                  </div>
                 </SwiperSlide>
               ))
             ) : (

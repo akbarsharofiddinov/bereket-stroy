@@ -136,3 +136,9 @@
     }
   }
 }
+
+@media screen and (max-width: 400px) {
+  .headerTop {
+    display: none !important;
+  }
+}

@@ -48,6 +48,11 @@ const Partners: React.FC = () => {
               loop={partners.length > 6}
               className="partners-swiper"
               modules={[FreeMode]}
+              breakpoints={{
+                400: {
+                  slidesPerView: "auto"
+                }
+              }}
             >
               {partners.map((item, index) => (
                 <SwiperSlide key={index} className="partner">

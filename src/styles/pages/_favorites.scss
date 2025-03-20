@@ -22,6 +22,11 @@
       color: #000;
       font-size: 16px;
       font-weight: 600;
+
+      span {
+        display: flex;
+        align-items: center;
+      }
     }
 
     & > div {
@@ -37,7 +42,7 @@
       p {
         font-size: 18px;
         font-weight: 600;
-        color: var(--text-) 200;
+        color: var(--text-200);
         text-transform: lowercase;
       }
     }
@@ -48,8 +53,12 @@
 
     .fav-products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 315px));
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
+
+      .product-item {
+        max-width: 360px !important;
+      }
     }
 
     &.center {

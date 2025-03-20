@@ -191,8 +191,9 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
           </div>
           <div className="body">
             <div className="extra-info">
-              <p>
-                {data.is_sale ? (
+
+              {data.is_sale ? (
+                <p>
                   <span>
                     <svg
                       width="20"
@@ -206,9 +207,11 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                         fill="#009846"
                       />
                     </svg>
-                    {t('in_sale')}
                   </span>
-                ) : (
+                  <span>{t('in_sale')}</span>
+                </p>
+              ) : (
+                <p>
                   <span>
                     <svg
                       width="18"
@@ -224,10 +227,11 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                         fill="#E31E24"
                       />
                     </svg>
-                    {t('not_in_sale')}
                   </span>
-                )}
-              </p>
+                  <span>{t('not_in_sale')}</span>
+                </p>
+              )}
+
               <p>
                 {data.count_rating ? (
                   <>
@@ -242,14 +246,18 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                     <span>
                       <FaStar />
                     </span>
-                    {t('no_comment')}
+                    <span className="no-comment">{t('no_comment')}</span>
+                    <p className="response-rating_box">
+                      <span>{data.avg_rating}</span>
+                      <span>{`(${data.count_rating})`}</span>
+                    </p>
                   </>
                 )}
               </p>
             </div>
             <p className="product-name">
               {data.name
-                ? data.name.slice(0, 68) + (data.name.length > 70 ? "..." : "")
+                ? data.name.slice(0, 25) + (data.name.length > 25 ? "..." : "")
                 : ""}
             </p>
             <div className="price">
@@ -294,7 +302,9 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                         : "add-cart_btn in-cart disable"
                     }
                   >
-                    {t("in_cart")}
+                    <p>
+                      {t("in_cart")}
+                    </p>
                     <span>
                       {data.is_sale ? (
                         <svg
@@ -411,7 +421,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                     }
                   }}
                 >
-                  {t("add_to_cart")}
+                  <p>{t("add_to_cart")}</p>
                   <span>
                     {data.is_sale ? (
                       <svg

@@ -237,7 +237,7 @@ const Header: React.FC = () => {
                       </defs>
                     </svg>
                   </span>
-                  {t("search")}
+                  <span>{t("search")}</span>
                 </button>
               </div>
             </div>

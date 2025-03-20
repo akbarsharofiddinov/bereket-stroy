@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import PrivateInfo from "./PrivateInfo";
 import Locations from "./Locations";
-import Company from "./Company";
 import { useAppSelector } from "@/store/hooks";
 
 const Profile: React.FC = () => {
@@ -33,12 +32,6 @@ const Profile: React.FC = () => {
                 Manzillar
               </Link>
               <Link
-                to={"/profile/company"}
-                className={menu_slug === "company" ? "active" : ""}
-              >
-                Korxona ma’lumotlari
-              </Link>
-              <Link
                 to={"/orders"}
                 className={menu_slug === "orders" ? "active" : ""}
               >
@@ -57,11 +50,7 @@ const Profile: React.FC = () => {
                 <PrivateInfo />
               ) : menu_slug === "locations" ? (
                 <Locations />
-              ) : menu_slug === "company" ? (
-                <Company />
-              ) : (
-                ""
-              )}
+              ) : ""}
             </div>
           </div>
         </div>

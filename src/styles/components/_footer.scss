@@ -21,7 +21,7 @@ footer {
 
       .column-item {
         a {
-          color: var(--text-) 200;
+          color: var(--text-200);
         }
 
         &:first-child {
@@ -85,7 +85,7 @@ footer {
       justify-content: space-between;
 
       & > p {
-        color: var(--text-) 200;
+        color: var(--text-200);
       }
 
       div {
@@ -94,7 +94,7 @@ footer {
         gap: 40px;
 
         p {
-          color: var(--text-) 150;
+          color: var(--text-150);
         }
       }
     }
