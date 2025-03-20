@@ -22,7 +22,7 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
             navigation={true}
             modules={[Pagination, Navigation]}
             breakpoints={{
-              400: {
+              300: {
                 direction: "vertical"
               },
               800: {
