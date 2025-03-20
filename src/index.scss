@@ -141,11 +141,8 @@ body {
 }
 
 .amo-button-holder {
-  z-index: 999 !important;
-}
-
-.amo-button-holder {
   z-index: 80 !important;
+  right: 30px !important;
 }
 
 .loading-box {
@@ -163,4 +160,8 @@ input:-webkit-autofill:active {
   box-shadow: 0 0 0px 1000px var(--border-color) inset !important;
   transition: background-color 5000s ease-in-out 0s;
   color: inherit !important;
+}
+
+.mobile-footer_navigation_bar {
+  display: none;
 }

@@ -232,7 +232,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                 </p>
               )}
 
-              <p>
+              <div>
                 {data.count_rating ? (
                   <>
                     <span>
@@ -253,7 +253,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                     </p>
                   </>
                 )}
-              </p>
+              </div>
             </div>
             <p className="product-name">
               {data.name

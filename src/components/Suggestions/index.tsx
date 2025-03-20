@@ -62,6 +62,15 @@ const Suggestions: React.FC<IProps> = ({
                 <Swiper
                   slidesPerView={"auto"}
                   spaceBetween={20}
+                  breakpoints={{
+                    300: {
+                      spaceBetween: 10,
+                    },
+
+                    800: {
+                      spaceBetween: 20,
+                    }
+                  }}
                   className="suggestions-swiper"
                 >
                   <SwiperSlide>

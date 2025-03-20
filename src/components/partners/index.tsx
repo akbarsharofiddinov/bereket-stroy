@@ -51,6 +51,10 @@ const Partners: React.FC = () => {
               breakpoints={{
                 400: {
                   slidesPerView: "auto"
+                },
+
+                800: {
+                  slidesPerView: 6
                 }
               }}
             >

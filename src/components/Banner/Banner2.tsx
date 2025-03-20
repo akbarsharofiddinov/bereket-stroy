@@ -23,10 +23,10 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
             modules={[Pagination, Navigation]}
             breakpoints={{
               300: {
-                direction: "vertical"
+                slidesPerView: 1,
               },
               800: {
-                direction: "horizontal"
+                slidesPerView: 2,
               }
             }}
             className="discount-banner_swiper"

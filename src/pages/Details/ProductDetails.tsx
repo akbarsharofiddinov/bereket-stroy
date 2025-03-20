@@ -748,10 +748,10 @@ const ProductDetails: React.FC = () => {
                       dangerouslySetInnerHTML={{
                         __html: productDetails.data[0].description
                           ? productDetails.data[0].description
-                              .split(" ")
-                              .slice(0, 40)
-                              .join(" ") +
-                            ` <a href="#description">batafsil</a>`
+                            .split(" ")
+                            .slice(0, 40)
+                            .join(" ") +
+                          ` <a href="#description">batafsil</a>`
                           : "<p>Tavsif yo'q</p>",
                       }}
                     />{" "}
@@ -1002,11 +1002,19 @@ const ProductDetails: React.FC = () => {
             ""
           )}
 
-          <Comments
-            data={comments}
-            rating_count={productDetails?.data[0].count_rating!}
-            avg_rating={productDetails?.data[0].avg_rating!}
-          />
+          {comments.length ? (
+            <Comments
+              data={comments}
+              rating_count={productDetails?.data[0].count_rating!}
+              avg_rating={productDetails?.data[0].avg_rating!}
+            />
+          ) : (
+            <div className="comments section">
+              <div className="section-top">
+                <h2 className="title" style={{ textAlign: "center", width: "100%", margin: "40px 0" }}>Sharhlar yo'q</h2>
+              </div>
+            </div>
+          )}
 
           {similarProducts?.data.length ? (
             <Suggestion
@@ -1023,7 +1031,7 @@ const ProductDetails: React.FC = () => {
           <Partners />
           <Services />
         </div>
-      </div>
+      </div >
     </>
   );
 };
