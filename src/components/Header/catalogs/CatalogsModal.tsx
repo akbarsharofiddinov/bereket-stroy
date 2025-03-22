@@ -31,29 +31,29 @@ const CatalogsModal: React.FC = () => {
             <div className="left">
               {allCategories.length
                 ? allCategories.map((category, index) => (
-                    <Link
-                      to={`catalogs/${category.slug}`}
-                      key={index}
-                      className={
-                        selectedCategory?.id === category.id ? "active" : ""
-                      }
-                      onMouseOver={() => {
-                        dispatch(setSelectedCategory(category));
-                      }}
-                      onClick={() => {
-                        dispatch(setCatalogModal(false));
-                        dispatch(setSelectedCategory(category));
-                      }}
-                    >
-                      <span>
-                        <img
-                          src={`http://bereket.webclub.uz/storage/${category.icon}`}
-                          alt=""
-                        />
-                      </span>
-                      {category.name}
-                    </Link>
-                  ))
+                  <Link
+                    to={`catalogs/${category.slug}`}
+                    key={index}
+                    className={
+                      selectedCategory?.id === category.id ? "active" : ""
+                    }
+                    onMouseOver={() => {
+                      dispatch(setSelectedCategory(category));
+                    }}
+                    onClick={() => {
+                      dispatch(setCatalogModal(false));
+                      dispatch(setSelectedCategory(category));
+                    }}
+                  >
+                    <span>
+                      <img
+                        src={`http://bereket.webclub.uz/storage/${category.icon}`}
+                        alt=""
+                      />
+                    </span>
+                    {category.name}
+                  </Link>
+                ))
                 : ""}
             </div>
             <div className="right">

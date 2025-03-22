@@ -73,5 +73,17 @@
   "leave_comment": "Sharh qoldirish",
   "company_info": "Korxona ma’lumotlari",
   "log_out": "Chiqish",
-  "per_month": "oyga"
+  "per_month": "oyga",
+  "checkout_title": "Buyurtmani rasmiylashtirish",
+  "info_text_takeaway": "Do‘kon filialini tanlab mahsulotni tekshirib olishingiz mumkun !",
+  "info_text_delivery": "Uyingiz, Ishxonangiz yoki Istalgan joyingizga tezkor yetkazib beramiz !",
+  "takeaway_locaiton": "Olib ketish manzili",
+  "delivery_location": "Yetkazish manzili",
+  "info_text_takeaway2": "Qabul qilish nuqtasini yoki qabul qilish do'konini xaritada tanlang",
+  "info_text_delivery2": "Yetkazib berish manzilini kiriting yoki xaritada tanlang",
+  "receiver_info": "Qabul qiluvchi ma’lumoti",
+  "phone_desc_info": "Siz koʻrsatgan telefon raqamiga buyurtma holati haqida bildirishnoma yuboramiz.Yetkazib berish vaqtini aniqlashtirish uchun kuryer siz bilan telefon orqali bogʻlanadi.",
+  "in_your_order": "Buyurtmangizda",
+  "your_discount": "Chegirmangiz",
+  "order_btn": "Rasmiylashtirish"
 }

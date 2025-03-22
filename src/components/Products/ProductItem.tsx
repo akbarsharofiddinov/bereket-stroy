@@ -243,11 +243,16 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                   </>
                 ) : (
                   <>
-                    <span>
-                      <FaStar />
-                    </span>
-                    <span className="no-comment">{t('no_comment')}</span>
+                    <p className="comment-box">
+                      <span>
+                        <FaStar />
+                      </span>
+                      <span className="no-comment">{t('no_comment')}</span>
+                    </p>
                     <p className="response-rating_box">
+                      <span>
+                        <FaStar />
+                      </span>
                       <span>{data.avg_rating}</span>
                       <span>{`(${data.count_rating})`}</span>
                     </p>

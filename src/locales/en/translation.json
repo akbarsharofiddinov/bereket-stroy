@@ -73,5 +73,17 @@
   "leave_comment": "Leave a comment",
   "company_info": "Company information",
   "log_out": "Log out",
-  "per_month": "month"
+  "per_month": "month",
+  "checkout_title": "Orderring",
+  "info_text_takeaway": "You can select a store branch and check the product!",
+  "info_text_delivery": "We deliver quickly to your home, office or anywhere you want!",
+  "takeaway_locaiton": "Pickup address",
+  "delivery_location": "Delivery address",
+  "info_text_takeaway2": "Select a pickup point or pickup store on the map",
+  "info_text_delivery2": "Enter your delivery address or select it on the map",
+  "receiver_info": "Recipient information",
+  "phone_desc_info": "We will send a notification about the status of your order to the phone number you provided. The courier will contact you by phone to confirm the delivery time.",
+  "in_your_order": "In your order",
+  "your_discount": "Your discount",
+  "order_btn": "Checkout"
 }

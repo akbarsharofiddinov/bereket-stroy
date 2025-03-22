@@ -72,5 +72,17 @@
   "leave_comment": "Pikir jazıw",
   "company_info": "Kárxana maǵlıwmatları",
   "log_out": "Shıǵıw",
-  "per_month": "ayǵa"
+  "per_month": "ayǵa",
+  "checkout_title": "Buyırtpanı rásmiylestiriw",
+  "info_text_takeaway": "Dúkan filialın tanlap ónimdi tekserip alıwıńız múmkin!",
+  "info_text_delivery": "Úyińiz, Jumıs ornıńız yamasa Qálegen jerinizge tez jetkizip beremiz!",
+  "takeaway_locaiton": "Alıp ketiw adresi",
+  "delivery_location": "Jetkerip beriw adresi",
+  "info_text_takeaway2": "Qabıllaw ornın yamasa qabıllaw dúkanın kartada tańlań",
+  "info_text_delivery2": "Jetkerip beriw mánzilin kirgiziń yamasa kartada tańlań",
+  "receiver_info": "Qabıllawshı maǵlıwmatı",
+  "phone_desc_info": "Siz kórsetken telefon nomerine buyırtpa jaǵdayı haqqında xabarnama jiberemiz. Jetkerip beriw waqtın anıqlastırıw ushın kurer siz benen telefon arqalı baylanısadı.",
+  "in_your_order": "Buyırtpańızda",
+  "your_discount": "Shegirmeniz",
+  "order_btn": "Rásmiylestiriw"
 }

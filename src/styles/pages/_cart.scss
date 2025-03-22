@@ -14,6 +14,10 @@
 .cart-page {
   margin: 40px 0;
 
+  .responsive-body {
+    display: none;
+  }
+
   .cart-inner {
     min-height: 50vh;
 
@@ -113,8 +117,8 @@
           }
 
           .img-box {
-            max-width: 150px !important;
-            max-height: 150px !important;
+            max-width: 150px;
+            max-height: 150px;
             position: relative;
 
             .select-btn {

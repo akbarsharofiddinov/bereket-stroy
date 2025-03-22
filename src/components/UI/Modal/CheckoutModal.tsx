@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const CheckoutModal: React.FC = () => {
 
   const navigate = useNavigate();
-  
+
   return (
     <>
       <div className="checkout-modal" onClick={() => navigate("/")}>

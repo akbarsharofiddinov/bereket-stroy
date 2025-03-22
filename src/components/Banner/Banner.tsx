@@ -54,9 +54,8 @@ const Banner: React.FC = () => {
         <div className="container">
           <div className="inner">
             <a
-              href={`/catalogs/${
-                bigBanners?.url.split("/")[bigBanners.url.split("/").length - 1]
-              }`}
+              href={`/catalogs/${bigBanners?.url.split("/")[bigBanners.url.split("/").length - 1]
+                }`}
               className="box box-1"
             >
               {loading ? (
@@ -80,9 +79,8 @@ const Banner: React.FC = () => {
             ) : (
               smallBanners.map((item, index) => (
                 <Link
-                  to={`/catalogs/${
-                    item?.url.split("/")[item.url.split("/").length - 1]
-                  }`}
+                  to={`/catalogs/${item?.url.split("/")[item.url.split("/").length - 1]
+                    }`}
                   className={`box box-${index + 2}`}
                   key={index}
                 >

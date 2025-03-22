@@ -5,6 +5,8 @@ import {
   AllCatalogs,
   Cart,
   Catalog,
+  Categories,
+  CategoryDetails,
   Checkout,
   Discount,
   Favorites,
@@ -14,6 +16,7 @@ import {
   Profile,
   SearchProducts,
   SubCatalogDetails,
+  SubCategory,
   SubSubCatalogDetails,
 } from "@/pages";
 import { PageNotFound } from "@/components";
@@ -91,11 +94,28 @@ const router = createBrowserRouter([
         path: "discounts/:discount_slug",
         element: <Discount />,
       },
+
     ],
   },
   {
     path: "checkout",
     element: <Checkout />,
+  },
+  {
+    path: "categories",
+    element: <Categories />,
+    children: [
+      {
+        path: ":catalog_slug",
+        element: <SubCategory />,
+        children: [
+          {
+            path: ":sub_catalog_slug",
+            element: <CategoryDetails />
+          }
+        ]
+      },
+    ]
   },
 ]);
 

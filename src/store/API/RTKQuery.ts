@@ -124,8 +124,11 @@ export const bereketAPI = createApi({
       },
     }),
 
-    getOrders: build.query<APIResponse<IOrder[]>, void>({
-      query: () => "/orders",
+    getOrders: build.query<APIResponse<IOrder[]>, number | undefined>({
+      query: (order_status_id) =>
+        `/orders${
+          order_status_id ? `?order_status_id=${order_status_id}` : ""
+        }`,
     }),
   }),
 });

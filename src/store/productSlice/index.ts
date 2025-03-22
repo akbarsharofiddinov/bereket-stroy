@@ -16,6 +16,7 @@ interface IState {
   totalProducts: number;
   selectedCardProducts: IProduct[];
   discounts: IDiscount[];
+  filterSideBar: boolean;
 }
 
 const initialState: IState = {
@@ -29,7 +30,8 @@ const initialState: IState = {
   isInSale: false,
   totalProducts: 0,
   selectedCardProducts: [],
-  discounts: []
+  discounts: [],
+  filterSideBar: false,
 };
 
 export const productSlice = createSlice({
@@ -119,9 +121,13 @@ export const productSlice = createSlice({
       state.selectedCardProducts = payload;
     },
 
-    setDiscounts: (state, {payload}) => {
-      state.discounts = payload
-    }
+    setDiscounts: (state, { payload }) => {
+      state.discounts = payload;
+    },
+
+    setFilterSidebar: (state, { payload }) => {
+      state.filterSideBar = payload;
+    },
   },
 });
 
@@ -142,6 +148,7 @@ export const {
   setFilteredProducts,
   setTotalProductsCount,
   setSelectedCardProducts,
-  setDiscounts
+  setDiscounts,
+  setFilterSidebar,
 } = productSlice.actions;
 export default productSlice.reducer;

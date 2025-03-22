@@ -9,14 +9,15 @@
 
   .inner {
     background-color: #fff;
-    min-width: 600px;
-    min-height: 400px;
+    width: 600px;
+    height: 400px;
     border-radius: 20px;
-    display: grid;
-    place-items: center;
+    padding: 20px;
 
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 20px;
 
     .title {
@@ -29,6 +30,7 @@
       color: var(--text-200);
       font-weight: 16px;
       font-weight: 600;
+      text-align: center;
     }
   }
 }

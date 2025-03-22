@@ -16,7 +16,7 @@ const Products: React.FC = () => {
   const [perPage, setPerPage] = useState(12);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [activeSort, setActiveSort] = useState<SortOption>("");
+  const [activeSort, setActiveSort] = useState<SortOption>("popular");
   const [inSaleProducts, setInSaleProducts] = useState<IProduct[]>([]);
 
   const [brandsQuery, setBrandsQuery] = useState("");
@@ -24,6 +24,8 @@ const Products: React.FC = () => {
 
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+
+  const [showFilter, setShowFilter] = useState(false);
 
   const debouncedMinPrice = useDebounce(minPrice, 500);
   const debouncedMaxPrice = useDebounce(maxPrice, 500);
@@ -94,6 +96,36 @@ const Products: React.FC = () => {
           setMaxPrice={setMaxPrice}
           setMinPrice={setMinPrice}
         />
+        <div className="top-actions">
+          <button className="filter-btn">
+            <span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.85746 12.5061C6.36901 10.6456 4.59564 8.59915 3.62734 7.44867C3.3276 7.09253 3.22938 6.8319 3.17033 6.3728C2.96811 4.8008 2.86701 4.0148 3.32795 3.5074C3.7889 3 4.60404 3 6.23433 3H17.7657C19.396 3 20.2111 3 20.672 3.5074C21.133 4.0148 21.0319 4.8008 20.8297 6.37281C20.7706 6.83191 20.6724 7.09254 20.3726 7.44867C19.403 8.60062 17.6261 10.6507 15.1326 12.5135C14.907 12.6821 14.7583 12.9567 14.7307 13.2614C14.4837 15.992 14.2559 17.4876 14.1141 18.2442C13.8853 19.4657 12.1532 20.2006 11.226 20.8563C10.6741 21.2466 10.0043 20.782 9.93278 20.1778C9.79643 19.0261 9.53961 16.6864 9.25927 13.2614C9.23409 12.9539 9.08486 12.6761 8.85746 12.5061Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            Filtrlash
+          </button>
+          <div className={showFilter ? "select-item active" : "select-item"} onClick={() => setShowFilter(prev => !prev)}>
+            <h2 className="selected">
+              {
+                activeSort === "popular" ? "Avval ommaboplari" : activeSort === "price" ? "Arzonroq" : activeSort === "-price" ? "Qimmatroq" : "Yuqori reyting"
+              }
+
+              <span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 7.50004C15 7.50004 11.3176 12.5 10 12.5C8.68233 12.5 5 7.5 5 7.5" stroke="black" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </h2>
+
+            <div className="menu">
+              <p onClick={() => setActiveSort("popular")}>Avval ommaboplari</p>
+              <p onClick={() => setActiveSort("price")}>Arzonroq</p>
+              <p onClick={() => setActiveSort("-price")}>Qimmatroq</p>
+              <p onClick={() => setActiveSort("rating")}>Yuqori reyting</p>
+            </div>
+          </div>
+        </div>
         <div className="right">
           <TopFilterBox activeSort={activeSort} setActiveSort={setActiveSort} />
           {isLoading ? (
@@ -105,35 +137,35 @@ const Products: React.FC = () => {
               <div className="products-grid">
                 {inSaleProducts?.length
                   ? inSaleProducts?.map((product, index) => (
-                      <ProductItem
-                        data={product}
-                        key={`${index}-${product.id}`}
-                      />
-                    ))
+                    <ProductItem
+                      data={product}
+                      key={`${index}-${product.id}`}
+                    />
+                  ))
                   : searchedProducts.length
-                  ? searchedProducts.map((item, index) => (
+                    ? searchedProducts.map((item, index) => (
                       <ProductItem key={index} data={item} />
                     ))
-                  : filteredProducts.length
-                  ? filteredProducts.map((product, index) => (
-                      <ProductItem key={index} data={product} />
-                    ))
-                  : selectedCardProducts.length
-                  ? selectedCardProducts.map((item, index) => (
-                      <ProductItem key={index} data={item} />
-                    ))
-                  : productsData?.data.length
-                  ? productsData?.data.map((product, index) => (
-                      <ProductItem
-                        data={product}
-                        key={`${index}-${product.id}`}
-                      />
-                    ))
-                  : ""}
+                    : filteredProducts.length
+                      ? filteredProducts.map((product, index) => (
+                        <ProductItem key={index} data={product} />
+                      ))
+                      : selectedCardProducts.length
+                        ? selectedCardProducts.map((item, index) => (
+                          <ProductItem key={index} data={item} />
+                        ))
+                        : productsData?.data.length
+                          ? productsData?.data.map((product, index) => (
+                            <ProductItem
+                              data={product}
+                              key={`${index}-${product.id}`}
+                            />
+                          ))
+                          : ""}
               </div>
               <div className="pagination-box">
                 {productsData?.pagination.per_page! <
-                productsData?.pagination.total! ? (
+                  productsData?.pagination.total! ? (
                   <>
                     <SelectItem
                       title="Ko‘statish:"

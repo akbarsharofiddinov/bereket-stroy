@@ -116,6 +116,7 @@ interface IOrder {
   receiver_name: string | null;
   receiver_phone: string;
   products_count: number;
+  order_status_id: number;
   products: {
     id: number;
     name: string;

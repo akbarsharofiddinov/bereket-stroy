@@ -37,6 +37,7 @@ const FilterSidebar: React.FC<IProps> = ({
   const dispatch = useAppDispatch();
 
   const { allCategories } = useAppSelector((state) => state.categorySlice);
+  const { filterSideBar } = useAppSelector(state => state.productSlice)
 
   const { i18n } = useTranslation();
 
@@ -45,10 +46,9 @@ const FilterSidebar: React.FC<IProps> = ({
   async function getBrands() {
     try {
       const response = await axios.get(
-        `https://bereket.webclub.uz/api/brands${
-          catalog_slug
-            ? `?category_slug=${catalog_slug}`
-            : sub_catalog_slug
+        `https://bereket.webclub.uz/api/brands${catalog_slug
+          ? `?category_slug=${catalog_slug}`
+          : sub_catalog_slug
             ? `?sub_category_slug=${sub_catalog_slug}`
             : ""
         }`
@@ -62,10 +62,9 @@ const FilterSidebar: React.FC<IProps> = ({
   async function getCountries() {
     try {
       const response = await axios.get(
-        `https://bereket.webclub.uz/api/countries${
-          catalog_slug
-            ? `?category_slug=${catalog_slug}`
-            : sub_catalog_slug
+        `https://bereket.webclub.uz/api/countries${catalog_slug
+          ? `?category_slug=${catalog_slug}`
+          : sub_catalog_slug
             ? `?sub_category_slug=${sub_catalog_slug}`
             : ""
         }`,
@@ -134,10 +133,20 @@ const FilterSidebar: React.FC<IProps> = ({
     }
   }, [selectedCountries]);
 
+  useEffect(() => {
+    if (filterSideBar) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+
+    return () => {
+      document.body.style.overflow = "";
+    }
+  }, [filterSideBar])
+
   return (
     <>
-      <div className="filter-sidebar">
+      <div className={filterSideBar ? "filter-sidebar active" : "filter-sidebar"}>
         {/* Qoshimcha filter box */}
+        <button className="close-filter">&times;</button>
         <div className={extraDropDown ? "select-item active" : "select-item"}>
           <div
             className="title"
@@ -203,15 +212,15 @@ const FilterSidebar: React.FC<IProps> = ({
             <input type="text" placeholder="Qidirish..." />
             {brands.length
               ? brands.map((brand, index) => (
-                  <Checkbox
-                    id={`${brand.id}-${brand.name}`}
-                    label={brand.name}
-                    key={index}
-                    setSelectedBrands={setSelectedBrands}
-                    isWaiting={isWating}
-                    setIsWating={setIsWating}
-                  />
-                ))
+                <Checkbox
+                  id={`${brand.id}-${brand.name}`}
+                  label={brand.name}
+                  key={index}
+                  setSelectedBrands={setSelectedBrands}
+                  isWaiting={isWating}
+                  setIsWating={setIsWating}
+                />
+              ))
               : ""}
           </div>
         </div>
@@ -246,15 +255,15 @@ const FilterSidebar: React.FC<IProps> = ({
             <input type="text" placeholder="Qidirish..." />
             {countries.length
               ? countries.map((country, index) => (
-                  <Checkbox
-                    key={index}
-                    id={`${country.id}-${country.name}`}
-                    label={country.name}
-                    isWaiting={isWaitingCountry}
-                    setSelectedCountries={setSelectedCountries}
-                    setIsWating={setIsWaitingCountry}
-                  />
-                ))
+                <Checkbox
+                  key={index}
+                  id={`${country.id}-${country.name}`}
+                  label={country.name}
+                  isWaiting={isWaitingCountry}
+                  setSelectedCountries={setSelectedCountries}
+                  setIsWating={setIsWaitingCountry}
+                />
+              ))
               : ""}
           </div>
         </div>

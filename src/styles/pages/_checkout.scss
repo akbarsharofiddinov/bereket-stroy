@@ -36,7 +36,6 @@
     display: flex;
     align-items: start;
     gap: 20px;
-    margin-bottom: 40px;
 
     .left {
       display: flex;
@@ -482,6 +481,10 @@
       gap: 20px;
       position: sticky;
       top: 30px;
+
+      .title {
+        display: inline-block;
+      }
 
       .switch-user_type {
         display: flex;

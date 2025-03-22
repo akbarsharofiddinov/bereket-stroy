@@ -19,6 +19,8 @@ import { calculateDiscounts } from "@/utils/calculateDiscounts";
 import { setCartProducts } from "@/store/productSlice";
 import { setProfileInfo } from "@/store/projectSlice";
 
+import logo from "@/assets/Vector.png"
+
 const Checkout: React.FC = () => {
   const [totalSum, setTotalSum] = useState(0);
   const [totalDiscountedSum, setTotalDiscountedSum] = useState(0);
@@ -255,43 +257,51 @@ const Checkout: React.FC = () => {
                   />
                 </svg>
               </span>
-              {t("back")}
+              <span>
+                {t("back")}
+              </span>
             </Link>
             <h2 className="title">Buyurtmani rasmiylashtirish</h2>
+            <div className="logo">
+              <img src={logo} alt="" />
+            </div>
           </div>
           <div className="inner">
+            <h2 className="title">
+              {t('checkout_title')}
+            </h2>
             <div className="left">
               <div className="switch-delivery_method">
                 {delivery_methods.length
                   ? delivery_methods.map((item, index) => (
-                      <button
-                        key={index}
-                        className={
-                          item.id === selectedDeliveryMethodID ? "active" : ""
-                        }
-                        onClick={() => setSelectedDeliveryMethodID(item.id)}
-                      >
-                        {item.name}
-                      </button>
-                    ))
+                    <button
+                      key={index}
+                      className={
+                        item.id === selectedDeliveryMethodID ? "active" : ""
+                      }
+                      onClick={() => setSelectedDeliveryMethodID(item.id)}
+                    >
+                      {item.name}
+                    </button>
+                  ))
                   : ""}
               </div>
               <p className="info-text">
                 {selectedDeliveryMethodID === 1
-                  ? "Do‘kon filialini tanlab mahsulotni tekshirib olishingiz mumkun !"
-                  : "Uyingiz, Ishxonangiz yoki Istalgan joyingizga tezkor yetkazib beramiz !"}
+                  ? t('info_text_takeaway')
+                  : t('info_text_delivery')}
               </p>
 
               <div className="locations section">
                 <h2 className="title">
                   {selectedDeliveryMethodID === 1
-                    ? "Olib ketish manzili"
-                    : "Yetkazish manzili"}
+                    ? t('takeaway_locaiton')
+                    : t('delivery_location')}
                 </h2>
                 <p className="info-text">
                   {selectedDeliveryMethodID === 1
-                    ? "Qabul qilish nuqtasini yoki qabul qilish do'konini xaritada tanlang"
-                    : "Yetkazib berish manzilini kiriting yoki xaritada tanlang"}
+                    ? t('info_text_takeaway2')
+                    : t('info_text_delivery2')}
                 </p>
                 <div className="branches">
                   {selectedDeliveryMethodID === 1 ? (
@@ -564,7 +574,7 @@ const Checkout: React.FC = () => {
                     : "receiver-info section"
                 }
               >
-                <h2 className="title">Qabul qiluvchi ma’lumoti</h2>
+                <h2 className="title">{t('receiver_info')}</h2>
                 <div className="user-info_inputs">
                   <input
                     type="text"
@@ -593,9 +603,7 @@ const Checkout: React.FC = () => {
                   </div>
                 </div>
                 <p className="desc-info">
-                  Siz koʻrsatgan telefon raqamiga buyurtma holati haqida
-                  bildirishnoma yuboramiz.Yetkazib berish vaqtini aniqlashtirish
-                  uchun kuryer siz bilan telefon orqali bogʻlanadi.
+                  {t('phone_desc_info')}
                 </p>
 
                 <textarea
@@ -608,65 +616,64 @@ const Checkout: React.FC = () => {
                 ></textarea>
               </div>
               <div className="orders section">
-                <h2 className="title">Buyurtmangizda</h2>
+                <h2 className="title">{t('in_your_order')}</h2>
                 {cart.length
                   ? cart.map((cartItem, index) =>
-                      cartItem.isSelected ? (
-                        <div className="cart-item" key={index}>
-                          <div className="img-box">
-                            {cartItem.product.photos ? (
-                              <img
-                                src={`http://bereket.webclub.uz/storage/${cartItem.product.photos[0]}`}
-                                alt=""
-                              />
-                            ) : (
-                              <img src={noImage} alt="" />
-                            )}
-                          </div>
+                    cartItem.isSelected ? (
+                      <div className="cart-item" key={index}>
+                        <div className="img-box">
+                          {cartItem.product.photos ? (
+                            <img
+                              src={`http://bereket.webclub.uz/storage/${cartItem.product.photos[0]}`}
+                              alt=""
+                            />
+                          ) : (
+                            <img src={noImage} alt="" />
+                          )}
+                        </div>
 
-                          <div className="body">
-                            <h2 className="product-name">
-                              {cartItem.product.name}
-                            </h2>
-
-                            <div className="price-box">
-                              <p>{cartItem.quantity} dona</p>
-                              {cartItem.product.discount ? (
-                                cartItem.product.discount_type === "%" ? (
-                                  <div className="discount">
-                                    <p className="old-price">
-                                      {formatCurrency(
-                                        parseFloat(cartItem.product.price)
-                                      )}
-                                    </p>
-                                    <span>{`${parseFloat(
-                                      cartItem.product.discount + ""
-                                    )}%`}</span>
-                                  </div>
-                                ) : (
-                                  <div className="discount">
-                                    <p className="old-price">
-                                      {formatCurrency(
-                                        parseFloat(cartItem.product.price + "")
-                                      )}
-                                    </p>
-                                  </div>
-                                )
+                        <div className="body">
+                          <h2 className="product-name">
+                            {cartItem.product.name}
+                          </h2>
+                          <div className="price-box">
+                            <p>{cartItem.quantity} {t('counting')}</p>
+                            {cartItem.product.discount ? (
+                              cartItem.product.discount_type === "%" ? (
+                                <div className="discount">
+                                  <p className="old-price">
+                                    {formatCurrency(
+                                      parseFloat(cartItem.product.price)
+                                    )}
+                                  </p>
+                                  <span>{`${parseFloat(
+                                    cartItem.product.discount + ""
+                                  )}%`}</span>
+                                </div>
                               ) : (
-                                ""
+                                <div className="discount">
+                                  <p className="old-price">
+                                    {formatCurrency(
+                                      parseFloat(cartItem.product.price + "")
+                                    )}
+                                  </p>
+                                </div>
+                              )
+                            ) : (
+                              ""
+                            )}
+                            <p>
+                              {formatCurrency(
+                                parseFloat(cartItem.product.discounted_price)
                               )}
-                              <p>
-                                {formatCurrency(
-                                  parseFloat(cartItem.product.discounted_price)
-                                )}
-                              </p>
-                            </div>
+                            </p>
                           </div>
                         </div>
-                      ) : (
-                        ""
-                      )
+                      </div>
+                    ) : (
+                      ""
                     )
+                  )
                   : ""}
               </div>
 
@@ -681,92 +688,90 @@ const Checkout: React.FC = () => {
                 <div className="methods">
                   {paymantMethods.length
                     ? paymantMethods.map((item) => (
-                        <label
-                          key={item.id}
-                          className={
-                            selectedPaymentMethod === item.key
-                              ? "selected"
-                              : item.key === "click" || item.key === "uzum_bank"
+                      <label
+                        key={item.id}
+                        className={
+                          selectedPaymentMethod === item.key
+                            ? "selected"
+                            : item.key === "click" || item.key === "uzum_bank"
                               ? "disable"
                               : ""
+                        }
+                        onClick={(e) => {
+                          if (
+                            item.key === "click" ||
+                            item.key === "uzum_bank"
+                          ) {
+                            e.preventDefault();
+                            e.stopPropagation();
                           }
-                          onClick={(e) => {
-                            if (
-                              item.key === "click" ||
-                              item.key === "uzum_bank"
-                            ) {
-                              e.preventDefault();
-                              e.stopPropagation();
-                            }
-                          }}
-                        >
-                          <input
-                            type="radio"
-                            name="payment-methods"
-                            value={item.id}
-                            checked={selectedPaymentMethod === item.key}
-                            onChange={() => setSelectedPaymentMethod(item.key)}
-                          />
-                          <div className="radio-content">
-                            <h2 className="title">
+                        }}
+                      >
+                        <input
+                          type="radio"
+                          name="payment-methods"
+                          value={item.id}
+                          checked={selectedPaymentMethod === item.key}
+                          onChange={() => setSelectedPaymentMethod(item.key)}
+                        />
+                        <div className="radio-content">
+                          <h2 className="title">
+                            <span>
                               {selectedPaymentMethod === item.key ? (
-                                <span>
-                                  <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12Z"
-                                      fill="#FFED00"
-                                    />
-                                    <path
-                                      d="M7.25 12C7.25 9.37665 9.37665 7.25 12 7.25C14.6234 7.25 16.75 9.37665 16.75 12C16.75 14.6234 14.6234 16.75 12 16.75C9.37665 16.75 7.25 14.6234 7.25 12Z"
-                                      fill="black"
-                                    />
-                                  </svg>
-                                </span>
+                                <svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12Z"
+                                    fill="#FFED00"
+                                  />
+                                  <path
+                                    d="M7.25 12C7.25 9.37665 9.37665 7.25 12 7.25C14.6234 7.25 16.75 9.37665 16.75 12C16.75 14.6234 14.6234 16.75 12 16.75C9.37665 16.75 7.25 14.6234 7.25 12Z"
+                                    fill="black"
+                                  />
+                                </svg>
                               ) : (
-                                <span>
-                                  <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      clipRule="evenodd"
-                                      d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12Z"
-                                      fill="#E2E5EB"
-                                    />
-                                  </svg>
-                                </span>
+                                <svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12Z"
+                                    fill="#E2E5EB"
+                                  />
+                                </svg>
                               )}
-                              {item.name}
-                            </h2>
-                            <p className="desc">{item.text}</p>
-                          </div>
-                          <img
-                            src={`http://bereket.webclub.uz/${item.photo}`}
-                            alt=""
-                          />
-                        </label>
-                      ))
+                            </span>
+                            {item.name}
+                          </h2>
+                          <p className="desc">{item.text}</p>
+                        </div>
+                        <img
+                          src={`http://bereket.webclub.uz/${item.photo}`}
+                          alt=""
+                        />
+                      </label>
+                    ))
                     : ""}
                 </div>
               </div>
             </div>
 
             <div className="right">
-              <h2 className="title">Buyurtmangizda:</h2>
+              <h2 className="title">{t('in_your_order')}:</h2>
               <div className="promo_code">
                 <input
                   type="text"
-                  placeholder="Promokod"
+                  placeholder={t('promo_code')}
                   name="promo-code"
                   id="promo-code"
                 />
@@ -807,29 +812,29 @@ const Checkout: React.FC = () => {
                     {cart.reduce((acc, item) => {
                       return item.isSelected ? acc + item.quantity : acc + 0;
                     }, 0) + " "}
-                    ta mahsulot
+                    {t('counting')} {t('product')}
                   </span>
                   <span>{formatCurrency(totalSum)}</span>
                 </p>
                 <p>
-                  <span>Chegirmangiz</span>
+                  <span>{t('your_discount')}</span>
                   <span>
                     -{formatCurrency(parseFloat(calculateDiscounts(cart) + ""))}
                   </span>
                 </p>
                 <p>
-                  <span>Jami to‘lov </span>
+                  <span>{t('total_fee')} </span>
                   <span>{formatCurrency(totalDiscountedSum)}</span>
                 </p>
               </div>
               <button className="order-btn" onClick={() => handleCreateOrder()}>
-                Rasmiylashtirish
+                {t('order_btn')}
               </button>
               <p>
                 Buyurtma berish orqali shaxsiy maʼlumotlarning{" "}
                 <span>BEREKET SAWDA </span>
-                platformasining 
-                <a href="https://bereket-stroy.uz/">Maxfiylik kelishuvi</a> va 
+                platformasining
+                <a href="https://bereket-stroy.uz/">Maxfiylik kelishuvi</a> va
                 <a href="https://bereket-stroy.uz/">Foydalanuvchi kelishuvi</a>
                 qoidalariga muvofiq qayta ishlanishiga rozilik bildirasiz.
               </p>

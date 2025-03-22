@@ -15,3 +15,7 @@ export { default as AllCatalogs } from "./Catalog/AllCatalogs";
 export { default as Loading } from "./Loading/Loading";
 export { default as SearchProducts } from "./SearchProducts/SearchProducts";
 export { default as Discount } from "./Discount/Discount";
+
+export { default as Categories } from "./Mobile/Categories";
+export { default as SubCategory } from "./Mobile/SubCategory";
+export { default as CategoryDetails } from "./Mobile/CategoryDetail";

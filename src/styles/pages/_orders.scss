@@ -88,6 +88,28 @@
             font-weight: 500;
           }
 
+          span {
+            &.success {
+              background-color: var(--green);
+              color: #fff;
+            }
+
+            &.canceled {
+              background-color: var(--red);
+              color: #fff;
+            }
+
+            &.waiting {
+              background-color: var(--yellow);
+              color: var(--text-300);
+            }
+
+            &.info {
+              background-color: var(--blue);
+              color: #fff;
+            }
+          }
+
           p {
             background-color: var(--border-color);
             display: flex;

@@ -17,6 +17,7 @@ import {
   setFavourites,
 } from "@/store/productSlice";
 import {
+  setAuthorization,
   setCatalogModal,
   setCurrentLanguage,
   setProfileInfo,
@@ -33,6 +34,7 @@ import { setAllCategories } from "./store/categorySlice";
 
 const Layout: React.FC = () => {
   const [loginType, setLoginType] = useState("login");
+  const [isCegoriesActive, setIsCategoriesActive] = useState(false);
 
   const { pathname } = useLocation();
 
@@ -40,7 +42,6 @@ const Layout: React.FC = () => {
 
   const { i18n } = useTranslation();
 
-  const location = useLocation();
 
   const { cart, favorites } = useAppSelector((state) => state.productSlice);
   const { authModal, authorization } = useAppSelector((state) => state.projectSlice);
@@ -86,6 +87,7 @@ const Layout: React.FC = () => {
     );
     localStorage.removeItem("token");
   }
+
 
   async function getBranches() {
     try {
@@ -164,6 +166,9 @@ const Layout: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    if (pathname.split("/")[1] === "catalogs") setIsCategoriesActive(true);
+    else setIsCategoriesActive(false)
   }, [pathname]);
 
   return (
@@ -198,7 +203,7 @@ const Layout: React.FC = () => {
               <path d="M2.35139 13.2135C1.99837 10.9162 1.82186 9.76763 2.25617 8.74938C2.69047 7.73112 3.65403 7.03443 5.58114 5.64106L7.02099 4.6C9.41829 2.86667 10.6169 2 12 2C13.383 2 14.5817 2.86667 16.979 4.6L18.4188 5.64106C20.346 7.03443 21.3095 7.73112 21.7438 8.74938C22.1781 9.76763 22.0016 10.9162 21.6486 13.2135L21.3476 15.1724C20.8471 18.4289 20.5969 20.0572 19.429 21.0286C18.2611 22 16.5536 22 13.1388 22H10.8612C7.44634 22 5.73891 22 4.571 21.0286C3.40309 20.0572 3.15287 18.4289 2.65243 15.1724L2.35139 13.2135Z" stroke="black" strokeWidth="2" strokeLinejoin="round" />
             </svg>
           </NavLink>
-          <NavLink to={"/categories"}>
+          <NavLink to={"/categories"} className={isCegoriesActive ? "active" : ""}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 18C2 16.4596 2 15.6893 2.34673 15.1235C2.54074 14.8069 2.80693 14.5407 3.12353 14.3467C3.68934 14 4.45956 14 6 14C7.54044 14 8.31066 14 8.87647 14.3467C9.19307 14.5407 9.45926 14.8069 9.65327 15.1235C10 15.6893 10 16.4596 10 18C10 19.5404 10 20.3107 9.65327 20.8765C9.45926 21.1931 9.19307 21.4593 8.87647 21.6533C8.31066 22 7.54044 22 6 22C4.45956 22 3.68934 22 3.12353 21.6533C2.80693 21.4593 2.54074 21.1931 2.34673 20.8765C2 20.3107 2 19.5404 2 18Z" stroke="black" strokeWidth="2" />
               <path d="M14 18C14 16.4596 14 15.6893 14.3467 15.1235C14.5407 14.8069 14.8069 14.5407 15.1235 14.3467C15.6893 14 16.4596 14 18 14C19.5404 14 20.3107 14 20.8765 14.3467C21.1931 14.5407 21.4593 14.8069 21.6533 15.1235C22 15.6893 22 16.4596 22 18C22 19.5404 22 20.3107 21.6533 20.8765C21.4593 21.1931 21.1931 21.4593 20.8765 21.6533C20.3107 22 19.5404 22 18 22C16.4596 22 15.6893 22 15.1235 21.6533C14.8069 21.4593 14.5407 21.1931 14.3467 20.8765C14 20.3107 14 19.5404 14 18Z" stroke="black" strokeWidth="2" />
@@ -231,12 +236,23 @@ const Layout: React.FC = () => {
               ""
             )}
           </NavLink>
-          <NavLink to={"/profile"}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6.57757 15.4816C5.1628 16.324 1.45336 18.0441 3.71266 20.1966C4.81631 21.248 6.04549 22 7.59087 22H16.4091C17.9545 22 19.1837 21.248 20.2873 20.1966C22.5466 18.0441 18.8372 16.324 17.4224 15.4816C14.1048 13.5061 9.89519 13.5061 6.57757 15.4816Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M16.5 6.5C16.5 8.98528 14.4853 11 12 11C9.51472 11 7.5 8.98528 7.5 6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5Z" stroke="black" strokeWidth="2" />
-            </svg>
-          </NavLink>
+          {token ? (
+            <NavLink to={"/profile"}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.57757 15.4816C5.1628 16.324 1.45336 18.0441 3.71266 20.1966C4.81631 21.248 6.04549 22 7.59087 22H16.4091C17.9545 22 19.1837 21.248 20.2873 20.1966C22.5466 18.0441 18.8372 16.324 17.4224 15.4816C14.1048 13.5061 9.89519 13.5061 6.57757 15.4816Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M16.5 6.5C16.5 8.98528 14.4853 11 12 11C9.51472 11 7.5 8.98528 7.5 6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5Z" stroke="black" strokeWidth="2" />
+              </svg>
+            </NavLink>
+          ) : (
+            <button onClick={() => {
+              dispatch(setAuthorization(true))
+            }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.57757 15.4816C5.1628 16.324 1.45336 18.0441 3.71266 20.1966C4.81631 21.248 6.04549 22 7.59087 22H16.4091C17.9545 22 19.1837 21.248 20.2873 20.1966C22.5466 18.0441 18.8372 16.324 17.4224 15.4816C14.1048 13.5061 9.89519 13.5061 6.57757 15.4816Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M16.5 6.5C16.5 8.98528 14.4853 11 12 11C9.51472 11 7.5 8.98528 7.5 6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5Z" stroke="black" strokeWidth="2" />
+              </svg>
+            </button>
+          )}
         </div>
       </div>
     </>
