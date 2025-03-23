@@ -5,11 +5,14 @@ import { FaAngleRight } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 import noImage from "@/assets/no-image.webp"
 import { Partners, Products, Services } from '@/components'
+import { useTranslation } from 'react-i18next'
 
 const CategoryDetail: React.FC = () => {
   const { selectedCategory } = useAppSelector(state => state.categorySlice);
   const { totalProducts } = useAppSelector(state => state.productSlice)
   const dispatch = useAppDispatch();
+
+  const { t } = useTranslation()
 
   return (
     <>

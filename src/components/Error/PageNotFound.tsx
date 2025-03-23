@@ -1,8 +1,10 @@
 import React from "react";
 import notFound404 from "@/assets/404/404.png";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const PageNotFound: React.FC = () => {
+  const { t } = useTranslation()
   return (
     <>
       <div className="error-component">
