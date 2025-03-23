@@ -110,5 +110,15 @@
   "rate_it": "Rate it",
   "send_product_photo": "Send a product image (optional)",
   "comment": "Comment",
-  "send": "Send"
+  "send": "Send",
+  "place_enter_your_number": "Please enter your phone number.",
+  "varification_code": "The varification code",
+  "sent_to_the_number": "has sent to the number",
+  "an_error_occured": "An Error occured",
+  "login_success": "You have loged in successfully",
+  "you": "you",
+  "if_code_didnt_come": "If the code does not come",
+  "try_later": "you can get a new code after the time over",
+  "confirm": "Confirm",
+  "your_name": "your name"
 }

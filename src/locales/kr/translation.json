@@ -109,5 +109,15 @@
   "rate_it": "Bahalań",
   "send_product_photo": "Tovar súwretin jiberiń (qálewli)",
   "comment": "Pikir",
-  "send": "Jiberiw"
+  "send": "Jiberiw",
+  "place_enter_your_number": "Telefon nomerińizdi kirgiziń.",
+  "varification_code": "Tastıyıqlaw kodi",
+  "sent_to_the_number": "nomerine jiberildi",
+  "an_error_occured": "Qáte júz berdi",
+  "login_success": "Sistemaǵa kirdińiz",
+  "you": "siz",
+  "if_code_didnt_come": "Eger kod kelmese",
+  "try_later": "sekundtan keyin jańa kod alıwıńız múmkin",
+  "confirm": "Tastıyıqlaw",
+  "your_name": "Atıńız"
 }

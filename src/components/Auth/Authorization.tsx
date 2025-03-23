@@ -22,7 +22,7 @@ const Authorization: React.FC = () => {
 
   const location = useLocation();
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const Authorization: React.FC = () => {
 
   const getVerificationCode = async () => {
     if (!phone) {
-      toast("Iltimos, telefon raqamingizni kiriting", { type: "error" });
+      toast(t('place_enter_your_number'), { type: "error" });
       setPhoneValidation(true);
       return;
     }
@@ -55,7 +55,7 @@ const Authorization: React.FC = () => {
         formData
       );
       if (response.status === 200) {
-        toast(`Tasdiqlash kodi ${phone} raqamiga yuborildi`, { type: "info" });
+        toast(`${t('varification_code')} ${phone} ${t('sent_to_the_number')}`, { type: "info" });
         setSmsSent(true);
         setTimerActive(true);
         setTimeLeft(120);
@@ -64,7 +64,7 @@ const Authorization: React.FC = () => {
 
     } catch (error: any) {
       console.log(error)
-      toast(error.response?.data?.message?.ru || "Xatolik yuz berdi", {
+      toast(error.response?.data?.message?.[i18n.language] || t('an_error_occured'), {
         type: "warning",
       });
       if (error.status === 429) setSmsSent(true)
@@ -84,15 +84,16 @@ const Authorization: React.FC = () => {
         formData
       );
       if (response.status === 200) {
-        toast("Tizimga muvaffaqiyatli kirdingiz", { type: "success" });
+        toast(t('login_success'), { type: "success" });
         localStorage.setItem("bereket_token", response.data.token);
         dispatch(setToken(response.data.token));
         dispatch(setAuthorization(false));
         dispatch(setProfileInfo(response.data.customer));
         if (location.pathname.includes("cart")) navigate("/checkout");
+        window.location.reload()
       }
     } catch (error: any) {
-      toast(error.response?.data?.message || "Kirishda xatolik yuz berdi", {
+      toast(error.response?.data?.message || t('an_error_occured'), {
         type: "error",
       });
     } finally {
@@ -126,7 +127,7 @@ const Authorization: React.FC = () => {
               <input
                 type="text"
                 name="username"
-                placeholder="Ismingiz"
+                placeholder={t('your_name')}
                 value={userName}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -142,8 +143,7 @@ const Authorization: React.FC = () => {
                 />
                 {timerActive && timeLeft > 0 ? (
                   <p className="desc">
-                    Agar kod kelmasa, siz {timeLeft} soniyadan so'ng yangi kod
-                    olishingiz mumkin
+                    {t('if_code_didnt_come')}, {t('you')} {timeLeft} {t('try_later')}
                   </p>
                 ) : (
                   <button onClick={getVerificationCode} disabled={isLoading}>
@@ -155,11 +155,11 @@ const Authorization: React.FC = () => {
             <div className="actions">
               {smsSent ? (
                 <button onClick={handleLogin} disabled={isLoading}>
-                  Tasdiqlash
+                  {t('confirm')}
                 </button>
               ) : (
                 <button onClick={getVerificationCode} disabled={isLoading}>
-                  SMS kodni olish
+                  {t('get_sms_code')}
                 </button>
               )}
             </div>

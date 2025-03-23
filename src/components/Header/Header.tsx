@@ -493,7 +493,7 @@ const Header: React.FC = () => {
                   <Link
                     to={""}
                     onClick={() => {
-                      localStorage.removeItem("token");
+                      localStorage.removeItem("bereket_token");
                       dispatch(setToken(""));
                       window.location.reload();
                     }}

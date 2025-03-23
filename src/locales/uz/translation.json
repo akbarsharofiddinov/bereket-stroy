@@ -110,5 +110,15 @@
   "rate_it": "Baholang",
   "send_product_photo": "Tovar rasmini yuboring (ixtiyoriy)",
   "comment": "Sharh",
-  "send": "Yuborish"
+  "send": "Yuborish",
+  "place_enter_your_number": "Iltimos, telefon raqamingizni kiriting",
+  "varification_code": "Tasdiqlash kodi",
+  "sent_to_the_number": "raqamiga yuborildi",
+  "an_error_occured": "Xatolik yuz berdi",
+  "login_success": "Tizimga muvofaqqiyatli kirdingiz",
+  "you": "siz",
+  "if_code_didnt_come": "Agar kod kelmasa",
+  "try_later": "soniyadan so'ng yangi kod olishingiz mumkin",
+  "confirm": "Tasdiqlash",
+  "your_name": "Ismingiz"
 }
