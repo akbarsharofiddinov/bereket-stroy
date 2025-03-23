@@ -280,6 +280,12 @@
     max-width: 400px !important;
   }
 
+  .banner {
+    .box-1 {
+      height: 350px !important;
+    }
+  }
+
   header {
     top: 0 !important;
     .left {
@@ -1390,6 +1396,12 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .container {
+    max-width: 360px !important;
   }
 }
 
