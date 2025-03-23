@@ -99,5 +99,10 @@
   "from": "From",
   "to": "To",
   "description": "Description",
-  "no_description": "No Description"
+  "no_description": "No Description",
+  "filter": "Filter",
+  "popular_first": "Popular first",
+  "cheaper": "cheaper",
+  "expensive": "more expensive",
+  "high_rating": "High rating"
 }

@@ -69,7 +69,6 @@ const AllCatalogs: React.FC = () => {
             </div>
 
             <Products />
-
             <Partners />
             <Services />
           </div>

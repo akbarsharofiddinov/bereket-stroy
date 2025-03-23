@@ -99,5 +99,10 @@
   "from": "от",
   "to": "до",
   "description": "Описание",
-  "no_description": "Нет описания"
+  "no_description": "Нет описания",
+  "filter": "Сортировка",
+  "popular_first": "Сначала популярный",
+  "cheaper": "дешевле",
+  "expensive": "дороже",
+  "high_rating": "Высокий рейтинг"
 }

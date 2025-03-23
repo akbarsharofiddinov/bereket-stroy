@@ -98,5 +98,10 @@
   "from": "den",
   "to": "shekem",
   "description": "Túsindirme",
-  "no_description": "Sipatlama joq"
+  "no_description": "Sipatlama joq",
+  "filter": "Saralaw",
+  "popular_first": "Dáslep tanılǵanlar",
+  "cheaper": "arzanlaw",
+  "expensive": "qımbatıraq",
+  "high_rating": "Joqarı reyting"
 }

@@ -99,5 +99,10 @@
   "from": "Dan",
   "to": "Gacha",
   "description": "Tavsif",
-  "no_description": "Tavsif yo'q"
+  "no_description": "Tavsif yo'q",
+  "filter": "Saralash",
+  "popular_first": "Avval ommaboplari",
+  "cheaper": "arzonroq",
+  "expensive": "qimmatroq",
+  "high_rating": "Yuqori reyting"
 }
