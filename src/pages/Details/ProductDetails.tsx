@@ -571,7 +571,7 @@ const ProductDetails: React.FC = () => {
         )}
         <div className="container">
           <div className="navigations">
-            <Link to={"/"}>Bosh sahifa</Link>
+            <Link to={"/"}>{t('home_page')}</Link>
             <span>
               <FaAngleRight />
             </span>

@@ -9,8 +9,6 @@ const SubCategory: React.FC = () => {
   const { selectedCategory } = useAppSelector(state => state.categorySlice)
   const { catalog_slug, sub_catalog_slug } = useParams();
 
-
-
   async function getSubCategories() {
     if (catalog_slug) {
       try {

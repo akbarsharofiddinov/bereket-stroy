@@ -16,7 +16,7 @@ const CategoryDetail: React.FC = () => {
       <div className="catalog-page">
         <div className="container">
           <div className="navigations">
-            <Link to={"/"}>Bosh sahifa</Link>
+            <Link to={"/"}>{t('home_page')}</Link>
             <span>
               <FaAngleRight />
             </span>

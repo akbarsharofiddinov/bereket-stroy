@@ -178,7 +178,7 @@ const Orders: React.FC = () => {
                       Buyurtmalaringizni ko'rish uchun tizimga kiring
                     </p>
                   )}
-                  <Link to={"/"}>Bosh sahifaga o‘tish</Link>
+                  <Link to={"/"}>{t('home_page')}ga o‘tish</Link>
                 </div>
               </div>
             ) : (

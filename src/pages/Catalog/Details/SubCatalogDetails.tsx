@@ -7,6 +7,7 @@ import noImage from "@/assets/no-image.webp";
 import { Partners, Products, Services } from "@/components";
 import axios from "axios";
 import { setAllProducts } from "@/store/productSlice";
+import { useTranslation } from "react-i18next";
 
 const SubCatalogDetails: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +17,7 @@ const SubCatalogDetails: React.FC = () => {
 
   const params = useParams();
   const { totalProducts } = useAppSelector(state => state.productSlice)
+  const { t } = useTranslation()
 
   async function getProducts(category_slug: string) {
     try {
@@ -52,7 +54,7 @@ const SubCatalogDetails: React.FC = () => {
         <div className="catalog-page">
           <div className="container">
             <div className="navigations">
-              <Link to={"/"}>Bosh sahifa</Link>
+              <Link to={"/"}>{t('home_page')}</Link>
               <span>
                 <FaAngleRight />
               </span>

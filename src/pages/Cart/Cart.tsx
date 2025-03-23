@@ -645,7 +645,7 @@ const Cart: React.FC = () => {
                 Ro'yxatni to'ldirish uchun <br /> Mahsulotlarni savatchaga
                 qo‘shing
               </p>
-              <Link to={"/"}>Bosh sahifaga o‘tish</Link>
+              <Link to={"/"}>{t('home_page')}ga o‘tish</Link>
             </div>
           )}
         </div>

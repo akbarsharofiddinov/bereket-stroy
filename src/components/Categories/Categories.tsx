@@ -1,22 +1,14 @@
-import { useGetAllCategoriesQuery } from "@/store/API/RTKQuery";
-import { setAllCategories } from "@/store/categorySlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+
+import { useAppSelector } from "@/store/hooks";
 import SkeletonImage from "antd/es/skeleton/Image";
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const Categories: React.FC = () => {
-  const { allCategories } = useAppSelector((state) => state.categorySlice);
-  const { t, i18n } = useTranslation();
-  const dispatch = useAppDispatch()
+  const { allCategories, isLoading } = useAppSelector((state) => state.categorySlice);
 
-  const { data, isSuccess, isFetching, refetch } = useGetAllCategoriesQuery()
-  if (isSuccess) dispatch(setAllCategories(data.data));
-
-  useEffect(() => {
-    refetch()
-  }, [i18n.language]);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -29,10 +21,10 @@ const Categories: React.FC = () => {
                   {allCategories.map((item, index) => (
                     <Link to={`catalogs/${item.slug}`} key={index}>
 
-                      {isFetching ? (
+                      {isLoading ? (
                         <SkeletonImage active />
                       ) :
-                        isSuccess ? (
+                        allCategories.length ? (
                           <>
                             <img
                               src={`http://bereket.webclub.uz/storage/${item.icon}`}

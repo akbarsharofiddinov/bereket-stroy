@@ -90,5 +90,7 @@
   "currency": "UZS",
   "keeping_date": "Expiration period",
   "public_offer": "Offer agreement",
-  "user_agreement": "User agreement"
+  "user_agreement": "User agreement",
+  "home_page": "Homepage",
+  "product_found": "products found"
 }

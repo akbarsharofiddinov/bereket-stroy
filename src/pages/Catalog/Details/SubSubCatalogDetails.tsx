@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setAllProducts } from "@/store/productSlice";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FaAngleRight } from "react-icons/fa6";
 import { Link, useParams } from "react-router-dom";
 
@@ -18,6 +19,8 @@ const SubSubCatalogDetails: React.FC = () => {
     useAppSelector((state) => state.categorySlice);
 
   const { totalProducts } = useAppSelector((state) => state.productSlice);
+
+  const { t } = useTranslation()
 
   const params = useParams();
 
@@ -57,7 +60,7 @@ const SubSubCatalogDetails: React.FC = () => {
       <div className="catalog-page">
         <div className="container">
           <div className="navigations">
-            <Link to={"/"}>Bosh sahifa</Link>
+            <Link to={"/"}>{t('home_page')}</Link>
             <span>
               <FaAngleRight />
             </span>

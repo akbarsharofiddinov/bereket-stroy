@@ -9,15 +9,20 @@ import {
 import { Partners, Products, Services } from "@/components";
 
 import noImage from "@/assets/no-image.webp";
+import { useTranslation } from "react-i18next";
+import SkeletonImage from "antd/es/skeleton/Image";
 
 const Catalog: React.FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
-  const { selectedCategory, allCategories } = useAppSelector(
+  const { selectedCategory, allCategories, isLoading } = useAppSelector(
     (state) => state.categorySlice
   );
 
+  const { t } = useTranslation()
+
   const { totalProducts } = useAppSelector((state) => state.productSlice);
+
 
   useEffect(() => {
     if (params.catalog_slug) {
@@ -38,7 +43,7 @@ const Catalog: React.FC = () => {
         <div className="catalog-page">
           <div className="container">
             <div className="navigations">
-              <Link to={"/"}>Bosh sahifa</Link>
+              <Link to={"/"}>{t('home_page')}</Link>
               <span>
                 <FaAngleRight />
               </span>
@@ -49,26 +54,31 @@ const Catalog: React.FC = () => {
 
             <div className="top">
               <h2 className="title">{selectedCategory?.name}</h2>
-              <p>{totalProducts} ta mahsulot topildi</p>
+              <p>{totalProducts} {`${t('counting')} ${t('product_found')}`}</p>
             </div>
 
+
             <div className="sub-categories">
-              {selectedCategory?.sub_category.map((sub_category, index) => (
-                <Link
-                  to={`/catalogs/${selectedCategory.slug}/${sub_category.slug}`}
-                  key={index}
-                  onClick={() => dispatch(setSelectedSubCategory(sub_category))}
-                >
-                  {sub_category.photo ? (
-                    <img
-                      src={`http://bereket.webclub.uz/storage/${sub_category.photo}`}
-                    />
-                  ) : (
-                    <img src={noImage} alt="" />
-                  )}
-                  <span>{sub_category.name}</span>
-                </Link>
-              ))}
+              {isLoading ? (
+                <SkeletonImage active />
+              ) : (
+                selectedCategory?.sub_category.map((sub_category, index) => (
+                  <Link
+                    to={`/catalogs/${selectedCategory.slug}/${sub_category.slug}`}
+                    key={index}
+                    onClick={() => dispatch(setSelectedSubCategory(sub_category))}
+                  >
+                    {sub_category.photo ? (
+                      <img
+                        src={`http://bereket.webclub.uz/storage/${sub_category.photo}`}
+                      />
+                    ) : (
+                      <img src={noImage} alt="" />
+                    )}
+                    <span>{sub_category.name}</span>
+                  </Link>
+                ))
+              )}
             </div>
 
             <Products />

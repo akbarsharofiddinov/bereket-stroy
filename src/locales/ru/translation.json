@@ -90,5 +90,7 @@
   "currency": "сум",
   "keeping_date": "Срок хранения",
   "public_offer": "Публичная оферта",
-  "user_agreement": "Пользовательское соглашение"
+  "user_agreement": "Пользовательское соглашение",
+  "home_page": "Главная страница",
+  "product_found": "продукт найден"
 }

@@ -27,8 +27,10 @@ import {
 import { setBranches } from "./store/companySlice";
 import { useTranslation } from "react-i18next";
 import {
+  useGetAllCategoriesQuery,
   useGetAllProductsQuery,
 } from "./store/API/RTKQuery";
+import { setAllCategories, setIsLoading } from "./store/categorySlice";
 
 
 const Layout: React.FC = () => {
@@ -83,6 +85,20 @@ const Layout: React.FC = () => {
     useGetAllProductsQuery({});
 
   if (allProductsSuccess) dispatch(setAllProducts(allProducts.data));
+
+
+  const { data, isSuccess, isFetching, refetch } = useGetAllCategoriesQuery()
+
+  if (isFetching) dispatch(setIsLoading(true));
+  else if (isSuccess) {
+    dispatch(setAllCategories(data.data))
+    dispatch(setIsLoading(false))
+  }
+
+
+  useEffect(() => {
+    refetch()
+  }, [i18n.language]);
 
   useEffect(() => {
     dispatch(setCatalogModal(false));

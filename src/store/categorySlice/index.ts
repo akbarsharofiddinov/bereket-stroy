@@ -5,6 +5,7 @@ interface IState {
   selectedCategory: ICategory | undefined;
   selectedSubCategory: ICategory | undefined;
   selectedSubSubCategory: ICategory | undefined;
+  isLoading: boolean;
 }
 
 const initialState: IState = {
@@ -12,6 +13,7 @@ const initialState: IState = {
   selectedCategory: undefined,
   selectedSubCategory: undefined,
   selectedSubSubCategory: undefined,
+  isLoading: false,
 };
 
 export const categorySlice = createSlice({
@@ -33,6 +35,10 @@ export const categorySlice = createSlice({
     setSelectedSubSubCategory: (state, { payload }) => {
       state.selectedSubSubCategory = payload;
     },
+
+    setIsLoading: (state, { payload }) => {
+      state.isLoading = payload;
+    },
   },
 });
 
@@ -41,6 +47,7 @@ export const {
   setSelectedCategory,
   setSelectedSubCategory,
   setSelectedSubSubCategory,
+  setIsLoading,
 } = categorySlice.actions;
 
 export default categorySlice.reducer;

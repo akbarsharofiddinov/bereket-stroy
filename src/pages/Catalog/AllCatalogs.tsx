@@ -41,12 +41,12 @@ const AllCatalogs: React.FC = () => {
         <div className="catalog-page">
           <div className="container">
             <div className="navigations">
-              <Link to={"/"}>Bosh sahifa</Link>
+              <Link to={"/"}>{t('home_page')}</Link>
             </div>
 
             <div className="top">
               <h2 className="title">{t("category")}</h2>
-              <p>{totalProducts} ta mahsulot topildi</p>
+              <p>{totalProducts} {`${t('counting')} ${t('product_found')}`}</p>
             </div>
 
             <div className="sub-categories">
