@@ -31,7 +31,8 @@ const Orders: React.FC = () => {
     try {
       const response = await axios.get("https://bereket.webclub.uz/api/order-status-list", {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          "Accept-Language": i18n.language
         }
       });
       if (response.status === 200) setOrderStatusList(response.data.data)
