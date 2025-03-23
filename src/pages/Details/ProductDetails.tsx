@@ -32,7 +32,7 @@ const ProductDetails: React.FC = () => {
   const [currentImage, setCurrentImage] = useState("");
   const [comments, setComments] = useState<IComment[]>([]);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { cart, favorites } = useAppSelector((state) => state.productSlice);
 
@@ -59,6 +59,7 @@ const ProductDetails: React.FC = () => {
     isError,
     isSuccess,
     data: productDetails,
+    refetch: detailsRefetch
   } = useGetProductDetailsQuery(params.product_slug + "");
 
   async function getComments() {
@@ -220,6 +221,10 @@ const ProductDetails: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    detailsRefetch()
+  }, [i18n.language])
 
   useEffect(() => {
     if (params.product_slug) refetch();
