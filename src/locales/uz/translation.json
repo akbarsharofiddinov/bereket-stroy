@@ -124,5 +124,6 @@
   "no_order_title": "Sizda buyurtmalar mavjud emas",
   "no_order_desc": "Sizga maʼqul kelgan mahsulotlarni sevimlilarga qo‘shing va ularni buyurtma qiling",
   "no_order_login_link": "Buyurtmalaringizni ko'rish uchun tizimga kiring",
-  "no_order_home_back": "Bosh sahifaga o‘tish"
+  "no_order_home_back": "Bosh sahifaga o‘tish",
+  "nothing_found": "Hech narsa topilmadi"
 }

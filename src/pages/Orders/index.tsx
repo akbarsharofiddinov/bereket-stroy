@@ -338,7 +338,7 @@ const Orders: React.FC = () => {
                           </div>
                         ))
                       ) : (
-                        <h2 style={{ textAlign: "center", marginTop: 40 }}>Hech narsa topilmadi</h2>
+                        <h2 style={{ textAlign: "center", marginTop: 40 }}>{t('nothing_found')}</h2>
                       )}
                     </div>
                   </>
