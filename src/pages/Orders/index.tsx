@@ -37,7 +37,7 @@ const Orders: React.FC = () => {
       });
       if (response.status === 200) setOrderStatusList(response.data.data)
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -89,7 +89,7 @@ const Orders: React.FC = () => {
 
   useEffect(() => {
     getOrderStatusList()
-  }, [])
+  }, [i18n.language])
 
   useEffect(() => {
     getOrders(selectedOrderStatusID)
