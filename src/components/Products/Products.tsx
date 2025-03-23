@@ -171,7 +171,7 @@ const Products: React.FC = () => {
                   productsData?.pagination.total! ? (
                   <>
                     <SelectItem
-                      title="Ko‘statish:"
+                      title={`${t('show')}:`}
                       productsCount={productsData?.pagination.per_page!}
                       setPerPage={setPerPage}
                       menu={["5", "10", "20", "25"]}
