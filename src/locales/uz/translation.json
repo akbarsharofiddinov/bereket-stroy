@@ -21,6 +21,7 @@
   "in_cart": "Savatda",
   "show_all": "Barchasini ko'rsatish",
   "always_usefull": "Har doim foydali bo'ladi",
+  "buy_with_this_product": "Ushbu mahsulot bilan xarid qilishadi",
   "famous_brands": "Mashhur brendlar",
   "branches": "Filiallar",
   "fast_delivery": "Tezkor yetkazib berish",
@@ -92,5 +93,11 @@
   "public_offer": "Ommaviy offerta",
   "user_agreement": "Foydalanuvchi kelishuvi",
   "home_page": "Bosh sahifa",
-  "product_found": "mahsulot topildi"
+  "product_found": "mahsulot topildi",
+  "country": "Mamlakat",
+  "price": "Narx",
+  "from": "Dan",
+  "to": "Gacha",
+  "description": "Tavsif",
+  "no_description": "Tavsif yo'q"
 }

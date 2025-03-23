@@ -21,6 +21,7 @@
   "in_cart": "В корзине",
   "show_all": "Показать все",
   "always_usefull": "Всегда полезно",
+  "buy_with_this_product": "Приобретено вместе с этим товаром",
   "famous_brands": "Популярные бренды",
   "branches": "Филиалы",
   "fast_delivery": "Быстрая доставка",
@@ -92,5 +93,11 @@
   "public_offer": "Публичная оферта",
   "user_agreement": "Пользовательское соглашение",
   "home_page": "Главная страница",
-  "product_found": "продукт найден"
+  "product_found": "продукт найден",
+  "country": "Страна",
+  "price": "Цена",
+  "from": "от",
+  "to": "до",
+  "description": "Описание",
+  "no_description": "Нет описания"
 }

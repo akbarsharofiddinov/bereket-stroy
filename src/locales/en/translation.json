@@ -21,6 +21,7 @@
   "in_cart": "In Cart",
   "show_all": "Show All",
   "always_usefull": "It will always be useful",
+  "buy_with_this_product": "This product is purchased with",
   "famous_brands": "Popular brands",
   "branches": "Branches",
   "fast_delivery": "Fast delivery",
@@ -92,5 +93,11 @@
   "public_offer": "Offer agreement",
   "user_agreement": "User agreement",
   "home_page": "Homepage",
-  "product_found": "products found"
+  "product_found": "products found",
+  "country": "Country",
+  "price": "Price",
+  "from": "From",
+  "to": "To",
+  "description": "Description",
+  "no_description": "No Description"
 }

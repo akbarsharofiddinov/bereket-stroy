@@ -15,7 +15,7 @@ const SubCatalogDetails: React.FC = () => {
     (state) => state.categorySlice
   );
 
-  const params = useParams();
+  const { sub_catalog_slug, sub_sub_catalog_slug } = useParams();
   const { totalProducts } = useAppSelector(state => state.productSlice)
   const { t } = useTranslation()
 
@@ -34,19 +34,19 @@ const SubCatalogDetails: React.FC = () => {
   }
 
   useEffect(() => {
-    if (params.sub_catalog_slug) {
-      const findSubCategory = selectedCategory?.sub_category?.find(
-        (item) => item.slug === params.sub_catalog_slug
-      );
 
-      dispatch(setSelectedSubCategory(findSubCategory));
-      getProducts(params.sub_catalog_slug);
-    }
-  }, [params.sub_catalog_slug]);
+    const findSubCategory = selectedCategory?.sub_category?.find(
+      (item) => item.slug === sub_catalog_slug
+    );
+
+    dispatch(setSelectedSubCategory(findSubCategory));
+    getProducts(sub_catalog_slug!);
+
+  }, [selectedCategory, sub_catalog_slug]);
 
   return (
     <>
-      {params.sub_sub_catalog_slug ? (
+      {sub_sub_catalog_slug ? (
         <>
           <Outlet />
         </>
@@ -73,7 +73,7 @@ const SubCatalogDetails: React.FC = () => {
 
             <div className="top">
               <h2 className="title">{selectedSubCategory?.name}</h2>
-              <p>{totalProducts} ta mahsulot topildi</p>
+              <p>{totalProducts} {`${t('counting')} ${t('product_found')}`}</p>
             </div>
 
             <div className="sub-categories">

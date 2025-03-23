@@ -40,19 +40,19 @@ const SubSubCatalogDetails: React.FC = () => {
   }
 
   useEffect(() => {
-    if (params.sub_sub_catalog_slug) {
-      const findSubCategory = selectedCategory?.sub_category?.find(
-        (item) => item.slug === params.sub_catalog_slug
-      );
 
-      dispatch(setSelectedSubCategory(findSubCategory));
-      getProducts(params.sub_sub_catalog_slug);
+    const findSubCategory = selectedCategory?.sub_category?.find(
+      (item) => item.slug === params.sub_catalog_slug
+    );
 
-      const findSubSubCategory = selectedSubCategory?.sub_sub_category?.find(
-        (item) => item.slug === params.sub_sub_catalog_slug
-      );
-      dispatch(setSelectedSubSubCategory(findSubSubCategory));
-    }
+    dispatch(setSelectedSubCategory(findSubCategory));
+    getProducts(params.sub_sub_catalog_slug!);
+
+    const findSubSubCategory = selectedSubCategory?.sub_sub_category?.find(
+      (item) => item.slug === params.sub_sub_catalog_slug
+    );
+    dispatch(setSelectedSubSubCategory(findSubSubCategory));
+
   }, [selectedSubCategory]);
 
   return (
@@ -83,7 +83,7 @@ const SubSubCatalogDetails: React.FC = () => {
 
           <div className="top">
             <h2 className="title">{selectedSubSubCategory?.name}</h2>
-            <p>{totalProducts} ta mahsulot topildi</p>
+            <p>{totalProducts} {`${t('counting')} ${t('product_found')}`}</p>
           </div>
 
           {loading ? <h1>Loading...</h1> : <Products />}

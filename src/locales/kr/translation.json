@@ -21,6 +21,7 @@
   "in_cart": "Sebette",
   "show_all": "Barlıǵın kórsetiw",
   "always_usefull": "Mudamı paydalı boladı",
+  "buy_with_this_product": "Bul ónim menen satıp alınadı",
   "famous_brands": "Ataqlı brendlar",
   "branches": "Filiallar",
   "fast_delivery": "Tez jetkiziw",
@@ -91,5 +92,11 @@
   "public_offer": "Jámáátlik oferta",
   "user_agreement": "Paydalanıwshı kelisimi",
   "home_page": "Bas bet",
-  "product_found": "ónim tabıldı"
+  "product_found": "ónim tabıldı",
+  "country": "Mámleket",
+  "price": "Bahası",
+  "from": "den",
+  "to": "shekem",
+  "description": "Túsindirme",
+  "no_description": "Sipatlama joq"
 }

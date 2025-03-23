@@ -988,12 +988,12 @@ const ProductDetails: React.FC = () => {
               </div>
               <div className="productInfo-navbar"></div>
               <div className="product-description" id="description">
-                <h2 className="title">Tavsif</h2>
+                <h2 className="title">{t('description')}</h2>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: productDetails.data[0].description
                       ? productDetails.data[0].description
-                      : "<p>Tavsif yo'q</p>",
+                      : `<p>${t('no_description')}</p>`,
                   }}
                 />
               </div>
@@ -1018,7 +1018,7 @@ const ProductDetails: React.FC = () => {
 
           {similarProducts?.data.length ? (
             <Suggestion
-              title="Ushbu mahsulot bilan xarid qilishadi"
+              title={t('buy_with_this_product')}
               link=""
               data={similarProducts.data}
               isError={similarProductsError}

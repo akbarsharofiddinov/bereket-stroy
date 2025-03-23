@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setIsInSalve } from "@/store/productSlice";
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 
 interface IProps {
   setBrandsQuery: React.Dispatch<React.SetStateAction<string>>;
@@ -154,7 +155,7 @@ const FilterSidebar: React.FC<IProps> = ({
               setExtraDropDown((prev) => !prev);
             }}
           >
-            Kategoriyalar
+            {t('category')}
             <span>
               <svg
                 width="14"
@@ -189,7 +190,7 @@ const FilterSidebar: React.FC<IProps> = ({
             className="title"
             onClick={() => setBrendsDropDown((prev) => !prev)}
           >
-            Brendlar
+            {t('brands')}
             <span>
               <svg
                 width="14"
@@ -231,7 +232,7 @@ const FilterSidebar: React.FC<IProps> = ({
             className="title"
             onClick={() => setCountryDropDown((prev) => !prev)}
           >
-            Mamlakat
+            {t('country')}
             <span>
               <svg
                 width="14"
@@ -274,7 +275,7 @@ const FilterSidebar: React.FC<IProps> = ({
             className="title"
             onClick={() => setPriceDropDown((prev) => !prev)}
           >
-            Narx
+            {t('price')}
             <span>
               <svg
                 width="14"
@@ -298,17 +299,17 @@ const FilterSidebar: React.FC<IProps> = ({
               type="number"
               name="min_price"
               onChange={(e) => handleInputChanges(e)}
-              placeholder="Dan"
+              placeholder={t('from')}
             />
             <input
               type="number"
               name="max_price"
               onChange={(e) => handleInputChanges(e)}
-              placeholder="Gacha"
+              placeholder={t('to')}
             />
             <div className="switch-item">
               <Switch onChange={(value) => dispatch(setIsInSalve(value))} />
-              Sotuvda mavjud
+              {t('in_sale')}
             </div>
           </div>
         </div>
