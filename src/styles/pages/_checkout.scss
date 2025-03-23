@@ -355,6 +355,7 @@
       }
 
       .payment-methods {
+        margin-bottom: 40px !important;
         &.error {
           label {
             border: 2px solid var(--red);

@@ -125,5 +125,8 @@
   "no_order_desc": "Add the products you like to your favorites and order them.",
   "no_order_login_link": "Log in to view your orders",
   "no_order_home_back": "Go to home page",
-  "nothing_found": "Nothing found"
+  "nothing_found": "Nothing found",
+  "comment_placeholder": "Additional comment...",
+  "full_name": "Full name",
+  "order_description": "By placing an order, you agree to the processing of personal data in accordance with the <a href='https://bereket-stroy.uz/'> Privacy Agreement</a> and <a href='https://bereket-stroy.uz/'>User Agreement</a> of the BEREKET SAWDA platform"
 }

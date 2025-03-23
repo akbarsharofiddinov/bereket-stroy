@@ -14,7 +14,6 @@ import {
   useGetUserInfoQuery,
 } from "@/store/API/RTKQuery";
 import { useTranslation } from "react-i18next";
-import { t } from "i18next";
 import { calculateDiscounts } from "@/utils/calculateDiscounts";
 import { setCartProducts } from "@/store/productSlice";
 import { setProfileInfo } from "@/store/projectSlice";
@@ -52,7 +51,7 @@ const Checkout: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const token = localStorage.getItem("bereket_token");
 
@@ -261,7 +260,7 @@ const Checkout: React.FC = () => {
                 {t("back")}
               </span>
             </Link>
-            <h2 className="title">Buyurtmani rasmiylashtirish</h2>
+            <h2 className="title">{t('checkout_title')}</h2>
             <div className="logo">
               <img src={logo} alt="" />
             </div>
@@ -585,7 +584,7 @@ const Checkout: React.FC = () => {
                       setUserName(e.target.value);
                       setFillInfoError(false);
                     }}
-                    placeholder="Ism va Familiya"
+                    placeholder={t('full_name')}
                   />
                   <div className="phone-input">
                     <span>+998 </span>
@@ -610,7 +609,7 @@ const Checkout: React.FC = () => {
                   name="comment"
                   id="comment"
                   className="comment"
-                  placeholder="Qo‘shimcha izoh..."
+                  placeholder={t('comment_placeholder')}
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                 ></textarea>
@@ -830,14 +829,7 @@ const Checkout: React.FC = () => {
               <button className="order-btn" onClick={() => handleCreateOrder()}>
                 {t('order_btn')}
               </button>
-              <p>
-                Buyurtma berish orqali shaxsiy maʼlumotlarning{" "}
-                <span>BEREKET SAWDA </span>
-                platformasining
-                <a href="https://bereket-stroy.uz/">Maxfiylik kelishuvi</a> va
-                <a href="https://bereket-stroy.uz/">Foydalanuvchi kelishuvi</a>
-                qoidalariga muvofiq qayta ishlanishiga rozilik bildirasiz.
-              </p>
+              <p dangerouslySetInnerHTML={{ __html: t('order_description') }} />
             </div>
           </div>
         </div>

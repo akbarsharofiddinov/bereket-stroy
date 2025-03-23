@@ -125,5 +125,8 @@
   "no_order_desc": "Sizga maʼqul kelgan mahsulotlarni sevimlilarga qo‘shing va ularni buyurtma qiling",
   "no_order_login_link": "Buyurtmalaringizni ko'rish uchun tizimga kiring",
   "no_order_home_back": "Bosh sahifaga o‘tish",
-  "nothing_found": "Hech narsa topilmadi"
+  "nothing_found": "Hech narsa topilmadi",
+  "comment_placeholder": "Qo‘shimcha izoh...",
+  "full_name": "Full name",
+  "order_description": "Buyurtma berish orqali shaxsiy maʼlumotlarning BEREKET SAWDA platformasining <a href='https://bereket-stroy.uz/'>Maxfiylik kelishuvi</a> va <a href='https://bereket-stroy.uz/'>Foydalanuvchi kelishuvi</a> qoidalariga muvofiq qayta ishlanishiga rozilik bildirasiz."
 }
