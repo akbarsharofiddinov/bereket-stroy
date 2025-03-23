@@ -54,7 +54,7 @@ const Checkout: React.FC = () => {
 
   const { i18n } = useTranslation();
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("bereket_token");
 
   const { isSuccess: userInfoSuccess, data: userInfo } = useGetUserInfoQuery(
     undefined,

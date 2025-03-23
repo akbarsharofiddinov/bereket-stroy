@@ -199,3 +199,8 @@ interface IDiscount {
   slug: string;
   type: null;
 }
+
+interface IOrderStatus {
+  id: number;
+  name: string;
+}

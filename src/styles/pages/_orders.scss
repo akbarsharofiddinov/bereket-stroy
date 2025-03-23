@@ -31,6 +31,13 @@
     }
   }
 
+  .loading {
+    width: 100%;
+    height: 50vh;
+    display: grid;
+    place-items: center;
+  }
+
   .status-switcher {
     display: flex;
     align-items: center;
@@ -46,6 +53,7 @@
       font-size: 16px;
       font-weight: 500;
       border-radius: 20px;
+      text-transform: capitalize;
       cursor: pointer;
 
       &.active {

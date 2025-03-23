@@ -430,58 +430,6 @@ const Header: React.FC = () => {
                     </span>
                     {t("addresses")}
                   </Link>
-                  <Link to={`profile/company`}>
-                    <span>
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g clipPath="url(#clip0_338_59742)">
-                          <path
-                            d="M13.3335 8.33325L15.1247 8.87059C16.269 9.21392 16.8412 9.38559 17.1707 9.82842C17.5002 10.2713 17.5002 10.8687 17.5002 12.0633V18.3333"
-                            stroke="black"
-                            strokeWidth="1.5"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M6.6665 7.5H9.1665M6.6665 10.8333H9.1665"
-                            stroke="black"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M10.0002 18.3334V15.8334C10.0002 15.0477 10.0002 14.6549 9.75608 14.4108C9.512 14.1667 9.11916 14.1667 8.3335 14.1667H7.50016C6.71449 14.1667 6.32165 14.1667 6.07757 14.4108C5.8335 14.6549 5.8335 15.0477 5.8335 15.8334V18.3334"
-                            stroke="black"
-                            strokeWidth="1.5"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M1.6665 18.3333H18.3332"
-                            stroke="black"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
-                          <path
-                            d="M2.5 18.3334V5.59778C2.5 3.50549 2.5 2.45934 3.15932 1.94028C3.81864 1.42123 4.78952 1.70304 6.73127 2.26667L10.8979 3.4761C12.0697 3.81623 12.6556 3.98628 12.9944 4.44979C13.3333 4.91331 13.3333 5.54462 13.3333 6.80722V18.3334"
-                            stroke="black"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_338_59742">
-                            <rect width="20" height="20" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </span>
-                    {t("company_info")}
-                  </Link>
                   <Link to={"/orders"}>
                     <span>
                       <svg

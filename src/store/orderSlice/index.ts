@@ -33,6 +33,7 @@ export const orderSlice = createSlice({
   },
 });
 
-export const { setProducts, setReceiverLat, setReceiverLon } = orderSlice.actions;
+export const { setProducts, setReceiverLat, setReceiverLon } =
+  orderSlice.actions;
 
 export default orderSlice.reducer;

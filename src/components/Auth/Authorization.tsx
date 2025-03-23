@@ -61,13 +61,13 @@ const Authorization: React.FC = () => {
         setTimeLeft(120);
       }
 
-      
+
     } catch (error: any) {
       console.log(error)
       toast(error.response?.data?.message?.ru || "Xatolik yuz berdi", {
         type: "warning",
       });
-      if(error.status === 429) setSmsSent(true)
+      if (error.status === 429) setSmsSent(true)
     } finally {
       setIsLoading(false);
     }
@@ -85,7 +85,7 @@ const Authorization: React.FC = () => {
       );
       if (response.status === 200) {
         toast("Tizimga muvaffaqiyatli kirdingiz", { type: "success" });
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("bereket_token", response.data.token);
         dispatch(setToken(response.data.token));
         dispatch(setAuthorization(false));
         dispatch(setProfileInfo(response.data.customer));

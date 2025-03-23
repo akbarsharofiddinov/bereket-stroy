@@ -122,6 +122,8 @@ const router = createBrowserRouter([
 const App: React.FC = () => {
   const { i18n } = useTranslation();
 
+  if (localStorage.getItem("token")) localStorage.removeItem("token")
+
   useEffect(() => {
     const language = localStorage.getItem("language");
     i18n.changeLanguage(language!);

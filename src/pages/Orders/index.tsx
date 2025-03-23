@@ -6,28 +6,39 @@ import React, { useEffect, useState } from "react";
 import noOrders from "@/assets/no-orders.png";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "@/utils/currencyFormat";
-import { Loading } from "@/pages";
 import { CommentModal } from "@/components";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { toast } from "react-toastify";
-
-type statusType = "all" | "inProgress" | "delivered" | "canceled";
+import { PuffLoader } from "react-spinners";
 
 const Orders: React.FC = () => {
-  const [status, setStatus] = useState<statusType>("all");
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [openedProducts, setOpenedProducts] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [commentModal, setCommentModal] = useState(false);
+  const [orderStatusList, setOrderStatusList] = useState<IOrderStatus[]>([]);
   const [selectedOrderStatusID, setSelectedOrderStatusID] = useState<undefined | number>();
 
   const dispatch = useAppDispatch();
 
   const { t, i18n } = useTranslation();
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("bereket_token");
+
+  async function getOrderStatusList() {
+    try {
+      const response = await axios.get("https://bereket.webclub.uz/api/order-status-list", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      if (response.status === 200) setOrderStatusList(response.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   async function getOrders(status_id: number | undefined) {
     setIsLoading(true)
@@ -75,114 +86,102 @@ const Orders: React.FC = () => {
     else setOpenedProducts(prev => [...prev, id])
   }
 
-
   useEffect(() => {
-    getOrders(selectedOrderStatusID ? selectedOrderStatusID : undefined)
+    getOrderStatusList()
   }, [])
 
   useEffect(() => {
-    if (status === "all") setSelectedOrderStatusID(undefined);
-    else if (status === "canceled") setSelectedOrderStatusID(6);
-    else if (status === "delivered") setSelectedOrderStatusID(4);
-    else if (status === "inProgress") setSelectedOrderStatusID(3)
     getOrders(selectedOrderStatusID)
-  }, [status])
-
+  }, [selectedOrderStatusID])
 
   return (
     <>
       <div className="orders-page">
         <div className="container">
-          {isLoading ? (
-            <Loading />
-          ) : !isSuccess ? (
-            <div className="centered">
-              <div className="no-orders">
-                <img src={noOrders} alt="" />
-                <h3 className="title">
-                  Siz hali ham sevili mahsulot tanlamadingiz
-                </h3>
-                <p className="desc">
-                  Sizga maʼqul kelgan mahsulotlarni <br /> sevimlilarga qo‘shing
-                  va ularni buyurtma qiling
-                </p>
-                {token ? (
-                  ""
-                ) : (
-                  <p
-                    onClick={() => {
-                      dispatch(setAuthModal(true));
-                    }}
+          <div className="page-inner">
+            <div className="top">
+              <Link to={"/"}>
+                <span>
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    Buyurtmalaringizni ko'rish uchun tizimga kiring
-                  </p>
-                )}
-                <Link to={"/"}>Bosh sahifaga o‘tish</Link>
+                    <path
+                      d="M4 11.9998H20"
+                      stroke="black"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M8.99997 17C8.99997 17 4.00002 13.3176 4 12C3.99999 10.6824 9 7 9 7"
+                      stroke="black"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+                {t("back")}
+              </Link>
+              <div>
+                <h2 className="title">{t("orders")}</h2>
               </div>
             </div>
-          ) : (
-            <>
-              <div className="page-inner">
-                <div className="top">
-                  <Link to={"/"}>
-                    <span>
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M4 11.9998H20"
-                          stroke="black"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M8.99997 17C8.99997 17 4.00002 13.3176 4 12C3.99999 10.6824 9 7 9 7"
-                          stroke="black"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
-                    {t("back")}
-                  </Link>
-                  <div>
-                    <h2 className="title">{t("orders")}</h2>
-                  </div>
-                </div>
 
-                <div className="status-switcher">
-                  <button
-                    className={status === "all" ? "active" : ""}
-                    onClick={() => setStatus("all")}
-                  >
-                    {t("all")}
-                  </button>
-                  <button
-                    className={status === "inProgress" ? "active" : ""}
-                    onClick={() => setStatus("inProgress")}
-                  >
-                    {t("active")}
-                  </button>
-                  <button
-                    className={status === "delivered" ? "active" : ""}
-                    onClick={() => setStatus("delivered")}
-                  >
-                    {t("arrived")}
-                  </button>
-                  <button
-                    className={status === "canceled" ? "active" : ""}
-                    onClick={() => setStatus("canceled")}
-                  >
-                    {t("canceled")}
-                  </button>
-                </div>
+            <div className="status-switcher">
+              <button
+                className={selectedOrderStatusID === undefined ? "active" : ""}
+                onClick={() => {
+                  setSelectedOrderStatusID(undefined);
+                }}
+              >
+                {t("all")}
+              </button>
 
+              {orderStatusList.length ? (
+                orderStatusList.map((item, index) => (
+                  <button key={index} onClick={() => setSelectedOrderStatusID(item.id)} className={selectedOrderStatusID === item.id ? "active" : ""}>
+                    {item.name}
+                  </button>
+                ))
+              ) : ""}
+
+            </div>
+            {isLoading ? (
+              <div className="loading">
+                <PuffLoader />
+              </div>
+            ) : !isSuccess ? (
+              <div className="centered">
+                <div className="no-orders">
+                  <img src={noOrders} alt="" />
+                  <h3 className="title">
+                    Siz hali ham sevili mahsulot tanlamadingiz
+                  </h3>
+                  <p className="desc">
+                    Sizga maʼqul kelgan mahsulotlarni <br /> sevimlilarga qo‘shing
+                    va ularni buyurtma qiling
+                  </p>
+                  {token ? (
+                    ""
+                  ) : (
+                    <p
+                      onClick={() => {
+                        dispatch(setAuthModal(true));
+                      }}
+                    >
+                      Buyurtmalaringizni ko'rish uchun tizimga kiring
+                    </p>
+                  )}
+                  <Link to={"/"}>Bosh sahifaga o‘tish</Link>
+                </div>
+              </div>
+            ) : (
+              <>
                 <div className="orders">
                   {orders.length > 0 ? (
                     orders.map((orderItem, index) => (
@@ -344,9 +343,9 @@ const Orders: React.FC = () => {
                     <h2 style={{ textAlign: "center", marginTop: 40 }}>Hech narsa topilmadi</h2>
                   )}
                 </div>
-              </div>
-            </>
-          )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>

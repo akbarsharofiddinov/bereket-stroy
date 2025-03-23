@@ -12,7 +12,6 @@ export { default as Favorites } from "./Favorites";
 export { default as Orders } from "./Orders";
 export { default as Profile } from "./Profile";
 export { default as AllCatalogs } from "./Catalog/AllCatalogs";
-export { default as Loading } from "./Loading/Loading";
 export { default as SearchProducts } from "./SearchProducts/SearchProducts";
 export { default as Discount } from "./Discount/Discount";
 

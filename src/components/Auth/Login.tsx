@@ -78,7 +78,7 @@ const Login: React.FC<{
       if (response.status === 200) {
         toast("Tizimga muvaffaqiyatli kirdingiz", { type: "success" });
         dispatch(setAuthModal(false));
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("bereket_token", response.data.token);
         dispatch(setToken(response.data.token));
       }
     } catch (error: any) {

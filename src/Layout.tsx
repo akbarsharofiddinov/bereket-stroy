@@ -28,7 +28,6 @@ import { setBranches } from "./store/companySlice";
 import { useTranslation } from "react-i18next";
 import {
   useGetAllProductsQuery,
-  useGetUserInfoQuery,
 } from "./store/API/RTKQuery";
 
 
@@ -46,37 +45,21 @@ const Layout: React.FC = () => {
   const { cart, favorites } = useAppSelector((state) => state.productSlice);
   const { authModal, authorization } = useAppSelector((state) => state.projectSlice);
 
-  // Get All Categories
-  // const { isSuccess, data: categoriesResponse } = useGetAllCategoriesQuery();
-  // if (isSuccess) dispatch(setAllCategories(categoriesResponse.data));
+  const token = localStorage.getItem("bereket_token");
 
-
-
-  const token = localStorage.getItem("token");
-  // Get User Info
-  const {
-    isSuccess: userInfoSuccess,
-    isError,
-    data: userInfo,
-  } = useGetUserInfoQuery(undefined, { skip: token?.length ? false : true });
-  if (userInfoSuccess) dispatch(setProfileInfo(userInfo));
-  else if (isError) {
-    dispatch(
-      setProfileInfo({
-        birthday: "",
-        company_name: "",
-        first_name: "",
-        id: 0,
-        inn: "",
-        is_legal: 0,
-        is_verified: 0,
-        last_name: "",
-        phone: "",
+  async function getUserInfo() {
+    try {
+      const response = await axios.get("https://bereket.webclub.uz/api/user/me", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
-    );
-    localStorage.removeItem("token");
-  }
 
+      if (response.status === 200) dispatch(setProfileInfo(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   async function getBranches() {
     try {
@@ -117,8 +100,8 @@ const Layout: React.FC = () => {
       i18n.changeLanguage(localStorage.getItem("language") + "");
     }
 
-    if (localStorage.getItem("token")) {
-      dispatch(setToken(localStorage.getItem("token") + ""));
+    if (localStorage.getItem("bereket_token")) {
+      dispatch(setToken(localStorage.getItem("bereket_token") + ""));
     }
 
     if (localStorage.getItem("favorites")) {
@@ -130,6 +113,8 @@ const Layout: React.FC = () => {
     if (localStorage.getItem("cart")) {
       dispatch(setCartProducts(JSON.parse(localStorage.getItem("cart") + "")));
     }
+
+    getUserInfo()
   }, []);
 
   useEffect(() => {
