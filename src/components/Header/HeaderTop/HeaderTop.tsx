@@ -117,7 +117,6 @@ const HeaderTop: React.FC = () => {
                     <p
                       key={index}
                       onClick={() => {
-                        window.location.reload()
                         i18n.changeLanguage(item);
                         localStorage.setItem("language", item);
                       }}

@@ -3,5 +3,5 @@ export function formatCurrency(number: number) {
     maximumFractionDigits: 2,
     maximumSignificantDigits: 10,
   }).format(number);
-  return formatted + " so‘m";
+  return formatted;
 }

@@ -185,7 +185,7 @@ const Branches: React.FC = () => {
                       strokeLinecap="round"
                     />
                   </svg>
-                  Saqlash muddati: 7 kun
+                  {t('keeping_date')}
                 </p>
                 <p>
                   <svg

@@ -30,7 +30,7 @@ import {
   useGetAllProductsQuery,
   useGetUserInfoQuery,
 } from "./store/API/RTKQuery";
-import { setAllCategories } from "./store/categorySlice";
+
 
 const Layout: React.FC = () => {
   const [loginType, setLoginType] = useState("login");
@@ -50,18 +50,7 @@ const Layout: React.FC = () => {
   // const { isSuccess, data: categoriesResponse } = useGetAllCategoriesQuery();
   // if (isSuccess) dispatch(setAllCategories(categoriesResponse.data));
 
-  async function getAllCategories() {
-    try {
-      const response = await axios.get("https://bereket.webclub.uz/api/categories", {
-        headers: {
-          "Accept-Language": i18n.language,
-        },
-      });
-      if (response.status === 200) dispatch(setAllCategories(response.data.data))
-    } catch (error) {
-      console.log(error)
-    }
-  }
+
 
   const token = localStorage.getItem("token");
   // Get User Info
@@ -120,7 +109,6 @@ const Layout: React.FC = () => {
   useEffect(() => {
     getBranches();
     dispatch(setCurrentLanguage(i18n.language));
-    getAllCategories()
   }, [i18n.language]);
 
   useEffect(() => {

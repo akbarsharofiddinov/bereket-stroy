@@ -134,7 +134,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
           onClick={() => navigate(`/details/${data.slug}`)}
         >
           <div className="img-box">
-            {!data.is_sale ? <div className="not-sale">Tugagan</div> : ""}
+            {!data.is_sale ? <div className="not-sale">{t('finished')}</div> : ""}
             {data.status && <span className="status_new">{data.status}</span>}
             <span
               className="add-fav"
@@ -266,13 +266,13 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                 : ""}
             </p>
             <div className="price">
-              {formatCurrency(parseInt(data.discounted_price))}
+              {`${formatCurrency(parseInt(data.discounted_price))} ${t('currency')}`}
               <div className="discount-price">
                 {data.discount ? (
                   data.discount_type === "%" ? (
                     <>
                       <p className="original-price">
-                        {formatCurrency(parseFloat(data.price))}
+                        {`${formatCurrency(parseFloat(data.price))} ${t('currency')}`}
                       </p>
                       <p className="discount">
                         {parseFloat(data.discount + "")}%
@@ -281,7 +281,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
                   ) : (
                     <>
                       <p className="original-price">
-                        {formatCurrency(parseFloat(data.price))}
+                        {`${formatCurrency(parseFloat(data.price))} ${t('currency')}`}
                       </p>
                     </>
                   )
@@ -291,9 +291,9 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
               </div>
             </div>
             <p className="monthly-price">
-              {formatCurrency(
+              {`${formatCurrency(
                 Math.round(parseFloat(data.discounted_price) / 12)
-              )}{" "}
+              )} ${t('currency')}`}{" "}
               / 12 {t('per_month')}
             </p>
             <div className="count-box" onClick={(e) => e.stopPropagation()}>

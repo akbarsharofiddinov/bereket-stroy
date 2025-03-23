@@ -306,16 +306,16 @@ const ProductDetails: React.FC = () => {
               <div className="right">
                 <div className="price">
                   <p className="discounted-price">
-                    {formatCurrency(
+                    {`${formatCurrency(
                       parseInt(productDetails.data[0].discounted_price)
-                    )}
+                    )} ${t('currency')}`}
                   </p>
                   {productDetails.data[0].discount ? (
                     <>
                       <p className="original-price">
-                        {formatCurrency(
+                        {`${formatCurrency(
                           parseFloat(productDetails.data[0].price)
-                        )}
+                        )} ${t('currency')}`}
                       </p>
                     </>
                   ) : (
@@ -368,7 +368,7 @@ const ProductDetails: React.FC = () => {
                               : "addtocart disable"
                           }
                         >
-                          Savatchaga
+                          {t('in_cart')}
                           {productDetails.data[0].is_sale ? (
                             <span>
                               <svg
@@ -452,7 +452,7 @@ const ProductDetails: React.FC = () => {
                         }
                       }}
                     >
-                      Savatga solish
+                      {t('add_to_cart')}
                       {productDetails.data[0].is_sale ? (
                         <span>
                           <svg
@@ -758,16 +758,16 @@ const ProductDetails: React.FC = () => {
                   </div>
                   <div className="price">
                     <span className="discounted-price">
-                      {formatCurrency(
+                      {`${formatCurrency(
                         parseFloat(productDetails.data[0].discounted_price)
-                      )}
+                      )} ${t('currency')}`}
                     </span>
                     {productDetails.data[0].discount ? (
                       <>
                         <span className="original-price">
-                          {formatCurrency(
+                          {`${formatCurrency(
                             parseFloat(productDetails.data[0].price)
-                          )}
+                          )} ${t('currency')}`}
                         </span>
                       </>
                     ) : (
@@ -779,13 +779,13 @@ const ProductDetails: React.FC = () => {
                     12 / oyga
                     <span>
                       {" " +
-                        formatCurrency(
+                        `${formatCurrency(
                           Math.round(
                             parseFloat(
                               productDetails.data[0].discounted_price
                             ) / 12
                           )
-                        )}
+                        )} ${t('currency')}`}
                     </span>
                   </p>
                   {checkProductInCart(productDetails.data[0]) ? (
@@ -833,7 +833,7 @@ const ProductDetails: React.FC = () => {
                               : "addtocart disable"
                           }
                         >
-                          Savatchaga
+                          {t('in_cart')}
                           {productDetails.data[0].is_sale ? (
                             <span>
                               <svg
@@ -917,7 +917,7 @@ const ProductDetails: React.FC = () => {
                         }
                       }}
                     >
-                      Savatga solish
+                      {t('add_to_cart')}
                       {productDetails.data[0].is_sale ? (
                         <span>
                           <svg
@@ -1011,7 +1011,7 @@ const ProductDetails: React.FC = () => {
           ) : (
             <div className="comments section">
               <div className="section-top">
-                <h2 className="title" style={{ textAlign: "center", width: "100%", margin: "40px 0" }}>Sharhlar yo'q</h2>
+                <h2 className="title" style={{ textAlign: "center", width: "100%", margin: "40px 0" }}>{t('no_comment')}</h2>
               </div>
             </div>
           )}

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { RootState } from "..";
 
 type productsParams = {
   page?: number;
@@ -35,16 +36,13 @@ export const bereketAPI = createApi({
   reducerPath: "bereketAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: `https://bereket.webclub.uz/api`,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("token");
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).projectSlice.token;
+      // const language = (getState() as RootState).projectSlice.currentLanguage;
       const language = localStorage.getItem("language");
-
-      if (language) {
-        headers.append("Access-Language", language);
-      }
-      if (token) {
-        headers.append("Authorization", `Bearer ${token}`);
-      }
+      headers.delete("Accept-language");
+      headers.set("Accept-language", language + "");
+      headers.set("Authorization", `Bearer ${token}`);
 
       return headers;
     },
@@ -130,6 +128,18 @@ export const bereketAPI = createApi({
           order_status_id ? `?order_status_id=${order_status_id}` : ""
         }`,
     }),
+
+    getTopBanner: build.query<APIResponse<IBanner>, void>({
+      query: () => "/big-banner",
+    }),
+
+    getSmallBanners: build.query<APIResponse<IBanner[]>, void>({
+      query: () => "/small-banner",
+    }),
+
+    getDiscounts: build.query<APIResponse<IDiscount[]>, void>({
+      query: () => "/discounts",
+    }),
   }),
 });
 
@@ -143,4 +153,7 @@ export const {
   useCreateOrderMutation,
   useGetSimilarProductsQuery,
   useGetOrdersQuery,
+  useGetTopBannerQuery,
+  useGetSmallBannersQuery,
+  useGetDiscountsQuery,
 } = bereketAPI;

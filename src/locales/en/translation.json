@@ -85,5 +85,10 @@
   "phone_desc_info": "We will send a notification about the status of your order to the phone number you provided. The courier will contact you by phone to confirm the delivery time.",
   "in_your_order": "In your order",
   "your_discount": "Your discount",
-  "order_btn": "Checkout"
+  "order_btn": "Checkout",
+  "finished": "Out of stock",
+  "currency": "UZS",
+  "keeping_date": "Expiration period",
+  "public_offer": "Offer agreement",
+  "user_agreement": "User agreement"
 }

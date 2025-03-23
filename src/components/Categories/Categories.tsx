@@ -1,11 +1,22 @@
-import { useAppSelector } from "@/store/hooks";
-import React from "react";
+import { useGetAllCategoriesQuery } from "@/store/API/RTKQuery";
+import { setAllCategories } from "@/store/categorySlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import SkeletonImage from "antd/es/skeleton/Image";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const Categories: React.FC = () => {
   const { allCategories } = useAppSelector((state) => state.categorySlice);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const dispatch = useAppDispatch()
+
+  const { data, isSuccess, isFetching, refetch } = useGetAllCategoriesQuery()
+  if (isSuccess) dispatch(setAllCategories(data.data));
+
+  useEffect(() => {
+    refetch()
+  }, [i18n.language]);
 
   return (
     <>
@@ -17,20 +28,27 @@ const Categories: React.FC = () => {
                 <>
                   {allCategories.map((item, index) => (
                     <Link to={`catalogs/${item.slug}`} key={index}>
-                      {item.icon ? (
-                        <img
-                          src={`http://bereket.webclub.uz/storage/${item.icon}`}
-                        />
-                      ) : (
-                        ""
-                      )}
-                      <h2 className="title">{item.name}</h2>
+
+                      {isFetching ? (
+                        <SkeletonImage active />
+                      ) :
+                        isSuccess ? (
+                          <>
+                            <img
+                              src={`http://bereket.webclub.uz/storage/${item.icon}`}
+                            />
+                            <h2 className="title">{item.name}</h2>
+                          </>
+                        ) : (
+                          ""
+                        )
+                      }
                     </Link>
                   ))}
                   <Link to={"catalogs"}>
                     <span>
                       <svg
-                        width="49"  
+                        width="49"
                         height="49"
                         viewBox="0 0 49 49"
                         fill="none"

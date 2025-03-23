@@ -1,73 +1,36 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useTranslation } from "react-i18next";
+import React from "react";
 import SkeletonImage from "antd/es/skeleton/Image";
 import { Link } from "react-router-dom";
+import { useGetSmallBannersQuery, useGetTopBannerQuery } from "@/store/API/RTKQuery";
 
 const Banner: React.FC = () => {
-  const [bigBanners, setBigBanners] = useState<IBanner>();
-  const [smallBanners, setSmallBanners] = useState<IBanner[]>([]);
-  const [loading, setLoading] = useState(false);
 
-  const { i18n } = useTranslation();
-
-  async function getBanners() {
-    setLoading(true);
-    try {
-      const smallBannerRes = await axios.get(
-        "https://bereket.webclub.uz/api/small-banner",
-        {
-          headers: {
-            "Accept-Language": i18n.language,
-          },
-        }
-      );
-      if (smallBannerRes.status === 200)
-        setSmallBanners(smallBannerRes.data.data);
-
-      const bigBannerRes = await axios.get(
-        "https://bereket.webclub.uz/api/big-banner",
-        {
-          headers: {
-            "Accept-Language": i18n.language,
-          },
-        }
-      );
-
-      if (bigBannerRes.status === 200) {
-        setBigBanners(bigBannerRes.data.data);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    getBanners();
-  }, []);
+  const { isLoading, isSuccess, data } = useGetTopBannerQuery();
+  const { isLoading: smallBannerLoading, isSuccess: smallBannerSuccess, data: smallBannersData } = useGetSmallBannersQuery();
 
   return (
     <>
       <div className="banner">
         <div className="container">
           <div className="inner">
-            <a
-              href={`/catalogs/${bigBanners?.url.split("/")[bigBanners.url.split("/").length - 1]
-                }`}
-              className="box box-1"
-            >
-              {loading ? (
+
+            {isLoading ? (
+              <a href="#" className="box box-1">
                 <SkeletonImage active />
-              ) : (
+              </a>
+            ) : isSuccess ? (
+              <a
+                href={`/catalogs/${data.data.url.split("/")[data.data.url.split("/").length - 1]
+                  }`}
+                className="box box-1"
+              >
                 <img
-                  src={`http://bereket.webclub.uz/storage/${bigBanners?.photo}`}
+                  src={`http://bereket.webclub.uz/storage/${data.data.photo}`}
                   alt=""
                 />
-              )}
-            </a>
-            {loading ? (
+              </a>
+            ) : ""}
+            {smallBannerLoading ? (
               <>
                 <div className="box box-2">
                   <SkeletonImage active />
@@ -76,8 +39,8 @@ const Banner: React.FC = () => {
                   <SkeletonImage active />
                 </div>
               </>
-            ) : (
-              smallBanners.map((item, index) => (
+            ) : smallBannerSuccess ? (
+              smallBannersData.data.map((item, index) => (
                 <Link
                   to={`/catalogs/${item?.url.split("/")[item.url.split("/").length - 1]
                     }`}
@@ -90,7 +53,7 @@ const Banner: React.FC = () => {
                   />
                 </Link>
               ))
-            )}
+            ) : ""}
           </div>
         </div>
       </div>

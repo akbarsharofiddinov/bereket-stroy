@@ -183,8 +183,8 @@ const Footer: React.FC = () => {
               </p>
 
               <div>
-                <p>Ommaviy offerta</p>
-                <p>Foydalanuvchi kelishuvi</p>
+                <p>{t('public_offer')}</p>
+                <p>{t('user_agreement')}</p>
               </div>
             </div>
           </div>

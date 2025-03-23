@@ -26,7 +26,7 @@ const initialState: IState = {
     phone: "",
   },
   token: "",
-  currentLanguage: "ru",
+  currentLanguage: "uz",
   authorization: false,
 };
 

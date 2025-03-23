@@ -85,5 +85,10 @@
   "phone_desc_info": "Siz koʻrsatgan telefon raqamiga buyurtma holati haqida bildirishnoma yuboramiz.Yetkazib berish vaqtini aniqlashtirish uchun kuryer siz bilan telefon orqali bogʻlanadi.",
   "in_your_order": "Buyurtmangizda",
   "your_discount": "Chegirmangiz",
-  "order_btn": "Rasmiylashtirish"
+  "order_btn": "Rasmiylashtirish",
+  "finished": "Tugadi",
+  "currency": "so‘m",
+  "keeping_date": "Saqlash muddati",
+  "public_offer": "Ommaviy offerta",
+  "user_agreement": "Foydalanuvchi kelishuvi"
 }
