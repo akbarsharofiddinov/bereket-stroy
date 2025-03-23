@@ -1,5 +1,6 @@
 import { useAppSelector } from "@/store/hooks";
 import axios from "axios";
+import { t } from "i18next";
 import React, { useState } from "react";
 import { CiSquarePlus } from "react-icons/ci";
 import { FaRegStar, FaStar } from "react-icons/fa6";
@@ -16,6 +17,7 @@ const CommentModal: React.FC<IProps> = ({ product_id, setModal }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [comment, setComment] = useState("");
+  console.log(product_id)
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -71,18 +73,15 @@ const CommentModal: React.FC<IProps> = ({ product_id, setModal }) => {
         <div className="inner" onClick={(e) => e.stopPropagation()}>
           <div className="top">
             <p className="title">Комменkтарий</p>
-            <button className="close-btn" onClick={() => setModal(false)}>
-              <span>&times;</span>
-            </button>
           </div>
 
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="product_id_input input-box">
-              <label htmlFor="product_id">Product ID:</label>
+              <label htmlFor="product_id">{t('product')} ID:</label>
               <p>{product_id}</p>
             </div>
             <div className="rating_input input-box">
-              <label>Baholang: </label>
+              <label>{t('rate_it')}: </label>
               <div className="stars">
                 {[1, 2, 3, 4, 5].map((item) => (
                   <button
@@ -109,7 +108,7 @@ const CommentModal: React.FC<IProps> = ({ product_id, setModal }) => {
             ) : (
               <>
                 <div className="img-input-box input-box">
-                  <p>Tovar rasmini yuboring {`(ixtiyoriy)`}</p>
+                  <p>{t('send_product_photo')}</p>
                   <label className="img-input">
                     <input
                       type="file"
@@ -124,7 +123,7 @@ const CommentModal: React.FC<IProps> = ({ product_id, setModal }) => {
               </>
             )}
             <div className="comment-input_box input-box">
-              <label>Sharh:</label>
+              <label>{t('comment')}:</label>
               <textarea
                 placeholder="Comment"
                 onChange={(e) => setComment(e.target.value)}
@@ -134,7 +133,7 @@ const CommentModal: React.FC<IProps> = ({ product_id, setModal }) => {
               className="submit-btn"
               onClick={() => handleCreateComment()}
             >
-              Yuborish
+              {t('send')}
             </button>
           </form>
         </div>

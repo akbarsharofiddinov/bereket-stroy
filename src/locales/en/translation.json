@@ -104,5 +104,11 @@
   "popular_first": "Popular first",
   "cheaper": "cheaper",
   "expensive": "more expensive",
-  "high_rating": "High rating"
+  "high_rating": "High rating",
+  "comments": "Comments",
+  "scores": "Rating",
+  "rate_it": "Rate it",
+  "send_product_photo": "Send a product image (optional)",
+  "comment": "Comment",
+  "send": "Send"
 }

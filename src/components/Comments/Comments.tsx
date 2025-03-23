@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import React from "react";
 import { FaRegStar, FaStar } from "react-icons/fa6";
 
@@ -12,7 +13,7 @@ const Comments: React.FC<IProps> = ({ data, avg_rating, rating_count }) => {
     <>
       <div className="comments">
         <div className="top">
-          <h2 className="title">Sharhlar</h2>
+          <h2 className="title">{t('comments')}</h2>
         </div>
         <div className="content">
           <div className="left">
@@ -33,10 +34,10 @@ const Comments: React.FC<IProps> = ({ data, avg_rating, rating_count }) => {
               </div>
             </div>
             <p>
-              Baholar: <span>{rating_count}</span>
+              {t('scores')}: <span>{rating_count}</span>
             </p>
             <p>
-              Sharhlar: <span>{data.length}</span>
+              {t('comments')}: <span>{data.length}</span>
             </p>
           </div>
 

@@ -104,5 +104,11 @@
   "popular_first": "Avval ommaboplari",
   "cheaper": "arzonroq",
   "expensive": "qimmatroq",
-  "high_rating": "Yuqori reyting"
+  "high_rating": "Yuqori reyting",
+  "comments": "Sharhlar",
+  "scores": "Baholar",
+  "rate_it": "Baholang",
+  "send_product_photo": "Tovar rasmini yuboring (ixtiyoriy)",
+  "comment": "Sharh",
+  "send": "Yuborish"
 }

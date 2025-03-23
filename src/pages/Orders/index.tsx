@@ -20,6 +20,7 @@ const Orders: React.FC = () => {
   const [commentModal, setCommentModal] = useState(false);
   const [orderStatusList, setOrderStatusList] = useState<IOrderStatus[]>([]);
   const [selectedOrderStatusID, setSelectedOrderStatusID] = useState<undefined | number>();
+  const [selectedOrderID, setSelectedOrderID] = useState(0);
 
   const dispatch = useAppDispatch();
 
@@ -321,19 +322,13 @@ const Orders: React.FC = () => {
                                 </div>
                                 <p
                                   className="right"
-                                  onClick={() => setCommentModal(true)}
+                                  onClick={() => {
+                                    setCommentModal(true);
+                                    setSelectedOrderID(item.id);
+                                  }}
                                 >
                                   {t("leave_comment")}
                                 </p>
-
-                                {commentModal ? (
-                                  <CommentModal
-                                    product_id={item.id}
-                                    setModal={setCommentModal}
-                                  />
-                                ) : (
-                                  ""
-                                )}
                               </div>
                             ))}
                           </div>
@@ -349,6 +344,15 @@ const Orders: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {commentModal ? (
+        <CommentModal
+          product_id={selectedOrderID}
+          setModal={setCommentModal}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 };
