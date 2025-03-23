@@ -127,5 +127,9 @@
   "nothing_found": "Hesh nárse tabılmadı",
   "comment_placeholder": "Qosimsha túsinik...",
   "full_name": "At hám familiya",
-  "order_description": "Buyırtpa beriw arqalı jeke maǵlıwmatlardıń BEREKET SAWDA platformasınıń <a href='https://bereket-stroy.uz/'> Jekelik kelisimi</a> hám <a href='https://bereket-stroy.uz/'>Paydalanıwshı kelisimi</a> qaǵıydalarına muwapıq qayta isleniwine razılıq beresiz."
+  "order_description": "Buyırtpa beriw arqalı jeke maǵlıwmatlardıń BEREKET SAWDA platformasınıń <a href='https://bereket-stroy.uz/'> Jekelik kelisimi</a> hám <a href='https://bereket-stroy.uz/'>Paydalanıwshı kelisimi</a> qaǵıydalarına muwapıq qayta isleniwine razılıq beresiz.",
+  "region_or_city": "Wálayat yaki qala",
+  "district_name": "Rayon atı",
+  "apartment_number": "Kvartira nomeri",
+  "location_comment": "Túsindirme..."
 }

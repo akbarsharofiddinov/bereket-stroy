@@ -128,5 +128,9 @@
   "nothing_found": "Ничего не найдено",
   "comment_placeholder": "Дополнительный комментарий...",
   "full_name": "Имя и фамилия",
-  "order_description": "Размещая заказ, вы соглашаетесь на обработку персональных данных в соответствии с положениями <a href='https://bereket-stroy.uz/'> Соглашения о конфиденциальности</a> и <a href='https://bereket-stroy.uz/'> Пользовательского соглашения</a> платформы BEREKET SAWDA."
+  "order_description": "Размещая заказ, вы соглашаетесь на обработку персональных данных в соответствии с положениями <a href='https://bereket-stroy.uz/'> Соглашения о конфиденциальности</a> и <a href='https://bereket-stroy.uz/'> Пользовательского соглашения</a> платформы BEREKET SAWDA.",
+  "region_or_city": "Регион и город",
+  "district_name": "Название района",
+  "apartment_number": "Номер квартиры",
+  "location_comment": "Объяснение..."
 }

@@ -128,5 +128,9 @@
   "nothing_found": "Hech narsa topilmadi",
   "comment_placeholder": "Qo‘shimcha izoh...",
   "full_name": "Full name",
-  "order_description": "Buyurtma berish orqali shaxsiy maʼlumotlarning BEREKET SAWDA platformasining <a href='https://bereket-stroy.uz/'>Maxfiylik kelishuvi</a> va <a href='https://bereket-stroy.uz/'>Foydalanuvchi kelishuvi</a> qoidalariga muvofiq qayta ishlanishiga rozilik bildirasiz."
+  "order_description": "Buyurtma berish orqali shaxsiy maʼlumotlarning BEREKET SAWDA platformasining <a ,href='https://bereket-stroy.uz/'>Maxfiylik kelishuvi</a> va <a href='https://bereket-stroy.uz/'>Foydalanuvchi kelishuvi</a> qoidalariga muvofiq qayta ishlanishiga rozilik bildirasiz.",
+  "region_or_city": "Viloyat yoki Shahar",
+  "district_name": "Tuman yoki Ovul nomi",
+  "apartment_number": "Xonadon raqami",
+  "location_comment": "Izoh..."
 }

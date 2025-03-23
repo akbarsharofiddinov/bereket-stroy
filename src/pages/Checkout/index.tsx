@@ -527,7 +527,7 @@ const Checkout: React.FC = () => {
                               setRegion(e.target.value);
                               setFillInfoError(false);
                             }}
-                            placeholder="Viloyat yoki Shahar"
+                            placeholder={t('region_or_city')}
                           />
                         </div>
                         <div className="village-input">
@@ -538,7 +538,7 @@ const Checkout: React.FC = () => {
                               setDistrict(e.target.value);
                               setFillInfoError(false);
                             }}
-                            placeholder="Tuman yoki Ovul nomi"
+                            placeholder={t('district_name')}
                           />
                         </div>
                         <div className="home-number-input">
@@ -549,14 +549,14 @@ const Checkout: React.FC = () => {
                               setAddress(e.target.value);
                               setFillInfoError(false);
                             }}
-                            placeholder="Xonadon raqami"
+                            placeholder={t('apartment_number')}
                           />
                         </div>
                         <div className="comment-input">
                           <input
                             type="text"
                             onChange={() => setFillInfoError(false)}
-                            placeholder="Izoh..."
+                            placeholder={t('location_comment')}
                           />
                         </div>
                       </div>

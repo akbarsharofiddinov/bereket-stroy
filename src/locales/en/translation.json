@@ -128,5 +128,9 @@
   "nothing_found": "Nothing found",
   "comment_placeholder": "Additional comment...",
   "full_name": "Full name",
-  "order_description": "By placing an order, you agree to the processing of personal data in accordance with the <a href='https://bereket-stroy.uz/'> Privacy Agreement</a> and <a href='https://bereket-stroy.uz/'>User Agreement</a> of the BEREKET SAWDA platform"
+  "order_description": "By placing an order, you agree to the processing of personal data in accordance with the <a href='https://bereket-stroy.uz/'> Privacy Agreement</a> and <a href='https://bereket-stroy.uz/'>User Agreement</a> of the BEREKET SAWDA platform",
+  "region_or_city": "Region or City",
+  "district_name": "District name",
+  "apartment_number": "Apartment number",
+  "location_comment": "Explanation..."
 }
