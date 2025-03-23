@@ -107,11 +107,10 @@ const Orders: React.FC = () => {
                 <div className="no-orders">
                   <img src={noOrders} alt="" />
                   <h3 className="title">
-                    Siz hali ham sevili mahsulot tanlamadingiz
+                    {t('no_order_title')}
                   </h3>
                   <p className="desc">
-                    Sizga maʼqul kelgan mahsulotlarni <br /> sevimlilarga qo‘shing
-                    va ularni buyurtma qiling
+                    {t('no_order_desc')}
                   </p>
                   {token ? (
                     ""
@@ -121,10 +120,10 @@ const Orders: React.FC = () => {
                         dispatch(setAuthModal(true));
                       }}
                     >
-                      Buyurtmalaringizni ko'rish uchun tizimga kiring
+                      {t('no_order_login_link')}
                     </p>
                   )}
-                  <Link to={"/"}>{t('home_page')}ga o‘tish</Link>
+                  <Link to={"/"}>{t('no_order_home_back')}</Link>
                 </div>
               </div>
             ) : (

@@ -120,5 +120,9 @@
   "if_code_didnt_come": "Agar kod kelmasa",
   "try_later": "soniyadan so'ng yangi kod olishingiz mumkin",
   "confirm": "Tasdiqlash",
-  "your_name": "Ismingiz"
+  "your_name": "Ismingiz",
+  "no_order_title": "Sizda buyurtmalar mavjud emas",
+  "no_order_desc": "Sizga maʼqul kelgan mahsulotlarni sevimlilarga qo‘shing va ularni buyurtma qiling",
+  "no_order_login_link": "Buyurtmalaringizni ko'rish uchun tizimga kiring",
+  "no_order_home_back": "Bosh sahifaga o‘tish"
 }

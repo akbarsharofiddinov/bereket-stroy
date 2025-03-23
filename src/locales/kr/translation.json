@@ -119,5 +119,9 @@
   "if_code_didnt_come": "Eger kod kelmese",
   "try_later": "sekundtan keyin jańa kod alıwıńız múmkin",
   "confirm": "Tastıyıqlaw",
-  "your_name": "Atıńız"
+  "your_name": "Atıńız",
+  "no_order_title": "Sizde buyırtpalar joq",
+  "no_order_desc": "Siz unatqan ónimlerdi súyiklilerge qosıń hám olardı buyırtpa beriń.",
+  "no_order_login_link": "Buyırtpalarıńızdı kóriw ushın sistemaǵa kiriń",
+  "no_order_home_back": "Bas betke ótiw"
 }
