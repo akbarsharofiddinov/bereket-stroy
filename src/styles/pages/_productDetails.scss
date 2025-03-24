@@ -1,6 +1,12 @@
 .product-details-page {
   min-height: 50vh;
 
+  .loading {
+    min-height: 40vh;
+    display: grid;
+    place-items: center;
+  }
+
   .count-box {
     display: flex;
     align-items: center;

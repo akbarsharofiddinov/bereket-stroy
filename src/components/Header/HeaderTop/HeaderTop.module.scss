@@ -63,11 +63,11 @@
         .selected {
           padding: 5px 10px;
           gap: 5px;
-          color: var(--text-) 200;
+          color: var(--text-200);
 
           span {
             &:first-child {
-              color: var(--text-) 300;
+              color: var(--text-300);
             }
           }
         }
@@ -123,7 +123,7 @@
 
         .header-menu_item {
           .header-menu_item__link {
-            color: var(--text-) 200;
+            color: var(--text-200);
 
             transition: color 0.3s;
 

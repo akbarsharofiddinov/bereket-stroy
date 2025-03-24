@@ -64,7 +64,7 @@
           font-weight: 600;
           border-color: transparent;
           background-color: transparent;
-          color: var(--text-) 200;
+          color: var(--text-200);
           cursor: pointer;
 
           &.active {
@@ -123,10 +123,10 @@
           padding: 20px;
           border: none;
           background-color: var(--background-color);
-          color: var(--text-) 300;
+          color: var(--text-300);
 
           &::placeholder {
-            color: var(--text-) 200;
+            color: var(--text-200);
           }
         }
 
@@ -186,7 +186,7 @@
           border-radius: 10px;
           font-size: 18px;
           font-weight: 600;
-          color: var(--text-) 300;
+          color: var(--text-300);
           border: none;
           cursor: pointer;
 

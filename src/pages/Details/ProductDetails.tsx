@@ -26,8 +26,15 @@ import {
   useGetSimilarProductsQuery,
 } from "@/store/API/RTKQuery";
 import axios from "axios";
+import { Pagination } from "swiper/modules";
+import { PuffLoader } from "react-spinners";
 
 const ProductDetails: React.FC = () => {
+
+  const [direction, setDirection] = useState<"horizontal" | "vertical">(
+    window.innerWidth <= 500 ? "horizontal" : "vertical"
+  );
+
   const [fixedToTop, setFixedToTop] = useState(false);
   const [currentImage, setCurrentImage] = useState("");
   const [comments, setComments] = useState<IComment[]>([]);
@@ -180,6 +187,17 @@ const ProductDetails: React.FC = () => {
     }
     return false;
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDirection(window.innerWidth <= 500 ? "vertical" : "horizontal");
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (productDetails) {
@@ -608,7 +626,9 @@ const ProductDetails: React.FC = () => {
           </div>
 
           {isLoading ? (
-            <h1>Loading</h1>
+            <div className="loading">
+              <PuffLoader />
+            </div>
           ) : isError ? (
             <h1>Error</h1>
           ) : isSuccess ? (
@@ -616,22 +636,62 @@ const ProductDetails: React.FC = () => {
               <div className="product-details">
                 <div className="images">
                   <Swiper
-                    direction={"vertical"}
                     slidesPerView={"auto"}
                     spaceBetween={10}
                     className="images-swiper"
+                    pagination={true}
+                    direction={direction}
+                    modules={[Pagination]}
                   >
                     {productDetails.data[0].photos &&
                       productDetails.data[0].photos.map((item, index) => (
-                        <SwiperSlide
-                          key={index}
-                          onClick={() => setCurrentImage(item)}
-                        >
-                          <img
-                            src={`http://bereket.webclub.uz/storage/${item}`}
-                            alt=""
-                          />
-                        </SwiperSlide>
+                        <>
+                          <SwiperSlide
+                            key={index}
+                            onClick={() => setCurrentImage(item)}
+                          >
+                            <img
+                              src={`http://bereket.webclub.uz/storage/${item}`}
+                              alt=""
+                            />
+                          </SwiperSlide>
+                          <SwiperSlide
+                            key={index}
+                            onClick={() => setCurrentImage(item)}
+                          >
+                            <img
+                              src={`http://bereket.webclub.uz/storage/${item}`}
+                              alt=""
+                            />
+                          </SwiperSlide>
+                          <SwiperSlide
+                            key={index}
+                            onClick={() => setCurrentImage(item)}
+                          >
+                            <img
+                              src={`http://bereket.webclub.uz/storage/${item}`}
+                              alt=""
+                            />
+                          </SwiperSlide>
+                          <SwiperSlide
+                            key={index}
+                            onClick={() => setCurrentImage(item)}
+                          >
+                            <img
+                              src={`http://bereket.webclub.uz/storage/${item}`}
+                              alt=""
+                            />
+                          </SwiperSlide>
+                          <SwiperSlide
+                            key={index}
+                            onClick={() => setCurrentImage(item)}
+                          >
+                            <img
+                              src={`http://bereket.webclub.uz/storage/${item}`}
+                              alt=""
+                            />
+                          </SwiperSlide>
+                        </>
                       ))}
                   </Swiper>
                   <div className="img-box">
