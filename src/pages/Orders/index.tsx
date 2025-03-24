@@ -64,8 +64,6 @@ const Orders: React.FC = () => {
     }
   }
 
-  // const {} = usegetorder
-
   async function cancelOrder(orderID: number) {
     try {
       const response = await axios.post(`https://bereket.webclub.uz/api/order-cancelled/${orderID}`, null, {

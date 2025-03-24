@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { RootState } from "..";
 
 type productsParams = {
   page?: number;
@@ -36,9 +35,10 @@ export const bereketAPI = createApi({
   reducerPath: "bereketAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: `https://bereket.webclub.uz/api`,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).projectSlice.token;
+    prepareHeaders: (headers) => {
+      // const token = (getState() as RootState).projectSlice.token;
       // const language = (getState() as RootState).projectSlice.currentLanguage;
+      const token = localStorage.getItem("bereket_token");
       const language = localStorage.getItem("language");
       headers.delete("Accept-language");
       headers.set("Accept-language", language + "");
@@ -122,12 +122,18 @@ export const bereketAPI = createApi({
       },
     }),
 
-    getOrders: build.query<APIResponse<IOrder[]>, number | undefined>({
-      query: (order_status_id) =>
-        `/orders${
-          order_status_id ? `?order_status_id=${order_status_id}` : ""
-        }`,
-    }),
+    getOrders: build.query<APIResponse<IOrder[]>, { order_status_id?: number }>(
+      {
+        query: (order_status_id) => {
+          return {
+            url: "/orders",
+            params: {
+              order_status_id,
+            },
+          };
+        },
+      }
+    ),
 
     getTopBanner: build.query<APIResponse<IBanner>, void>({
       query: () => "/big-banner",
