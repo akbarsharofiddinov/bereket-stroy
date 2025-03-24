@@ -13,10 +13,10 @@ const Profile: React.FC = () => {
   const { token, profileInfo } = useAppSelector((state) => state.projectSlice);
   const [isCegoriesActive, setIsCategoriesActive] = useState(false);
 
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
 
   const { cart, favorites } = useAppSelector((state) => state.productSlice);
   const languages: string[] = Object.keys(i18n.options.resources || {});
@@ -81,19 +81,19 @@ const Profile: React.FC = () => {
                   to={"/orders"}
                   className={menu_slug === "orders" ? "active" : ""}
                 >
-                  Buyurtmalar
+                  {t('orders')}
                 </Link>
                 <Link
                   to={"/favorites"}
                   className={menu_slug === "favourites" ? "active" : ""}
                 >
-                  Sevimlilar
+                  {t('favourites')}
                 </Link>
               </div>
 
               <div className="options">
                 <div>
-                  <p>Sayt tili:</p>
+                  <p>{t('site_lang')}:</p>
                   <div className="select-item">
                     <h2 className="selected">
                       <div className="selectItem language">
@@ -123,8 +123,8 @@ const Profile: React.FC = () => {
                     </h2>
                   </div>
                 </div>
-                <Link to={""}>Do‘kon manzillari</Link>
-                <Link to={""}>Biz bilan bog’lanish</Link>
+                <Link to={""}>{t('addresses')}</Link>
+                <Link to={""}>{t('contact_with_us')}</Link>
               </div>
             </div>
           )

@@ -298,11 +298,15 @@
         width: 380px !important;
 
         .input-box {
-          width: 300px !important;
+          width: 250px !important;
         }
 
         .search-btn {
           display: flex !important;
+        }
+
+        .select-item {
+          display: inline-block !important;
         }
       }
     }

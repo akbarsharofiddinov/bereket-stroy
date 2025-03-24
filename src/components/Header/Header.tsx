@@ -13,9 +13,13 @@ import {
 import { useTranslation } from "react-i18next";
 import { setSearchedProducts, setSearchValue } from "@/store/productSlice";
 import axios from "axios";
+import { PiGlobe } from "react-icons/pi";
+import { FaAngleDown } from "react-icons/fa6";
 
 const Header: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
+
+  const [languageDropDown, setLanguageDropDowm] = useState(false);
 
   const [profileMenu, setProfileMenu] = useState(false);
   const [quantityCartProducts, setQuantityCartProducts] = useState(0);
@@ -30,6 +34,8 @@ const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const languages: string[] = Object.keys(i18n.options.resources || {});
 
   const { product_name } = useParams();
 
@@ -85,6 +91,27 @@ const Header: React.FC = () => {
   useEffect(() => {
     if (product_name) setSearchInput(product_name);
   }, [product_name]);
+
+  function convertLanguage(lang: string) {
+    switch (lang) {
+      case "uz":
+        return "O'zbek";
+        break;
+      case "en":
+        return "English";
+        break;
+      case "ru":
+        return "Русский";
+        break;
+      case "qr":
+        return "Qaraqalpaqsha";
+        break;
+
+      default:
+        return "";
+        break;
+    }
+  }
 
   return (
     <>
@@ -240,6 +267,34 @@ const Header: React.FC = () => {
                   </span>
                   <span>{t("search")}</span>
                 </button>
+
+                {/* Language */}
+                <div className={languageDropDown ? "select-item language active" : "select-item language"}>
+                  <div className="selected" onClick={() => setLanguageDropDowm(prev => !prev)}>
+                    <span>
+                      <PiGlobe />
+                    </span>
+                    {/* <p>{convertLanguage(i18n.language)}</p> */}
+                    <span>
+                      <FaAngleDown />
+                    </span>
+                  </div>
+                  <div className="menu">
+                    {languages.map((item, index) => (
+                      <p
+                        key={index}
+                        onClick={() => {
+                          i18n.changeLanguage(item);
+                          localStorage.setItem("language", item);
+                          setLanguageDropDowm(false)
+                        }}
+                      >
+                        {convertLanguage(item)}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+
               </div>
             </div>
             <div className="right">
@@ -383,7 +438,7 @@ const Header: React.FC = () => {
                 </svg>
 
                 <div className="menu" onClick={(e) => e.stopPropagation()}>
-                  <Link to={`profile/private-info`}>
+                  <Link to="">
                     <span>
                       <svg
                         width="24"
@@ -407,29 +462,6 @@ const Header: React.FC = () => {
                       </svg>
                     </span>
                     {profileInfo.first_name}
-                  </Link>
-                  <Link to={`profile/locations`}>
-                    <span>
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M11.3481 17.8059C10.9867 18.1442 10.5037 18.3334 10.0009 18.3334C9.49817 18.3334 9.01517 18.1442 8.65375 17.8059C5.34418 14.6884 0.908967 11.2058 3.07189 6.1498C4.24136 3.41605 7.04862 1.66675 10.0009 1.66675C12.9532 1.66675 15.7605 3.41605 16.93 6.1498C19.0902 11.1995 14.6658 14.6992 11.3481 17.8059Z"
-                          stroke="black"
-                          strokeWidth="1.5"
-                        />
-                        <path
-                          d="M12.9168 9.16667C12.9168 10.7775 11.611 12.0833 10.0002 12.0833C8.38933 12.0833 7.0835 10.7775 7.0835 9.16667C7.0835 7.55583 8.38933 6.25 10.0002 6.25C11.611 6.25 12.9168 7.55583 12.9168 9.16667Z"
-                          stroke="black"
-                          strokeWidth="1.5"
-                        />
-                      </svg>
-                    </span>
-                    {t("addresses")}
                   </Link>
                   <Link to={"/orders"}>
                     <span>

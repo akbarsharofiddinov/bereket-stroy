@@ -132,5 +132,6 @@
   "region_or_city": "Регион и город",
   "district_name": "Название района",
   "apartment_number": "Номер квартиры",
-  "location_comment": "Объяснение..."
+  "location_comment": "Объяснение...",
+  "site_lang": "Язык сайта"
 }

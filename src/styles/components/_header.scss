@@ -85,6 +85,55 @@
             }
           }
         }
+
+        .select-item {
+          display: none;
+
+          position: relative;
+
+          .selected {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 2px solid var(--border-color);
+            padding: 10px 5px;
+            border-radius: 10px;
+
+            span {
+              display: flex;
+              align-items: center;
+            }
+          }
+
+          .menu {
+            position: absolute;
+            background-color: #fff;
+            border: 2px solid var(--border-color);
+            right: 0;
+            border-radius: 10px;
+
+            transform: translateY(-50%);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+
+            transition: opacity 0.2s, transform 0.2s;
+
+            p {
+              font-size: 14px !important;
+              padding: 10px;
+            }
+          }
+
+          &.active {
+            .menu {
+              transform: translateY(0);
+              opacity: 1;
+              visibility: visible;
+              pointer-events: all;
+            }
+          }
+        }
       }
     }
 

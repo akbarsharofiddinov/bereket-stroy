@@ -132,5 +132,6 @@
   "region_or_city": "Viloyat yoki Shahar",
   "district_name": "Tuman yoki Ovul nomi",
   "apartment_number": "Xonadon raqami",
-  "location_comment": "Izoh..."
+  "location_comment": "Izoh...",
+  "site_lang": "Sayt tili"
 }
