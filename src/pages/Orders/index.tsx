@@ -205,40 +205,42 @@ const Orders: React.FC = () => {
                                 {t("address")}:<span>{orderItem.branch}</span>
                               </p>
 
-                              <button className="cancel-order" onClick={() => cancelOrder(orderItem.id)}>
-                                <span>
-                                  <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      d="M15 9L12 12M12 12L9 15M12 12L15 15M12 12L9 9"
-                                      stroke="#E31E24"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    />
-                                    <path
-                                      d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47713 17.5228 1.99997 12 1.99997"
-                                      stroke="#E31E24"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    />
-                                    <path
-                                      d="M2.5 8.49997C2.86239 7.67054 3.3189 6.89163 3.85601 6.17675M6.17681 3.85596C6.89168 3.31885 7.67058 2.86236 8.5 2.49997"
-                                      stroke="#E31E24"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    />
-                                  </svg>
-                                </span>
-                                {t("cancel_order")}
-                              </button>
+                              {orderItem.order_status_id === 6 ? "" : (
+                                <button className="cancel-order" onClick={() => cancelOrder(orderItem.id)}>
+                                  <span>
+                                    <svg
+                                      width="24"
+                                      height="24"
+                                      viewBox="0 0 24 24"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M15 9L12 12M12 12L9 15M12 12L15 15M12 12L9 9"
+                                        stroke="#E31E24"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                      <path
+                                        d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47713 17.5228 1.99997 12 1.99997"
+                                        stroke="#E31E24"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                      <path
+                                        d="M2.5 8.49997C2.86239 7.67054 3.3189 6.89163 3.85601 6.17675M6.17681 3.85596C6.89168 3.31885 7.67058 2.86236 8.5 2.49997"
+                                        stroke="#E31E24"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                    </svg>
+                                  </span>
+                                  {t("cancel_order")}
+                                </button>
+                              )}
                               <p className="order-date">
                                 {t("order_date")}:
                                 <span>

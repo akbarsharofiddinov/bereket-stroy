@@ -86,9 +86,19 @@
         gap: 20px;
 
         .order_id,
-        address,
+        .address,
         .order-date {
           margin-right: auto;
+        }
+
+        .order-date,
+        .total-price,
+        .address {
+          padding: 0 !important;
+        }
+
+        .total-price {
+          grid-column: 2 / 2;
         }
 
         .cancel-order {
