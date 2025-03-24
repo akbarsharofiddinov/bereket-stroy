@@ -57,13 +57,13 @@
 
       &.status_new {
         left: 20px;
+        right: unset;
         background-color: var(--blue);
         color: #fff;
         font-size: 16px;
         font-weight: 600;
         padding: 5px 10px;
         border-radius: 10px;
-        width: 64px;
         text-transform: capitalize;
       }
     }

@@ -21,7 +21,7 @@
   "in_cart": "В корзине",
   "show_all": "Показать все",
   "always_usefull": "Всегда полезно",
-  "buy_with_this_product": "Приобретено вместе с этим товаром",
+  "buy_with_this_product": "С этим товаром покупают",
   "famous_brands": "Популярные бренды",
   "branches": "Филиалы",
   "fast_delivery": "Быстрая доставка",
@@ -133,5 +133,6 @@
   "district_name": "Название района",
   "apartment_number": "Номер квартиры",
   "location_comment": "Объяснение...",
-  "site_lang": "Язык сайта"
+  "site_lang": "Язык сайта",
+  "details": "подробно"
 }

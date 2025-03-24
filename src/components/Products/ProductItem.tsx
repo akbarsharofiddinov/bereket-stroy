@@ -135,7 +135,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
         >
           <div className="img-box">
             {!data.is_sale ? <div className="not-sale">{t('finished')}</div> : ""}
-            {data.status && <span className="status_new">{data.status}</span>}
+            {data.status ? <span className="status_new">{data.status}</span> : ""}
             <span
               className="add-fav"
               onClick={(e) => {

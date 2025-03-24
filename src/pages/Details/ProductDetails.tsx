@@ -58,7 +58,7 @@ const ProductDetails: React.FC = () => {
     isLoading: similarProductsLoading,
     isError: similarProductsError,
     isSuccess: similarProductsSuccess,
-    refetch,
+
   } = useGetSimilarProductsQuery(params.product_slug!);
 
   const {
@@ -67,7 +67,7 @@ const ProductDetails: React.FC = () => {
     isSuccess,
     data: productDetails,
     refetch: detailsRefetch
-  } = useGetProductDetailsQuery(params.product_slug + "");
+  } = useGetProductDetailsQuery(params.product_slug!);
 
   async function getComments() {
     try {
@@ -242,11 +242,11 @@ const ProductDetails: React.FC = () => {
 
   useEffect(() => {
     detailsRefetch()
-  }, [i18n.language])
+  }, [i18n.language]);
 
-  useEffect(() => {
-    if (params.product_slug) refetch();
-  }, [params]);
+  // useEffect(() => {
+  //   if (params.product_slug) refetch();
+  // }, [params]);
 
   return (
     <>
@@ -319,8 +319,8 @@ const ProductDetails: React.FC = () => {
                       )}
 
                       {productDetails.data[0].is_sale
-                        ? "Sotuvda"
-                        : "Sotuvda yo’q"}
+                        ? t('in_sale')
+                        : t('not_in_sale')}
                     </p>
                   </div>
                 </div>
@@ -642,6 +642,15 @@ const ProductDetails: React.FC = () => {
                     pagination={true}
                     direction={direction}
                     modules={[Pagination]}
+                    breakpoints={{
+                      500: {
+                        modules: [Pagination]
+                      },
+
+                      800: {
+                        modules: []
+                      }
+                    }}
                   >
                     {productDetails.data[0].photos &&
                       productDetails.data[0].photos.map((item, index) => (
@@ -803,8 +812,8 @@ const ProductDetails: React.FC = () => {
                         )}
 
                         {productDetails.data[0].is_sale
-                          ? "Sotuvda"
-                          : "Sotuvda yo’q"}
+                          ? t('in_sale')
+                          : t('not_in_sale')}
                       </p>
                     </div>
                   </div>
@@ -816,7 +825,7 @@ const ProductDetails: React.FC = () => {
                             .split(" ")
                             .slice(0, 40)
                             .join(" ") +
-                          ` <a href="#description">batafsil</a>`
+                          ` <a href="#description">${t('details')}</a>`
                           : "<p>Tavsif yo'q</p>",
                       }}
                     />{" "}
@@ -841,7 +850,7 @@ const ProductDetails: React.FC = () => {
                   </div>
                   <p className="rasrochka">
                     <span>{t("fixed_payment")}: </span>
-                    12 / oyga
+                    12 / {t('per_month')}
                     <span>
                       {" " +
                         `${formatCurrency(

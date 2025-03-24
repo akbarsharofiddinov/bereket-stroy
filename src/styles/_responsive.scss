@@ -944,13 +944,17 @@
         display: none;
       }
 
+      .right {
+        width: 100% !important;
+      }
+
       .products-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
-        max-width: 360px !important;
+        width: 100% !important;
 
         .product-item {
-          max-width: 182px !important;
+          max-width: 100% !important;
         }
       }
 

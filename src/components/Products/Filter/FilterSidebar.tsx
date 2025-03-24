@@ -21,7 +21,7 @@ const FilterSidebar: React.FC<IProps> = ({
   setMaxPrice,
   setMinPrice,
 }) => {
-  const [extraDropDown, setExtraDropDown] = useState(false);
+  const [extraDropDown, setExtraDropDown] = useState(true);
   const [brendsDropDown, setBrendsDropDown] = useState(true);
   const [countryDropDown, setCountryDropDown] = useState(true);
   const [priceDropDown, setPriceDropDown] = useState(true);
@@ -210,7 +210,7 @@ const FilterSidebar: React.FC<IProps> = ({
             </span>
           </div>
           <div className="menu">
-            <input type="text" placeholder="Qidirish..." />
+            <input type="text" placeholder={t('search')} />
             {brands.length
               ? brands.map((brand, index) => (
                 <Checkbox
@@ -253,7 +253,7 @@ const FilterSidebar: React.FC<IProps> = ({
           </div>
 
           <div className="menu">
-            <input type="text" placeholder="Qidirish..." />
+            <input type="text" placeholder={t('search')} />
             {countries.length
               ? countries.map((country, index) => (
                 <Checkbox

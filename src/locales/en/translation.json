@@ -133,5 +133,6 @@
   "district_name": "District name",
   "apartment_number": "Apartment number",
   "location_comment": "Explanation...",
-  "site_lang": "Site language"
+  "site_lang": "Site language",
+  "details": "details"
 }
