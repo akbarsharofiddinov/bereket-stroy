@@ -168,7 +168,7 @@ const Header: React.FC = () => {
                 </button>
                 <div className="input-box">
                   <input
-                    type="text"
+                    type="search"
                     className="search-input"
                     placeholder={t("search_placeholder")}
                     value={searchInput}
@@ -198,13 +198,14 @@ const Header: React.FC = () => {
                 <button
                   className="search-btn"
                   onClick={() => {
-                    if (searchModal) {
-                      if (searchInput) {
-                        setTimeout(() => {
-                          navigate(`/search/${searchInput}`);
-                        }, 500);
-                      }
-                    } else dispatch(setSearchModal(true));
+                    if (searchInput) {
+                      setTimeout(() => {
+                        navigate(`/search/${searchInput}`);
+                        setSearchModal(false)
+                      }, 500);
+                    } else {
+                      dispatch(setSearchModal(true))
+                    };
                   }}
                 >
                   <span>

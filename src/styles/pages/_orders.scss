@@ -80,116 +80,116 @@
       padding: 20px;
 
       .order-info {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        justify-content: space-between;
         gap: 20px;
 
-        .info-top {
-          display: flex;
-          justify-content: space-between;
+        .order_id,
+        address,
+        .order-date {
+          margin-right: auto;
+        }
 
-          span,
-          p {
-            padding: 10px 15px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 500;
+        .cancel-order {
+          grid-row: 3 / 3;
+        }
+
+        span,
+        p {
+          padding: 10px 15px;
+          border-radius: 10px;
+          font-size: 16px;
+          font-weight: 500;
+        }
+
+        .status_span {
+          margin-left: auto;
+        }
+
+        span {
+          &.success {
+            background-color: var(--green);
+            color: #fff;
           }
 
-          span {
-            &.success {
-              background-color: var(--green);
-              color: #fff;
-            }
-
-            &.canceled {
-              background-color: var(--red);
-              color: #fff;
-            }
-
-            &.waiting {
-              background-color: var(--yellow);
-              color: var(--text-300);
-            }
-
-            &.info {
-              background-color: var(--blue);
-              color: #fff;
-            }
+          &.canceled {
+            background-color: var(--red);
+            color: #fff;
           }
 
-          p {
-            background-color: var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 20px;
-
-            span {
-              padding: 0;
-              font-weight: 600;
-              font-size: 16px;
-            }
-          }
-
-          & > span {
+          &.waiting {
             background-color: var(--yellow);
             color: var(--text-300);
-            display: flex;
-            align-items: center;
+          }
+
+          &.info {
+            background-color: var(--blue);
+            color: #fff;
           }
         }
 
-        .content {
+        p {
           display: flex;
-          justify-content: space-between;
-          margin-top: 20px;
-          border-bottom: 2px solid var(--border-color);
-          padding-bottom: 20px;
+          align-items: center;
+          gap: 10px;
+          font-size: 20px;
 
-          & > div {
+          &.order_id {
+            background-color: var(--border-color);
+          }
+
+          span {
+            padding: 0;
+            font-weight: 600;
+            font-size: 16px;
+          }
+        }
+
+        & > span {
+          background-color: var(--yellow);
+          color: var(--text-300);
+          display: flex;
+          align-items: center;
+        }
+
+        & > div {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          gap: 20px;
+
+          p {
             display: flex;
-            flex-direction: column;
-            align-items: start;
-            gap: 20px;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text-300);
 
-            p {
-              display: flex;
-              align-items: center;
-              gap: 10px;
-              font-weight: 600;
-              font-size: 16px;
-              color: var(--text-300);
-
-              span {
-                font-weight: 500;
-                color: var(--text-200);
-              }
+            span {
+              font-weight: 500;
+              color: var(--text-200);
             }
           }
+        }
 
-          .left {
-            .cancel-order {
-              display: flex;
-              align-items: center;
-              padding: 10px 20px;
-              border-radius: 10px;
-              border: 2px solid var(--red);
-              color: var(--red);
-              font-weight: 600;
-              font-size: 16px;
-              gap: 10px;
-              background-color: transparent;
+        .cancel-order {
+          display: flex;
+          align-items: center;
+          padding: 10px 20px;
+          border-radius: 10px;
+          border: 2px solid var(--red);
+          color: var(--red);
+          font-weight: 600;
+          font-size: 16px;
+          gap: 10px;
+          background-color: transparent;
 
-              span {
-                display: flex;
-                align-items: center;
-              }
-            }
-          }
-
-          .right {
-            gap: 30px;
+          span {
+            display: flex;
+            align-items: center;
+            padding: 0 !important;
           }
         }
       }
@@ -245,7 +245,9 @@
             margin: 20px 0;
             button {
               span {
-                transform: rotate(180deg);
+                &:last-child {
+                  transform: rotate(180deg);
+                }
               }
             }
           }
@@ -274,6 +276,7 @@
             .left {
               display: flex;
               align-items: center;
+              gap: 20px;
 
               .img-box {
                 max-width: 100px;
@@ -307,6 +310,12 @@
                   span {
                     color: var(--text-200);
                   }
+                }
+
+                .price {
+                  font-size: 16px;
+                  font-weight: 600;
+                  color: var(--text-300);
                 }
               }
             }

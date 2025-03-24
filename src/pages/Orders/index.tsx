@@ -64,6 +64,8 @@ const Orders: React.FC = () => {
     }
   }
 
+  // const {} = usegetorder
+
   async function cancelOrder(orderID: number) {
     try {
       const response = await axios.post(`https://bereket.webclub.uz/api/order-cancelled/${orderID}`, null, {
@@ -180,6 +182,8 @@ const Orders: React.FC = () => {
                   ) : ""}
 
                 </div>
+
+
                 {isLoading ? (
                   <div className="loading">
                     <PuffLoader />
@@ -191,76 +195,70 @@ const Orders: React.FC = () => {
                         orders.map((orderItem, index) => (
                           <div className="order-item" key={index}>
                             <div className="order-info">
-                              <div className="info-top">
-                                <p>
-                                  <span>ID {t("number")}:</span>
-                                  {orderItem.id}
-                                </p>
-                                <span className={orderItem.order_status_id === 6 ? "canceled" : orderItem.order_status_id === 3 ? "waiting" : orderItem.order_status_id === 1 ? "info" : "success"}>{orderItem.status}</span>
-                              </div>
+                              <p className="order_id">
+                                <span>ID {t("number")}:</span>
+                                {orderItem.id}
+                              </p>
+                              <span className={orderItem.order_status_id === 6 ? "status_span canceled" : orderItem.order_status_id === 3 ? "status_span waiting" : orderItem.order_status_id === 1 ? "status_span info" : "status_span success"}>
+                                {orderItem.status}
+                              </span>
 
-                              <div className="content">
-                                <div className="left">
-                                  <p>
-                                    {t("address")}:<span>{orderItem.branch}</span>
-                                  </p>
+                              <p className="address">
+                                {t("address")}:<span>{orderItem.branch}</span>
+                              </p>
 
-                                  <button className="cancel-order" onClick={() => cancelOrder(orderItem.id)}>
-                                    <span>
-                                      <svg
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <path
-                                          d="M15 9L12 12M12 12L9 15M12 12L15 15M12 12L9 9"
-                                          stroke="#E31E24"
-                                          strokeWidth="2"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                        <path
-                                          d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47713 17.5228 1.99997 12 1.99997"
-                                          stroke="#E31E24"
-                                          strokeWidth="2"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                        <path
-                                          d="M2.5 8.49997C2.86239 7.67054 3.3189 6.89163 3.85601 6.17675M6.17681 3.85596C6.89168 3.31885 7.67058 2.86236 8.5 2.49997"
-                                          stroke="#E31E24"
-                                          strokeWidth="2"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                      </svg>
-                                    </span>
-                                    {t("cancel_order")}
-                                  </button>
-                                </div>
-                                <div className="right">
-                                  <p className="order-date">
-                                    {t("order_date")}:
-                                    <span>
-                                      {orderItem.created_at
-                                        .split(" ")[0]
-                                        .split("-")
-                                        .reverse()
-                                        .join("-")}
-                                    </span>
-                                  </p>
-                                  <p className="total-price">
-                                    {t("total_amount")}:
-                                    <span>
-                                      {formatCurrency(
-                                        parseFloat(orderItem.total_amount)
-                                      )}
-                                    </span>
-                                  </p>
-                                </div>
-                              </div>
+                              <button className="cancel-order" onClick={() => cancelOrder(orderItem.id)}>
+                                <span>
+                                  <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M15 9L12 12M12 12L9 15M12 12L15 15M12 12L9 9"
+                                      stroke="#E31E24"
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                    <path
+                                      d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47713 17.5228 1.99997 12 1.99997"
+                                      stroke="#E31E24"
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                    <path
+                                      d="M2.5 8.49997C2.86239 7.67054 3.3189 6.89163 3.85601 6.17675M6.17681 3.85596C6.89168 3.31885 7.67058 2.86236 8.5 2.49997"
+                                      stroke="#E31E24"
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
+                                </span>
+                                {t("cancel_order")}
+                              </button>
+                              <p className="order-date">
+                                {t("order_date")}:
+                                <span>
+                                  {orderItem.created_at
+                                    .split(" ")[0]
+                                    .split("-")
+                                    .reverse()
+                                    .join("-")}
+                                </span>
+                              </p>
+                              <p className="total-price">
+                                {t("total_amount")}:
+                                <span>
+                                  {formatCurrency(
+                                    parseFloat(orderItem.total_amount)
+                                  )}
+                                </span>
+                              </p>
                             </div>
                             <div
                               className={
@@ -281,7 +279,7 @@ const Orders: React.FC = () => {
                                 </p>
 
                                 <button>
-                                  {t("show")}
+                                  <span>{t("show")}</span>
                                   <span>
                                     <svg
                                       width="14"
@@ -319,6 +317,9 @@ const Orders: React.FC = () => {
                                           <span>
                                             {item.quantity} {t("counting")}
                                           </span>
+                                        </p>
+                                        <p className="price">
+                                          {`${formatCurrency(parseFloat(item.price))} ${t('currency')}`}
                                         </p>
                                       </div>
                                     </div>
