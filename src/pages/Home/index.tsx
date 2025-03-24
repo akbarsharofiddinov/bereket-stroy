@@ -15,9 +15,9 @@ import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setDiscounts } from "@/store/productSlice";
+import { useGetDiscountsQuery } from "@/store/API/RTKQuery";
 
 const Home: React.FC = () => {
-  const [loading, setLoading] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -25,12 +25,7 @@ const Home: React.FC = () => {
   const [usefullProoducts, setUsefullProducts] = useState<IProduct[]>([])
 
   const [cards, setCards] = useState<ICard[]>([]);
-  // const {
-  //   isLoading: bestOfferLoading,
-  //   isError: bestOfferError,
-  //   isSuccess: bestOfferSuccess,
-  //   data: bestOfferData,
-  // } = useGetBestOfferedProductsQuery();
+
 
   async function getBestOffers() {
     try {
@@ -44,14 +39,6 @@ const Home: React.FC = () => {
       console.log(error);
     }
   }
-
-  // const {
-  //   isLoading: usefullLoading,
-  //   isError: usefullError,
-  //   isSuccess: usefullSuccess,
-  //   data: usefullData,
-  // } = useGetAllProductsQuery({});
-
 
   async function getUsefullProducts() {
     try {
@@ -83,30 +70,12 @@ const Home: React.FC = () => {
     }
   }
 
-  async function getDiscounts() {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        "https://bereket.webclub.uz/api/discounts",
-        {
-          headers: {
-            "Accept-Language": i18n.language,
-          },
-        }
-      );
-      if (response.status === 200) {
-        dispatch(setDiscounts(response.data.data));
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  }
+  const { isLoading: discountsLoading, data: discountsData, isSuccess: discountsSuccess } = useGetDiscountsQuery();
+
+  if (discountsSuccess) dispatch(setDiscounts(discountsData))
 
   useEffect(() => {
     getCards();
-    getDiscounts();
     getBestOffers()
     getUsefullProducts()
   }, [i18n.language]);
@@ -114,7 +83,7 @@ const Home: React.FC = () => {
   return (
     <>
       <Banner />
-      <Banner2 loading={loading} discounts={discounts} />
+      <Banner2 loading={discountsLoading} discounts={discountsData?.data!} />
       <Suggestions
         title={t("best_offers")}
         link="/catalogs"

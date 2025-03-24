@@ -57,7 +57,7 @@ const Categories: React.FC = () => {
           <div className="all-categories">
             {allCategories.length ? (
               allCategories.map((item, index) => (
-                <Link to={`${item.slug}`} key={index} onClick={() => dispatch(setSelectedCategory(item))}>
+                <Link to={item.sub_category.length ? `${item.slug}` : `/catalogs/${item.slug}`} key={index} onClick={() => dispatch(setSelectedCategory(item))}>
                   <span>
                     <img src={`http://bereket.webclub.uz/storage/${item.icon}`} alt="" />
                     {item.name}

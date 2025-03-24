@@ -5,7 +5,7 @@ import { Pagination } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
 import { setTotalProductsCount } from "@/store/productSlice";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useTranslation } from "react-i18next";
 
@@ -35,8 +35,6 @@ const Products: React.FC = () => {
 
   const params = useParams();
 
-  const [searchParams] = useSearchParams();
-
   const { selectedCardProducts } = useAppSelector(
     (state) => state.productSlice
   );
@@ -47,7 +45,7 @@ const Products: React.FC = () => {
       category_slug: params.catalog_slug,
       sub_category_slug: params.sub_catalog_slug,
       sub_sub_category_slug: params.sub_sub_catalog_slug,
-      sort_by: searchParams.get("sort_by")!,
+      sort_by: activeSort,
       brandIDsStr: brandsQuery,
       countryIDsStr: countriesQuesy,
       min_price: debouncedMinPrice.length ? debouncedMinPrice : undefined,
@@ -74,11 +72,11 @@ const Products: React.FC = () => {
 
   useEffect(() => {
     refetch();
-  }, [params]);
+  }, [activeSort]);
 
   useEffect(() => {
     refetch();
-  }, [searchParams]);
+  }, [params]);
 
   useEffect(() => {
     if (isInSale) {
@@ -111,7 +109,7 @@ const Products: React.FC = () => {
           <div className={showFilter ? "select-item active" : "select-item"} onClick={() => setShowFilter(prev => !prev)}>
             <h2 className="selected">
               {
-                activeSort === "popular" ? "Avval ommaboplari" : activeSort === "price" ? "Arzonroq" : activeSort === "-price" ? "Qimmatroq" : "Yuqori reyting"
+                activeSort === "popular" ? t('popular_first') : activeSort === "price" ? t('cheaper') : activeSort === "-price" ? t('expensive') : t('high_rating')
               }
 
               <span>
@@ -122,10 +120,10 @@ const Products: React.FC = () => {
             </h2>
 
             <div className="menu">
-              <p onClick={() => setActiveSort("popular")}>Avval ommaboplari</p>
-              <p onClick={() => setActiveSort("price")}>Arzonroq</p>
-              <p onClick={() => setActiveSort("-price")}>Qimmatroq</p>
-              <p onClick={() => setActiveSort("rating")}>Yuqori reyting</p>
+              <p onClick={() => setActiveSort("popular")}>{t('popular_first')}</p>
+              <p onClick={() => setActiveSort("price")}>{t('cheaper')}</p>
+              <p onClick={() => setActiveSort("-price")}>{t('expensive')}</p>
+              <p onClick={() => setActiveSort("rating")}>{t('high_rating')}</p>
             </div>
           </div>
         </div>
