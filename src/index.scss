@@ -59,6 +59,7 @@
   box-sizing: border-box;
   font-family: "TT-Travels" !important;
 
+  -webkit-tap-highlight-color: transparent !important;
   user-select: none !important;
 }
 
@@ -174,4 +175,19 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  background: none; // Remove any background
+  -webkit-tap-highlight-color: transparent !important; // Removes tap highlight on mobile
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: none;
+    outline: none;
+    box-shadow: none;
+  }
 }
