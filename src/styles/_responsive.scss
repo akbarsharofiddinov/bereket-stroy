@@ -708,6 +708,40 @@
   .product-details-page {
     margin-top: 20px;
 
+    .comments {
+      .content {
+        flex-direction: column;
+        gap: 20px;
+
+        .right {
+          align-items: start;
+          width: 100% !important;
+          .comment-box {
+            width: 100% !important;
+            .top {
+              flex-direction: column;
+              align-items: start;
+              gap: 10px;
+
+              .date {
+                font-size: 14px !important;
+              }
+            }
+
+            .images {
+              width: 100% !important;
+
+              img {
+                width: 60px !important;
+                height: 80px !important;
+                object-fit: inherit;
+              }
+            }
+          }
+        }
+      }
+    }
+
     .fixed-product_info {
       display: none !important;
     }

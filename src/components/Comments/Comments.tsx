@@ -1,6 +1,8 @@
+import { dateTransform } from "@/utils/dateTransform";
 import { t } from "i18next";
-import React from "react";
+import React, { useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa6";
+import PhotoModal from "./PhotoModal";
 
 interface IProps {
   data: IComment[];
@@ -9,6 +11,7 @@ interface IProps {
 }
 
 const Comments: React.FC<IProps> = ({ data, avg_rating, rating_count }) => {
+  const [selectedPhoto, setSelectedPhoto] = useState("");
   return (
     <>
       <div className="comments">
@@ -81,22 +84,25 @@ const Comments: React.FC<IProps> = ({ data, avg_rating, rating_count }) => {
                     </div>
                   </div>
                   <p className="date">
-                    {new Date(item.created_at)
-                      .toLocaleString()
-                      .split(",")
-                      .reverse()
-                      .join(" ")}
+                    {dateTransform(new Date(item.created_at)
+                      .toLocaleString())}
                   </p>
                 </div>
                 <div className="comment-text">{item.comment}</div>
                 <div className="images">
-                  {item.photo ? <img src={item.photo} alt="" /> : ""}
+                  {item.photo ? <img src={item.photo} onClick={() => setSelectedPhoto(item.photo)} alt="" /> : ""}
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      {selectedPhoto ? (
+        <PhotoModal setSelectedPhoto={setSelectedPhoto}>
+          <img src={selectedPhoto} alt="" />
+        </PhotoModal>
+      ) : ""}
     </>
   );
 };
