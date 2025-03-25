@@ -203,9 +203,9 @@ const Checkout: React.FC = () => {
   }, [cart]);
 
   useEffect(() => {
-    if (profileInfo.phone) {
-      setUserName(profileInfo.first_name);
-      setPhoneNumber(profileInfo.phone);
+    if (profileInfo?.phone) {
+      setUserName(profileInfo?.first_name);
+      setPhoneNumber(profileInfo?.phone);
     }
   }, [profileInfo]);
 
