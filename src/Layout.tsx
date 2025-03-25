@@ -50,16 +50,20 @@ const Layout: React.FC = () => {
   const token = localStorage.getItem("bereket_token");
 
   async function getUserInfo() {
-    try {
-      const response = await axios.get("https://bereket.webclub.uz/api/user/me", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+    if (token) {
+      try {
+        const response = await axios.get("https://bereket.webclub.uz/api/user/me", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
 
-      if (response.status === 200) dispatch(setProfileInfo(response.data))
-    } catch (error) {
-      console.log(error)
+        if (response.status === 200) dispatch(setProfileInfo(response.data));
+      } catch (error) {
+        console.log(error)
+        localStorage.removeItem("bereket_token");
+        dispatch(setProfileInfo({}));
+      }
     }
   }
 

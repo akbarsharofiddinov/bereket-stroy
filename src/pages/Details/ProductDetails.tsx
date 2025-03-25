@@ -28,11 +28,16 @@ import {
 import axios from "axios";
 import { Pagination } from "swiper/modules";
 import { PuffLoader } from "react-spinners";
+import { SwiperModule } from "swiper/types";
 
 const ProductDetails: React.FC = () => {
 
   const [direction, setDirection] = useState<"horizontal" | "vertical">(
     window.innerWidth <= 500 ? "horizontal" : "vertical"
+  );
+
+  const [swiperModules, setSwiperModules] = useState<SwiperModule[]>(
+    window.innerWidth <= 500 ? [Pagination] : []
   );
 
   const [fixedToTop, setFixedToTop] = useState(false);
@@ -58,7 +63,6 @@ const ProductDetails: React.FC = () => {
     isLoading: similarProductsLoading,
     isError: similarProductsError,
     isSuccess: similarProductsSuccess,
-
   } = useGetSimilarProductsQuery(params.product_slug!);
 
   const {
@@ -190,7 +194,8 @@ const ProductDetails: React.FC = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setDirection(window.innerWidth <= 500 ? "vertical" : "horizontal");
+      setDirection(window.innerWidth <= 500 ? "horizontal" : "vertical");
+      setSwiperModules(window.innerWidth <= 500 ? [Pagination] : [])
     };
 
     window.addEventListener("resize", handleResize);
@@ -200,7 +205,7 @@ const ProductDetails: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (productDetails) {
+    if (productDetails?.data.length) {
       getComments();
       if (productDetails.data[0].photos)
         setCurrentImage(productDetails.data[0].photos[0]);
@@ -226,6 +231,8 @@ const ProductDetails: React.FC = () => {
           }
         }
       }
+    } else {
+      detailsRefetch()
     }
   }, [productDetails]);
 
@@ -243,10 +250,6 @@ const ProductDetails: React.FC = () => {
   useEffect(() => {
     detailsRefetch()
   }, [i18n.language]);
-
-  // useEffect(() => {
-  //   if (params.product_slug) refetch();
-  // }, [params]);
 
   return (
     <>
@@ -598,31 +601,31 @@ const ProductDetails: React.FC = () => {
             <span>
               <FaAngleRight />
             </span>
-            {selectedCategory && (
+            {selectedCategory ? (
               <Link to={`/catalogs/${selectedCategory?.slug}`}>
                 {selectedCategory.name}
               </Link>
-            )}
+            ) : ""}
             <span>
               <FaAngleRight />
             </span>
-            {selectedSubCategory && (
+            {selectedSubCategory ? (
               <Link
                 to={`/catalogs/${selectedCategory?.slug}/${selectedSubCategory?.slug}`}
               >
                 {selectedSubCategory.name}
               </Link>
-            )}
+            ) : ""}
             <span>
               <FaAngleRight />
             </span>
-            {selectedSubSubCategory && (
+            {selectedSubSubCategory ? (
               <Link
                 to={`/catalogs/${selectedSubCategory?.slug}/${selectedSubSubCategory.slug}`}
               >
                 {selectedSubSubCategory.name}
               </Link>
-            )}
+            ) : ""}
           </div>
 
           {isLoading ? (
@@ -641,12 +644,11 @@ const ProductDetails: React.FC = () => {
                     className="images-swiper"
                     pagination={true}
                     direction={direction}
-                    modules={[Pagination]}
+                    modules={swiperModules}
                     breakpoints={{
                       500: {
                         modules: [Pagination]
                       },
-
                       800: {
                         modules: []
                       }
@@ -654,53 +656,15 @@ const ProductDetails: React.FC = () => {
                   >
                     {productDetails.data[0].photos &&
                       productDetails.data[0].photos.map((item, index) => (
-                        <>
-                          <SwiperSlide
-                            key={index}
-                            onClick={() => setCurrentImage(item)}
-                          >
-                            <img
-                              src={`http://bereket.webclub.uz/storage/${item}`}
-                              alt=""
-                            />
-                          </SwiperSlide>
-                          <SwiperSlide
-                            key={index}
-                            onClick={() => setCurrentImage(item)}
-                          >
-                            <img
-                              src={`http://bereket.webclub.uz/storage/${item}`}
-                              alt=""
-                            />
-                          </SwiperSlide>
-                          <SwiperSlide
-                            key={index}
-                            onClick={() => setCurrentImage(item)}
-                          >
-                            <img
-                              src={`http://bereket.webclub.uz/storage/${item}`}
-                              alt=""
-                            />
-                          </SwiperSlide>
-                          <SwiperSlide
-                            key={index}
-                            onClick={() => setCurrentImage(item)}
-                          >
-                            <img
-                              src={`http://bereket.webclub.uz/storage/${item}`}
-                              alt=""
-                            />
-                          </SwiperSlide>
-                          <SwiperSlide
-                            key={index}
-                            onClick={() => setCurrentImage(item)}
-                          >
-                            <img
-                              src={`http://bereket.webclub.uz/storage/${item}`}
-                              alt=""
-                            />
-                          </SwiperSlide>
-                        </>
+                        <SwiperSlide
+                          key={index}
+                          onClick={() => setCurrentImage(item)}
+                        >
+                          <img
+                            src={`http://bereket.webclub.uz/storage/${item}`}
+                            alt=""
+                          />
+                        </SwiperSlide>
                       ))}
                   </Swiper>
                   <div className="img-box">
