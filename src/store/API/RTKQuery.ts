@@ -11,6 +11,7 @@ type productsParams = {
   min_price?: string;
   max_price?: string;
   pagination?: number;
+  search?: string;
 };
 
 // type createOrderParams = {
@@ -60,6 +61,7 @@ export const bereketAPI = createApi({
         countryIDsStr,
         max_price,
         min_price,
+        search,
       }) => {
         return {
           url: `/products?${
@@ -78,6 +80,7 @@ export const bereketAPI = createApi({
             sort_by,
             min_price,
             max_price,
+            search,
           },
         };
       },

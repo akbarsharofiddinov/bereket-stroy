@@ -46,7 +46,7 @@ const Header: React.FC = () => {
   async function searchProducts(query: string) {
     try {
       const response = await axios.get(
-        `https://bereket.webclub.uz/api/product-search?name=${query}`,
+        `https://bereket.webclub.uz/api/products?search=${query}`,
         {
           headers: {
             "Accept-Language": i18n.language,

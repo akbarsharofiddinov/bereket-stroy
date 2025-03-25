@@ -4,7 +4,7 @@ import { FilterSidebar, SelectItem, TopFilterBox } from "@/components";
 import { Pagination } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
-import { setTotalProductsCount } from "@/store/productSlice";
+import { setSearchedProducts, setTotalProductsCount } from "@/store/productSlice";
 import { useParams } from "react-router-dom";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useTranslation } from "react-i18next";
@@ -34,10 +34,13 @@ const Products: React.FC = () => {
   const debouncedMaxPrice = useDebounce(maxPrice, 500);
 
   const params = useParams();
+  const dispatch = useAppDispatch();
 
-  const { selectedCardProducts } = useAppSelector(
+
+  const { isInSale, filteredProducts, searchedProducts, searchValue, selectedCardProducts } = useAppSelector(
     (state) => state.productSlice
   );
+
 
   const { isLoading, isError, isSuccess, data, refetch } =
     useGetAllProductsQuery({
@@ -51,20 +54,16 @@ const Products: React.FC = () => {
       min_price: debouncedMinPrice.length ? debouncedMinPrice : undefined,
       max_price: debouncedMaxPrice.length ? debouncedMaxPrice : undefined,
       pagination: perPage,
+      search: searchValue ? searchValue : params.product_name
     });
-
-  const { isInSale, filteredProducts, searchedProducts } = useAppSelector(
-    (state) => state.productSlice
-  );
-
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isSuccess) {
       dispatch(setTotalProductsCount(data.pagination.total));
       setProductsData(data);
     }
-  }, [data]);
+
+  }, [data, isSuccess]);
 
   useEffect(() => {
     refetch();
@@ -72,6 +71,9 @@ const Products: React.FC = () => {
 
   useEffect(() => {
     refetch();
+    setTimeout(() => {
+      dispatch(setSearchedProducts([]))
+    }, 300);
   }, [activeSort]);
 
   useEffect(() => {
