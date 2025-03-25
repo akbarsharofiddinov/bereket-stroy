@@ -72,8 +72,8 @@ const Profile: React.FC = () => {
                 </svg>
 
                 <div className="context">
-                  <span>{profileInfo.first_name}</span>
-                  <span>{formatPhoneNumber(`998${profileInfo.phone}`)}</span>
+                  <span>{profileInfo?.first_name}</span>
+                  <span>{formatPhoneNumber(`998${profileInfo?.phone}`)}</span>
                 </div>
               </Link>
               <div className="menu">
