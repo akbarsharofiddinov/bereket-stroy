@@ -134,5 +134,7 @@
   "apartment_number": "Xonadon raqami",
   "location_comment": "Izoh...",
   "site_lang": "Sayt tili",
-  "details": "batafsil"
+  "details": "batafsil",
+  "payment_status": "To'lov holati",
+  "payment_type": "To'lov usuli"
 }

@@ -461,7 +461,7 @@ const Header: React.FC = () => {
                         />
                       </svg>
                     </span>
-                    {profileInfo.first_name}
+                    {profileInfo?.first_name}
                   </Link>
                   <Link to={"/orders"}>
                     <span>

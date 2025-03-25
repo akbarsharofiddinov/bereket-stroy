@@ -134,5 +134,7 @@
   "apartment_number": "Apartment number",
   "location_comment": "Explanation...",
   "site_lang": "Site language",
-  "details": "details"
+  "details": "details",
+  "payment_status": "Payment status",
+  "payment_type": "Payment type"
 }

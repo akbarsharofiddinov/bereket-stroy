@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@/store/hooks";
-import { setAuthModal } from "@/store/projectSlice";
+import { setAuthorization } from "@/store/projectSlice";
 
 import React, { useEffect, useState } from "react";
 
@@ -94,7 +94,9 @@ const Orders: React.FC = () => {
 
   useEffect(() => {
     getOrders(selectedOrderStatusID)
-  }, [selectedOrderStatusID])
+  }, [selectedOrderStatusID, i18n.language]);
+
+
 
   return (
     <>
@@ -117,7 +119,7 @@ const Orders: React.FC = () => {
                   ) : (
                     <p
                       onClick={() => {
-                        dispatch(setAuthModal(true));
+                        dispatch(setAuthorization(true));
                       }}
                     >
                       {t('no_order_login_link')}
@@ -197,7 +199,7 @@ const Orders: React.FC = () => {
                                 <span>ID {t("number")}:</span>
                                 {orderItem.id}
                               </p>
-                              <span className={orderItem.order_status_id === 6 ? "status_span canceled" : orderItem.order_status_id === 3 ? "status_span waiting" : orderItem.order_status_id === 1 ? "status_span info" : "status_span success"}>
+                              <span className={orderItem.order_status_id === 4 ? "status_span canceled" : orderItem.order_status_id === 1 ? "status_span waiting" : orderItem.order_status_id === 1 ? "status_span info" : "status_span success"}>
                                 {orderItem.status}
                               </span>
 
@@ -205,7 +207,7 @@ const Orders: React.FC = () => {
                                 {t("address")}:<span>{orderItem.branch}</span>
                               </p>
 
-                              {orderItem.order_status_id === 6 ? "" : (
+                              {orderItem.order_status_id === 4 ? "" : (
                                 <button className="cancel-order" onClick={() => cancelOrder(orderItem.id)}>
                                   <span>
                                     <svg
@@ -259,6 +261,13 @@ const Orders: React.FC = () => {
                                   )}
                                 </span>
                               </p>
+                              <div className="payment_info">
+                                <p>{t('payment_type')}: {orderItem.payment_type}</p>
+                                <p>{t('payment_status')}: {orderItem.payment_status}</p>
+                                {orderItem.payment_url && orderItem.order_status_id !== 4 ? (
+                                  <a href={orderItem.payment_url}>To'lash</a>
+                                ) : ""}
+                              </div>
                             </div>
                             <div
                               className={

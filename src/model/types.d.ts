@@ -117,6 +117,9 @@ interface IOrder {
   receiver_phone: string;
   products_count: number;
   order_status_id: number;
+  payment_status: string;
+  payment_type: string;
+  payment_url: string;
   products: {
     id: number;
     name: string;

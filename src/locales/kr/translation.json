@@ -133,5 +133,7 @@
   "apartment_number": "Kvartira nomeri",
   "location_comment": "Túsindirme...",
   "site_lang": "Sayt tili",
-  "details": "tolıq"
+  "details": "tolıq",
+  "payment_status": "Tólem halatı",
+  "payment_type": "Tólem usılı"
 }

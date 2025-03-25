@@ -134,5 +134,7 @@
   "apartment_number": "Номер квартиры",
   "location_comment": "Объяснение...",
   "site_lang": "Язык сайта",
-  "details": "подробно"
+  "details": "подробно",
+  "payment_status": "Статус платежа",
+  "payment_type": "Способ оплаты"
 }

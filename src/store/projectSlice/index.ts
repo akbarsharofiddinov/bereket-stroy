@@ -4,7 +4,7 @@ interface IState {
   authModal: boolean;
   catalogModal: boolean;
   searchModal: boolean;
-  profileInfo: IProfile;
+  profileInfo: IProfile | undefined;
   token: string;
   currentLanguage: string;
   authorization: boolean;
@@ -14,17 +14,7 @@ const initialState: IState = {
   authModal: false,
   catalogModal: false,
   searchModal: false,
-  profileInfo: {
-    birthday: "",
-    company_name: "",
-    first_name: "",
-    id: 0,
-    inn: "",
-    is_legal: 0,
-    is_verified: 0,
-    last_name: "",
-    phone: "",
-  },
+  profileInfo: undefined,
   token: "",
   currentLanguage: "uz",
   authorization: false,
