@@ -790,7 +790,7 @@ const ProductDetails: React.FC = () => {
                             .slice(0, 40)
                             .join(" ") +
                           ` <a href="#description">${t('details')}</a>`
-                          : "<p>Tavsif yo'q</p>",
+                          : `<p>${t('no_description')}</p>`,
                       }}
                     />{" "}
                   </div>
