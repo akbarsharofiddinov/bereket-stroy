@@ -692,15 +692,10 @@ const Checkout: React.FC = () => {
                         className={
                           selectedPaymentMethod === item.key
                             ? "selected"
-                            : item.key === "click" || item.key === "uzum_bank"
-                              ? "disable"
-                              : ""
+                            : item.is_active ? "" : "disable"
                         }
                         onClick={(e) => {
-                          if (
-                            item.key === "click" ||
-                            item.key === "uzum_bank"
-                          ) {
+                          if (item.is_active === 0) {
                             e.preventDefault();
                             e.stopPropagation();
                           }

@@ -134,7 +134,7 @@ const Layout: React.FC = () => {
       dispatch(setCartProducts(JSON.parse(localStorage.getItem("cart") + "")));
     }
 
-    getUserInfo()
+    getUserInfo();
   }, []);
 
   useEffect(() => {
@@ -144,7 +144,13 @@ const Layout: React.FC = () => {
           localStorage.getItem("cart") + ""
         );
 
-        dispatch(setCartProducts(cartProducts));
+        const filteredCartProducts = cartProducts.filter(item => {
+          return { ...item, product: allProducts.data.find(product => product.id === item.product.id) }
+        })
+
+        console.log(filteredCartProducts)
+
+        dispatch(setCartProducts(filteredCartProducts));
       }
 
       if (localStorage.getItem("favorites")) {

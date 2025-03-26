@@ -101,6 +101,7 @@ interface IPaymanyMethod {
   photo: string;
   text: string;
   key: string;
+  is_active: number;
 }
 
 interface IOrder {

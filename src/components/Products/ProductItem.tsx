@@ -292,7 +292,7 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
             </div>
             <p className="monthly-price">
               {`${formatCurrency(
-                Math.round(parseFloat(data.discounted_price) / 12)
+                Math.round((parseFloat(data.discounted_price) * 1.37) / 12)
               )} ${t('currency')}`}{" "}
               / 12 {t('per_month')}
             </p>
