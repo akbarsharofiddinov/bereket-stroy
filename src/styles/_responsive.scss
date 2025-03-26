@@ -288,25 +288,46 @@
 
   header {
     top: 0 !important;
+    .header-inner {
+      width: 100% !important;
+    }
     .left {
-      button,
-      a {
+      gap: 10px !important;
+      width: 100% !important;
+      button {
         display: none !important;
       }
 
+      a {
+        img {
+          width: 50px !important;
+          height: 40px !important;
+        }
+      }
+
       & > div {
-        width: 380px !important;
+        width: 100% !important;
 
         .input-box {
-          width: 250px !important;
+          width: 100% !important;
         }
 
         .search-btn {
           display: flex !important;
+
+          svg {
+            width: 15px;
+            height: 15px;
+          }
         }
 
         .select-item {
           display: inline-block !important;
+
+          svg {
+            width: 15px;
+            height: 15px;
+          }
         }
       }
     }
