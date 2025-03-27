@@ -1587,7 +1587,8 @@
     }
 
     .order-info {
-      grid-template-rows: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 60px);
+      align-items: center;
 
       .order_id,
       .status_span {
@@ -1624,6 +1625,7 @@
     }
 
     .order-products {
+      margin-top: 40px;
       .top {
         margin: 10px 0 !important;
         button {
@@ -1645,6 +1647,10 @@
 
           &:first-child {
             border: none;
+          }
+
+          .left {
+            margin-right: auto;
           }
 
           .name {
