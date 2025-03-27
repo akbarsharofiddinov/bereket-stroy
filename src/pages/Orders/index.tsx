@@ -262,8 +262,8 @@ const Orders: React.FC = () => {
                                 </span>
                               </p>
                               <div className="payment_info">
-                                <p>{t('payment_type')}: {orderItem.payment_type}</p>
-                                <p>{t('payment_status')}: {orderItem.payment_status}</p>
+                                <p>{t('payment_type')}: <span>{orderItem.payment_type}</span></p>
+                                <p>{t('payment_status')}: <span>{orderItem.payment_status}</span></p>
                                 {orderItem.payment_url && orderItem.order_status_id !== 4 ? (
                                   <a href={orderItem.payment_url}>To'lash</a>
                                 ) : ""}
