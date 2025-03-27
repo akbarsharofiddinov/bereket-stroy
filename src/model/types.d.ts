@@ -55,6 +55,8 @@ interface IProduct {
   country: string;
   sales_count: number;
   search?: string;
+  installment_month: number;
+  monthly_payment: number;
 }
 
 interface IBrands {

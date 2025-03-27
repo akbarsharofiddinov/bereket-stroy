@@ -814,15 +814,11 @@ const ProductDetails: React.FC = () => {
                   </div>
                   <p className="rasrochka">
                     <span>{t("fixed_payment")}: </span>
-                    12 / {t('per_month')}
+                    {productDetails.data[0].installment_month} / {t('per_month')}
                     <span>
                       {" " +
                         `${formatCurrency(
-                          Math.round(
-                            parseFloat(
-                              productDetails.data[0].discounted_price
-                            ) / 12
-                          )
+                          productDetails.data[0].monthly_payment
                         )} ${t('currency')}`}
                     </span>
                   </p>
