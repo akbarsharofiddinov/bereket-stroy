@@ -331,22 +331,33 @@ const ProductDetails: React.FC = () => {
 
               <div className="right">
                 <div className="price">
-                  <p className="discounted-price">
-                    {`${formatCurrency(
-                      parseInt(productDetails.data[0].discounted_price)
-                    )} ${t('currency')}`}
-                  </p>
-                  {productDetails.data[0].discount ? (
-                    <>
-                      <p className="original-price">
-                        {`${formatCurrency(
-                          parseFloat(productDetails.data[0].price)
+                  <div className="left">
+                    <p className="discounted-price">
+                      {`${formatCurrency(
+                        parseInt(productDetails.data[0].discounted_price)
+                      )} ${t('currency')}`}
+                    </p>
+                    {productDetails.data[0].discount ? (
+                      <>
+                        <p className="original-price">
+                          {`${formatCurrency(
+                            parseFloat(productDetails.data[0].price)
+                          )} ${t('currency')}`}
+                        </p>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <p className="rasrochka">
+                    {productDetails.data[0].installment_month} / {t('per_month')}
+                    <span>
+                      {" " +
+                        `${formatCurrency(
+                          productDetails.data[0].monthly_payment
                         )} ${t('currency')}`}
-                      </p>
-                    </>
-                  ) : (
-                    ""
-                  )}
+                    </span>
+                  </p>
                 </div>
                 <div className="actions">
                   {checkProductInCart(productDetails.data[0]) ? (
