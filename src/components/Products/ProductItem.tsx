@@ -183,10 +183,10 @@ const ProductItem: React.FC<{ data: IProduct }> = ({ data }) => {
             {data.photos ? (
               <img
                 src={`https://bereket.webclub.uz/storage/${data.photos[0]}`}
-                alt=""
+                alt="bereket-strop_photo"
               />
             ) : (
-              <img src={noImage} alt="" />
+              <img src={noImage} alt="bereket-strop_photo" />
             )}
           </div>
           <div className="body">

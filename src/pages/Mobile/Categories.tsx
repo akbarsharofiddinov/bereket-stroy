@@ -59,7 +59,7 @@ const Categories: React.FC = () => {
               allCategories.map((item, index) => (
                 <Link to={item.sub_category.length ? `${item.slug}` : `/catalogs/${item.slug}`} key={index} onClick={() => dispatch(setSelectedCategory(item))}>
                   <span>
-                    <img src={`http://bereket.webclub.uz/storage/${item.icon}`} alt="" />
+                    <img src={`http://bereket.webclub.uz/storage/${item.icon}`} alt="bereket-strop_photo" />
                     {item.name}
                   </span>
                   <span>

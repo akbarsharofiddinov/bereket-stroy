@@ -16,7 +16,6 @@ import { calculateDiscounts } from "@/utils/calculateDiscounts";
 import noImage from "@/assets/no-image.webp";
 import { useGetAllProductsQuery } from "@/store/API/RTKQuery";
 import { useTranslation } from "react-i18next";
-import { setAuthorization } from "@/store/projectSlice";
 
 interface ICart {
   product: IProduct;
@@ -35,7 +34,6 @@ const Cart: React.FC = () => {
 
   const { cart } = useAppSelector((state) => state.productSlice);
   const { selectedCategory } = useAppSelector((state) => state.categorySlice);
-  const token = useAppSelector((state) => state.projectSlice.token);
   const dispatch = useAppDispatch();
 
   const { isLoading, isSuccess, isError, data } = useGetAllProductsQuery({
@@ -247,10 +245,10 @@ const Cart: React.FC = () => {
                           {product.photos ? (
                             <img
                               src={`http://bereket.webclub.uz/storage/${product.photos[0]}`}
-                              alt=""
+                              alt="bereket-strop_photo"
                             />
                           ) : (
-                            <img src={noImage} alt="" />
+                            <img src={noImage} alt="bereket-strop_photo" />
                           )}
                         </div>
                         <div className="body">
@@ -613,12 +611,7 @@ const Cart: React.FC = () => {
                         : "order-btn disable"
                     }
                     onClick={() => {
-                      if (token) {
-                        if (cartProductsSelected !== "none")
-                          navigate("/checkout");
-                      } else {
-                        dispatch(setAuthorization(true));
-                      }
+                      navigate("/checkout");
                     }}
                   >
                     {t("proceed_payment")}
@@ -639,7 +632,7 @@ const Cart: React.FC = () => {
             </>
           ) : (
             <div className="empty-cart">
-              <img src={emptyCart} alt="" />
+              <img src={emptyCart} alt="bereket-strop_photo" />
               <h3 className="title">Savatingiz bo‘sh qolmoqda</h3>
               <p className="desc">
                 Ro'yxatni to'ldirish uchun <br /> Mahsulotlarni savatchaga

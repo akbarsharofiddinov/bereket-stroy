@@ -26,7 +26,7 @@ const Banner: React.FC = () => {
               >
                 <img
                   src={`http://bereket.webclub.uz/storage/${data.data.photo}`}
-                  alt=""
+                  alt="bereket-strop_photo"
                 />
               </a>
             ) : ""}
@@ -49,7 +49,7 @@ const Banner: React.FC = () => {
                 >
                   <img
                     src={`http://bereket.webclub.uz/storage/${item.photo}`}
-                    alt=""
+                    alt="bereket-strop_photo"
                   />
                 </Link>
               ))

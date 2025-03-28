@@ -107,7 +107,7 @@ const Orders: React.FC = () => {
 
               <div className="centered">
                 <div className="no-orders">
-                  <img src={noOrders} alt="" />
+                  <img src={noOrders} alt="bereket-strop_photo" />
                   <h3 className="title">
                     {t('no_order_title')}
                   </h3>
@@ -316,7 +316,7 @@ const Orders: React.FC = () => {
                                       <div className="img-box">
                                         <img
                                           src={`http://bereket.webclub.uz/storage/${item.photos[0]}`}
-                                          alt=""
+                                          alt="bereket-strop_photo"
                                         />
                                       </div>
                                       <div className="body">

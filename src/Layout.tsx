@@ -148,8 +148,6 @@ const Layout: React.FC = () => {
           return { ...item, product: allProducts.data.find(product => product.id === item.product.id) }
         })
 
-        console.log(filteredCartProducts)
-
         dispatch(setCartProducts(filteredCartProducts));
       }
 

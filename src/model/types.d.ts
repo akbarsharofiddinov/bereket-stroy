@@ -16,11 +16,13 @@ interface ICategory {
     name: string;
     photo: string | null;
     slug: string;
+    seo: MetaData;
     sub_sub_category: {
       id: number;
       name: string;
       photo: string | null;
       slug: string;
+      seo: MetaData;
     }[];
   }[];
 
@@ -29,7 +31,10 @@ interface ICategory {
     name: string;
     photo: string | null;
     slug: string;
+    seo: MetaData;
   }[];
+
+  seo: MetaData;
 }
 
 interface IProduct {
@@ -57,6 +62,7 @@ interface IProduct {
   search?: string;
   installment_month: number;
   monthly_payment: number;
+  seo: MetaData;
 }
 
 interface IBrands {
@@ -209,4 +215,18 @@ interface IDiscount {
 interface IOrderStatus {
   id: number;
   name: string;
+}
+
+interface MetaData {
+  title: string;
+  meta_description: string;
+  meta_keywords: string;
+  canonical_url: string;
+  "og:title": string;
+  "og:description": string;
+  "og:image": string;
+  "og:url": string;
+  "twitter:title": string;
+  "twitter:description": string;
+  "twitter:image": string;
 }

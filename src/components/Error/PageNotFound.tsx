@@ -9,7 +9,7 @@ const PageNotFound: React.FC = () => {
     <>
       <div className="error-component">
         <div className="inner">
-          <img src={notFound404} alt="" />
+          <img src={notFound404} alt="bereket-strop_photo" />
           <h2 className="title">Kechirasiz ushbu sahifa topilmadi</h2>
           <Link to={"/"}>{t('home_page')}ga o‘tish</Link>
         </div>

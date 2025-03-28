@@ -64,7 +64,7 @@ const Favorites: React.FC = () => {
               </div>
             ) : (
               <div className="no-favs">
-                <img src={favImage} alt="" />
+                <img src={favImage} alt="bereket-strop_photo" />
                 <h3 className="title">{t("no_favs_title")}</h3>
                 <p className="desc">{t("no_favs_desc")}</p>
                 <Link to={"/"}>{t("go_home_page")}</Link>

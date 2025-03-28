@@ -48,7 +48,7 @@ const CatalogsModal: React.FC = () => {
                     <span>
                       <img
                         src={`http://bereket.webclub.uz/storage/${category.icon}`}
-                        alt=""
+                        alt="bereket-strop_photo"
                       />
                     </span>
                     {category.name}

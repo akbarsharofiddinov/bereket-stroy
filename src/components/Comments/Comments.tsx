@@ -90,7 +90,7 @@ const Comments: React.FC<IProps> = ({ data, avg_rating, rating_count }) => {
                 </div>
                 <div className="comment-text">{item.comment}</div>
                 <div className="images">
-                  {item.photo ? <img src={item.photo} onClick={() => setSelectedPhoto(item.photo)} alt="" /> : ""}
+                  {item.photo ? <img src={item.photo} onClick={() => setSelectedPhoto(item.photo)} alt="bereket-strop_photo" /> : ""}
                 </div>
               </div>
             ))}
@@ -100,7 +100,7 @@ const Comments: React.FC<IProps> = ({ data, avg_rating, rating_count }) => {
 
       {selectedPhoto ? (
         <PhotoModal setSelectedPhoto={setSelectedPhoto}>
-          <img src={selectedPhoto} alt="" />
+          <img src={selectedPhoto} alt="bereket-strop_photo" />
         </PhotoModal>
       ) : ""}
     </>

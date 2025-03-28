@@ -22,6 +22,7 @@ import {
 import { PageNotFound } from "@/components";
 import { ToastContainer } from "react-toastify";
 import { useTranslation } from "react-i18next";
+// import { HelmetProvider } from "react-helmet-async";
 
 const router = createBrowserRouter([
   {
@@ -131,8 +132,10 @@ const App: React.FC = () => {
 
   return (
     <>
+      {/* <HelmetProvider> */}
       <RouterProvider router={router} />
       <ToastContainer />
+      {/* </HelmetProvider> */}
     </>
   );
 };

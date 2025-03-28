@@ -37,7 +37,7 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
                 <p className="desc">Chegirma 15-Fevralga qadar davom etadi</p>
               </div>
               <div className="img-box">
-                <img src={miniBanner1} alt="" />
+                <img src={miniBanner1} alt="bereket-strop_photo" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -46,7 +46,7 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
                 <p className="desc">Chegirma 15-Fevralga qadar davom etadi</p>
               </div>
               <div className="img-box">
-                <img src={miniBanner2} alt="" />
+                <img src={miniBanner2} alt="bereket-strop_photo" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -55,7 +55,7 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
                 <p className="desc">Chegirma 15-Fevralga qadar davom etadi</p>
               </div>
               <div className="img-box">
-                <img src={miniBanner1} alt="" />
+                <img src={miniBanner1} alt="bereket-strop_photo" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -64,7 +64,7 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
                 <p className="desc">Chegirma 15-Fevralga qadar davom etadi</p>
               </div>
               <div className="img-box">
-                <img src={miniBanner2} alt="" />
+                <img src={miniBanner2} alt="bereket-strop_photo" />
               </div>
             </SwiperSlide> */}
 
@@ -87,7 +87,7 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
                 //       <div className="img-box">
                 //         <img
                 //           src={`http://bereket.webclub.uz/storage/${item.photo}`}
-                //           alt=""
+                //           alt="bereket-strop_photo"
                 //         />
                 //       </div>
                 //     </div>
@@ -99,7 +99,7 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
                 //       <div className="img-box">
                 //         <img
                 //           src={`http://bereket.webclub.uz/storage/${item.photo}`}
-                //           alt=""
+                //           alt="bereket-strop_photo"
                 //         />
                 //       </div>
                 //     </div>
@@ -111,7 +111,7 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
                 //     <div className="img-box">
                 //       <img
                 //         src={`http://bereket.webclub.uz/storage/${item.photo}`}
-                //         alt=""
+                //         alt="bereket-strop_photo"
                 //       />
                 //     </div>
                 //   </div>
@@ -125,7 +125,7 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
                   <div className="img-box">
                     <img
                       src={`http://bereket.webclub.uz/storage/${item.photo}`}
-                      alt=""
+                      alt="bereket-strop_photo"
                     />
                   </div>
                 </SwiperSlide>

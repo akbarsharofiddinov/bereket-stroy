@@ -10,7 +10,7 @@ const CheckoutModal: React.FC = () => {
     <>
       <div className="checkout-modal" onClick={() => navigate("/")}>
         <div className="inner" onClick={(e) => e.stopPropagation()}>
-          <img src={checkout} alt="" />
+          <img src={checkout} alt="bereket-strop_photo" />
           <h2 className="title">Buyurtmangiz qabul qilindi !</h2>
           <p className="desc">Tez orada operatorlar siz bilan bog’lanishadi!</p>
         </div>

@@ -121,7 +121,7 @@ const Header: React.FC = () => {
           <div className="header-inner">
             <div className="left">
               <Link to={"/"}>
-                <img src={logo} alt="" />
+                <img src={logo} alt="bereket-strop_photo" />
               </Link>
               <div>
                 <button

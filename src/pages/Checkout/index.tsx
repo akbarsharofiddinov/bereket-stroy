@@ -262,7 +262,7 @@ const Checkout: React.FC = () => {
             </Link>
             <h2 className="title">{t('checkout_title')}</h2>
             <div className="logo">
-              <img src={logo} alt="" />
+              <img src={logo} alt="bereket-strop_photo" />
             </div>
           </div>
           <div className="inner">
@@ -624,10 +624,10 @@ const Checkout: React.FC = () => {
                           {cartItem.product.photos ? (
                             <img
                               src={`http://bereket.webclub.uz/storage/${cartItem.product.photos[0]}`}
-                              alt=""
+                              alt="bereket-strop_photo"
                             />
                           ) : (
-                            <img src={noImage} alt="" />
+                            <img src={noImage} alt="bereket-strop_photo" />
                           )}
                         </div>
 
@@ -751,7 +751,7 @@ const Checkout: React.FC = () => {
                         </div>
                         <img
                           src={`http://bereket.webclub.uz/${item.photo}`}
-                          alt=""
+                          alt="bereket-strop_photo"
                         />
                       </label>
                     ))

@@ -45,7 +45,7 @@ const CategoryDetail: React.FC = () => {
                     src={`http://bereket.webclub.uz/storage/${sub_category.photo}`}
                   />
                 ) : (
-                  <img src={noImage} alt="" />
+                  <img src={noImage} alt="bereket-strop_photo" />
                 )}
                 <span>{sub_category.name}</span>
               </Link>

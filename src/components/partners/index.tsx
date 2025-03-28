@@ -63,10 +63,10 @@ const Partners: React.FC = () => {
                   {item.icon ? (
                     <img
                       src={`http://bereket.webclub.uz/storage/${item.icon}`}
-                      alt=""
+                      alt="bereket-strop_photo"
                     />
                   ) : (
-                    <img src={noImage} alt="" />
+                    <img src={noImage} alt="bereket-strop_photo" />
                   )}
                   <p>{item.name}</p>
                 </SwiperSlide>
