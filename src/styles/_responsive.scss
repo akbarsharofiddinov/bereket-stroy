@@ -382,12 +382,17 @@
       }
 
       .status_new {
-        font-size: 12px !important;
+        font-size: 9px !important;
+        top: 10px !important;
+        left: 10px !important;
+        text-align: center;
         padding: 5px !important;
         width: 43px !important;
       }
 
       .add-fav {
+        right: 10px !important;
+        top: 10px !important;
         svg,
         path {
           width: 20px !important;
