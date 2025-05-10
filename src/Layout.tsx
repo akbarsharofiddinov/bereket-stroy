@@ -5,9 +5,7 @@ import {
   CatalogsModal,
   Footer,
   Header,
-  LoginModal,
   SearchModal,
-  SignUpModal,
 } from "@/components";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import axios from "axios";
@@ -34,7 +32,6 @@ import { setAllCategories, setIsLoading } from "./store/categorySlice";
 
 
 const Layout: React.FC = () => {
-  const [loginType, setLoginType] = useState("login");
   const [isCegoriesActive, setIsCategoriesActive] = useState(false);
 
   const { pathname } = useLocation();
@@ -45,7 +42,7 @@ const Layout: React.FC = () => {
 
 
   const { cart, favorites } = useAppSelector((state) => state.productSlice);
-  const { authModal, authorization } = useAppSelector((state) => state.projectSlice);
+  const { authorization } = useAppSelector((state) => state.projectSlice);
 
   const token = localStorage.getItem("bereket_token");
 
@@ -202,16 +199,6 @@ const Layout: React.FC = () => {
         <Outlet />
       </div>
       <Footer />
-
-      {authModal ? (
-        loginType === "login" ? (
-          <LoginModal setLoginType={setLoginType} />
-        ) : (
-          <SignUpModal setLoginType={setLoginType} />
-        )
-      ) : (
-        ""
-      )}
 
       {authorization ? (
         <Authorization />

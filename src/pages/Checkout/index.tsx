@@ -1,4 +1,4 @@
-import { CheckoutModal, Footer, LeafLetMap } from "@/components";
+import { Authorization, CheckoutModal, Footer, LeafLetMap } from "@/components";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { formatCurrency } from "@/utils/currencyFormat";
 import axios from "axios";
@@ -16,7 +16,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { calculateDiscounts } from "@/utils/calculateDiscounts";
 import { setCartProducts } from "@/store/productSlice";
-import { setProfileInfo } from "@/store/projectSlice";
+import { setAuthorization, setProfileInfo } from "@/store/projectSlice";
 
 import logo from "@/assets/Vector.png"
 
@@ -119,8 +119,11 @@ const Checkout: React.FC = () => {
     }
   }
 
+  const { authorization } = useAppSelector((state) => state.projectSlice);
+
   async function handleCreateOrder() {
     const products: { product_id: number; quantity: number }[] = [];
+
 
     cart.map((item) => {
       if (item.isSelected)
@@ -166,8 +169,11 @@ const Checkout: React.FC = () => {
         }, 500);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
+
+      dispatch(setAuthorization(true))
     }
+
   }
 
   useEffect(() => {
@@ -833,6 +839,10 @@ const Checkout: React.FC = () => {
       {isSuccess && <CheckoutModal />}
 
       <Footer />
+
+      {authorization ? (
+        <Authorization />
+      ) : ""}
     </>
   );
 };

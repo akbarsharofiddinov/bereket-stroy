@@ -116,7 +116,6 @@ export const bereketAPI = createApi({
 
     createOrder: build.mutation<any, any>({
       query: (data) => {
-        console.log(data);
         return {
           url: "/orders",
           method: "POST",
