@@ -168,6 +168,31 @@ const Layout: React.FC = () => {
     else setIsCategoriesActive(false)
   }, [pathname]);
 
+  useEffect(() => {
+    const storedCart: ICart[] = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    const checkProduct = async (item: ICart): Promise<ICart | null> => {
+      const res = await fetch(`https://bereket.webclub.uz/api/products?slug=${item.product.slug}`);
+      if (res.ok) {
+        const product = await res.json();
+        return product ? item : null;
+      }
+      return null;
+    };
+
+    const validateCart = async () => {
+      const checkedItems = await Promise.all(
+        storedCart.map((item) => checkProduct(item))
+      );
+
+      const validItems = checkedItems.filter((item): item is ICart => item !== null);
+      dispatch(setCartProducts(validItems))
+      localStorage.setItem("cart", JSON.stringify(validItems));
+    };
+
+    validateCart();
+  }, []);
+
   return (
     <>
       <Header />

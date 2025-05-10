@@ -98,6 +98,7 @@ const Cart: React.FC = () => {
 
       setCurrentCategory(findCategory!);
     }
+
   }, [cart]);
 
   useEffect(() => {
