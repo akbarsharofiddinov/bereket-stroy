@@ -43,6 +43,8 @@ const Checkout: React.FC = () => {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
 
+  const [validatePaymentMethod, setValidatePaymentMethod] = useState(false);
+
   const [fillInfoError, setFillInfoError] = useState(false);
 
   const { branches } = useAppSelector((state) => state.companySlice);
@@ -164,14 +166,16 @@ const Checkout: React.FC = () => {
         selectedDeliveryMethodID === 1 ? takeAwayBodyData : deliveryBodyData
       );
       if (response.data.url) {
+        setValidatePaymentMethod(false);
         setTimeout(() => {
           window.location.href = response.data.url;
         }, 500);
       }
-    } catch (error) {
-      console.log(error)
-
-      dispatch(setAuthorization(true))
+    } catch (error: any) {
+      console.log(error);
+      setValidatePaymentMethod(true);
+      toast("Пожалуйста, выберите способ оплаты.", { type: "warning" })
+      if (!token) dispatch(setAuthorization(true))
     }
 
   }
@@ -684,7 +688,7 @@ const Checkout: React.FC = () => {
 
               <div
                 className={
-                  fillInfoError
+                  fillInfoError || validatePaymentMethod
                     ? "payment-methods section error"
                     : "payment-methods section"
                 }
@@ -701,6 +705,7 @@ const Checkout: React.FC = () => {
                             : item.is_active ? "" : "disable"
                         }
                         onClick={(e) => {
+                          setValidatePaymentMethod(false)
                           if (item.is_active === 0) {
                             e.preventDefault();
                             e.stopPropagation();
