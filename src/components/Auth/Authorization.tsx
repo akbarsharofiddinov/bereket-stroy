@@ -10,7 +10,12 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const Authorization: React.FC = () => {
+interface IProps {
+  propUsername?: string;
+  propPhone?: string;
+}
+
+const Authorization: React.FC<IProps> = ({ propPhone, propUsername }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [sms, setSms] = useState("");
   const [smsSent, setSmsSent] = useState(false);
@@ -39,7 +44,31 @@ const Authorization: React.FC = () => {
     if (/^\d*$/.test(value) && value.length <= 9) setPhone(value);
   };
 
+  const getVerificationCodeProps = async () => {
+
+    console.log(propPhone, propUsername)
+
+    // if (propPhone && propUsername) {
+    const formData = new FormData();
+    formData.append("phone", propPhone!);
+    formData.append("name", propUsername!);
+
+    try {
+      const response = await axios.post("https://bereket.webclub.uz/api/login", formData);
+      if (response.status === 200) {
+        toast(`${t('varification_code')} ${phone} ${t('sent_to_the_number')}`, { type: "info" });
+        setSmsSent(true);
+        setTimerActive(true);
+        setTimeLeft(120);
+      }
+    } catch (error: any) {
+      toast(error.response.data.message[`${i18n.language}`], { type: "error" })
+    }
+
+  }
+
   const getVerificationCode = async () => {
+
     if (!phone) {
       toast(t('place_enter_your_number'), { type: "error" });
       setPhoneValidation(true);
@@ -100,6 +129,16 @@ const Authorization: React.FC = () => {
       setIsLoading(false);
     }
   };
+
+
+
+  useEffect(() => {
+    getVerificationCodeProps();
+    if (propPhone && propUsername) {
+      setPhone(propPhone);
+      setUsername(propUsername)
+    }
+  }, [propPhone, propUsername]);
 
   return (
     <div

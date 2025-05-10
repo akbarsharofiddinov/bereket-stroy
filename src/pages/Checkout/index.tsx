@@ -841,7 +841,7 @@ const Checkout: React.FC = () => {
       <Footer />
 
       {authorization ? (
-        <Authorization />
+        <Authorization propPhone={phoneNumber} propUsername={userName} />
       ) : ""}
     </>
   );
