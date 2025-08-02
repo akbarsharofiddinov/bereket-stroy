@@ -281,10 +281,19 @@
   }
 
   .banner {
-    margin-top: 0;
+    margin-top: 10px !important;
+
+    .inner {
+      gap: 10px;
+    }
 
     .box-1 {
-      height: 450px !important;
+      height: 260px !important;
+    }
+
+    .box-2,
+    .box-3 {
+      height: 150px !important;
     }
   }
 
@@ -302,7 +311,7 @@
 
       a {
         img {
-          width: 50px !important;
+          width: 70px !important;
           height: 40px !important;
         }
       }
