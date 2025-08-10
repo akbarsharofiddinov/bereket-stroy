@@ -136,5 +136,8 @@
   "site_lang": "Site language",
   "details": "details",
   "payment_status": "Payment status",
-  "payment_type": "Payment type"
+  "payment_type": "Payment type",
+  "go_to_homepage": "Go to home page",
+  "empty_cart_title": "Your cart is empty",
+  "empty_cart_desc": "To complete the list\nAdd products to cart"
 }

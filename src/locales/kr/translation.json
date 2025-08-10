@@ -135,5 +135,8 @@
   "site_lang": "Sayt tili",
   "details": "tolıq",
   "payment_status": "Tólem halatı",
-  "payment_type": "Tólem usılı"
+  "payment_type": "Tólem usılı",
+  "go_to_homepage": "Bas betke ótiw",
+  "empty_cart_title": "Sebetińiz bos",
+  "empty_cart_desc": "Tizimdi toltırıw ushın\nTovarlar sebetke qosıń"
 }

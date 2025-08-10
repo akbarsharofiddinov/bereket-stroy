@@ -31,42 +31,6 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
             }}
             className="discount-banner_swiper"
           >
-            {/* <SwiperSlide>
-              <div className="context">
-                <h2 className="title">Oshxona buyumlari uchun chegirma</h2>
-                <p className="desc">Chegirma 15-Fevralga qadar davom etadi</p>
-              </div>
-              <div className="img-box">
-                <img src={miniBanner1} alt="bereket-strop_photo" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="context">
-                <h2 className="title">Yumshoq to‘shak shirin uyqu garovi</h2>
-                <p className="desc">Chegirma 15-Fevralga qadar davom etadi</p>
-              </div>
-              <div className="img-box">
-                <img src={miniBanner2} alt="bereket-strop_photo" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="context">
-                <h2 className="title">Oshxona buyumlari uchun chegirma</h2>
-                <p className="desc">Chegirma 15-Fevralga qadar davom etadi</p>
-              </div>
-              <div className="img-box">
-                <img src={miniBanner1} alt="bereket-strop_photo" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="context">
-                <h2 className="title">Yumshoq to‘shak shirin uyqu garovi</h2>
-                <p className="desc">Chegirma 15-Fevralga qadar davom etadi</p>
-              </div>
-              <div className="img-box">
-                <img src={miniBanner2} alt="bereket-strop_photo" />
-              </div>
-            </SwiperSlide> */}
 
             {loading ? (
               <>
@@ -79,44 +43,6 @@ const Banner2: React.FC<IProps> = ({ discounts, loading }) => {
               </>
             ) : discounts.length ? (
               discounts.map((item, index) => (
-                // <>
-                //   <SwiperSlide key={index}>
-                //     <div className="context">
-                //       <h2 className="title">{item.name}</h2>
-                //       {/* <p className="desc">{}</p> */}
-                //       <div className="img-box">
-                //         <img
-                //           src={`http://bereket.webclub.uz/storage/${item.photo}`}
-                //           alt="bereket-strop_photo"
-                //         />
-                //       </div>
-                //     </div>
-                //   </SwiperSlide>
-                //   <SwiperSlide key={index}>
-                //     <div className="context">
-                //       <h2 className="title">{item.name}</h2>
-                //       {/* <p className="desc">{}</p> */}
-                //       <div className="img-box">
-                //         <img
-                //           src={`http://bereket.webclub.uz/storage/${item.photo}`}
-                //           alt="bereket-strop_photo"
-                //         />
-                //       </div>
-                //     </div>
-                //   </SwiperSlide>
-                //   <SwiperSlide key={index}>
-                //   <div className="context">
-                //     <h2 className="title">{item.name}</h2>
-                //     {/* <p className="desc">{}</p> */}
-                //     <div className="img-box">
-                //       <img
-                //         src={`http://bereket.webclub.uz/storage/${item.photo}`}
-                //         alt="bereket-strop_photo"
-                //       />
-                //     </div>
-                //   </div>
-                // </SwiperSlide>
-                // </>
 
                 <SwiperSlide
                   key={index}

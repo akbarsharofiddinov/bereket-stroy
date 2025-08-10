@@ -136,5 +136,8 @@
   "site_lang": "Sayt tili",
   "details": "batafsil",
   "payment_status": "To'lov holati",
-  "payment_type": "To'lov usuli"
+  "payment_type": "To'lov usuli",
+  "go_to_homepage": "Bosh sahifaga o'tish",
+  "empty_cart_title": "Savatingiz bo'sh",
+  "empty_cart_desc": "Ro‘yxatni to‘ldirish uchun\nMahsulotlarni savatga qo‘shing"
 }
